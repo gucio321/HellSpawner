@@ -18,6 +18,7 @@ import (
 	"github.com/OpenDiablo2/HellSpawner/hswindow/hsdialog/hsaboutdialog"
 	"github.com/OpenDiablo2/HellSpawner/hswindow/hsdialog/hspreferencesdialog"
 	"github.com/OpenDiablo2/HellSpawner/hswindow/hsdialog/hsprojectpropertiesdialog"
+	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor/hsanimdataeditor"
 	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor/hscofeditor"
 	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor/hsdc6editor"
 	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor/hsdcceditor"
@@ -45,6 +46,7 @@ func (a *App) setup() error {
 	a.editorConstructors[hsfiletypes.FileTypeTBLStringTable] = hsstringtableeditor.Create
 	a.editorConstructors[hsfiletypes.FileTypeTBLFontTable] = hsfonttableeditor.Create
 	a.editorConstructors[hsfiletypes.FileTypeDS1] = hsds1editor.Create
+	a.editorConstructors[hsfiletypes.FileTypeAnimation] = hsanimdataeditor.Create
 
 	// Register the tool windows
 	if a.mpqExplorer, err = hsmpqexplorer.Create(a.openEditor, a.config, mpqExplorerDefaultX, mpqExplorerDefaultY); err != nil {
