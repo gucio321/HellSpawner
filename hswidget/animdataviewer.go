@@ -5,11 +5,12 @@ import (
 
 	"github.com/ianling/giu"
 
-	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2animdata"
+	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2data"
 )
 
 // AnimDataViewerState represents state ov animation data viewer
 type AnimDataViewerState struct {
+	record int32
 }
 
 // Dispose clears viewer's state
@@ -19,10 +20,10 @@ func (s *AnimDataViewerState) Dispose() {
 
 type AnimDataViewerWidget struct {
 	id       string
-	animData *d2animdata.AnimationData
+	animData d2data.AnimationData
 }
 
-func AnimDataViewer(id string, animData *d2animdata.AnimationData) *AnimDataViewerWidget {
+func AnimDataViewer(id string, animData d2data.AnimationData) *AnimDataViewerWidget {
 	result := &AnimDataViewerWidget{
 		id:       id,
 		animData: animData,
@@ -32,22 +33,46 @@ func AnimDataViewer(id string, animData *d2animdata.AnimationData) *AnimDataView
 }
 
 func (p *AnimDataViewerWidget) Build() {
-	stateID := fmt.Sprintf("AnimDataViewerWidget_%s", p.id)
-	s := giu.Context.GetState(stateID)
+	state := p.getState()
 
-	if s == nil {
-		giu.Context.SetState(stateID, &AnimDataViewerState{})
+	var recordsList []string = make([]string, 0)
 
-		return
+	for i, _ := range p.animData {
+		recordsList = append(recordsList, i)
 	}
 
-	//state := s.(*AnimDataViewerState)
+	fmt.Println(recordsList[0])
 
-	records := p.animData.GetRecordNames()[0]
+	giu.Layout{
+		giu.Combo("##"+p.id+"recordsList", recordsList[state.record], recordsList, &state.record),
+	}.Build()
+}
 
-	giu.TabBar("AnimDataViewerTabs").Layout(giu.Layout{
-		giu.TabItem("Records").Layout(giu.Layout{
-			giu.Label(fmt.Sprintf("%v", p.animData.GetRecord(records).FPS())),
-		}),
-	}).Build()
+func (p *AnimDataViewerWidget) getStateID() string {
+	return fmt.Sprintf("AnimDataViewerWidget_%s", p.id)
+}
+
+func (p *AnimDataViewerWidget) getState() *AnimDataViewerState {
+	var state *AnimDataViewerState
+
+	s := giu.Context.GetState(p.getStateID())
+
+	if s != nil {
+		state = s.(*AnimDataViewerState)
+	} else {
+		p.initState()
+		state = p.getState()
+	}
+
+	return state
+}
+
+func (p *AnimDataViewerWidget) initState() {
+	state := &AnimDataViewerState{}
+
+	p.setState(state)
+}
+
+func (p *AnimDataViewerWidget) setState(s giu.Disposable) {
+	giu.Context.SetState(p.getStateID(), s)
 }

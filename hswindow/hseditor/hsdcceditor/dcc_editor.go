@@ -2,8 +2,6 @@
 package hsdcceditor
 
 import (
-	"fmt"
-
 	g "github.com/ianling/giu"
 
 	"github.com/OpenDiablo2/dialog"
@@ -32,10 +30,6 @@ func Create(_ *hscommon.TextureLoader,
 	pathEntry *hscommon.PathEntry,
 	data *[]byte, x, y float32, project *hsproject.Project) (hscommon.EditorWindow, error) {
 	dcc, err := d2dcc.Load(*data)
-	fmt.Println(dcc)
-	fmt.Println("\n\n\n")
-	e := dcc.Encode()
-	fmt.Println(e)
 	if err != nil {
 		return nil, err
 	}
