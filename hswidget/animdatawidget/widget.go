@@ -1,4 +1,4 @@
-package hswidget
+package animdatawidget
 
 import (
 	"fmt"

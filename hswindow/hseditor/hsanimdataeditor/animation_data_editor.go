@@ -10,7 +10,7 @@ import (
 	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
 
 	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hswidget"
+	"github.com/OpenDiablo2/HellSpawner/hswidget/animdatawidget"
 
 	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor"
 )
@@ -41,7 +41,7 @@ func Create(_ *hscommon.TextureLoader,
 // Build builds a cof editor
 func (e *AnimDataEditor) Build() {
 	e.IsOpen(&e.Visible).Flags(g.WindowFlagsAlwaysAutoResize).Layout(g.Layout{
-		hswidget.AnimDataViewer(e.Path.GetUniqueID(), e.animData),
+		animdatawidget.AnimDataViewer(e.Path.GetUniqueID(), e.animData),
 	})
 }
 
