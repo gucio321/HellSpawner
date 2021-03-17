@@ -83,7 +83,8 @@ func (m *MPQExplorer) Build() {
 						m.filesToOverwrite = m.filesToOverwrite[1:]
 					}),
 				),
-			})})
+			}),
+		})
 	} else {
 		m.IsOpen(&m.Visible).
 			Size(mainWindowW, mainWindowH).
@@ -139,7 +140,8 @@ func (m *MPQExplorer) renderNodes(pathEntry *hscommon.PathEntry) g.Widget {
 				g.Selectable("Copy to Project").OnClick(func() {
 					m.copyToProject(pathEntry)
 				}),
-			})}
+			}),
+		}
 	}
 
 	widgets := make([]g.Widget, len(pathEntry.Children))

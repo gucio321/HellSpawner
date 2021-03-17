@@ -208,7 +208,7 @@ func (m *ProjectExplorer) createFileTreeItem(pathEntry *hscommon.PathEntry) g.Wi
 }
 
 func (m *ProjectExplorer) createDirectoryTreeItem(pathEntry *hscommon.PathEntry, layout g.Layout) g.Widget {
-	var id = pathEntry.Name + "##ProjectExplorerNode_" + pathEntry.FullPath
+	id := pathEntry.Name + "##ProjectExplorerNode_" + pathEntry.FullPath
 
 	if pathEntry.IsRenaming {
 		return g.Layout{

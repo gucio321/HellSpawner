@@ -25,7 +25,6 @@ func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, config *hsconfig.Conf
 	}
 
 	files, err := mpq.Listfile()
-
 	if err != nil {
 		files, err = p.searchForMpqFiles(mpq, config)
 		if err != nil {

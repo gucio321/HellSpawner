@@ -259,7 +259,6 @@ func (a *App) createEditor(path *hscommon.PathEntry, x, y float32) {
 	}
 
 	editor, err := a.editorConstructors[fileType](a.TextureLoader, path, &data, x, y, a.project)
-
 	if err != nil {
 		dialog.Message("Error creating editor: %s", err).Error()
 		return

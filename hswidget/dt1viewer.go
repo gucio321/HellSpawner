@@ -726,7 +726,7 @@ func (f subtileFlag) unknown7() bool {
 }
 
 func getFlagFromPos(x, y int) int {
-	var subtileLookup = [5][5]int{
+	subtileLookup := [5][5]int{
 		{20, 21, 22, 23, 24},
 		{15, 16, 17, 18, 19},
 		{10, 11, 12, 13, 14},

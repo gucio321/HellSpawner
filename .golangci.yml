@@ -49,6 +49,7 @@ linters:
     - gocyclo
     - godox
     - gofmt
+    - gofumpt
     - goimports
     - golint
     - gomnd

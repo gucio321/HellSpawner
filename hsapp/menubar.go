@@ -168,5 +168,5 @@ func (a *App) onProjectRunClicked() {
 }
 
 func (a *App) onProjectExportMPQClicked() {
-
+	// https://github.com/OpenDiablo2/OpenDiablo2/issues/909
 }
