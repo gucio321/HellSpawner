@@ -7,7 +7,8 @@ import (
 
 	"github.com/OpenDiablo2/dialog"
 	"github.com/ianling/giu"
-	"github.com/ianling/imgui-go"
+
+	//"github.com/ianling/imgui-go"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2dcc"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
@@ -15,6 +16,7 @@ import (
 	"github.com/OpenDiablo2/HellSpawner/hscommon"
 	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"
 	"github.com/OpenDiablo2/HellSpawner/hswidget"
+	"github.com/OpenDiablo2/HellSpawner/hswidget/animationwidget"
 )
 
 const (
@@ -62,10 +64,10 @@ func (p *widget) Build() {
 	viewerState := p.getState()
 
 	imageScale := uint32(viewerState.controls.scale)
-	dirIdx := int(viewerState.controls.direction)
-	frameIdx := viewerState.controls.frame
+	// dirIdx := int(viewerState.controls.direction)
+	// frameIdx := viewerState.controls.frame
 
-	textureIdx := dirIdx*len(p.dcc.Directions[dirIdx].Frames) + int(frameIdx)
+	// textureIdx := dirIdx*len(p.dcc.Directions[dirIdx].Frames) + int(frameIdx)
 
 	if imageScale < 1 {
 		imageScale = 1
@@ -76,7 +78,7 @@ func (p *widget) Build() {
 		log.Print(err)
 	}
 
-	var widget *giu.ImageWidget
+	/*var widget *giu.ImageWidget
 	if viewerState.textures == nil || len(viewerState.textures) <= int(frameIdx) || viewerState.textures[frameIdx] == nil {
 		widget = giu.Image(nil).Size(imageW, imageH)
 	} else {
@@ -85,7 +87,7 @@ func (p *widget) Build() {
 		w := float32(uint32(bw) * imageScale)
 		h := float32(uint32(bh) * imageScale)
 		widget = giu.Image(viewerState.textures[textureIdx]).Size(w, h)
-	}
+	}*/
 
 	giu.Layout{
 		giu.Line(
@@ -96,24 +98,27 @@ func (p *widget) Build() {
 			giu.Label(fmt.Sprintf("Directions: %v", p.dcc.NumberOfDirections)),
 			giu.Label(fmt.Sprintf("Frames per Direction: %v", p.dcc.FramesPerDirection)),
 		),
-		giu.Custom(func() {
-			imgui.BeginGroup()
-			if p.dcc.NumberOfDirections > 1 {
-				imgui.SliderInt("Direction", &viewerState.controls.direction, 0, int32(p.dcc.NumberOfDirections-1))
-			}
+		/*
+			giu.Custom(func() {
+				imgui.BeginGroup()
+				if p.dcc.NumberOfDirections > 1 {
+					imgui.SliderInt("Direction", &viewerState.controls.direction, 0, int32(p.dcc.NumberOfDirections-1))
+				}
 
-			if p.dcc.FramesPerDirection > 1 {
-				imgui.SliderInt("Frames", &viewerState.controls.frame, 0, int32(p.dcc.FramesPerDirection-1))
-			}
+				if p.dcc.FramesPerDirection > 1 {
+					imgui.SliderInt("Frames", &viewerState.controls.frame, 0, int32(p.dcc.FramesPerDirection-1))
+				}
 
-			imgui.SliderInt("Scale", &viewerState.controls.scale, 1, 8)
+				imgui.SliderInt("Scale", &viewerState.controls.scale, 1, 8)
 
-			imgui.EndGroup()
-		}),
-		giu.Separator(),
-		p.makePlayerLayout(viewerState),
-		giu.Separator(),
-		widget,
+				imgui.EndGroup()
+			}),
+			giu.Separator(),
+			p.makePlayerLayout(viewerState),
+			giu.Separator(),
+			widget,
+		*/
+		animationwidget.Create(p.id+"widget", viewerState.images, p.dcc.FramesPerDirection, p.dcc.NumberOfDirections, p.textureLoader),
 	}.Build()
 }
 
