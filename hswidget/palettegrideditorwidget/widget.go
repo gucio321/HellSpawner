@@ -1,7 +1,7 @@
 package palettegrideditorwidget
 
 import (
-	"log"
+	"image/color"
 
 	"github.com/ianling/giu"
 
@@ -83,29 +83,18 @@ func (p *PaletteGridEditorWidget) Build() {
 func (p *PaletteGridEditorWidget) buildEditor(grid *palettegridwidget.PaletteGridWidget) {
 	state := p.getState()
 
+	col := color.RGBA{
+		R: state.r,
+		G: state.g,
+		B: state.b,
+	}
+
 	giu.Layout{
-		giu.Label("Edit Color: "),
-		giu.Image(grid.GetColorTexture(state.idx)),
-		giu.Separator(),
-		p.makeRGBField("##"+p.id+"changeR", "R:", &state.r, grid),
-		giu.Separator(),
-		p.makeRGBField("##"+p.id+"changeG", "G:", &state.g, grid),
-		giu.Separator(),
-		p.makeRGBField("##"+p.id+"changeB", "B:", &state.b, grid),
-		giu.Separator(),
-		giu.Line(
-			giu.Label("Hex: "),
-			giu.InputText("##"+p.id+"editHex", &state.hex).OnChange(func() {
-				r, g, b, err := Hex2RGB(state.hex)
-				if err != nil {
-					log.Print("error: ", err)
-				}
-
-				grid.UpdateColorTexture(state.idx)
-
-				state.r, state.g, state.b = r, g, b
-			}),
-		),
+		giu.ColorEdit("##EditColor", &col).OnChange(func() {
+			state.r = col.R
+			state.g = col.G
+			state.b = col.B
+		}),
 		giu.Separator(),
 		giu.Button("OK##"+p.id+"editColorOK").Size(actionButtonW, actionButtonH).OnClick(func() {
 			if p.onChange != nil {
