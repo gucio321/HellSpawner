@@ -2,9 +2,12 @@
 package hspreferencesdialog
 
 import (
+	"image/color"
+
 	"github.com/OpenDiablo2/dialog"
 	g "github.com/ianling/giu"
 
+	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"
 	"github.com/OpenDiablo2/HellSpawner/hsconfig"
 	"github.com/OpenDiablo2/HellSpawner/hswindow/hsdialog"
 )
@@ -19,15 +22,17 @@ const (
 type PreferencesDialog struct {
 	*hsdialog.Dialog
 
-	config          *hsconfig.Config
-	onConfigChanged func(config *hsconfig.Config)
+	config             *hsconfig.Config
+	onConfigChanged    func(config *hsconfig.Config)
+	windowColorChanger func(c color.RGBA)
 }
 
 // Create creates a new preferences dialog
-func Create(onConfigChanged func(config *hsconfig.Config)) *PreferencesDialog {
+func Create(onConfigChanged func(config *hsconfig.Config), windowColorChanger func(c color.RGBA)) *PreferencesDialog {
 	result := &PreferencesDialog{
-		Dialog:          hsdialog.New("Preferences"),
-		onConfigChanged: onConfigChanged,
+		Dialog:             hsdialog.New("Preferences"),
+		onConfigChanged:    onConfigChanged,
+		windowColorChanger: windowColorChanger,
 	}
 	result.Visible = false
 
@@ -36,33 +41,45 @@ func Create(onConfigChanged func(config *hsconfig.Config)) *PreferencesDialog {
 
 // Build builds a preferences dialog
 func (p *PreferencesDialog) Build() {
-	p.IsOpen(&p.Visible).Layout(g.Layout{
-		g.Child("PreferencesLayout").Size(mainWindowW, mainWindowH).Layout(g.Layout{
+	p.IsOpen(&p.Visible).Layout(
+		g.Child("PreferencesLayout").Size(mainWindowW, mainWindowH).Layout(
 			g.Label("Auxiliary MPQ Path"),
 			g.Line(
-				g.InputText("##AppPreferencesAuxMPQPath", &p.config.AuxiliaryMpqPath).Size(textboxSize).Flags(g.InputTextFlagsReadOnly),
+				g.InputText("##AppPreferencesAuxMPQPath", &p.config.AuxiliaryMpqPath).Size(textboxSize).Flags(g.InputTextFlags_ReadOnly),
 				g.Button("...##AppPreferencesAuxMPQPathBrowse").Size(btnW, btnH).OnClick(p.onBrowseAuxMpqPathClicked),
 			),
 			g.Separator(),
 			g.Label("External MPQ listfile Path"),
 			g.Line(
-				g.InputText("##AppPreferencesListfilePath", &p.config.ExternalListFile).Size(textboxSize).Flags(g.InputTextFlagsReadOnly),
+				g.InputText("##AppPreferencesListfilePath", &p.config.ExternalListFile).Size(textboxSize).Flags(g.InputTextFlags_ReadOnly),
 				g.Button("...##AppPreferencesListfilePathBrowse").Size(btnW, btnH).OnClick(p.onBrowseExternalListfileClicked),
 			),
 			g.Separator(),
 			g.Label("Abyss Engine Path"),
 			g.Line(
-				g.InputText("##AppPreferencesAbyssEnginePath", &p.config.AbyssEnginePath).Size(textboxSize).Flags(g.InputTextFlagsReadOnly),
+				g.InputText("##AppPreferencesAbyssEnginePath", &p.config.AbyssEnginePath).Size(textboxSize).Flags(g.InputTextFlags_ReadOnly),
 				g.Button("...##AppPreferencesAbyssEnginePathBrowse").Size(btnW, btnH).OnClick(p.onBrowseAbyssEngineClicked),
 			),
 			g.Separator(),
 			g.Checkbox("Open most recent project on start-up", &p.config.OpenMostRecentOnStartup),
-		}),
+			g.Separator(),
+			g.Label("Background color:"),
+			g.Line(
+				g.ColorEdit("##BackgroundColor", &p.config.BGColor).
+					Flags(g.ColorEditFlagsNoAlpha).OnChange(func() {
+					p.windowColorChanger(p.config.BGColor)
+				}),
+				g.Button("Default##BackgroundColorDefault").OnClick(func() {
+					p.config.BGColor = hsutil.Color(hsconfig.DefaultBGColor)
+					p.windowColorChanger(p.config.BGColor)
+				}),
+			),
+		),
 		g.Line(
 			g.Button("Save##AppPreferencesSave").OnClick(p.onSaveClicked),
 			g.Button("Cancel##AppPreferencesCancel").OnClick(p.onCancelClicked),
 		),
-	})
+	).Build()
 }
 
 // Show switch preferences dialog to visible state
