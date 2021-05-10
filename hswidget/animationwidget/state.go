@@ -113,7 +113,7 @@ func (p *widget) runPlayer(state *widgetState) {
 			continue
 		}
 
-		numFrames := int32(p.dcc.FramesPerDirection - 1)
+		numFrames := int32(p.fpd - 1)
 		isLastFrame := state.controls.frame == numFrames
 
 		// update play direction
@@ -135,7 +135,7 @@ func (p *widget) runPlayer(state *widgetState) {
 			state.controls.frame--
 		}
 
-		state.controls.frame = int32(hsutil.Wrap(int(state.controls.frame), p.dcc.FramesPerDirection))
+		state.controls.frame = int32(hsutil.Wrap(int(state.controls.frame), p.fpd))
 
 		// next, check for stopping/repeat
 		isStoppingFrame := (state.controls.frame == 0) || (state.controls.frame == numFrames)
