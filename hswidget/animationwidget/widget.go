@@ -31,6 +31,7 @@ type widget struct {
 	textureLoader hscommon.TextureLoader
 }
 
+// Create creates a new widget
 func Create(id string, images []*image.RGBA, fpd, numDirs int, tl hscommon.TextureLoader) giu.Widget {
 	result := &widget{
 		id:            id,
@@ -65,10 +66,6 @@ func (p *widget) Build() {
 	if state.textures == nil || len(state.textures) <= int(frameIdx) || state.textures[frameIdx] == nil {
 		widget = giu.Image(nil).Size(imageW, imageH)
 	} else {
-		/*bw := p.dcc.Directions[dirIdx].Box.Width
-		bh := p.dcc.Directions[dirIdx].Box.Height
-		w := float32(uint32(bw) * imageScale)
-		h := float32(uint32(bh) * imageScale)*/
 		b := p.images[textureIdx].Bounds()
 		w, h := b.Dx()*int(imageScale), b.Dy()*int(imageScale)
 		widget = giu.Image(state.textures[textureIdx]).Size(float32(w), float32(h))
