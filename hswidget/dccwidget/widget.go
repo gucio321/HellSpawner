@@ -14,7 +14,6 @@ import (
 )
 
 const (
-	// nolint:gomnd // constant = constant
 	maxAlpha = uint8(255)
 )
 
