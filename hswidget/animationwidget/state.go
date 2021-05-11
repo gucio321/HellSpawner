@@ -89,6 +89,7 @@ func (p *widget) initState() {
 	go p.runPlayer(state)
 
 	totalFrames := p.numDirs * p.fpd
+
 	go func() {
 		textures := make([]*giu.Texture, totalFrames)
 
