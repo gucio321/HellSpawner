@@ -4,6 +4,10 @@ github.com/JoshVarga/blast v0.0.0-20180421040937-681c804fb9f0 h1:tDnuU0igiBiQFjs
 github.com/JoshVarga/blast v0.0.0-20180421040937-681c804fb9f0/go.mod h1:h/5OEGj4G+fpYxluLjSMZbFY011ZxAntO98nCl8mrCs=
 github.com/OpenDiablo2/OpenDiablo2 v0.0.0-20210407164247-7ce4583fe18e h1:d52Ska0HlV+Y9eG9ihaUE65cOX2BTCZ6a9SnI/F6YT8=
 github.com/OpenDiablo2/OpenDiablo2 v0.0.0-20210407164247-7ce4583fe18e/go.mod h1:IzC2iZNeFCs35eOl/wdvzqSGkHs30d94zomUoaA9QT0=
+github.com/OpenDiablo2/OpenDiablo2 v0.0.0-20210419103254-eb470533c42e h1:gwXJR8BafmaBN+vOKU6vGw/HcYopXtHp+UdrSh8Xy7M=
+github.com/OpenDiablo2/OpenDiablo2 v0.0.0-20210419103254-eb470533c42e/go.mod h1:IzC2iZNeFCs35eOl/wdvzqSGkHs30d94zomUoaA9QT0=
+github.com/OpenDiablo2/OpenDiablo2 v0.0.0-20210510190009-c5a8a8601a7f h1:QIahhpmuktqVC+SUldGr88wGm/1RnQvgBToy9IVWMvM=
+github.com/OpenDiablo2/OpenDiablo2 v0.0.0-20210510190009-c5a8a8601a7f/go.mod h1:IzC2iZNeFCs35eOl/wdvzqSGkHs30d94zomUoaA9QT0=
 github.com/OpenDiablo2/dialog v0.0.0-20201230220514-26162241209f h1:pvMvvC9qn9EaHDbiCgblnrL4iyvwchcMKO81kSnlEsc=
 github.com/OpenDiablo2/dialog v0.0.0-20201230220514-26162241209f/go.mod h1:pVhjsSdbHVR9+2HBRkrfvlZCmjC+jRhGjjKM3uYlfWY=
 github.com/TheTitanrain/w32 v0.0.0-20180517000239-4f5cfb03fabf h1:FPsprx82rdrX2jiKyS17BH6IrTmUBYqZa/CXT4uvb+I=
@@ -38,6 +42,14 @@ github.com/gopherjs/gopherjs v0.0.0-20180825215210-0210a2f0f73c/go.mod h1:wJfORR
 github.com/gopherjs/gopherwasm v0.1.1/go.mod h1:kx4n9a+MzHH0BJJhvlsQ65hqLFXDO/m256AsaDPQ+/4=
 github.com/gopherjs/gopherwasm v1.0.0/go.mod h1:SkZ8z7CWBz5VXbhJel8TxCmAcsQqzgWGR/8nMhyhZSI=
 github.com/gravestench/akara v0.0.0-20201014060234-a64208a7fd3c/go.mod h1:fTeda1SogMg5Lkd4lXMEd/Pk/a5/gQuLGaAI2rn1PBQ=
+github.com/gucio321/d2d2s v0.0.0-20210512160614-b711cc924952 h1:rnzuBvOWVN60zWhZKmrTWY6VOfnQWHTKuXQ2e+Y8lNs=
+github.com/gucio321/d2d2s v0.0.0-20210512160614-b711cc924952/go.mod h1:iWYh0cbfkBBp5wk2czODOTeLdOTFaxYO87Sft67CkYU=
+github.com/gucio321/d2d2s v0.0.0-20210512163619-3f77a2c6247b h1:FMiIzNPiAysVqd5RYRBoEAyTw+igsKxplqiiN01FLso=
+github.com/gucio321/d2d2s v0.0.0-20210512163619-3f77a2c6247b/go.mod h1:iWYh0cbfkBBp5wk2czODOTeLdOTFaxYO87Sft67CkYU=
+github.com/gucio321/d2d2s v0.0.0-20210513145305-6143ad6d3e75 h1:IPEi4Q8Y3Z7hO8MND9owASzQmePfqAwIEBB9JkBVvC8=
+github.com/gucio321/d2d2s v0.0.0-20210513145305-6143ad6d3e75/go.mod h1:iWYh0cbfkBBp5wk2czODOTeLdOTFaxYO87Sft67CkYU=
+github.com/gucio321/d2d2s v0.0.0-20210513150230-20081de151dc h1:XBqc36+rMvO7ldUr/w6uWtCgr0AZeAEOxe3y6XD9xno=
+github.com/gucio321/d2d2s v0.0.0-20210513150230-20081de151dc/go.mod h1:iWYh0cbfkBBp5wk2czODOTeLdOTFaxYO87Sft67CkYU=
 github.com/hajimehoshi/bitmapfont/v2 v2.1.0/go.mod h1:2BnYrkTQGThpr/CY6LorYtt/zEPNzvE/ND69CRTaHMs=
 github.com/hajimehoshi/ebiten/v2 v2.0.2/go.mod h1:AbHP/SS226aFTex/izULVwW0D2AuGyqC4AVwilmRjOg=
 github.com/hajimehoshi/file2byteslice v0.0.0-20200812174855-0e5e8a80490e/go.mod h1:CqqAHp7Dk/AqQiwuhV1yT2334qbA/tFWQW0MD2dGqUE=
@@ -69,6 +81,8 @@ github.com/mattn/go-runewidth v0.0.9 h1:Lm995f3rfxdpd6TSmuVCHVb/QhupuXlYr8sCI/Qd
 github.com/mattn/go-runewidth v0.0.9/go.mod h1:H031xJmbD/WCDINGzjvQ9THkh0rPKHF+m2gUSrubnMI=
 github.com/mewkiz/flac v1.0.5/go.mod h1:EHZNU32dMF6alpurYyKHDLYpW1lYpBZ5WrXi/VuNIGs=
 github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e/go.mod h1:zD1mROLANZcx1PVRCS0qkT7pwLkGfwJo4zjcN/Tysno=
+github.com/nokka/d2s v1.3.0 h1:d1v9tOMZ4gotC2SneGZaF+WTYxVQe4d0fjA8KWxz17I=
+github.com/nokka/d2s v1.3.0/go.mod h1:xLa9/d01xmFQI8GKH2uHC8iL6WAUPUk0T1WgsccL2OM=
 github.com/olekukonko/tablewriter v0.0.5 h1:P2Ga83D34wi1o9J6Wh1mRuqd4mF/x/lgBS7N7AbDhec=
 github.com/olekukonko/tablewriter v0.0.5/go.mod h1:hPp6KlRPjbx+hW8ykQs1w3UBbZlj6HuIJcUGPhkA7kY=
 github.com/ozankasikci/go-image-merge v0.2.3-0.20210426105355-ce64427c0c12 h1:LdAKX13BHUD2Ugj/PI7FjtUed9TksjhbtmkmorgOCEI=

@@ -34,6 +34,7 @@ const (
 	FileTypeTBLFontTable
 	FileTypeDS1
 	FileTypeAnimationData
+	FileTypeD2S
 )
 
 // determinateTBLtype returns table type
@@ -68,6 +69,7 @@ func fileExtensionInfo() map[FileType]fileTypeInfoStruct {
 		FileTypeText:           {Name: "Text", Extension: ".txt"},
 		FileTypeDS1:            {Name: "DS1", Extension: ".ds1"},
 		FileTypeAnimationData:  {Name: "AnimationData", Extension: ".d2"},
+		FileTypeD2S:            {Name: "Character save", Extension: ".d2s"},
 	}
 }
 

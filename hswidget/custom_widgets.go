@@ -169,6 +169,8 @@ func MakeInputInt(id string, width int32, output interface{}, optionalCB func())
 		input = int32(*o)
 	case *int:
 		input = int32(*o)
+	case *uint32:
+		input = int32(*o)
 	default:
 		panic(fmt.Sprintf("MakeInputInt: invalid value type %T given", o))
 	}
@@ -179,6 +181,8 @@ func MakeInputInt(id string, width int32, output interface{}, optionalCB func())
 			SetByteToInt(input, o)
 		case *int:
 			*o = int(input)
+		case *uint32:
+			*o = uint32(input)
 		}
 
 		if optionalCB != nil {

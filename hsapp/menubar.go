@@ -42,6 +42,7 @@ func (a *App) renderMainMenuBar() {
 			}),
 			g.Menu("Open##MainMenuFileOpen").Layout(g.Layout{
 				g.MenuItem("Project...\t\tCtrl+O##MainMenuFileOpenProject").OnClick(a.onOpenProjectClicked),
+				g.MenuItem("Character save...##MainMenuFileOpenCharacterSave").OnClick(a.onOpenCharacterSaveClicked),
 			}),
 			g.MenuItem("Save\t\t\t\t\t\tCtrl+S##MainMenuFileSaveProject").OnClick(a.Save),
 			g.Menu("Open Recent##MainMenuOpenRecent").Layout(g.Layout{
@@ -172,6 +173,23 @@ func (a *App) onOpenProjectClicked() {
 	}
 
 	a.loadProjectFromFile(file)
+}
+
+func (a *App) onOpenCharacterSaveClicked() {
+	file, err := dialog.File().Filter("Diablo 2 save file", "d2s").Load()
+	if err != nil || file == "" {
+		return
+	}
+
+	path := &hscommon.PathEntry{
+		FullPath:    file,
+		IsDirectory: false,
+		IsRoot:      false,
+		IsRenaming:  false,
+		Source:      hscommon.PathEntrySourceProject,
+	}
+
+	a.createEditor(path, nil, 0, 0, 0, 0)
 }
 
 func (a *App) onProjectPropertiesClicked() {
