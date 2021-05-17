@@ -18,7 +18,8 @@ func (s *widgetState) Dispose() {
 }
 
 func (p *widget) getStateID() string {
-	return fmt.Sprintf("widget_%s", p.id)
+	// return fmt.Sprintf("widget_%s", p.id)
+	return fmt.Sprintf("charSaveWidget_%s", p.id)
 }
 
 func (p *widget) getState() *widgetState {
