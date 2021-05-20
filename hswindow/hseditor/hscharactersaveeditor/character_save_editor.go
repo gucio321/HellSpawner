@@ -3,6 +3,7 @@ package hscharactersaveeditor
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/OpenDiablo2/dialog"
 	g "github.com/ianling/giu"
@@ -34,7 +35,7 @@ func Create(config *hsconfig.Config,
 	pathEntry *hscommon.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project) (hscommon.EditorWindow, error) {
-	char, err := d2d2s.Unmarshal(*data)
+	char, err := d2d2s.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading cof file: %w", err)
 	}
@@ -87,7 +88,10 @@ func (e *CharacterSaveEditor) RegisterKeyboardShortcuts(inputManager *hsinput.In
 
 // GenerateSaveData generates data to be saved
 func (e *CharacterSaveEditor) GenerateSaveData() []byte {
-	data, _ := e.Path.GetFileBytes()
+	data, err := e.char.Encode()
+	if err != nil {
+		log.Println(err)
+	}
 
 	return data
 }
