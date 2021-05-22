@@ -8,6 +8,7 @@ import (
 	"github.com/gucio321/d2d2s"
 	"github.com/gucio321/d2d2s/d2senums"
 	"github.com/gucio321/d2d2s/d2sitems"
+	"github.com/gucio321/d2d2s/d2smercenary/d2smercenarytype"
 	"github.com/ianling/giu"
 )
 
@@ -61,6 +62,7 @@ func (p *widget) Build() {
 		),
 		giu.Label(fmt.Sprintf("Map ID: %v", p.d2s.MapID)),
 		giu.TreeNode("Status##" + p.id + "status").Layout(p.makeStatusLayout()),
+		giu.TreeNode("Skills##" + p.id + "skills").Layout(p.makeSkillsLayout()),
 		giu.TreeNode("Difficulty##" + p.id + "difficultyStatus").Layout(p.makeDifficultyLayout()),
 		giu.TreeNode("Mercenary##" + p.id + "merc").Layout(p.makeMercLayout()),
 		giu.TreeNode("Quests##" + p.id + "quests").Layout(p.makeQuestsLayout()),
@@ -80,6 +82,51 @@ func (p *widget) makeStatusLayout() giu.Layout {
 	}
 }
 
+func (p *widget) makeSkillsLayout() giu.Layout {
+	state := p.getState()
+
+	leftSkill := int32(p.d2s.LeftSkill)
+	rightSkill := int32(p.d2s.RightSkill)
+
+	leftSkillSwitch := int32(p.d2s.LeftSkillSwitch)
+	rightSkillSwitch := int32(p.d2s.RightSkillSwitch)
+
+	skillsList := make([]string, 0)
+	for i := d2senums.SkillAttack; i <= d2senums.SkillAssasinRoyalStrike; i++ {
+		skillsList = append(skillsList, i.String())
+	}
+
+	specSkills := d2senums.GetSkillList(p.d2s.Class)
+	specSkillsList := make([]string, 0)
+	for _, s := range specSkills {
+		specSkillsList = append(specSkillsList, s.String())
+	}
+
+	skillValue := int32((*p.d2s.Skills)[specSkills[state.skillIdx]])
+
+	return giu.Layout{
+		giu.Combo("Left skill", skillsList[leftSkill], skillsList, &leftSkill).OnChange(func() {
+			p.d2s.LeftSkill = d2senums.SkillID(leftSkill)
+		}),
+		giu.Combo("Right skill", skillsList[rightSkill], skillsList, &rightSkill).OnChange(func() {
+			p.d2s.RightSkill = d2senums.SkillID(rightSkill)
+		}),
+		giu.Combo("Left skill (switch)", skillsList[leftSkillSwitch], skillsList, &leftSkillSwitch).OnChange(func() {
+			p.d2s.LeftSkillSwitch = d2senums.SkillID(leftSkillSwitch)
+		}),
+		giu.Combo("Right skill (switch)", skillsList[rightSkillSwitch], skillsList, &rightSkillSwitch).OnChange(func() {
+			p.d2s.RightSkillSwitch = d2senums.SkillID(rightSkillSwitch)
+		}),
+		giu.Separator(),
+		giu.Line(
+			giu.SliderInt("skill ID", &state.skillIdx, 0, int32(d2senums.NumSkills-1)).Format(fmt.Sprintf("Skill: %s", specSkillsList[state.skillIdx])),
+			giu.InputInt("##"+p.id+"skillValue", &skillValue).Size(inputIntW).OnChange(func() {
+				(*p.d2s.Skills)[specSkills[state.skillIdx]] = byte(skillValue)
+			}),
+		),
+	}
+}
+
 func (p *widget) makeDifficultyLayout() giu.Layout {
 	state := p.getState()
 	act := (*p.d2s.Difficulty)[d2enum.DifficultyType(state.difficultyStatus)].Act
@@ -94,10 +141,37 @@ func (p *widget) makeDifficultyLayout() giu.Layout {
 }
 
 func (p *widget) makeMercLayout() giu.Layout {
+	mercClass := int32(p.d2s.Mercenary.Type.Class)
+	mercClassList := make([]string, 0)
+	for i := d2smercenarytype.MercRogue; i <= d2smercenarytype.MercBarbarian; i++ {
+		mercClassList = append(mercClassList, i.String())
+	}
+
+	classAttributes := d2smercenarytype.GetClassAttributes(p.d2s.Mercenary.Type.Class)
+	mercAttribute := int32(p.d2s.Mercenary.Type.Attribute - classAttributes[0])
+	mercAttributeList := make([]string, 0)
+	for _, a := range classAttributes {
+		mercAttributeList = append(mercAttributeList, a.String())
+	}
+
 	return giu.Layout{
 		giu.Label(fmt.Sprintf("ID: %v", p.d2s.Mercenary.ID)),
 		giu.Label(fmt.Sprintf("Name ID: %v", p.d2s.Mercenary.Name)),
-		giu.Label(fmt.Sprintf("Type: %v", p.d2s.Mercenary.Type.Code)),
+		giu.Label("Type: "),
+		giu.Line(
+			giu.Label("\tClass: "),
+			giu.Combo("##"+p.id+"mercClass", mercClassList[mercClass], mercClassList, &mercClass).OnChange(func() {
+				p.d2s.Mercenary.Type.Class = d2smercenarytype.MercClass(mercClass)
+				classAttributes = d2smercenarytype.GetClassAttributes(p.d2s.Mercenary.Type.Class)
+				p.d2s.Mercenary.Type.Attribute = classAttributes[0]
+			}),
+		),
+		giu.Line(
+			giu.Label("\tAttribute"),
+			giu.Combo("##"+p.id+"mercAttributes", mercAttributeList[mercAttribute], mercAttributeList, &mercAttribute).OnChange(func() {
+				p.d2s.Mercenary.Type.Attribute = d2smercenarytype.MercAttribute(mercAttribute) + classAttributes[0]
+			}),
+		),
 		giu.Line(
 			giu.Label("Experience:"),
 			hswidget.MakeInputInt("##"+p.id+"mercExp", 80, &p.d2s.Mercenary.Experience, nil),

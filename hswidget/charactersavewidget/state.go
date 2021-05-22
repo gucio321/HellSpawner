@@ -12,6 +12,7 @@ type widgetState struct {
 	questsAct        int32
 	questsIdx        int32
 	itemIdx          int32
+	skillIdx         int32
 }
 
 func (s *widgetState) Dispose() {

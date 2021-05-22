@@ -58,6 +58,16 @@ github.com/gucio321/d2d2s v0.0.0-20210519144713-56ba1cc164e3 h1:KGBKBwZrL90RTnJj
 github.com/gucio321/d2d2s v0.0.0-20210519144713-56ba1cc164e3/go.mod h1:rYY95/R7HB5IWs31LxnEIRsblvB1vnAlczwvgQq1ruA=
 github.com/gucio321/d2d2s v0.0.0-20210519154805-8e9c9fe0334c h1:qBaOlK+4ajyh1OKTUyK2ciQVv4lXNHaWOo6uHTP9xL0=
 github.com/gucio321/d2d2s v0.0.0-20210519154805-8e9c9fe0334c/go.mod h1:rYY95/R7HB5IWs31LxnEIRsblvB1vnAlczwvgQq1ruA=
+github.com/gucio321/d2d2s v0.0.0-20210520092337-d5846ad017ad h1:WXL88rj4Hkuexnw6Tu7g+hNIoYi+AjiK9jvWQ4BNi3Y=
+github.com/gucio321/d2d2s v0.0.0-20210520092337-d5846ad017ad/go.mod h1:rYY95/R7HB5IWs31LxnEIRsblvB1vnAlczwvgQq1ruA=
+github.com/gucio321/d2d2s v0.0.0-20210520093735-9e5afa05dcc9 h1:hWvRzP/4vOOkAvOBaTM4F0XdbiKHk0kz/oZAr9u4ydc=
+github.com/gucio321/d2d2s v0.0.0-20210520093735-9e5afa05dcc9/go.mod h1:rYY95/R7HB5IWs31LxnEIRsblvB1vnAlczwvgQq1ruA=
+github.com/gucio321/d2d2s v0.0.0-20210521092721-12c4ccf7f2e6 h1:iS5Q0aAABwrqsMWMgRxOpeqAFrLr594gSPZ+IH1yIl4=
+github.com/gucio321/d2d2s v0.0.0-20210521092721-12c4ccf7f2e6/go.mod h1:rYY95/R7HB5IWs31LxnEIRsblvB1vnAlczwvgQq1ruA=
+github.com/gucio321/d2d2s v0.0.0-20210521100027-18e494d0a787 h1:ji9ia7HCq5EZ4j1l8O19AuNBDys72zE8bfUQt3OVn98=
+github.com/gucio321/d2d2s v0.0.0-20210521100027-18e494d0a787/go.mod h1:rYY95/R7HB5IWs31LxnEIRsblvB1vnAlczwvgQq1ruA=
+github.com/gucio321/d2d2s v0.0.0-20210521101909-399354b9d0b5 h1:itKdieKR01rAgFNgGkK+EtqjDm+q4XlYjNShmv9BSDU=
+github.com/gucio321/d2d2s v0.0.0-20210521101909-399354b9d0b5/go.mod h1:rYY95/R7HB5IWs31LxnEIRsblvB1vnAlczwvgQq1ruA=
 github.com/hajimehoshi/bitmapfont/v2 v2.1.0/go.mod h1:2BnYrkTQGThpr/CY6LorYtt/zEPNzvE/ND69CRTaHMs=
 github.com/hajimehoshi/ebiten/v2 v2.0.2/go.mod h1:AbHP/SS226aFTex/izULVwW0D2AuGyqC4AVwilmRjOg=
 github.com/hajimehoshi/file2byteslice v0.0.0-20200812174855-0e5e8a80490e/go.mod h1:CqqAHp7Dk/AqQiwuhV1yT2334qbA/tFWQW0MD2dGqUE=
