@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/ianling/giu"
-	"github.com/ianling/imgui-go"
+	"github.com/AllenDang/giu"
+	"github.com/AllenDang/imgui-go"
 
 	"github.com/OpenDiablo2/HellSpawner/hsassets"
 	"github.com/OpenDiablo2/HellSpawner/hscommon"

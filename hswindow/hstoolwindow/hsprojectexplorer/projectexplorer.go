@@ -11,9 +11,9 @@ import (
 
 	"github.com/OpenDiablo2/dialog"
 
-	"github.com/ianling/imgui-go"
+	"github.com/AllenDang/imgui-go"
 
-	g "github.com/ianling/giu"
+	g "github.com/AllenDang/giu"
 
 	"github.com/OpenDiablo2/HellSpawner/hsassets"
 	"github.com/OpenDiablo2/HellSpawner/hscommon"

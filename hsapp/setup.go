@@ -12,8 +12,8 @@ import (
 	"github.com/faiface/beep"
 	"github.com/faiface/beep/speaker"
 
-	g "github.com/ianling/giu"
-	"github.com/ianling/imgui-go"
+	g "github.com/AllenDang/giu"
+	"github.com/AllenDang/imgui-go"
 
 	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor/hsds1editor"
 	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor/hsdt1editor"

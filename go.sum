@@ -1,5 +1,9 @@
 dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7gZCb22OMCxBHrMx7a5I7Hp++hsVxbQ4BYO7hU=
 dmitri.shuralyov.com/gpu/mtl v0.0.0-20201218220906-28db891af037/go.mod h1:H6x//7gZCb22OMCxBHrMx7a5I7Hp++hsVxbQ4BYO7hU=
+github.com/AllenDang/giu v0.5.4 h1:OuSgcTZYH9buug1yWsJAvUr57aQwiJK7hjk+JYtv4tM=
+github.com/AllenDang/giu v0.5.4/go.mod h1:1CyOLkJREGGWFVx+p2z5+1KMhY3H7Zbl8gQ/huzThsI=
+github.com/AllenDang/imgui-go v1.12.1-0.20210509113325-c0e4c78e7a88 h1:dXpshnNwPl+QjFOiJNFlQrtOz1oA565EO9FUseKvlhU=
+github.com/AllenDang/imgui-go v1.12.1-0.20210509113325-c0e4c78e7a88/go.mod h1:+pYwstqlGGlU2lI1FREPlVAKP2nwV+bNhAlMrbQynhQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/JoshVarga/blast v0.0.0-20180421040937-681c804fb9f0 h1:tDnuU0igiBiQFjsvq1Bi7DpoUjqI76VVvW045vpeFeM=
@@ -58,10 +62,6 @@ github.com/hajimehoshi/oto v0.6.1/go.mod h1:0QXGEkbuJRohbJaxr7ZQSxnju7hEhseiPx2h
 github.com/hajimehoshi/oto v0.6.8/go.mod h1:0QXGEkbuJRohbJaxr7ZQSxnju7hEhseiPx2hrh6raOI=
 github.com/hajimehoshi/oto v0.7.1 h1:I7maFPz5MBCwiutOrz++DLdbr4rTzBsbBuV2VpgU9kk=
 github.com/hajimehoshi/oto v0.7.1/go.mod h1:wovJ8WWMfFKvP587mhHgot/MBr4DnNy9m6EepeVGnos=
-github.com/ianling/giu v0.5.1-0.20210524205023-4d3114338b69 h1:8/TnUIv7dy6smaOQiWsOB9MMHbiOgHrllYXRimQPx+Y=
-github.com/ianling/giu v0.5.1-0.20210524205023-4d3114338b69/go.mod h1:twqK/c83RuUbBV8sWkV9TMpcdaBs3Pec2FBN5gC+hEA=
-github.com/ianling/imgui-go v1.12.1-0.20210420174252-e90a22fb87e6 h1:cYyhJBJpHS3ccwS/Hn9SI4T3SUzORnfiBvB+/1mopLs=
-github.com/ianling/imgui-go v1.12.1-0.20210420174252-e90a22fb87e6/go.mod h1:XJ3IHn74S/5gKA6R5tYya4x7bsucY4tHgfnGO94FmEc=
 github.com/jakecoffman/cp v1.0.0/go.mod h1:JjY/Fp6d8E1CHnu74gWNnU0+b9VzEdUVPoJxg2PsTQg=
 github.com/jaytaylor/html2text v0.0.0-20200412013138-3577fbdbcff7 h1:g0fAGBisHaEQ0TRq1iBvemFRf+8AEWEmBESSiWB3Vsc=
 github.com/jaytaylor/html2text v0.0.0-20200412013138-3577fbdbcff7/go.mod h1:CVKlgaMiht+LXvHG173ujK6JUhZXKb2u/BQtjPDIvyk=

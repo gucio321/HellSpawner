@@ -5,7 +5,7 @@ import (
 	"image/color"
 
 	"github.com/OpenDiablo2/dialog"
-	g "github.com/ianling/giu"
+	g "github.com/AllenDang/giu"
 
 	"github.com/OpenDiablo2/HellSpawner/hscommon/hsenum"
 	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"

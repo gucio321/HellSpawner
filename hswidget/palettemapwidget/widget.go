@@ -3,8 +3,8 @@ package palettemapwidget
 import (
 	"log"
 
-	"github.com/ianling/giu"
-	"github.com/ianling/imgui-go"
+	"github.com/AllenDang/giu"
+	"github.com/AllenDang/imgui-go"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2pl2"
 

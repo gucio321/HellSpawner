@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	g "github.com/ianling/giu"
+	g "github.com/AllenDang/giu"
 
 	"github.com/OpenDiablo2/dialog"
 

@@ -12,7 +12,7 @@ package hsinput
 
 import (
 	"github.com/go-gl/glfw/v3.3/glfw"
-	"github.com/ianling/giu"
+	"github.com/AllenDang/giu"
 )
 
 const (
