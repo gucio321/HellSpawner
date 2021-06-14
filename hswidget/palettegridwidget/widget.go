@@ -14,10 +14,10 @@ const (
 
 // PaletteGridWidget represents a palette grid
 type PaletteGridWidget struct {
-	id            string
-	colors        *[]PaletteColor
 	textureLoader hscommon.TextureLoader
+	colors        *[]PaletteColor
 	onClick       func(idx int)
+	id            string
 }
 
 // Create creates a new palette grid widget

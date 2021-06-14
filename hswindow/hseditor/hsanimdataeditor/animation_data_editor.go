@@ -23,10 +23,10 @@ var _ hscommon.EditorWindow = &AnimationDataEditor{}
 
 // AnimationDataEditor represents a cof editor
 type AnimationDataEditor struct {
-	*hseditor.Editor
-	d2            *d2animdata.AnimationData
-	state         []byte
 	textureLoader hscommon.TextureLoader
+	*hseditor.Editor
+	d2    *d2animdata.AnimationData
+	state []byte
 }
 
 // Create creates a new cof editor

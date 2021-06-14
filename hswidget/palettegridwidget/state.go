@@ -8,11 +8,9 @@ import (
 
 // PaletteGridState represents palette grid's state
 type widgetState struct {
-	// nolint:unused,structcheck // will be used
-	loading bool
-	// nolint:unused,structcheck // will be used
-	failure bool
 	texture [256]*giu.Texture
+	loading bool
+	failure bool
 }
 
 // Dispose cleans palette grids state

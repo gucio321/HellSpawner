@@ -19,8 +19,8 @@ type Path = string
 // Node represents node
 type Node struct {
 	Parent *Node
-	name
 	Children
+	name
 }
 
 // NewNode creates a new node

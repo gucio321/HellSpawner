@@ -43,17 +43,14 @@ func (s *playPauseButtonState) Dispose() {
 
 // PlayPauseButtonWidget represents a play/pause button
 type PlayPauseButtonWidget struct {
-	id string
-
-	onChange,
-	onPauseClicked,
-	onPlayClicked func()
-
-	width,
-	height float32
-
-	isPlaying     *bool
-	textureLoader hscommon.TextureLoader
+	textureLoader  hscommon.TextureLoader
+	isPlaying      *bool
+	onPauseClicked func()
+	onPlayClicked  func()
+	onChange       func()
+	id             string
+	width          float32
+	height         float32
 }
 
 // PlayPauseButton creates a play/pause button

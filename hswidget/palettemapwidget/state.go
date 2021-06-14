@@ -14,12 +14,12 @@ const (
 )
 
 type widgetState struct {
+	textures map[string]giu.Widget
+	editTransformState
 	mode      widgetMode
 	selection int32
 	slider1   int32
 	slider2   int32
-	textures  map[string]giu.Widget
-	editTransformState
 }
 
 // Dispose cleans viewer's state

@@ -16,10 +16,10 @@ const (
 
 // AbyssWrapper represents abyss wrapper
 type AbyssWrapper struct {
-	running bool
 	output  io.Writer
 	cmd     *exec.Cmd
 	mutex   sync.RWMutex
+	running bool
 }
 
 // Create creates new Abyss Wrapper

@@ -27,10 +27,10 @@ var _ hscommon.EditorWindow = &FontTableEditor{}
 
 // FontTableEditor represents font table editor
 type FontTableEditor struct {
-	*hseditor.Editor
-	fontTable     *d2font.Font
-	state         []byte
 	textureLoader hscommon.TextureLoader
+	*hseditor.Editor
+	fontTable *d2font.Font
+	state     []byte
 }
 
 // Create creates a new font table editor

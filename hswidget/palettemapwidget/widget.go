@@ -21,9 +21,9 @@ const (
 )
 
 type widget struct {
-	id            string
-	pl2           *d2pl2.PL2
 	textureLoader hscommon.TextureLoader
+	pl2           *d2pl2.PL2
+	id            string
 }
 
 // Create creates a new palette map viewer's widget

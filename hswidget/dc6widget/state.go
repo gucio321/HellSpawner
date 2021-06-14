@@ -52,21 +52,17 @@ const (
 
 // widgetState represents dc6 viewer's state
 type widgetState struct {
-	viewerState
-	tiledState
-	mode widgetMode
-
-	isPlaying bool
-	repeat    bool
-	tickTime  int32
-	playMode  animationPlayMode
-
-	// cache - will not be saved
-	rgb      []*image.RGBA
+	ticker   *time.Ticker
 	textures []*giu.Texture
-
+	rgb      []*image.RGBA
+	tiledState
+	viewerState
+	tickTime  int32
+	mode      widgetMode
+	isPlaying bool
+	playMode  animationPlayMode
 	isForward bool
-	ticker    *time.Ticker
+	repeat    bool
 }
 
 func (w *widgetState) Dispose() {
@@ -198,11 +194,11 @@ func (s *viewerState) Dispose() {
 }
 
 type tiledState struct {
-	width,
+	tiled  *giu.Texture
+	imgw   int
+	imgh   int
+	width  int32
 	height int32
-	tiled *giu.Texture
-	imgw, // nolint:structcheck // linter's bug - it is used
-	imgh int
 }
 
 func (s *tiledState) Dispose() {

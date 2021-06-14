@@ -30,10 +30,10 @@ const (
 
 // widget represents dc6viewer's widget
 type widget struct {
-	id            string
-	dc6           *d2dc6.DC6
 	textureLoader hscommon.TextureLoader
+	dc6           *d2dc6.DC6
 	palette       *[256]d2interface.Color
+	id            string
 }
 
 // Create creates new widget

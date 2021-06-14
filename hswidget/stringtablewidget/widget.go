@@ -15,8 +15,8 @@ const (
 )
 
 type widget struct {
-	id   string
 	dict d2tbl.TextDictionary
+	id   string
 }
 
 // Create creates a new string table editor widget

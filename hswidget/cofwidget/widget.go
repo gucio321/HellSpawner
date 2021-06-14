@@ -23,9 +23,9 @@ const (
 )
 
 type widget struct {
-	id            string
-	cof           *d2cof.COF
 	textureLoader hscommon.TextureLoader
+	cof           *d2cof.COF
+	id            string
 }
 
 // Create a new COF widget

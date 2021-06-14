@@ -20,9 +20,9 @@ const (
 // Console represents a console
 type Console struct {
 	*hstoolwindow.ToolWindow
+	logFile    *os.File
 	outputText string
 	fontFixed  imgui.Font
-	logFile    *os.File
 }
 
 // Create creates a new console

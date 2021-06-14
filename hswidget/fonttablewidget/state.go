@@ -20,10 +20,10 @@ const (
 )
 
 type widgetState struct {
-	mode                widgetMode
-	editRuneState       editRuneState
-	addItemState        addItemState
 	deleteButtonTexture *giu.Texture
+	addItemState        addItemState
+	editRuneState       editRuneState
+	mode                widgetMode
 }
 
 // Dispose cleans state

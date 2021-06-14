@@ -69,36 +69,29 @@ type editorConstructor func(
 
 // App represents an app
 type App struct {
-	masterWindow *g.MasterWindow
-	*Flags
-	project      *hsproject.Project
-	config       *hsconfig.Config
-	abyssWrapper *abysswrapper.AbyssWrapper
-	logFile      *os.File
-
-	aboutDialog             *hsaboutdialog.AboutDialog
+	focusedEditor           hscommon.EditorWindow
+	TextureLoader           hscommon.TextureLoader
 	preferencesDialog       *hspreferencesdialog.PreferencesDialog
+	config                  *hsconfig.Config
+	abyssWrapper            *abysswrapper.AbyssWrapper
+	logFile                 *os.File
+	aboutDialog             *hsaboutdialog.AboutDialog
+	project                 *hsproject.Project
 	projectPropertiesDialog *hsprojectpropertiesdialog.ProjectPropertiesDialog
-
-	projectExplorer *hsprojectexplorer.ProjectExplorer
-	mpqExplorer     *hsmpqexplorer.MPQExplorer
-	console         *hsconsole.Console
-
-	editors            []hscommon.EditorWindow
+	projectExplorer         *hsprojectexplorer.ProjectExplorer
+	mpqExplorer             *hsmpqexplorer.MPQExplorer
+	console                 *hsconsole.Console
+	*Flags
 	editorConstructors map[hsfiletypes.FileType]editorConstructor
-
+	InputManager       *hsinput.InputManager
+	masterWindow       *g.MasterWindow
+	editors            []hscommon.EditorWindow
+	fontFixed          imgui.Font
+	fontFixedSmall     imgui.Font
+	diabloBoldFont     imgui.Font
+	diabloRegularFont  imgui.Font
 	editorManagerMutex sync.RWMutex
-	focusedEditor      hscommon.EditorWindow
-
-	fontFixed         imgui.Font
-	fontFixedSmall    imgui.Font
-	diabloBoldFont    imgui.Font
-	diabloRegularFont imgui.Font
-
-	InputManager  *hsinput.InputManager
-	TextureLoader hscommon.TextureLoader
-
-	showUsage bool
+	showUsage          bool
 }
 
 // Create creates new app instance

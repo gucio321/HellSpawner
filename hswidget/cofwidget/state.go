@@ -23,10 +23,10 @@ const (
 )
 
 type widgetState struct {
+	textures
 	*viewerState
 	*newLayerFields
 	mode
-	textures
 }
 
 type textures struct {
@@ -158,11 +158,11 @@ func (s *widgetState) Decode(data []byte) {
 
 // viewerState represents cof viewer's state
 type viewerState struct {
+	layer          *d2cof.CofLayer
+	confirmDialog  *hswidget.PopUpConfirmDialog
 	layerIndex     int32
 	directionIndex int32
 	frameIndex     int32
-	layer          *d2cof.CofLayer
-	confirmDialog  *hswidget.PopUpConfirmDialog
 }
 
 // Dispose clears viewer's layers
