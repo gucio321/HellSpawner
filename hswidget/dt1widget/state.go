@@ -23,11 +23,9 @@ type controls struct {
 // widgetState represents dt1 viewers state
 type widgetState struct {
 	*controls
-
+	tileGroups    [][]*d2dt1.Tile
+	textures      [][]map[string]*giu.Texture
 	lastTileGroup int32
-
-	tileGroups [][]*d2dt1.Tile
-	textures   [][]map[string]*giu.Texture
 }
 
 // Dispose clears viewers state

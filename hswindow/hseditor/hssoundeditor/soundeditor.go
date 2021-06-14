@@ -36,13 +36,12 @@ var _ hscommon.EditorWindow = &SoundEditor{}
 
 // SoundEditor represents a sound editor
 type SoundEditor struct {
-	*hseditor.Editor
-
 	streamer      beep.StreamSeekCloser
-	control       *beep.Ctrl
-	format        beep.Format
-	file          string
 	textureLoader hscommon.TextureLoader
+	*hseditor.Editor
+	control *beep.Ctrl
+	file    string
+	format  beep.Format
 }
 
 // Create creates a new sound editor

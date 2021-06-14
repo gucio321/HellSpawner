@@ -32,10 +32,10 @@ const (
 )
 
 type widget struct {
-	id            string
+	textureLoader hscommon.TextureLoader
 	dcc           *d2dcc.DCC
 	palette       *[256]d2interface.Color
-	textureLoader hscommon.TextureLoader
+	id            string
 }
 
 // Create creates a new dcc widget

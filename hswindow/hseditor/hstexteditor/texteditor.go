@@ -28,11 +28,10 @@ var _ hscommon.EditorWindow = &TextEditor{}
 // TextEditor represents a text editor
 type TextEditor struct {
 	*hseditor.Editor
-
 	text      string
-	tableView bool
 	tableRows []*g.TableRowWidget
 	columns   int
+	tableView bool
 }
 
 // Create creates a new text editor

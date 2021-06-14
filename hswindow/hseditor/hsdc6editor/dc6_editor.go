@@ -24,14 +24,14 @@ var _ hscommon.EditorWindow = &DC6Editor{}
 
 // DC6Editor represents a dc6 editor
 type DC6Editor struct {
-	*hseditor.Editor
-	dc6                 *d2dc6.DC6
-	textureLoader       hscommon.TextureLoader
-	config              *hsconfig.Config
-	selectPalette       bool
-	palette             *[256]d2interface.Color
 	selectPaletteWidget g.Widget
-	state               []byte
+	textureLoader       hscommon.TextureLoader
+	dc6                 *d2dc6.DC6
+	config              *hsconfig.Config
+	palette             *[256]d2interface.Color
+	*hseditor.Editor
+	state         []byte
+	selectPalette bool
 }
 
 // Create creates a new dc6 editor

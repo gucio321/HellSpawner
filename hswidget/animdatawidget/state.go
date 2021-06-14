@@ -20,12 +20,12 @@ const (
 )
 
 type widgetState struct {
-	mode       widgetMode
-	mapKeys    []string
-	mapIndex   int32
-	recordIdx  int32
 	deleteIcon *giu.Texture
 	addEntryState
+	mapKeys   []string
+	mode      widgetMode
+	mapIndex  int32
+	recordIdx int32
 }
 
 // Dispose clears widget's state

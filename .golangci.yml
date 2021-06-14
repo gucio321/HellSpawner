@@ -21,6 +21,13 @@ linters-settings:
   goimports:
     local-prefixes: github.com/OpenDiablo2/HellSpawner
   govet:
+    # for fieldalignment you can use built-in fieldalignment's linter feature
+    # to autofix bugs
+    # ```
+    # go get golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment
+    # fieldalignment --fix ./...
+    # ```
+    enable-all: true
     check-shadowing: true
   lll:
     line-length: 140

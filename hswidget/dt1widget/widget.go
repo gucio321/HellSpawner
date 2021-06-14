@@ -39,10 +39,10 @@ func (tileIdentity) fromTile(tile *d2dt1.Tile) tileIdentity {
 
 // widget represents dt1 viewers widget
 type widget struct {
-	id            string
+	textureLoader hscommon.TextureLoader
 	dt1           *d2dt1.DT1
 	palette       *[256]d2interface.Color
-	textureLoader hscommon.TextureLoader
+	id            string
 }
 
 // Create creates a new dt1 viewers widget

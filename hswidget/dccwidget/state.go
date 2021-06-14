@@ -42,23 +42,19 @@ func (a animationPlayMode) String() string {
 const defaultTickTime = 100
 
 type widgetState struct {
+	ticker   *time.Ticker
+	textures []*giu.Texture
+	images   []*image.RGBA
 	controls struct {
 		direction int32
 		frame     int32
 		scale     int32
 	}
-
-	isPlaying bool
-	repeat    bool
 	tickTime  int32
+	isPlaying bool
 	playMode  animationPlayMode
-
-	// cache - will not be saved
-	images   []*image.RGBA
-	textures []*giu.Texture
-
-	isForward bool // determines a direction of animation
-	ticker    *time.Ticker
+	isForward bool
+	repeat    bool
 }
 
 // Dispose cleans viewers state

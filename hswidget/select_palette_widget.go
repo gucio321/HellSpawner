@@ -27,9 +27,9 @@ const (
 type SelectPaletteWidget struct {
 	mpqExplorer     *hsmpqexplorer.MPQExplorer
 	projectExplorer *hsprojectexplorer.ProjectExplorer
-	id              string
 	saveCB          func(colors *[256]d2interface.Color)
 	closeCB         func()
+	id              string
 }
 
 // NewSelectPaletteWidget creates a select palette widget

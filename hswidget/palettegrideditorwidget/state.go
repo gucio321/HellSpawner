@@ -18,8 +18,8 @@ const (
 
 // PaletteGridState represents palette grid's state
 type widgetState struct {
-	mode widgetMode
 	editEntryState
+	mode widgetMode
 }
 
 // Dispose cleans palette grids state
@@ -107,9 +107,11 @@ func (ws *widgetState) Decode(data []byte) {
 }
 
 type editEntryState struct {
-	idx     int
-	r, g, b uint8
-	hex     string // nolint:structcheck // linter's bug
+	hex string
+	idx int
+	r   uint8
+	g   uint8
+	b   uint8
 }
 
 func (ees *editEntryState) Dispose() {

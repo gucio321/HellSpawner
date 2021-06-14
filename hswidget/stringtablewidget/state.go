@@ -18,11 +18,11 @@ const (
 )
 
 type widgetState struct {
-	mode    widgetMode
-	keys    []string
-	numOnly bool
-	addEditState
 	search string
+	addEditState
+	keys    []string
+	mode    widgetMode
+	numOnly bool
 }
 
 func (ws *widgetState) Dispose() {

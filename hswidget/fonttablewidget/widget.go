@@ -22,9 +22,9 @@ const (
 )
 
 type widget struct {
+	textureLoader hscommon.TextureLoader
 	fontTable     *d2font.Font
 	id            string
-	textureLoader hscommon.TextureLoader
 }
 
 // Create creates a new FontTable widget

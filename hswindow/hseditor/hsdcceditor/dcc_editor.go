@@ -25,14 +25,14 @@ var _ hscommon.EditorWindow = &DCCEditor{}
 
 // DCCEditor represents a new dcc editor
 type DCCEditor struct {
-	*hseditor.Editor
-	dcc                 *d2dcc.DCC
-	config              *hsconfig.Config
-	selectPalette       bool
-	palette             *[256]d2interface.Color
-	selectPaletteWidget g.Widget
-	state               []byte
 	textureLoader       hscommon.TextureLoader
+	selectPaletteWidget g.Widget
+	*hseditor.Editor
+	config        *hsconfig.Config
+	palette       *[256]d2interface.Color
+	dcc           *d2dcc.DCC
+	state         []byte
+	selectPalette bool
 }
 
 // Create creates a new dcc editor

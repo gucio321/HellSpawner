@@ -26,33 +26,15 @@ const (
 
 // PathEntry defines a file/folder
 type PathEntry struct {
-	// Children represents child files/folders inside a folder.
-	Children []*PathEntry `json:"children"`
-
-	// Name is the visible name of the path entry.
-	Name string `json:"name"`
-
-	// FullPath is the actual path of the entry (filesystem, or mpq relative).
-	FullPath string `json:"fullPath"`
-
-	// IsDirectory is true when this path represents a directory.
-	IsDirectory bool `json:"isDirectory"`
-
-	// IsRoot is true When this path represents the root path (the project node).
-	IsRoot bool `json:"isRoot"`
-
-	// IsRenaming is true when this path is currently being renamed in a tree view.
-	IsRenaming bool `json:"isRenaming"`
-
-	// OldName is the value of the path's Name before renaming started.
-	// If renaming has not started, this value should be blank.
-	OldName string `json:"oldMame"`
-
-	// PathEntrySource is the type of path entry this is (MPQ or Filesystem).
-	Source PathEntrySource `json:"source"`
-
-	// MPQFile represents the full path to the MPQ that contains this file (if this is an MPQ path).
-	MPQFile string `json:"mpqFile"`
+	OldName     string          `json:"oldMame"`
+	Name        string          `json:"name"`
+	FullPath    string          `json:"fullPath"`
+	MPQFile     string          `json:"mpqFile"`
+	Children    []*PathEntry    `json:"children"`
+	Source      PathEntrySource `json:"source"`
+	IsDirectory bool            `json:"isDirectory"`
+	IsRoot      bool            `json:"isRoot"`
+	IsRenaming  bool            `json:"isRenaming"`
 }
 
 // GetUniqueID returns path's ID

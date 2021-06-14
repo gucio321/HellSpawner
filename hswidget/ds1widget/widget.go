@@ -27,10 +27,10 @@ const (
 )
 
 type widget struct {
-	id                  string
+	textureLoader       hscommon.TextureLoader
 	ds1                 *d2ds1.DS1
 	deleteButtonTexture *giu.Texture
-	textureLoader       hscommon.TextureLoader
+	id                  string
 }
 
 // Create creates a new ds1 viewer

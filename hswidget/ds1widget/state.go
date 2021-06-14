@@ -20,15 +20,12 @@ const (
 )
 
 type ds1Controls struct {
-	tileX, tileY int32
-	object       int32
-	// nolint:structcheck // will be used
-	subgroup int32
-	// nolint:structcheck // linter's bug: this is used
-	tile struct {
-		floor, wall, shadow, sub int32
-	}
 	noObjectsImageTexture *giu.Texture
+	tile                  struct{ floor, wall, shadow, sub int32 }
+	tileX                 int32
+	tileY                 int32
+	object                int32
+	subgroup              int32
 }
 
 // ds1AddObjectState represents state of new object
@@ -60,11 +57,11 @@ func (t *ds1AddPathState) Dispose() {
 // widgetState represents ds1 viewers state
 type widgetState struct {
 	*ds1Controls
-	mode           widgetMode
 	confirmDialog  *hswidget.PopUpConfirmDialog
 	newFilePath    string
 	addObjectState ds1AddObjectState
 	addPathState   ds1AddPathState
+	mode           widgetMode
 }
 
 // Dispose clears viewers state

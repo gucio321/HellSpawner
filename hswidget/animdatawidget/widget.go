@@ -22,9 +22,9 @@ const (
 )
 
 type widget struct {
-	id            string
-	d2            *d2animdata.AnimationData
 	textureLoader hscommon.TextureLoader
+	d2            *d2animdata.AnimationData
+	id            string
 }
 
 // Create creates a new widget

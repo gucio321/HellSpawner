@@ -12,11 +12,11 @@ const (
 
 // PopUpConfirmDialog represents a pop up dialog
 type PopUpConfirmDialog struct {
+	yCB     func()
+	nCB     func()
 	header  string
 	message string
 	id      string
-	yCB     func()
-	nCB     func()
 }
 
 // NewPopUpConfirmDialog creates a new pop up dialog (with yes-no options)

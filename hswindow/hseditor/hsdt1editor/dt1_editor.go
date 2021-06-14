@@ -25,14 +25,14 @@ var _ hscommon.EditorWindow = &DT1Editor{}
 
 // DT1Editor represents a dt1 editor
 type DT1Editor struct {
-	*hseditor.Editor
-	dt1                 *d2dt1.DT1
-	textureLoader       hscommon.TextureLoader
-	config              *hsconfig.Config
-	selectPalette       bool
-	palette             *[256]d2interface.Color
 	selectPaletteWidget g.Widget
-	state               []byte
+	textureLoader       hscommon.TextureLoader
+	dt1                 *d2dt1.DT1
+	config              *hsconfig.Config
+	palette             *[256]d2interface.Color
+	*hseditor.Editor
+	state         []byte
+	selectPalette bool
 }
 
 // Create creates new dt1 editor
