@@ -12,7 +12,7 @@ import (
 
 	"github.com/OpenDiablo2/HellSpawner/hsconfig"
 
-	g "github.com/AllenDang/giu"
+	g "github.com/gucio321/giu"
 
 	"github.com/AllenDang/imgui-go"
 

@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/OpenDiablo2/dialog"
-	g "github.com/AllenDang/giu"
+	g "github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
 

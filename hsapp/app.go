@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	g "github.com/AllenDang/giu"
 	"github.com/AllenDang/imgui-go"
+	g "github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/dialog"
 	"github.com/go-gl/glfw/v3.3/glfw"
@@ -128,7 +128,7 @@ func (a *App) Run() (err error) {
 	// setting up the logging here, as opposed to inside of app.setup(),
 	// because of the deferred call to logfile.Close()
 	if a.config.LoggingToFile || *a.Flags.logFile != "" {
-		var path = a.config.LogFilePath
+		path := a.config.LogFilePath
 		if *a.Flags.logFile != "" {
 			path = *a.Flags.logFile
 		}

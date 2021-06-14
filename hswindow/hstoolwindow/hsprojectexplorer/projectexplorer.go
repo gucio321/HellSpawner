@@ -13,7 +13,7 @@ import (
 
 	"github.com/AllenDang/imgui-go"
 
-	g "github.com/AllenDang/giu"
+	g "github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/HellSpawner/hsassets"
 	"github.com/OpenDiablo2/HellSpawner/hscommon"

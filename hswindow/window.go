@@ -1,7 +1,7 @@
 package hswindow
 
 import (
-	"github.com/AllenDang/giu"
+	"github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/HellSpawner/hscommon/hsstate"
 	"github.com/OpenDiablo2/HellSpawner/hsinput"

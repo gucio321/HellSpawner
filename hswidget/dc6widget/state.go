@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/AllenDang/giu"
+	"github.com/gucio321/giu"
 	gim "github.com/ozankasikci/go-image-merge"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2datautils"

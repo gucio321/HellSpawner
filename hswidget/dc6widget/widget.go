@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/OpenDiablo2/dialog"
-	"github.com/AllenDang/giu"
+	"github.com/gucio321/giu"
 	"github.com/AllenDang/imgui-go"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2dc6"

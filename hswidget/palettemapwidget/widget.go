@@ -3,8 +3,7 @@ package palettemapwidget
 import (
 	"log"
 
-	"github.com/AllenDang/giu"
-	"github.com/AllenDang/imgui-go"
+	"github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2pl2"
 
@@ -167,7 +166,7 @@ func (p *widget) buildEditor(state *widgetState) {
 	})
 	labelColor := hsutil.Color(p.pl2.BasePalette.Colors[indices[state.idx]].RGBA())
 	giu.Layout{
-		giu.Style().SetColor(imgui.StyleColorText, labelColor).To(
+		giu.Style().SetColor(giu.StyleColorText, labelColor).To(
 			giu.Label("Select color from base palette"),
 		),
 		grid,

@@ -7,7 +7,7 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/AllenDang/giu"
+	"github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2enum"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2dt1"
@@ -665,7 +665,7 @@ func (p *widget) makeSubTilePreview(tile *d2dt1.Tile, state *widgetState) giu.La
 					hasFlag := (flag & (1 << state.controls.subtileFlag)) > 0
 
 					if hasFlag {
-						canvas.AddCircle(flagPoint, 3, col, 1)
+						canvas.AddCircle(flagPoint, 3, col, 1, 1)
 					}
 				}
 

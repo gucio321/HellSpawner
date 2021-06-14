@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/AllenDang/giu"
+	"github.com/gucio321/giu"
 	"github.com/AllenDang/imgui-go"
 
 	"github.com/OpenDiablo2/HellSpawner/hsassets"

@@ -3,7 +3,7 @@ package ds1widget
 import (
 	"fmt"
 
-	"github.com/AllenDang/giu"
+	"github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/HellSpawner/hsassets"
 	"github.com/OpenDiablo2/HellSpawner/hswidget"

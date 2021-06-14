@@ -4,7 +4,7 @@ import (
 	image2 "image"
 	"image/color"
 
-	"github.com/AllenDang/giu"
+	"github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"
 )

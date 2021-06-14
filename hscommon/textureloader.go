@@ -12,7 +12,7 @@ import (
 
 	"github.com/enriquebris/goconcurrentqueue"
 
-	g "github.com/AllenDang/giu"
+	g "github.com/gucio321/giu"
 )
 
 // TextureLoadRequestItem represents texture request item

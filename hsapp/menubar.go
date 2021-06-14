@@ -10,7 +10,7 @@ import (
 
 	"github.com/OpenDiablo2/dialog"
 	"github.com/gravestench/osinfo"
-	g "github.com/AllenDang/giu"
+	g "github.com/gucio321/giu"
 	"github.com/pkg/browser"
 
 	"github.com/OpenDiablo2/HellSpawner/hscommon"

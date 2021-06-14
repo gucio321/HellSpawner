@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/go-gl/glfw/v3.3/glfw"
-	"github.com/AllenDang/giu"
+	"github.com/gucio321/giu"
 )
 
 func Test_InputManager_Create(t *testing.T) {

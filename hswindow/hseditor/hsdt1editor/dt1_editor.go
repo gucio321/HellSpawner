@@ -4,7 +4,7 @@ package hsdt1editor
 import (
 	"fmt"
 
-	g "github.com/AllenDang/giu"
+	g "github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/dialog"
 

@@ -12,8 +12,8 @@ import (
 	"github.com/faiface/beep"
 	"github.com/faiface/beep/speaker"
 
-	g "github.com/AllenDang/giu"
 	"github.com/AllenDang/imgui-go"
+	g "github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor/hsds1editor"
 	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor/hsdt1editor"
@@ -77,7 +77,8 @@ func (a *App) setup() (err error) {
 }
 
 func (a *App) setupMasterWindow() {
-	a.masterWindow = g.NewMasterWindow(baseWindowTitle, baseWindowW, baseWindowH, 0, a.setupFonts)
+	a.masterWindow = g.NewMasterWindow(baseWindowTitle, baseWindowW, baseWindowH, 0)
+	a.setupFonts()
 
 	bgColor := a.determineBackgroundColor()
 	a.masterWindow.SetBgColor(bgColor)
@@ -154,7 +155,6 @@ func (a *App) setupProjectExplorer() error {
 	x, y := float32(projectExplorerDefaultX), float32(projectExplorerDefaultY)
 	window, err := hsprojectexplorer.Create(a.TextureLoader,
 		a.openEditor, x, y)
-
 	if err != nil {
 		return fmt.Errorf("error creating a project explorer: %w", err)
 	}

@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	g "github.com/AllenDang/giu"
+	g "github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/dialog"
 
@@ -99,7 +99,7 @@ func (e *TextEditor) Build() {
 		e.IsOpen(&e.Visible).
 			Layout(
 				g.InputTextMultiline("", &e.text).
-					Flags(g.InputTextFlags_AllowTabInput),
+					Flags(g.InputTextFlagsAllowTabInput),
 			)
 	} else {
 		e.IsOpen(&e.Visible).

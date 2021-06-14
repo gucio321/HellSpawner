@@ -3,7 +3,7 @@ package stringtablewidget
 import (
 	"strconv"
 
-	"github.com/AllenDang/giu"
+	"github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2tbl"
 )

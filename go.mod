@@ -3,8 +3,7 @@ module github.com/OpenDiablo2/HellSpawner
 go 1.16
 
 require (
-	github.com/AllenDang/giu v0.5.4 // indirect
-	github.com/AllenDang/imgui-go v1.12.1-0.20210509113325-c0e4c78e7a88 // indirect
+	github.com/AllenDang/imgui-go v1.12.1-0.20210610115201-3253c355762e // indirect
 	github.com/OpenDiablo2/OpenDiablo2 v0.0.0-20210514222603-a688d660a0f7
 	github.com/OpenDiablo2/dialog v0.0.0-20201230220514-26162241209f
 	github.com/TheTitanrain/w32 v0.0.0-20200114052255-2654d97dbd3d // indirect
@@ -13,6 +12,7 @@ require (
 	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20210410170116-ea3d685f79fb
 	github.com/go-resty/resty/v2 v2.6.0 // indirect
 	github.com/gravestench/osinfo v0.0.0-20210525170338-34eb1ac010f7
+	github.com/gucio321/giu v0.5.3-0.20210614125644-78dccbce4e14 // indirect
 	github.com/hajimehoshi/oto v0.7.1 // indirect
 	github.com/jaytaylor/html2text v0.0.0-20200412013138-3577fbdbcff7
 	github.com/kirsle/configdir v0.0.0-20170128060238-e45d2f54772f
@@ -25,6 +25,6 @@ require (
 	golang.org/x/exp v0.0.0-20210526181343-b47a03e3048a // indirect
 	golang.org/x/image v0.0.0-20210504121937-7319ad40d33e // indirect
 	golang.org/x/mobile v0.0.0-20210527171505-7e972142eb43 // indirect
-	golang.org/x/net v0.0.0-20210525063256-abc453219eb5 // indirect
+	golang.org/x/net v0.0.0-20210610132358-84b48f89b13b // indirect
 	golang.org/x/sys v0.0.0-20210601080250-7ecdf8ef093b // indirect
 )
