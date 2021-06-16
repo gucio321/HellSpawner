@@ -46,3 +46,11 @@ func (d *Dialog) IsVisible() bool {
 func (d *Dialog) Cleanup() {
 	d.Visible = false
 }
+
+func (d *Dialog) Build() {
+	if d.Visible {
+		giu.OpenPopup(d.title)
+	}
+
+	d.PopupModalWidget.Build()
+}

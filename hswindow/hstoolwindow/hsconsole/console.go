@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/AllenDang/imgui-go"
+	"github.com/gucio321/giu"
 	g "github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/HellSpawner/hscommon/hsstate"
@@ -21,12 +21,12 @@ const (
 type Console struct {
 	*hstoolwindow.ToolWindow
 	outputText string
-	fontFixed  imgui.Font
+	fontFixed  *giu.FontInfo
 	logFile    *os.File
 }
 
 // Create creates a new console
-func Create(fontFixed imgui.Font, x, y float32, logFile *os.File) *Console {
+func Create(fontFixed *giu.FontInfo, x, y float32, logFile *os.File) *Console {
 	result := &Console{
 		fontFixed:  fontFixed,
 		ToolWindow: hstoolwindow.New("Console", hsstate.ToolWindowTypeConsole, x, y),
@@ -44,15 +44,11 @@ func Create(fontFixed imgui.Font, x, y float32, logFile *os.File) *Console {
 func (c *Console) Build() {
 	c.IsOpen(&c.Visible).
 		Layout(g.Layout{
-			g.Custom(func() {
-				imgui.PushFont(c.fontFixed)
-			}),
-			g.InputTextMultiline("", &c.outputText).
-				Size(lineW, lineH).
-				Flags(g.InputTextFlagsReadOnly | g.InputTextFlagsNoUndoRedo),
-			g.Custom(func() {
-				imgui.PopFont()
-			}),
+			g.Style().SetFont(c.fontFixed).To(
+				g.InputTextMultiline("", &c.outputText).
+					Size(lineW, lineH).
+					Flags(g.InputTextFlagsReadOnly | g.InputTextFlagsNoUndoRedo),
+			),
 		})
 }
 

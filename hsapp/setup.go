@@ -12,7 +12,7 @@ import (
 	"github.com/faiface/beep"
 	"github.com/faiface/beep/speaker"
 
-	"github.com/AllenDang/imgui-go"
+	"github.com/gucio321/giu"
 	g "github.com/gucio321/giu"
 
 	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor/hsds1editor"
@@ -206,12 +206,6 @@ func (a *App) setupDialogs() error {
 // it will only load an appropriate glyph ranges for
 // displayed text (e.g. for string/font table editors)
 func (a *App) setupFonts() {
-	fonts := g.Context.IO().Fonts()
-	ranges := imgui.NewGlyphRanges()
-	builder := imgui.NewFontGlyphRangesBuilder()
-
-	builder.AddRanges(fonts.GlyphRangesDefault())
-
 	font := hsassets.FontNotoSansRegular
 
 	switch a.config.Locale {
@@ -222,29 +216,22 @@ func (a *App) setupFonts() {
 		// noop
 	case hsenum.LocaleChineseTraditional:
 		font = hsassets.FontSourceHanSerif
-
-		builder.AddRanges(fonts.GlyphRangesChineseFull())
 	case hsenum.LocaleKorean:
 		font = hsassets.FontSourceHanSerif
-
-		builder.AddRanges(fonts.GlyphRangesKorean())
-	case hsenum.LocalePolish:
-		builder.AddText(hsenum.PolishSpecialCharacters)
+		// case hsenum.LocalePolish:
+		// builder.AddText(hsenum.PolishSpecialCharacters)
 	}
 
-	// build ranges
-	builder.BuildRanges(ranges)
-
 	// setup default font
-	fonts.AddFontFromMemoryTTFV(font, baseFontSize, 0, ranges.Data())
+	giu.AddFontFromBytes("Default font", font, baseFontSize)
 
 	// please note, that the following fonts will not use
 	// previously generated glyph ranges.
 	// they'll have a default range
-	a.fontFixed = fonts.AddFontFromMemoryTTF(hsassets.FontCascadiaCode, fixedFontSize)
-	a.fontFixedSmall = fonts.AddFontFromMemoryTTF(hsassets.FontCascadiaCode, fixedSmallFontSize)
-	a.diabloRegularFont = fonts.AddFontFromMemoryTTF(hsassets.FontDiabloRegular, diabloRegularFontSize)
-	a.diabloBoldFont = fonts.AddFontFromMemoryTTF(hsassets.FontDiabloBold, diabloBoldFontSize)
+	a.fontFixed = giu.AddFontFromBytes("fixed font", hsassets.FontCascadiaCode, fixedFontSize)
+	a.fontFixedSmall = giu.AddFontFromBytes("small fixed font", hsassets.FontCascadiaCode, fixedSmallFontSize)
+	a.diabloRegularFont = giu.AddFontFromBytes("dialog - regular font", hsassets.FontDiabloRegular, diabloRegularFontSize)
+	a.diabloBoldFont = giu.AddFontFromBytes("dialog - bold font", hsassets.FontDiabloBold, diabloBoldFontSize)
 }
 
 func (a *App) registerGlobalKeyboardShortcuts() {
