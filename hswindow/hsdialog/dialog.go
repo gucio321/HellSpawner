@@ -48,9 +48,6 @@ func (d *Dialog) Cleanup() {
 }
 
 func (d *Dialog) Build() {
-	if d.Visible {
-		giu.OpenPopup(d.title)
-	}
-
+	giu.OpenPopup(d.title)
 	d.PopupModalWidget.Build()
 }

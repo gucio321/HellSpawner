@@ -121,5 +121,6 @@ func (a *AboutDialog) Build() {
 				),
 			),
 		),
-	).Build()
+	)
+	a.Dialog.Build()
 }

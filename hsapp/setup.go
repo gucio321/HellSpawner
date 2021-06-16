@@ -223,7 +223,7 @@ func (a *App) setupFonts() {
 	}
 
 	// setup default font
-	giu.AddFontFromBytes("Default font", font, baseFontSize)
+	giu.SetDefaultFontFromBytes(font, baseFontSize)
 
 	// please note, that the following fonts will not use
 	// previously generated glyph ranges.
