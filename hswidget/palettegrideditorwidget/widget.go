@@ -1,23 +1,15 @@
 package palettegrideditorwidget
 
 import (
-	"image"
-	"image/color"
-	"log"
-	"math"
-
 	"github.com/ianling/giu"
 
 	"github.com/OpenDiablo2/HellSpawner/hscommon"
 	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"
-	"github.com/OpenDiablo2/HellSpawner/hswidget"
 	"github.com/OpenDiablo2/HellSpawner/hswidget/palettegridwidget"
 )
 
 const (
 	actionButtonW, actionButtonH = 250, 30
-	inputIntW                    = 30
-	imgSize                      = 80
 )
 
 // PaletteGridEditorWidget represents a palette grid editor
@@ -67,9 +59,7 @@ func (p *PaletteGridEditorWidget) Build() {
 
 	grid := palettegridwidget.Create(p.textureLoader, p.id, &colors).OnClick(func(idx int) {
 		color := hsutil.Color((*p.colors)[idx].RGBA())
-		state.r = color.R
-		state.g = color.G
-		state.b = color.B
+		state.rgba = color
 		state.idx = idx
 
 		state.mode = widgetModeEdit
@@ -79,102 +69,48 @@ func (p *PaletteGridEditorWidget) Build() {
 	case widgetModeGrid:
 		grid.Build()
 	case widgetModeEdit:
-		p.buildEditor(grid)
+		p.buildEditor()
 	}
 }
 
-func (p *PaletteGridEditorWidget) buildEditor(grid *palettegridwidget.PaletteGridWidget) {
+func (p *PaletteGridEditorWidget) buildEditor() {
 	state := p.getState()
 
-	giu.Layout{
-		giu.Label("Edit Color: "),
-		giu.Image(state.texture),
-		giu.Separator(),
-		p.makeRGBField("##"+p.id+"changeR", "R:", &state.r, grid),
-		giu.Separator(),
-		p.makeRGBField("##"+p.id+"changeG", "G:", &state.g, grid),
-		giu.Separator(),
-		p.makeRGBField("##"+p.id+"changeB", "B:", &state.b, grid),
-		giu.Separator(),
-		giu.Row(
-			giu.Label("Hex: "),
-			giu.InputText("##"+p.id+"editHex", &state.hex).OnChange(func() {
-				r, g, b, err := Hex2RGB(state.hex)
-				if err != nil {
-					log.Print("error: ", err)
-				}
+	isOpen := state.mode == widgetModeEdit
+	onChange := func() {
+		p.changeColor(state)
 
-				grid.UpdateImage()
-
-				state.r, state.g, state.b = r, g, b
-			}),
-		),
-		giu.Separator(),
-		giu.Button("OK##"+p.id+"editColorOK").Size(actionButtonW, actionButtonH).OnClick(func() {
-			if p.onChange != nil {
-				p.onChange()
-			}
-			state.mode = widgetModeGrid
-		}),
-	}.Build()
-}
-
-func (p *PaletteGridEditorWidget) makeRGBField(id, label string, field *uint8, grid *palettegridwidget.PaletteGridWidget) giu.Layout {
-	state := p.getState()
-
-	p.updateEditedTexture()
-
-	f32 := int32(*field)
-
-	return giu.Layout{
-		giu.Row(
-			giu.Label(label),
-			hswidget.MakeInputInt(
-				id,
-				inputIntW,
-				field,
-				func() {
-					p.changeColor(state)
-					p.updateEditedTexture()
-					grid.UpdateImage()
-					if p.onChange != nil {
-						p.onChange()
-					}
-					state.hex = RGB2Hex(state.r, state.g, state.b)
-				},
-			),
-		),
-		giu.SliderInt(id+"Slider", &f32, 0, math.MaxUint8).OnChange(func() {
-			p.changeColor(state)
-			grid.UpdateImage()
-			if p.onChange != nil {
-				p.onChange()
-			}
-			p.updateEditedTexture()
-			state.hex = RGB2Hex(state.r, state.g, state.b)
-			hswidget.SetByteToInt(f32, field)
-		}),
-	}
-}
-
-func (p *PaletteGridEditorWidget) updateEditedTexture() {
-	state := p.getState()
-
-	rgb := image.NewRGBA(image.Rect(0, 0, imgSize, imgSize))
-
-	for y := 0; y < imgSize; y++ {
-		for x := 0; x < imgSize; x++ {
-			// nolint:gomnd // alpha = 255
-			rgb.Set(x, y, color.RGBA{
-				R: state.r,
-				G: state.g,
-				B: state.b,
-				A: 255,
-			})
+		if p.onChange != nil {
+			p.onChange()
 		}
 	}
 
-	p.textureLoader.CreateTextureFromARGB(rgb, func(t *giu.Texture) {
-		state.texture = t
+	onClick := func() {
+		onChange()
+
+		state.mode = widgetModeGrid
+	}
+
+	const (
+		popupTitle = "Edit color"
+	)
+
+	colorEditID := "##edit color"
+	buttonID := "OK##" + p.id + "editColorOK"
+
+	colorEditor := giu.PopupModal(popupTitle).IsOpen(&isOpen).Layout(
+		giu.ColorEdit(colorEditID, &state.rgba).Flags(giu.ColorEditFlagsNoAlpha),
+		giu.Separator(),
+		giu.Button(buttonID).Size(actionButtonW, actionButtonH).OnClick(onClick),
+	)
+
+	// handle clicking on "X" button of popup
+	closeButtonHandler := giu.Custom(func() {
+		if !isOpen {
+			onChange()
+			state.mode = widgetModeGrid
+		}
 	})
+
+	giu.Layout{colorEditor, closeButtonHandler}.Build()
 }
