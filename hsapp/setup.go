@@ -1,7 +1,9 @@
 package hsapp
 
 import (
+	"bytes"
 	"fmt"
+	"image"
 	"image/color"
 	"log"
 	"strconv"
@@ -81,6 +83,13 @@ func (a *App) setupMasterWindow() {
 
 	bgColor := a.determineBackgroundColor()
 	a.masterWindow.SetBgColor(bgColor)
+
+	icon, _, err := image.Decode(bytes.NewReader(hsassets.HellSpawnerLogo))
+	if err != nil {
+		dialog.Message("error loading icon image").Info()
+	}
+
+	a.masterWindow.SetIcon([]image.Image{icon})
 }
 
 func (a *App) determineBackgroundColor() color.RGBA {
