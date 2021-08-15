@@ -9,7 +9,6 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2cof"
 
 	"github.com/OpenDiablo2/HellSpawner/hsassets"
-	"github.com/OpenDiablo2/HellSpawner/hswidget"
 )
 
 type mode int32
@@ -17,7 +16,6 @@ type mode int32
 const (
 	modeViewer mode = iota
 	modeAddLayer
-	modeConfirm
 )
 
 type widgetState struct {
@@ -46,7 +44,6 @@ type viewerState struct {
 	DirectionIndex int32
 	FrameIndex     int32
 	layer          *d2cof.CofLayer
-	confirmDialog  *hswidget.PopUpConfirmDialog
 }
 
 // Dispose clears viewer's layers
@@ -99,9 +96,6 @@ func (p *widget) setState(s giu.Disposable) {
 func (p *widget) initState() {
 	state := &widgetState{
 		Mode: modeViewer,
-		viewerState: &viewerState{
-			confirmDialog: &hswidget.PopUpConfirmDialog{},
-		},
 		newLayerFields: &newLayerFields{
 			Selectable: true,
 			DrawEffect: int32(d2enum.DrawEffectNone),

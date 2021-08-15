@@ -6,7 +6,6 @@ import (
 	"github.com/AllenDang/giu"
 
 	"github.com/OpenDiablo2/HellSpawner/hsassets"
-	"github.com/OpenDiablo2/HellSpawner/hswidget"
 )
 
 type widgetMode int32
@@ -16,7 +15,6 @@ const (
 	widgetModeAddFile
 	widgetModeAddObject
 	widgetModeAddPath
-	widgetModeConfirm
 )
 
 type ds1Controls struct {
@@ -59,7 +57,6 @@ func (t *ds1AddPathState) Dispose() {
 type widgetState struct {
 	*ds1Controls
 	Mode           widgetMode
-	confirmDialog  *hswidget.PopUpConfirmDialog
 	NewFilePath    string
 	addObjectState ds1AddObjectState
 	addPathState   ds1AddPathState

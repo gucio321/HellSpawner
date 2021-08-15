@@ -64,11 +64,6 @@ func (p *widget) Build() {
 		p.makeViewerLayout().Build()
 	case modeAddLayer:
 		p.makeAddLayerLayout().Build()
-	case modeConfirm:
-		giu.Layout{
-			giu.Label("Please confirm your decision"),
-			state.confirmDialog,
-		}.Build()
 	}
 }
 
@@ -151,19 +146,13 @@ func (p *widget) makeLayerTab(state *widgetState) giu.Layout {
 			strMessage = "If you'll click YES, all data from this layer will be lost. Continue?"
 		)
 
-		fnYes := func() {
-			p.deleteCurrentLayer(state.viewerState.LayerIndex)
-			state.Mode = modeViewer
-		}
-
-		fnNo := func() {
-			state.Mode = modeViewer
-		}
-
-		id := fmt.Sprintf("##%sDeleteLayerConfirm", p.id)
-		state.viewerState.confirmDialog = hswidget.NewPopUpConfirmDialog(id, strPrompt, strMessage, fnYes, fnNo)
-
-		state.Mode = modeConfirm
+		giu.Msgbox(strPrompt, strMessage).Buttons(giu.MsgboxButtonsYesNo).ResultCallback(
+			func(result giu.DialogResult) {
+				if result == giu.DialogResultYes {
+					p.deleteCurrentLayer(state.viewerState.LayerIndex)
+				}
+			},
+		)
 	})
 
 	layout := giu.Layout{
@@ -223,19 +212,13 @@ func (p *widget) makePriorityTab(state *widgetState) giu.Layout {
 	deleteButtonID := fmt.Sprintf("Delete current direction...##%sDeleteDirection", p.id)
 	deleteButton := giu.Button(deleteButtonID).Size(actionButtonW, actionButtonH)
 	deleteButton.OnClick(func() {
-		fnYes := func() {
-			p.deleteCurrentDirection()
-			state.Mode = modeViewer
-		}
-
-		fnNo := func() {
-			state.Mode = modeViewer
-		}
-
-		popupID := fmt.Sprintf("%sDeleteLayerConfirm", p.id)
-
-		state.confirmDialog = hswidget.NewPopUpConfirmDialog(popupID, strPrompt, strMessage, fnYes, fnNo)
-		state.Mode = modeConfirm
+		giu.Msgbox(strPrompt, strMessage).
+			Buttons(giu.MsgboxButtonsYesNo).
+			ResultCallback(func(result giu.DialogResult) {
+				if result == giu.DialogResultYes {
+					p.deleteCurrentDirection()
+				}
+			})
 	})
 
 	return giu.Layout{

@@ -69,11 +69,6 @@ func (p *widget) Build() {
 		p.makeAddObjectLayout().Build()
 	case widgetModeAddPath:
 		p.makeAddPathLayout().Build()
-	case widgetModeConfirm:
-		giu.Layout{
-			giu.Label("Please confirm your decision"),
-			state.confirmDialog,
-		}.Build()
 	}
 }
 
@@ -103,69 +98,60 @@ func (p *widget) makeViewerLayout() giu.Layout {
 func (p *widget) makeDataLayout() giu.Layout {
 	version := int32(p.ds1.Version())
 
-	state := p.getState()
-
 	w, h := int32(p.ds1.Width()), int32(p.ds1.Height())
 	l := giu.Layout{
 		giu.Row(
 			giu.Label("Version: "),
+			giu.PrepareMsgbox(),
 			giu.InputInt(&version).Size(inputIntW).OnChange(func() {
-				state.confirmDialog = hswidget.NewPopUpConfirmDialog(
-					"##"+p.id+"confirmVersionChange",
+				giu.Msgbox(
 					"Are you sure, you want to change DS1 Version?",
 					"This value is used while decoding and encoding ds1 file\n"+
 						"Please check github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2ds1/ds1_version.go\n"+
 						"to get more informations what does version determinates.\n\n"+
 						"Continue?",
-					func() {
-						p.ds1.SetVersion(int(version))
-						state.Mode = widgetModeViewer
-					},
-					func() {
-						state.Mode = widgetModeViewer
+				).Buttons(giu.MsgboxButtonsOkCancel).ResultCallback(
+					func(result giu.DialogResult) {
+						if result == giu.DialogResultOK {
+							p.ds1.SetVersion(int(version))
+						}
 					},
 				)
-				state.Mode = widgetModeConfirm
 			}),
 		),
 		// giu.Label(fmt.Sprintf("Size: %d x %d tiles", p.ds1.Width, p.ds1.Height)),
 		giu.Label("Size:"),
 		giu.Row(
 			giu.Label("\tWidth: "),
+			giu.PrepareMsgbox(),
 			giu.InputInt(&w).Size(inputIntW).OnChange(func() {
-				state.confirmDialog = hswidget.NewPopUpConfirmDialog(
-					"##"+p.id+"confirmWidthChange",
+				giu.Msgbox(
 					"Are you really sure, you want to change size of DS1 tiles?",
 					"This will affect all your tiles in Tile tab.\n"+
 						"Continue?",
-					func() {
-						p.ds1.SetWidth(int(w))
-						state.Mode = widgetModeViewer
-					},
-					func() {
-						state.Mode = widgetModeViewer
+				).Buttons(giu.MsgboxButtonsOkCancel).ResultCallback(
+					func(result giu.DialogResult) {
+						if result == giu.DialogResultOK {
+							p.ds1.SetWidth(int(w))
+						}
 					},
 				)
-				state.Mode = widgetModeConfirm
 			}),
 		),
 		giu.Row(
 			giu.Label("\tHeight: "),
 			giu.InputInt(&h).Size(inputIntW).OnChange(func() {
-				state.confirmDialog = hswidget.NewPopUpConfirmDialog(
-					"##"+p.id+"confirmWidthChange",
+				giu.Msgbox(
 					"Are you really sure, you want to change size of DS1 tiles?",
 					"This will affect all your tiles in Tile tab.\n"+
 						"Continue?",
-					func() {
-						p.ds1.SetHeight(int(h))
-						state.Mode = widgetModeViewer
-					},
-					func() {
-						state.Mode = widgetModeViewer
+				).Buttons(giu.MsgboxButtonsOkCancel).ResultCallback(
+					func(result giu.DialogResult) {
+						if result == giu.DialogResultOK {
+							p.ds1.SetHeight(int(h))
+						}
 					},
 				)
-				state.Mode = widgetModeConfirm
 			}),
 		),
 		giu.Label(fmt.Sprintf("Substitution Type: %d", p.ds1.SubstitutionType)),
