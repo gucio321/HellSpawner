@@ -10,7 +10,7 @@ export GOPROXY = https://proxy.golang.org,direct
 # go source files
 SRC = $(shell find . -type f -name "*.go")
 # The name of the executable (default is current directory name)
-TARGET := $(shell echo $${PWD-`pwd`})
+TARGET := $(shell echo $${PWD-`pwd`})/cmd/HellSpawner
 
 .PHONY: all build setup test cover clean run help
 
@@ -20,7 +20,7 @@ all: build
 ## build: Builds the binary
 build:
 	@echo "Building..."
-	@$(GOCMD) build -o ${NAME}
+	cd cmd/HellSpawner; $(GOCMD) build -o ${NAME}
 
 ## setup: Runs mod download and generate
 setup:
@@ -47,7 +47,8 @@ clean:
 
 ## run: Runs go run
 run: build
-	@$(GOCMD) run ${TARGET}
+	cd cmd/HellSpawner; \
+		$(GOCMD) run ${TARGET}
 
 ## help: Prints this help message
 help:
