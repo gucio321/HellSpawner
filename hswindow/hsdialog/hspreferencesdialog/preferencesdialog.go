@@ -25,12 +25,12 @@ type PreferencesDialog struct {
 
 	config             *hsconfig.Config
 	onConfigChanged    func(config *hsconfig.Config)
-	windowColorChanger func(c color.RGBA)
+	windowColorChanger func(c color.Color)
 	restartPrompt      bool
 }
 
 // Create creates a new preferences dialog
-func Create(onConfigChanged func(config *hsconfig.Config), windowColorChanger func(c color.RGBA)) *PreferencesDialog {
+func Create(onConfigChanged func(config *hsconfig.Config), windowColorChanger func(c color.Color)) *PreferencesDialog {
 	result := &PreferencesDialog{
 		Dialog:             hsdialog.New("Preferences"),
 		onConfigChanged:    onConfigChanged,

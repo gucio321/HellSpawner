@@ -282,11 +282,11 @@ func (p *widget) makeTileSelector() giu.Layout {
 
 	// actual layout
 	layout := giu.Layout{
-		giu.SliderInt("Tile Group", &state.controls.TileGroup, 0, int32(numGroups)),
+		giu.SliderInt(&state.controls.TileGroup, 0, int32(numGroups)).Label("Tile Group"),
 	}
 
 	if numVariants > 1 {
-		layout = append(layout, giu.SliderInt("Tile Variant", &state.controls.TileVariant, 0, int32(numVariants)))
+		layout = append(layout, giu.SliderInt(&state.controls.TileVariant, 0, int32(numVariants)).Label("Tile Variant"))
 	}
 
 	p.setState(state)
@@ -582,7 +582,7 @@ func (p *widget) makeSubtileFlags(state *widgetState, tile *d2dt1.Tile) giu.Layo
 	)
 
 	return giu.Layout{
-		giu.SliderInt("Subtile Type", &state.controls.SubtileFlag, 0, maxSubtileIndex),
+		giu.SliderInt(&state.controls.SubtileFlag, 0, maxSubtileIndex).Label("Subtile Type"),
 		giu.Label(subTileString(state.controls.SubtileFlag)),
 		p.makeSubTilePreview(tile, state),
 		giu.Dummy(gridMaxWidth, gridMaxHeight),

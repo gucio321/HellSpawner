@@ -72,7 +72,7 @@ func (p *widget) transformMulti(key string, transforms []d2pl2.PL2PaletteTransfo
 
 	textureID := fmt.Sprintf("%s_%d", key, state.Slider1)
 
-	l = append(l, giu.SliderInt("##"+key+"_slider", &state.Slider1, 0, numSelections-1))
+	l = append(l, giu.SliderInt(&state.Slider1, 0, numSelections-1).Label("##"+key+"_slider"))
 
 	if tex, found := state.textures[textureID]; found {
 		l = append(l, tex)
@@ -99,7 +99,7 @@ func (p *widget) transformMultiGroup(key string, groups ...[256]d2pl2.PL2Palette
 
 	if numGroups > 1 {
 		sliderKey := fmt.Sprintf("##%s_group", key)
-		l = append(l, giu.SliderInt(sliderKey, &state.Slider2, 0, numGroups-1))
+		l = append(l, giu.SliderInt(&state.Slider2, 0, numGroups-1).Label(sliderKey))
 	}
 
 	groupIdx := state.Slider2
@@ -113,7 +113,7 @@ func (p *widget) transformMultiGroup(key string, groups ...[256]d2pl2.PL2Palette
 
 	textureID := fmt.Sprintf("%s_%d_%d", key, state.Slider2, state.Slider1)
 
-	l = append(l, giu.SliderInt("##"+key+"_slider", &state.Slider1, 0, numSelections))
+	l = append(l, giu.SliderInt(&state.Slider1, 0, numSelections).Label("##"+key+"_slider"))
 
 	if tex, found := state.textures[textureID]; found {
 		l = append(l, tex)

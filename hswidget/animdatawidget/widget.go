@@ -130,7 +130,8 @@ func (p *widget) buildViewRecordLayout() {
 
 	giu.Layout{
 		giu.Row(
-			giu.ArrowButton("##"+p.id+"previousAnimation", giu.DirectionLeft).OnClick(func() {
+			giu.ArrowButton(giu.DirectionLeft).
+				ID("##"+p.id+"previousAnimation").OnClick(func() {
 				state.RecordIdx = 0
 
 				if state.MapIndex > 0 {
@@ -138,7 +139,8 @@ func (p *widget) buildViewRecordLayout() {
 				}
 			}),
 			giu.Label(fmt.Sprintf("Animation name: %s", name)),
-			giu.ArrowButton("##"+p.id+"nextAnimation", giu.DirectionRight).OnClick(func() {
+			giu.ArrowButton(giu.DirectionRight).
+				ID("##"+p.id+"nextAnimation").OnClick(func() {
 				state.RecordIdx = 0
 
 				if int(state.MapIndex) < len(state.mapKeys)-1 {
@@ -150,7 +152,7 @@ func (p *widget) buildViewRecordLayout() {
 		giu.Custom(func() {
 			if max > 0 {
 				giu.Layout{
-					giu.SliderInt("record##"+p.id, &state.RecordIdx, 0, int32(max)),
+					giu.SliderInt(&state.RecordIdx, 0, int32(max)).Label("record##" + p.id),
 					giu.Separator(),
 				}.Build()
 			}

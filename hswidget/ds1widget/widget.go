@@ -243,7 +243,7 @@ func (p *widget) makeObjectsLayout(state *widgetState) giu.Layout {
 	l := giu.Layout{}
 
 	if numObjects > 1 {
-		l = append(l, giu.SliderInt("Object Index", &state.Object, 0, numObjects-1))
+		l = append(l, giu.SliderInt(&state.Object, 0, numObjects-1).Label("Object Index"))
 	}
 
 	if numObjects > 0 {
@@ -466,8 +466,8 @@ func (p *widget) makeTilesTabLayout(state *widgetState) giu.Layout {
 
 	l = append(
 		l,
-		giu.SliderInt("Tile X", &state.ds1Controls.TileX, 0, int32(p.ds1.Width()-1)),
-		giu.SliderInt("Tile Y", &state.ds1Controls.TileY, 0, int32(p.ds1.Height()-1)),
+		giu.SliderInt(&state.ds1Controls.TileX, 0, int32(p.ds1.Width()-1)).Label("Tile X"),
+		giu.SliderInt(&state.ds1Controls.TileY, 0, int32(p.ds1.Height()-1)).Label("Tile Y"),
 		giu.TabBar().TabItems(
 			p.makeTilesGroupLayout(state, tx, ty, d2ds1.FloorLayerGroup),
 			p.makeTilesGroupLayout(state, tx, ty, d2ds1.WallLayerGroup),
@@ -541,7 +541,7 @@ func (p *widget) makeTilesGroupLayout(state *widgetState, x, y int, t d2ds1.Laye
 		}
 
 		if numRecords > 1 {
-			l = append(l, giu.SliderInt(t.String(), recordIdx, 0, int32(numRecords-1)))
+			l = append(l, giu.SliderInt(recordIdx, 0, int32(numRecords-1)).Label(t.String()))
 		}
 
 		l = append(l, p.makeTileLayout((*group)[*recordIdx].Tile(x, y), t))
@@ -680,7 +680,7 @@ func (p *widget) makeSubstitutionsLayout(state *widgetState) giu.Layout {
 	}
 
 	if numRecords > 1 {
-		l = append(l, giu.SliderInt("Substitution", &state.Subgroup, 0, int32(numRecords-1)))
+		l = append(l, giu.SliderInt(&state.Subgroup, 0, int32(numRecords-1)).Label("Substitution"))
 	}
 
 	l = append(l, p.makeSubstitutionLayout(&p.ds1.SubstitutionGroups[recordIdx]))
