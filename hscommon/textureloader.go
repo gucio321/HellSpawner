@@ -89,11 +89,9 @@ func (t *textureLoader) ProcessTextureLoadRequests() {
 
 			var texture *g.Texture
 
-			if texture, err = g.NewTextureFromRgba(loadRequest.rgb); err != nil {
-				log.Fatal(err)
-			}
-
-			loadRequest.callback(texture)
+			g.NewTextureFromRgba(loadRequest.rgb, func(tex *g.Texture) {
+				loadRequest.callback(texture)
+			})
 		}
 	}()
 }
