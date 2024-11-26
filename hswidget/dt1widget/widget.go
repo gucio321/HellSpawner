@@ -46,7 +46,7 @@ func (tileIdentity) fromTile(tile *d2dt1.Tile) tileIdentity {
 
 // widget represents dt1 viewers widget
 type widget struct {
-	id            string
+	id            giu.ID
 	dt1           *d2dt1.DT1
 	palette       *[256]d2interface.Color
 	textureLoader hscommon.TextureLoader
@@ -55,7 +55,7 @@ type widget struct {
 // Create creates a new dt1 viewers widget
 func Create(state []byte, palette *[256]d2interface.Color, textureLoader hscommon.TextureLoader, id string, dt1 *d2dt1.DT1) giu.Widget {
 	result := &widget{
-		id:            id,
+		id:            giu.ID(id),
 		dt1:           dt1,
 		textureLoader: textureLoader,
 		palette:       palette,
@@ -462,7 +462,9 @@ func (p *widget) makeTileInfoTab(tile *d2dt1.Tile) giu.Layout {
 		giu.Row(
 			giu.Label("Type: "),
 			giu.InputInt(&tile.Type).Size(inputIntW),
-			giu.Combo("##"+p.id+"tileTypeList", tileTypeList[tileTypeIdx], tileTypeList, &tile.Type),
+			giu.Combo("", tileTypeList[tileTypeIdx], tileTypeList, &tile.Type).ID(
+				"##"+p.id+"tileTypeList",
+			),
 		),
 	}
 
@@ -592,7 +594,7 @@ func (p *widget) makeSubtileFlags(state *widgetState, tile *d2dt1.Tile) giu.Layo
 	)
 
 	return giu.Layout{
-		giu.Combo("", subtileFlagList[state.subtileFlag], subtileFlagList, &state.subtileFlag).Size(comboW).ID(
+		giu.Combo("", subtileFlagList[state.SubtileFlag], subtileFlagList, &state.SubtileFlag).Size(comboW).ID(
 			"##" + p.id + "SubtileList",
 		),
 		giu.Label("Edit:"),
