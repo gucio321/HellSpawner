@@ -23,7 +23,7 @@ require (
 	github.com/russross/blackfriday v1.6.0
 	github.com/ssor/bom v0.0.0-20170718123548-6386211fdfcf // indirect
 	golang.org/x/exp v0.0.0-20210526181343-b47a03e3048a // indirect
-	golang.org/x/image v0.0.0-20210504121937-7319ad40d33e // indirect
+	golang.org/x/image v0.0.0-20210504121937-7319ad40d33e
 	golang.org/x/mobile v0.0.0-20210527171505-7e972142eb43 // indirect
 	golang.org/x/net v0.0.0-20210614182718-04defd469f4e // indirect
 	golang.org/x/sys v0.0.0-20210601080250-7ecdf8ef093b // indirect
