@@ -6,7 +6,7 @@ require (
 	github.com/OpenDiablo2/OpenDiablo2 v0.0.0-20210514222603-a688d660a0f7
 	github.com/OpenDiablo2/dialog v0.0.0-20201230220514-26162241209f
 	github.com/TheTitanrain/w32 v0.0.0-20200114052255-2654d97dbd3d // indirect
-	github.com/enriquebris/goconcurrentqueue v0.6.0
+	github.com/enriquebris/goconcurrentqueue v0.7.0
 	github.com/faiface/beep v1.0.2
 	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20210410170116-ea3d685f79fb
 	github.com/go-resty/resty/v2 v2.6.0 // indirect
