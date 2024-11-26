@@ -6,9 +6,9 @@ import (
 
 	"github.com/ianling/giu"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"
-	"github.com/OpenDiablo2/HellSpawner/hswidget/palettegridwidget"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/hswidget/palettegridwidget"
 )
 
 const (

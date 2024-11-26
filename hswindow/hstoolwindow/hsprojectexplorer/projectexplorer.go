@@ -15,14 +15,14 @@ import (
 
 	g "github.com/ianling/giu"
 
-	"github.com/OpenDiablo2/HellSpawner/hsassets"
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsfiletypes"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsstate"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"
-	"github.com/OpenDiablo2/HellSpawner/hswidget"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hstoolwindow"
+	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
+	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/hscommon/hsstate"
+	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/hswidget"
+	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow"
 )
 
 const (

@@ -9,12 +9,12 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2dat"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsfiletypes"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
-	"github.com/OpenDiablo2/HellSpawner/hsconfig"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hstoolwindow/hsmpqexplorer"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hstoolwindow/hsprojectexplorer"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
+	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsmpqexplorer"
+	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsprojectexplorer"
 )
 
 const (

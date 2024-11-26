@@ -14,17 +14,17 @@ import (
 	"github.com/OpenDiablo2/dialog"
 	"github.com/go-gl/glfw/v3.3/glfw"
 
-	"github.com/OpenDiablo2/HellSpawner/abysswrapper"
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsfiletypes"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
-	"github.com/OpenDiablo2/HellSpawner/hsconfig"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hsdialog/hsaboutdialog"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hsdialog/hspreferencesdialog"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hsdialog/hsprojectpropertiesdialog"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hstoolwindow/hsconsole"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hstoolwindow/hsmpqexplorer"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hstoolwindow/hsprojectexplorer"
+	"github.com/gucio321/HellSpawner/abysswrapper"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
+	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hsaboutdialog"
+	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hspreferencesdialog"
+	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hsprojectpropertiesdialog"
+	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsconsole"
+	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsmpqexplorer"
+	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsprojectexplorer"
 )
 
 const (

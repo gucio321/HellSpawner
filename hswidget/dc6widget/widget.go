@@ -13,9 +13,9 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2dc6"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"
-	"github.com/OpenDiablo2/HellSpawner/hswidget"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/hswidget"
 )
 
 const (

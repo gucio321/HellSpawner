@@ -7,15 +7,15 @@ import (
 	"github.com/OpenDiablo2/dialog"
 	g "github.com/ianling/giu"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/hscommon/hsproject"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2ds1"
 
-	"github.com/OpenDiablo2/HellSpawner/hsassets"
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hsconfig"
-	"github.com/OpenDiablo2/HellSpawner/hswidget/ds1widget"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor"
+	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/hswidget/ds1widget"
+	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 )
 
 // static check if DS1Editor implemented hscommon.EditorWindow

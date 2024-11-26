@@ -9,10 +9,10 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2pl2"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"
-	"github.com/OpenDiablo2/HellSpawner/hswidget/palettegrideditorwidget"
-	"github.com/OpenDiablo2/HellSpawner/hswidget/palettegridwidget"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/hswidget/palettegrideditorwidget"
+	"github.com/gucio321/HellSpawner/hswidget/palettegridwidget"
 )
 
 const (

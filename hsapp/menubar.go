@@ -13,12 +13,12 @@ import (
 	g "github.com/ianling/giu"
 	"github.com/pkg/browser"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon/hsproject"
 )
 
 const (
-	githubURL            = "https://github.com/OpenDiablo2/HellSpawner"
+	githubURL            = "https://github.com/gucio321/HellSpawner"
 	discordInvitationURL = "https://discord.gg/pRy8tdc"
 	twitchURL            = "https://www.twitch.tv/essial/"
 	supportURL           = "https://www.patreon.com/bePatron?u=37261055"
@@ -341,7 +341,7 @@ func (a *App) onReportBugClicked() {
 		"</pre></details>",
 	}
 
-	err = browser.OpenURL("https://github.com/OpenDiablo2/HellSpawner/issues/new?body=" + strings.Join(body, "%0D"))
+	err = browser.OpenURL("https://github.com/gucio321/HellSpawner/issues/new?body=" + strings.Join(body, "%0D"))
 	if err != nil {
 		log.Println(err)
 	}

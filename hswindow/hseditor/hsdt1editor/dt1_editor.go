@@ -11,12 +11,12 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2dt1"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
-	"github.com/OpenDiablo2/HellSpawner/hsconfig"
-	"github.com/OpenDiablo2/HellSpawner/hswidget/dt1widget"
-	"github.com/OpenDiablo2/HellSpawner/hswidget/selectpalettewidget"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/hswidget/dt1widget"
+	"github.com/gucio321/HellSpawner/hswidget/selectpalettewidget"
+	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 )
 
 // static check, to ensure, if dt1 editor implemented editoWindow
@@ -114,7 +114,7 @@ func (e *DT1Editor) UpdateMainMenuLayout(l *g.Layout) {
 
 // KeyboardShortcuts register a new keyboard shortcut
 func (e *DT1Editor) KeyboardShortcuts() []g.WindowShortcut {
-	// https://github.com/OpenDiablo2/HellSpawner/issues/329
+	// https://github.com/gucio321/HellSpawner/issues/329
 	return []g.WindowShortcut{
 		/*
 			// right arrow goes to the next tile group

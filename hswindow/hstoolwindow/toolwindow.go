@@ -1,8 +1,8 @@
 package hstoolwindow
 
 import (
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsstate"
-	"github.com/OpenDiablo2/HellSpawner/hswindow"
+	"github.com/gucio321/HellSpawner/hscommon/hsstate"
+	"github.com/gucio321/HellSpawner/hswindow"
 )
 
 // ToolWindow represents a tool window

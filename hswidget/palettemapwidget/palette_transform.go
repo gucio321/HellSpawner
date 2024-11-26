@@ -7,8 +7,8 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2pl2"
 
-	"github.com/OpenDiablo2/HellSpawner/hswidget/palettegrideditorwidget"
-	"github.com/OpenDiablo2/HellSpawner/hswidget/palettegridwidget"
+	"github.com/gucio321/HellSpawner/hswidget/palettegrideditorwidget"
+	"github.com/gucio321/HellSpawner/hswidget/palettegridwidget"
 )
 
 func (p *widget) makeGrid(key string, colors *[256]palettegridwidget.PaletteColor) {

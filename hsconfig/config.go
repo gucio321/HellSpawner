@@ -10,9 +10,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsenum"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsstate"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/hscommon/hsenum"
+	"github.com/gucio321/HellSpawner/hscommon/hsstate"
+	"github.com/gucio321/HellSpawner/hscommon/hsutil"
 
 	"github.com/kirsle/configdir"
 )

@@ -11,8 +11,8 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2font"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2font/d2fontglyph"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hswidget"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hswidget"
 )
 
 const (

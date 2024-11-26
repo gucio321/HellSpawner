@@ -8,17 +8,17 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon"
 
-	"github.com/OpenDiablo2/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/hsconfig"
 
 	g "github.com/ianling/giu"
 
 	"github.com/ianling/imgui-go"
 
-	"github.com/OpenDiablo2/HellSpawner/hsassets"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hsdialog"
+	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/hswindow/hsdialog"
 )
 
 const (

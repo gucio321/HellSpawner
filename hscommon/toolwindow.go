@@ -3,7 +3,7 @@ package hscommon
 import (
 	"github.com/ianling/giu"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsstate"
+	"github.com/gucio321/HellSpawner/hscommon/hsstate"
 )
 
 // ToolWindow represents tool windows

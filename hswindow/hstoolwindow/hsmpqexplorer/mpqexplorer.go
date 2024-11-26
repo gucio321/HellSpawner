@@ -14,13 +14,13 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2mpq"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsstate"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"
-	"github.com/OpenDiablo2/HellSpawner/hsconfig"
-	"github.com/OpenDiablo2/HellSpawner/hswidget"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hstoolwindow"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/hscommon/hsstate"
+	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/hswidget"
+	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow"
 )
 
 const (

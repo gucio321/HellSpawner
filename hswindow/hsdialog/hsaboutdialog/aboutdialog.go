@@ -11,10 +11,10 @@ import (
 	"github.com/jaytaylor/html2text"
 	"github.com/russross/blackfriday"
 
-	"github.com/OpenDiablo2/HellSpawner/hsassets"
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hsdialog"
+	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/hswindow/hsdialog"
 )
 
 const (

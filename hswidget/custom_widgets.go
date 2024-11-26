@@ -7,8 +7,8 @@ import (
 	"github.com/ianling/giu"
 	"github.com/ianling/imgui-go"
 
-	"github.com/OpenDiablo2/HellSpawner/hsassets"
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/hscommon"
 )
 
 // MakeImageButton is a hack for giu.ImageButton that creates image button

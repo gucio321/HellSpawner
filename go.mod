@@ -1,4 +1,4 @@
-module github.com/OpenDiablo2/HellSpawner
+module github.com/gucio321/HellSpawner
 
 go 1.16
 

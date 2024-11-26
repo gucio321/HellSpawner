@@ -7,10 +7,10 @@ import (
 	"github.com/OpenDiablo2/dialog"
 	g "github.com/ianling/giu"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsenum"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"
-	"github.com/OpenDiablo2/HellSpawner/hsconfig"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hsdialog"
+	"github.com/gucio321/HellSpawner/hscommon/hsenum"
+	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/hswindow/hsdialog"
 )
 
 const (

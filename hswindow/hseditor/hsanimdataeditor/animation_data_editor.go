@@ -9,12 +9,12 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2animdata"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/hscommon/hsproject"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hsconfig"
-	"github.com/OpenDiablo2/HellSpawner/hswidget/animdatawidget"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/hswidget/animdatawidget"
+	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 )
 
 // static check, to ensure, if D2 editor implemented editoWindow

@@ -9,17 +9,17 @@ import (
 
 	"github.com/OpenDiablo2/dialog"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/hscommon/hsproject"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon"
 
 	"github.com/faiface/beep"
 	"github.com/faiface/beep/speaker"
 	"github.com/faiface/beep/wav"
 
-	"github.com/OpenDiablo2/HellSpawner/hsconfig"
-	"github.com/OpenDiablo2/HellSpawner/hswidget"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor"
+	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/hswidget"
+	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 
 	g "github.com/ianling/giu"
 )
@@ -166,7 +166,7 @@ func (s *SoundEditor) UpdateMainMenuLayout(l *g.Layout) {
 
 // GenerateSaveData generates data to be saved
 func (s *SoundEditor) GenerateSaveData() []byte {
-	// https://github.com/OpenDiablo2/HellSpawner/issues/181
+	// https://github.com/gucio321/HellSpawner/issues/181
 	data, _ := s.Path.GetFileBytes()
 
 	return data

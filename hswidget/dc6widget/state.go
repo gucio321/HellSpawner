@@ -10,7 +10,7 @@ import (
 	"github.com/ianling/giu"
 	gim "github.com/ozankasikci/go-image-merge"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/hscommon/hsutil"
 )
 
 const (

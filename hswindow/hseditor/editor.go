@@ -8,11 +8,11 @@ import (
 
 	"github.com/ianling/giu"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/hscommon/hsproject"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsstate"
-	"github.com/OpenDiablo2/HellSpawner/hswindow"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon/hsstate"
+	"github.com/gucio321/HellSpawner/hswindow"
 )
 
 // Editor represents an editor

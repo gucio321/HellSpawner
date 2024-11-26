@@ -3,7 +3,7 @@ package hswindow
 import (
 	"github.com/ianling/giu"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsstate"
+	"github.com/gucio321/HellSpawner/hscommon/hsstate"
 )
 
 // Window represents project's window

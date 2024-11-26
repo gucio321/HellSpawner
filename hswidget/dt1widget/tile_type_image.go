@@ -3,7 +3,7 @@ package dt1widget
 import (
 	"github.com/ianling/giu"
 
-	"github.com/OpenDiablo2/HellSpawner/hswidget/dt1widget/tiletypeimage"
+	"github.com/gucio321/HellSpawner/hswidget/dt1widget/tiletypeimage"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2enum"
 )

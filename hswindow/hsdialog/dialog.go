@@ -32,7 +32,7 @@ func (d *Dialog) Show() {
 
 // RegisterKeyboardShortcuts registers a shortcuts for popup dialog
 func (d *Dialog) RegisterKeyboardShortcuts(_ ...giu.WindowShortcut) {
-	// https://github.com/OpenDiablo2/HellSpawner/issues/327
+	// https://github.com/gucio321/HellSpawner/issues/327
 }
 
 // KeyboardShortcuts returns a list of shortcuts

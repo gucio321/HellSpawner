@@ -8,8 +8,8 @@ import (
 	g "github.com/ianling/giu"
 	"github.com/ianling/imgui-go"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsstate"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hstoolwindow"
+	"github.com/gucio321/HellSpawner/hscommon/hsstate"
+	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow"
 )
 
 const (

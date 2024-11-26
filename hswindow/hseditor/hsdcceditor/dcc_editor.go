@@ -11,12 +11,12 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2dcc"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon"
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsproject"
-	"github.com/OpenDiablo2/HellSpawner/hsconfig"
-	"github.com/OpenDiablo2/HellSpawner/hswidget/dccwidget"
-	"github.com/OpenDiablo2/HellSpawner/hswidget/selectpalettewidget"
-	"github.com/OpenDiablo2/HellSpawner/hswindow/hseditor"
+	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/hswidget/dccwidget"
+	"github.com/gucio321/HellSpawner/hswidget/selectpalettewidget"
+	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 )
 
 // static check, to ensure, if dc6 editor implemented editoWindow
@@ -110,7 +110,7 @@ func (e *DCCEditor) UpdateMainMenuLayout(l *g.Layout) {
 
 // GenerateSaveData generates data to save
 func (e *DCCEditor) GenerateSaveData() []byte {
-	// https://github.com/OpenDiablo2/HellSpawner/issues/181
+	// https://github.com/gucio321/HellSpawner/issues/181
 	data, _ := e.Path.GetFileBytes()
 
 	return data

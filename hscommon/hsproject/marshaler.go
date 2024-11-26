@@ -10,7 +10,7 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2pl2"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2tbl"
 
-	"github.com/OpenDiablo2/HellSpawner/hscommon/hsfiletypes"
+	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
 )
 
 type marshaler interface {

@@ -5,8 +5,8 @@ import (
 
 	"github.com/ianling/giu"
 
-	"github.com/OpenDiablo2/HellSpawner/hsassets"
-	"github.com/OpenDiablo2/HellSpawner/hswidget"
+	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/hswidget"
 )
 
 type widgetMode int32
