@@ -87,10 +87,8 @@ func (t *textureLoader) ProcessTextureLoadRequests() {
 
 			loadRequest := item.(TextureLoadRequestItem)
 
-			var texture *g.Texture
-
 			g.NewTextureFromRgba(loadRequest.rgb, func(tex *g.Texture) {
-				loadRequest.callback(texture)
+				loadRequest.callback(tex)
 			})
 		}
 	}()
