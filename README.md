@@ -7,8 +7,15 @@
 
 ![Logo](hsassets/images/d2logo.png)
 
-Join us on IRC!: ircs://irc.libera.chat/#opendiablo2
+# Announcment
 
+This is an Unofficial Fork of the [OpenDiablo2/HellSpawner](https://github.com/gucio321/hellspawner)
+hosted under github.com/gucio321/hellspawner go import path.
+
+It contains not merged Pull Request from the upstream repo (the repo randomly died) and other new features.
+Some of them are listed below
+- [X] now it runs on giu v0.11.0 and cimgui-go v1.2.0
+- [X] Exporting DC6 to PNG frames (useful for obtaining game textures)
 
 ## About this project
 
