@@ -25,12 +25,11 @@ build:
 ## setup: Runs mod download and generate
 setup:
 	@echo "Downloading tools and dependencies..."
-	@git submodule update --init --recursive
-	@$(GOCMD) get -v -t ./...
-	@$(GOCMD) mod download -x
-	@$(GOCMD) install golang.org/x/tools/cmd/stringer
-	@$(GOCMD) install golang.org/x/tools/cmd/stringer
-	@$(GOCMD) generate -v ./...
+	git submodule update --init --recursive
+	$(GOCMD) get -v -t ./...
+	$(GOCMD) mod download -x
+	$(GOCMD) install golang.org/x/tools/cmd/stringer@latest
+	$(GOCMD) generate -v ./...
 
 ## test: Runs the tests with coverage
 test:
