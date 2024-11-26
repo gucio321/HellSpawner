@@ -26,7 +26,7 @@ build:
 setup:
 	@echo "Downloading tools and dependencies..."
 	@git submodule update --init --recursive
-	@$(GOCMD) get -v -t -d ./...
+	@$(GOCMD) get -v -t ./...
 	@$(GOCMD) mod download -x
 	@$(GOCMD) install golang.org/x/tools/cmd/stringer
 	@$(GOCMD) install golang.org/x/tools/cmd/stringer
