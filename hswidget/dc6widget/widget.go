@@ -167,6 +167,12 @@ func (p *widget) makePlayerLayout(state *widgetState) giu.Layout {
 					dialog.Message(err.Error()).Error()
 				}
 			}),
+			giu.Button("Export Frames (PNG)##"+p.id+"exportpng").OnClick(func() {
+				err := p.exportPng(state)
+				if err != nil {
+					dialog.Message(err.Error()).Error()
+				}
+			}),
 		),
 	}
 }
@@ -197,6 +203,17 @@ func (p *widget) exportGif(state *widgetState) error {
 	err := hsutil.ExportToGif(images, state.TickTime)
 	if err != nil {
 		return fmt.Errorf("error creating gif file: %w", err)
+	}
+
+	return nil
+}
+
+func (p *widget) exportPng(state *widgetState) error {
+	images := state.rgb
+
+	err := hsutil.ExportToPng(images)
+	if err != nil {
+		return fmt.Errorf("error creating png file: %w", err)
 	}
 
 	return nil

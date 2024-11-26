@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"image"
 	"image/gif"
+	"image/png"
 	"log"
 	"os"
 	"path/filepath"
@@ -82,6 +83,29 @@ func ExportToGif(images []*image.RGBA, delay int32) error {
 	err = gif.EncodeAll(file, outGif)
 	if err != nil {
 		return fmt.Errorf("error saving to output gif: %w", err)
+	}
+
+	return nil
+}
+
+// ExportToPng converts images area to PNG frames and saves it under the path selected by user
+func ExportToPng(images []*image.RGBA) error {
+	filePath, err := dialog.File().Title("Save").Filter("png images", "png").Save()
+	if err != nil {
+		return fmt.Errorf("error reading filepath: %w", err)
+	}
+
+	for i, img := range images {
+		g := bytes.NewBuffer([]byte{})
+
+		err := png.Encode(g, img)
+		if err != nil {
+			return fmt.Errorf("error encoding gif: %w", err)
+		}
+
+		if err := os.WriteFile(filepath.Join(filepath.Dir(filePath), fmt.Sprintf("%d%s", i, filepath.Base(filePath))), g.Bytes(), 0o644); err != nil {
+			return fmt.Errorf("error saving to output png: %w", err)
+		}
 	}
 
 	return nil
