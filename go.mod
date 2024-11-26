@@ -3,8 +3,8 @@ module github.com/gucio321/HellSpawner
 go 1.16
 
 require (
-	github.com/AllenDang/giu v0.6.1
-	github.com/AllenDang/imgui-go v1.12.1-0.20220118055608-8cbd98e97ca2
+	github.com/AllenDang/giu v0.6.2
+	github.com/AllenDang/imgui-go v1.12.1-0.20220322114136-499bbf6a42ad
 	github.com/OpenDiablo2/OpenDiablo2 v0.0.0-20210514222603-a688d660a0f7
 	github.com/OpenDiablo2/dialog v0.0.0-20201230220514-26162241209f
 	github.com/TheTitanrain/w32 v0.0.0-20200114052255-2654d97dbd3d // indirect
@@ -12,7 +12,6 @@ require (
 	github.com/faiface/beep v1.0.2
 	github.com/go-gl/gl v0.0.0-20231021071112-07e5d0ea2e71 // indirect
 	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20240506104042-037f3cc74f2a
-	github.com/go-resty/resty/v2 v2.16.2 // indirect
 	github.com/gravestench/osinfo v0.0.0-20210525170338-34eb1ac010f7
 	github.com/hajimehoshi/oto v0.7.1 // indirect
 	github.com/jaytaylor/html2text v0.0.0-20200412013138-3577fbdbcff7
