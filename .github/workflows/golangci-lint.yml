@@ -15,8 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-        fetch-depth: 0
-        submodules: 'true'
+          fetch-depth: 0
+          submodules: 'true'
       - name: Set up LibGL, Mesa & X11 libraries
         run: |
           sudo apt-get --allow-releaseinfo-change update
