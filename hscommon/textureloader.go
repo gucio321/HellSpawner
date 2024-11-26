@@ -87,7 +87,7 @@ func (t *textureLoader) ProcessTextureLoadRequests() {
 
 			loadRequest := item.(TextureLoadRequestItem)
 
-			g.NewTextureFromRgba(loadRequest.rgb, func(tex *g.Texture) {
+			g.EnqueueNewTextureFromRgba(loadRequest.rgb, func(tex *g.Texture) {
 				loadRequest.callback(tex)
 			})
 		}

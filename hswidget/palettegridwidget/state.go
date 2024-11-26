@@ -20,8 +20,8 @@ func (s *widgetState) Dispose() {
 	s.rgba = nil
 }
 
-func (p *PaletteGridWidget) getStateID() string {
-	return fmt.Sprintf("PaletteGridWidget_%s", p.id)
+func (p *PaletteGridWidget) getStateID() giu.ID {
+	return giu.ID(fmt.Sprintf("PaletteGridWidget_%s", p.id))
 }
 
 func (p *PaletteGridWidget) getState() *widgetState {

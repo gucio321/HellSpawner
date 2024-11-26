@@ -11,7 +11,7 @@ import (
 
 	"github.com/OpenDiablo2/dialog"
 
-	"github.com/AllenDang/imgui-go"
+	"github.com/AllenDang/cimgui-go/imgui"
 
 	g "github.com/AllenDang/giu"
 
@@ -52,7 +52,8 @@ type ProjectExplorer struct {
 // Create creates a new project explorer
 func Create(textureLoader hscommon.TextureLoader,
 	fileSelectedCallback ProjectExplorerFileSelectedCallback,
-	x, y float32) (*ProjectExplorer, error) {
+	x, y float32,
+) (*ProjectExplorer, error) {
 	result := &ProjectExplorer{
 		ToolWindow:           hstoolwindow.New("Project Explorer", hsstate.ToolWindowTypeProjectExplorer, x, y),
 		nodeCache:            make(map[string][]g.Widget),
@@ -117,10 +118,10 @@ func (m *ProjectExplorer) makeRefreshButtonLayout() g.Layout {
 
 	return g.Layout{
 		g.Custom(func() {
-			imgui.PushStyleColor(imgui.StyleColorButton, imgui.Vec4{})
-			imgui.PushStyleColor(imgui.StyleColorBorder, imgui.Vec4{})
+			imgui.PushStyleColorVec4(imgui.ColButton, imgui.Vec4{})
+			imgui.PushStyleColorVec4(imgui.ColBorder, imgui.Vec4{})
 			imgui.PushStyleVarVec2(imgui.StyleVarItemSpacing, imgui.Vec2{Y: pushStyle})
-			imgui.PushID("ProjectExplorerRefresh")
+			imgui.PushIDStr("ProjectExplorerRefresh")
 		}),
 
 		button,
@@ -202,7 +203,7 @@ func (m *ProjectExplorer) createFileTreeItem(pathEntry *hscommon.PathEntry) g.Wi
 		layout = g.Layout{
 			g.Custom(func() {
 				imgui.SetKeyboardFocusHere()
-				if imgui.InputTextV("##RenameField_"+pathEntry.FullPath, &pathEntry.Name,
+				if imgui.InputTextWithHint("##RenameField_"+pathEntry.FullPath, "", &pathEntry.Name,
 					imgui.InputTextFlagsAutoSelectAll|imgui.InputTextFlagsEnterReturnsTrue, nil) {
 					pathEntry.IsRenaming = false
 					m.onFileRenamed(pathEntry)
@@ -233,7 +234,7 @@ func (m *ProjectExplorer) createDirectoryTreeItem(pathEntry *hscommon.PathEntry,
 		return g.Layout{
 			g.Custom(func() {
 				imgui.SetKeyboardFocusHere()
-				if imgui.InputTextV("##RenameField_"+pathEntry.FullPath, &pathEntry.Name,
+				if imgui.InputTextWithHint("##RenameField_"+pathEntry.FullPath, "", &pathEntry.Name,
 					imgui.InputTextFlagsAutoSelectAll|imgui.InputTextFlagsEnterReturnsTrue, nil) {
 					pathEntry.IsRenaming = false
 					m.onFileRenamed(pathEntry)
@@ -299,7 +300,7 @@ func (m *ProjectExplorer) createDirectoryTreeItem(pathEntry *hscommon.PathEntry,
 	}
 
 	menuLayout := g.Layout{
-		g.Custom(func() { imgui.PushID(id) }),
+		g.Custom(func() { imgui.PushIDStr(id) }),
 		g.ContextMenu().Layout(contextMenuLayout),
 		g.Custom(func() { imgui.PopID() }),
 	}

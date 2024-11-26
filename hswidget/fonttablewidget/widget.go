@@ -25,7 +25,7 @@ const (
 
 type widget struct {
 	fontTable     *d2font.Font
-	id            string
+	id            giu.ID
 	textureLoader hscommon.TextureLoader
 }
 
@@ -37,7 +37,7 @@ func Create(
 ) giu.Widget {
 	result := &widget{
 		fontTable:     fontTable,
-		id:            id,
+		id:            giu.ID(id),
 		textureLoader: tl,
 	}
 
@@ -100,7 +100,7 @@ func (p *widget) makeTableLayout() giu.Layout {
 	}
 
 	return giu.Layout{
-		giu.Button("Add new glyph...##"+p.id+"addItem").Size(addW, addH).OnClick(func() {
+		giu.Button("").ID("Add new glyph...##"+p.id+"addItem").Size(addW, addH).OnClick(func() {
 			state.Mode = modeAddItem
 		}),
 		giu.Separator(),
@@ -124,7 +124,7 @@ func (p *widget) makeGlyphLayout(r rune) *giu.TableRowWidget {
 	height32 := int32(h)
 
 	row := giu.TableRow(
-		hswidget.MakeImageButton("##"+p.id+"deleteFrame"+string(r),
+		hswidget.MakeImageButton("##"+p.id+"deleteFrame"+giu.ID(r),
 			delSize, delSize,
 			state.deleteButtonTexture,
 			func() { p.deleteRow(r) },
@@ -132,16 +132,16 @@ func (p *widget) makeGlyphLayout(r rune) *giu.TableRowWidget {
 		giu.Row(
 			giu.Label(fmt.Sprintf("%d", p.fontTable.Glyphs[r].FrameIndex())),
 			giu.ArrowButton(giu.DirectionUp).
-				ID("##"+p.id+"upItem"+string(r)).OnClick(func() {
+				ID("##"+p.id+"upItem"+giu.ID(r)).OnClick(func() {
 				p.itemUp(r)
 			}),
 			giu.ArrowButton(giu.DirectionDown).
-				ID("##"+p.id+"downItem"+string(r)).OnClick(func() {
+				ID("##"+p.id+"downItem"+giu.ID(r)).OnClick(func() {
 				p.itemDown(r)
 			}),
 		),
 		giu.Row(
-			giu.Button("edit##"+p.id+"editRune"+string(r)).Size(editRuneW, editRuneH).OnClick(func() {
+			giu.Button("").ID("edit##"+p.id+"editRune"+giu.ID(r)).Size(editRuneW, editRuneH).OnClick(func() {
 				state.EditRuneState.RuneBefore = r
 				state.EditRuneState.EditedRune = r
 				state.Mode = modeEditRune
@@ -335,7 +335,7 @@ func (p *widget) makeSaveCancelRow(saveCB func(), r rune) giu.Layout {
 
 	return giu.Layout{
 		giu.Custom(func() {
-			cancel := giu.Button("Cancel##"+p.id+"addItemCancel").Size(saveCancelW, saveCancelH).OnClick(func() {
+			cancel := giu.Button("").ID("Cancel##"+p.id+"addItemCancel").Size(saveCancelW, saveCancelH).OnClick(func() {
 				state.Mode = modeViewer
 			})
 
@@ -347,7 +347,7 @@ func (p *widget) makeSaveCancelRow(saveCB func(), r rune) giu.Layout {
 			}
 
 			giu.Row(
-				giu.Button("Save##"+p.id+"addItemSave").Size(saveCancelW, saveCancelH).OnClick(func() {
+				giu.Button("").ID("Save##"+p.id+"addItemSave").Size(saveCancelW, saveCancelH).OnClick(func() {
 					saveCB()
 				}),
 				cancel,

@@ -34,8 +34,8 @@ func (ees *editEntryState) Dispose() {
 	ees.Idx = 0
 }
 
-func (p *PaletteGridEditorWidget) getStateID() string {
-	return fmt.Sprintf("widget_%s", p.id)
+func (p *PaletteGridEditorWidget) getStateID() giu.ID {
+	return giu.ID(fmt.Sprintf("widget_%s", p.id))
 }
 
 func (p *PaletteGridEditorWidget) getState() *widgetState {

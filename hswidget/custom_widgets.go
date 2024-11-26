@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"math"
 
+	"github.com/AllenDang/cimgui-go/imgui"
 	"github.com/AllenDang/giu"
-	"github.com/AllenDang/imgui-go"
 
 	"github.com/gucio321/HellSpawner/hsassets"
 	"github.com/gucio321/HellSpawner/hscommon"
@@ -13,7 +13,7 @@ import (
 
 // MakeImageButton is a hack for giu.ImageButton that creates image button
 // as a giu.child
-func MakeImageButton(id string, w, h int, t *giu.Texture, fn func()) giu.Widget {
+func MakeImageButton(id giu.ID, w, h int, t *giu.Texture, fn func()) giu.Widget {
 	// the image button
 	btnW, btnH := float32(w), float32(h)
 	button := giu.Layout{
@@ -22,7 +22,7 @@ func MakeImageButton(id string, w, h int, t *giu.Texture, fn func()) giu.Widget 
 
 	return giu.Layout{
 		giu.Custom(func() {
-			imgui.PushID(id)
+			imgui.PushIDStr(string(id))
 		}),
 		button,
 		giu.Custom(func() {
@@ -91,7 +91,7 @@ func (p *PlayPauseButtonWidget) OnChange(cb func()) *PlayPauseButtonWidget {
 
 // Build build a widget
 func (p *PlayPauseButtonWidget) Build() {
-	stateID := fmt.Sprintf("%s_state", p.id)
+	stateID := giu.ID(fmt.Sprintf("%s_state", p.id))
 	state := giu.Context.GetState(stateID)
 
 	var widget giu.Widget
@@ -120,7 +120,7 @@ func (p *PlayPauseButtonWidget) Build() {
 
 	w, h := int(p.width), int(p.height)
 
-	var id string
+	var id giu.ID
 
 	var texture *giu.Texture
 
@@ -139,11 +139,11 @@ func (p *PlayPauseButtonWidget) Build() {
 	}
 
 	if !*p.isPlaying {
-		id = p.id + "Play"
+		id = giu.ID(p.id + "Play")
 		texture = imgState.playTexture
 		callback = func() { setIsPlaying(true) }
 	} else {
-		id = p.id + "Pause"
+		id = giu.ID(p.id + "Pause")
 		texture = imgState.pauseTexture
 		callback = func() { setIsPlaying(false) }
 	}
@@ -193,10 +193,10 @@ func MakeInputInt(width int32, output interface{}, optionalCB func()) *giu.Input
 }
 
 // MakeCheckboxFromByte creates a checkbox using a byte as input/output
-func MakeCheckboxFromByte(id string, value *byte) *giu.CheckboxWidget {
+func MakeCheckboxFromByte(id giu.ID, value *byte) *giu.CheckboxWidget {
 	v := *value > 0
 
-	return giu.Checkbox(id, &v).OnChange(func() {
+	return giu.Checkbox("", &v).ID(id).OnChange(func() {
 		if v {
 			*value = 1
 		} else {
@@ -208,10 +208,11 @@ func MakeCheckboxFromByte(id string, value *byte) *giu.CheckboxWidget {
 // OnDoubleClick detects if item is double-clicked
 // this can be used as an alternative to OnClick methos of some widgets
 // e.g.:
-// giu.Layout{
-//	giu.Button("double click me"),
-//	OnDoubleClick(func() { fmt.Println("I was double-clicked") }),
-// }
+//
+//	giu.Layout{
+//		giu.Button("double click me"),
+//		OnDoubleClick(func() { fmt.Println("I was double-clicked") }),
+//	}
 func OnDoubleClick(cb func()) giu.Widget {
 	return giu.Custom(func() {
 		if giu.IsItemHovered() && giu.IsMouseDoubleClicked(giu.MouseButtonLeft) {

@@ -344,9 +344,11 @@ func (a *App) closeActiveEditor() {
 }
 
 func (a *App) closePopups() {
-	a.projectPropertiesDialog.Cleanup()
-	a.aboutDialog.Cleanup()
-	a.preferencesDialog.Cleanup()
+	/*
+		a.projectPropertiesDialog.Cleanup()
+		a.aboutDialog.Cleanup()
+		a.preferencesDialog.Cleanup()
+	*/
 }
 
 func (a *App) toggleConsole() {
@@ -355,9 +357,9 @@ func (a *App) toggleConsole() {
 
 // CloseAllOpenWindows closes all opened windows
 func (a *App) CloseAllOpenWindows() {
-	a.closePopups()
-	a.projectExplorer.Cleanup()
-	a.mpqExplorer.Cleanup()
+	// a.closePopups()
+	// a.projectExplorer.Cleanup()
+	// a.mpqExplorer.Cleanup()
 	a.focusedEditor = nil
 
 	for _, editor := range a.editors {

@@ -14,13 +14,13 @@ const (
 type PopUpConfirmDialog struct {
 	header  string
 	message string
-	id      string
+	id      giu.ID
 	yCB     func()
 	nCB     func()
 }
 
 // NewPopUpConfirmDialog creates a new pop up dialog (with yes-no options)
-func NewPopUpConfirmDialog(id, header, message string, yCB, nCB func()) *PopUpConfirmDialog {
+func NewPopUpConfirmDialog(id giu.ID, header, message string, yCB, nCB func()) *PopUpConfirmDialog {
 	result := &PopUpConfirmDialog{
 		header:  header,
 		message: message,
@@ -40,12 +40,12 @@ func (p *PopUpConfirmDialog) Build() {
 
 	open := true
 	giu.Layout{
-		giu.PopupModal(p.header + "##" + p.id).IsOpen(&open).Layout(giu.Layout{
+		giu.PopupModal(p.header + "##" + string(p.id)).IsOpen(&open).Layout(giu.Layout{
 			giu.Label(p.message),
 			giu.Separator(),
 			giu.Row(
-				giu.Button("YES##"+p.id+"ConfirmDialog").Size(yesNoButtonW, yesNoButtonH).OnClick(p.yCB),
-				giu.Button("NO##"+p.id+"confirmDialog").Size(yesNoButtonW, yesNoButtonH).OnClick(p.nCB),
+				giu.Button("").ID("YES##"+p.id+"ConfirmDialog").Size(yesNoButtonW, yesNoButtonH).OnClick(p.yCB),
+				giu.Button("").ID("NO##"+p.id+"confirmDialog").Size(yesNoButtonW, yesNoButtonH).OnClick(p.nCB),
 			),
 		}),
 	}.Build()

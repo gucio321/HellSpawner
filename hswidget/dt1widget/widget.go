@@ -305,10 +305,13 @@ func (p *widget) makeTileDisplay(state *widgetState, tile *d2dt1.Tile) *giu.Layo
 		state.controls.Scale = 1
 	}
 
-	err := giu.Context.GetRenderer().SetTextureMagFilter(giu.TextureFilterNearest)
-	if err != nil {
-		log.Println(err)
-	}
+	// TODO: this is disabled in giu since migration
+	/*
+		err := giu.Context.GetRenderer().SetTextureMagFilter(giu.TextureFilterNearest)
+		if err != nil {
+			log.Println(err)
+		}
+	*/
 
 	w, h := float32(tile.Width), float32(tile.Height)
 	if h < 0 {

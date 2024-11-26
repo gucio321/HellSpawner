@@ -43,8 +43,8 @@ import (
 func (a *App) setup() (err error) {
 	dialog.Init()
 
-	a.setupConsole()
 	a.setupMasterWindow()
+	a.setupConsole()
 	a.setupAutoSave()
 	a.registerGlobalKeyboardShortcuts()
 	a.registerEditors()
@@ -220,15 +220,15 @@ func (a *App) setupFonts() {
 		font = hsassets.FontSourceHanSerif
 	}
 
-	g.SetDefaultFontFromBytes(font, baseFontSize)
+	g.Context.FontAtlas.SetDefaultFontFromBytes(font, baseFontSize)
 
 	// please note, that the following fonts will not use
 	// previously generated glyph ranges.
 	// they'll have a default range
-	a.fontFixed = g.AddFontFromBytes("fixed font", hsassets.FontCascadiaCode, fixedFontSize)
-	a.fontFixedSmall = g.AddFontFromBytes("small fixed font", hsassets.FontCascadiaCode, fixedSmallFontSize)
-	a.diabloRegularFont = g.AddFontFromBytes("diablo regular", hsassets.FontDiabloRegular, diabloRegularFontSize)
-	a.diabloBoldFont = g.AddFontFromBytes("diablo bold", hsassets.FontDiabloBold, diabloBoldFontSize)
+	a.fontFixed = g.Context.FontAtlas.AddFontFromBytes("fixed font", hsassets.FontCascadiaCode, fixedFontSize)
+	a.fontFixedSmall = g.Context.FontAtlas.AddFontFromBytes("small fixed font", hsassets.FontCascadiaCode, fixedSmallFontSize)
+	a.diabloRegularFont = g.Context.FontAtlas.AddFontFromBytes("diablo regular", hsassets.FontDiabloRegular, diabloRegularFontSize)
+	a.diabloBoldFont = g.Context.FontAtlas.AddFontFromBytes("diablo bold", hsassets.FontDiabloBold, diabloBoldFontSize)
 }
 
 func (a *App) registerGlobalKeyboardShortcuts() {

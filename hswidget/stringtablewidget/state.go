@@ -47,8 +47,8 @@ func (aes *addEditState) Dispose() {
 	aes.Editable = false
 }
 
-func (p *widget) getStateID() string {
-	return fmt.Sprintf("widget_%s", p.id)
+func (p *widget) getStateID() giu.ID {
+	return giu.ID(fmt.Sprintf("widget_%s", p.id))
 }
 
 func (p *widget) getState() *widgetState {

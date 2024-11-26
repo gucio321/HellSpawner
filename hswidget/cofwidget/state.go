@@ -70,8 +70,8 @@ func (s *newLayerFields) Dispose() {
 	s.WeaponClass = 0
 }
 
-func (p *widget) getStateID() string {
-	return fmt.Sprintf("widget_%s", p.id)
+func (p *widget) getStateID() giu.ID {
+	return giu.ID(fmt.Sprintf("widget_%s", p.id))
 }
 
 func (p *widget) getState() *widgetState {

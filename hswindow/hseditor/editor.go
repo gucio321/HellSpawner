@@ -117,7 +117,7 @@ func generateWindowTitle(path *hscommon.PathEntry) string {
 
 // EncodeState returns widget's state (unique for each editor type) in byte slice format
 func (e *Editor) EncodeState() []byte {
-	id := fmt.Sprintf("widget_%s", e.Path.GetUniqueID())
+	id := giu.ID(fmt.Sprintf("widget_%s", e.Path.GetUniqueID()))
 
 	if s := giu.Context.GetState(id); s != nil {
 		data, err := json.Marshal(s)

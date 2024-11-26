@@ -58,10 +58,13 @@ func (p *widget) Build() {
 }
 
 func (p *widget) buildViewer(state *widgetState) {
-	err := giu.Context.GetRenderer().SetTextureMagFilter(giu.TextureFilterNearest)
-	if err != nil {
-		log.Print(err)
-	}
+	// TODO: this is disabled in giu since cimgui-go migration
+	/*
+		err := giu.Context.GetRenderer().SetTextureMagFilter(giu.TextureFilterNearest)
+		if err != nil {
+			log.Print(err)
+		}
+	*/
 
 	baseColors := make([]palettegridwidget.PaletteColor, numColorsInPalette)
 

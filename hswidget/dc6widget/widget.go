@@ -6,8 +6,8 @@ import (
 	"log"
 	"time"
 
+	"github.com/AllenDang/cimgui-go/imgui"
 	"github.com/AllenDang/giu"
-	"github.com/AllenDang/imgui-go"
 	"github.com/OpenDiablo2/dialog"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2dc6"
@@ -90,10 +90,13 @@ func (p *widget) makeViewerLayout() giu.Layout {
 		imageScale = 1
 	}
 
-	err := giu.Context.GetRenderer().SetTextureMagFilter(giu.TextureFilterNearest)
-	if err != nil {
-		log.Print(err)
-	}
+	// TODO: doesn't work on latest giu
+	/*
+		err := giu.Context.GetRenderer().SetTextureMagFilter(giu.TextureFilterNearest)
+		if err != nil {
+			log.Print(err)
+		}
+	*/
 
 	w := float32(p.dc6.Frames[curFrameIndex].Width * imageScale)
 	h := float32(p.dc6.Frames[curFrameIndex].Height * imageScale)

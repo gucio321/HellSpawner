@@ -14,7 +14,7 @@ import (
 
 	g "github.com/AllenDang/giu"
 
-	"github.com/AllenDang/imgui-go"
+	"github.com/AllenDang/cimgui-go/imgui"
 
 	"github.com/gucio321/HellSpawner/hsassets"
 	"github.com/gucio321/HellSpawner/hscommon/hsproject"
@@ -179,8 +179,8 @@ func (p *ProjectPropertiesDialog) Build() {
 					g.Label("Auxiliary MPQs:"),
 					g.Child().Border(false).Size(mpqGroupW, mpqGroupH).Layout(
 						g.Custom(func() {
-							imgui.PushStyleColor(imgui.StyleColorButton, imgui.Vec4{})
-							imgui.PushStyleColor(imgui.StyleColorBorder, imgui.Vec4{})
+							imgui.PushStyleColorVec4(imgui.ColButton, imgui.Vec4{})
+							imgui.PushStyleColorVec4(imgui.ColBorder, imgui.Vec4{})
 							imgui.PushStyleVarVec2(imgui.StyleVarItemSpacing, imgui.Vec2{})
 							for idx := range p.project.AuxiliaryMPQs {
 								currentIdx := idx
@@ -191,7 +191,7 @@ func (p *ProjectPropertiesDialog) Build() {
 
 								g.Row(
 									g.Custom(func() {
-										imgui.PushID(fmt.Sprintf("ProjectPropertiesAddAuxMpqRemove_%d", currentIdx))
+										imgui.PushIDStr(fmt.Sprintf("ProjectPropertiesAddAuxMpqRemove_%d", currentIdx))
 									}),
 
 									g.ImageButton(p.removeIconTexture).Size(imgBtnW, imgBtnH).OnClick(func() {
@@ -200,25 +200,23 @@ func (p *ProjectPropertiesDialog) Build() {
 									}),
 									g.Custom(func() {
 										imgui.PopID()
-										imgui.PushID(fmt.Sprintf("ProjectPropertiesAddAuxMpqDown_%d", currentIdx))
+										imgui.PushIDStr(fmt.Sprintf("ProjectPropertiesAddAuxMpqDown_%d", currentIdx))
 									}),
 									g.ImageButton(p.downIconTexture).Size(imgBtnW, imgBtnH).OnClick(func() {
 										if currentIdx < len(p.project.AuxiliaryMPQs)-1 {
 											p.project.AuxiliaryMPQs[currentIdx],
-												p.project.AuxiliaryMPQs[currentIdx+1] =
-												p.project.AuxiliaryMPQs[currentIdx+1],
+												p.project.AuxiliaryMPQs[currentIdx+1] = p.project.AuxiliaryMPQs[currentIdx+1],
 												p.project.AuxiliaryMPQs[currentIdx]
 										}
 									}),
 									g.Custom(func() {
 										imgui.PopID()
-										imgui.PushID(fmt.Sprintf("ProjectPropertiesAddAuxMpqUp_%d", currentIdx))
+										imgui.PushIDStr(fmt.Sprintf("ProjectPropertiesAddAuxMpqUp_%d", currentIdx))
 									}),
 									g.ImageButton(p.upIconTexture).Size(imgBtnW, imgBtnH).OnClick(func() {
 										if currentIdx > 0 {
 											p.project.AuxiliaryMPQs[currentIdx-1],
-												p.project.AuxiliaryMPQs[currentIdx] =
-												p.project.AuxiliaryMPQs[currentIdx],
+												p.project.AuxiliaryMPQs[currentIdx] = p.project.AuxiliaryMPQs[currentIdx],
 												p.project.AuxiliaryMPQs[currentIdx-1]
 										}
 									}),
