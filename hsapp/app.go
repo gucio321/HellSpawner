@@ -11,7 +11,6 @@ import (
 	g "github.com/AllenDang/giu"
 
 	"github.com/OpenDiablo2/dialog"
-	"github.com/go-gl/glfw/v3.3/glfw"
 
 	"github.com/gucio321/HellSpawner/abysswrapper"
 	"github.com/gucio321/HellSpawner/hscommon"
@@ -279,11 +278,11 @@ func (a *App) loadProjectFromFile(file string) error {
 
 func (a *App) updateWindowTitle() {
 	if a.project == nil {
-		glfw.GetCurrentContext().SetTitle(baseWindowTitle)
+		a.masterWindow.SetTitle(baseWindowTitle)
 		return
 	}
 
-	glfw.GetCurrentContext().SetTitle(baseWindowTitle + " - " + a.project.ProjectName)
+	a.masterWindow.SetTitle(baseWindowTitle + " - " + a.project.ProjectName)
 }
 
 func (a *App) toggleMPQExplorer() {

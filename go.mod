@@ -8,7 +8,6 @@ require (
 	github.com/OpenDiablo2/dialog v0.0.0-20201230220514-26162241209f
 	github.com/enriquebris/goconcurrentqueue v0.6.0
 	github.com/faiface/beep v1.0.2
-	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20240506104042-037f3cc74f2a
 	github.com/gravestench/osinfo v0.0.0-20210525170338-34eb1ac010f7
 	github.com/jaytaylor/html2text v0.0.0-20200412013138-3577fbdbcff7
 	github.com/kirsle/configdir v0.0.0-20170128060238-e45d2f54772f
