@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ianling/giu"
+	"github.com/AllenDang/giu"
 
 	"github.com/gucio321/HellSpawner/hscommon/hsproject"
 

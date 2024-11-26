@@ -21,7 +21,7 @@ import (
 	"github.com/gucio321/HellSpawner/hswidget"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 
-	g "github.com/ianling/giu"
+	g "github.com/AllenDang/giu"
 )
 
 const (

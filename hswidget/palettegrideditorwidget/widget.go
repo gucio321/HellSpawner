@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/ianling/giu"
+	"github.com/AllenDang/giu"
 
 	"github.com/gucio321/HellSpawner/hscommon"
 	"github.com/gucio321/HellSpawner/hscommon/hsutil"
