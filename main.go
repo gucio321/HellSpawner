@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/OpenDiablo2/HellSpawner/hsapp"
+	"github.com/gucio321/HellSpawner/hsapp"
 )
 
 func main() {

@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/OpenDiablo2/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/hsconfig"
 )
 
 const (
