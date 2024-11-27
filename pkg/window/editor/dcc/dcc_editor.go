@@ -1,5 +1,5 @@
-// Package hsdcceditor contains dcc editor's data
-package hsdcceditor
+// Package dcc contains dcc editor's data
+package dcc
 
 import (
 	"fmt"
