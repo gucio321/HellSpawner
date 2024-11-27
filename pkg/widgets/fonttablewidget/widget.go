@@ -217,7 +217,7 @@ func (p *widget) makeEditRuneLayout() giu.Layout {
 		giu.Row(
 			giu.Label("Rune: "),
 			giu.InputText(&r).Size(inputIntW).OnChange(func() {
-				if len(r) > 0 {
+				if r != "" {
 					state.EditRuneState.EditedRune = int32(r[0])
 				}
 			}),

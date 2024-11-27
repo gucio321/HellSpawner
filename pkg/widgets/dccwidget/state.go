@@ -180,6 +180,7 @@ func (p *widget) runPlayer(state *widgetState) {
 			continue
 		}
 
+		//nolint:mnd // this comes from od2 and we have no control over that. On the other hand we need to pass it to giu which supports int32 only.
 		numFrames := int32(p.dcc.FramesPerDirection - 1)
 		isLastFrame := state.Controls.Frame == numFrames
 
@@ -202,7 +203,8 @@ func (p *widget) runPlayer(state *widgetState) {
 			state.Controls.Frame--
 		}
 
-		state.Controls.Frame = int32(hsutil.Wrap(int(state.Controls.Frame), p.dcc.FramesPerDirection))
+		//nolint:gomnd // this comes from od2 and needs to be passed to giu.
+		state.Controls.Frame = hsutil.Wrap(state.Controls.Frame, int32(p.dcc.FramesPerDirection))
 
 		// next, check for stopping/repeat
 		isStoppingFrame := (state.Controls.Frame == 0) || (state.Controls.Frame == numFrames)

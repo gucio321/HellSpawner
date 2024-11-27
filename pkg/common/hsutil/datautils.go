@@ -29,7 +29,7 @@ func BoolToInt(b bool) int32 {
 }
 
 // Wrap integer to max: wrap(450, 360) == 90
-func Wrap(x, maxV int) int {
+func Wrap[T int | int32](x, maxV T) T {
 	wrapped := x % maxV
 
 	if wrapped < 0 {

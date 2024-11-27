@@ -110,7 +110,9 @@ func (p *widget) makeTableRow(key string) *giu.TableRowWidget {
 			giu.Button("edit##"+p.id+"editButton"+key).Size(deleteW, deleteH).OnClick(func() {
 				state.Key = key
 				state.Editable = false
+
 				p.updateValueText()
+
 				state.Mode = widgetModeAddEdit
 			}),
 		),

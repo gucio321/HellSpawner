@@ -13,9 +13,7 @@ import (
 
 func (p *widget) makeGrid(key string, colors *[256]palettegridwidget.PaletteColor) {
 	c := make([]palettegridwidget.PaletteColor, len(colors))
-	for n := range colors {
-		c[n] = colors[n]
-	}
+	copy(c, colors[:])
 
 	state := p.getState()
 	state.textures[key] = palettegridwidget.Create(p.textureLoader, p.id+key, &c).OnClick(func(idx int) {
@@ -63,6 +61,7 @@ func (p *widget) transformMulti(key string, transforms []d2pl2.PL2PaletteTransfo
 
 	l := giu.Layout{}
 
+	//nolint:gosec // this is for giu, so needs to be int32.
 	numSelections := int32(len(transforms))
 
 	if state.Slider1 >= numSelections {
@@ -90,6 +89,7 @@ func (p *widget) transformMultiGroup(key string, groups ...[256]d2pl2.PL2Palette
 
 	l := giu.Layout{}
 
+	//nolint:gosec // this is for giu, so needs to be int32.
 	numGroups := int32(len(groups))
 
 	if state.Slider2 >= numGroups {
@@ -130,6 +130,7 @@ func (p *widget) textColors(key string, colors []d2pl2.PL2Color24Bits) giu.Layou
 
 	l := giu.Layout{}
 
+	//nolint:gosec // this is for giu, so needs to be int32.
 	numSelections := int32(len(colors) - 1)
 
 	if state.Slider1 >= numSelections {

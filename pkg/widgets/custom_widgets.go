@@ -173,7 +173,7 @@ func MakeInputInt(width int32, output interface{}, optionalCB func()) *giu.Input
 	case *byte:
 		input = int32(*o)
 	case *int:
-		input = int32(*o)
+		input = int32(*o) //nolint:gosec // lets suppose this is safe
 	default:
 		panic(fmt.Sprintf("MakeInputInt: invalid value type %T given", o))
 	}

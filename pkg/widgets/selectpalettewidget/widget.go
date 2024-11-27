@@ -36,7 +36,7 @@ type SelectPaletteWidget struct {
 func NewSelectPaletteWidget(
 	id string,
 	project *hsproject.Project,
-	config *config.Config,
+	cfg *config.Config,
 	saveCB func(colors *[256]d2interface.Color),
 	closeCB func(),
 ) *SelectPaletteWidget {
@@ -80,7 +80,7 @@ func NewSelectPaletteWidget(
 		}
 	}
 
-	mpqExplorer, err := mpqexplorer.Create(callback, config, 0, 0)
+	mpqExplorer, err := mpqexplorer.Create(callback, cfg, 0, 0)
 	if err != nil {
 		log.Print(err)
 	}

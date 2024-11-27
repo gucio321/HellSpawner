@@ -66,7 +66,7 @@ func Create(tl common.TextureLoader, state []byte, palette *[256]d2interface.Col
 func (p *widget) Build() {
 	viewerState := p.getState()
 
-	imageScale := uint32(viewerState.Controls.Scale)
+	imageScale := viewerState.Controls.Scale
 	dirIdx := int(viewerState.Controls.Direction)
 	frameIdx := viewerState.Controls.Frame
 
@@ -90,8 +90,8 @@ func (p *widget) Build() {
 	} else {
 		bw := p.dcc.Directions[dirIdx].Box.Width
 		bh := p.dcc.Directions[dirIdx].Box.Height
-		w := float32(uint32(bw) * imageScale)
-		h := float32(uint32(bh) * imageScale)
+		w := float32(int32(bw) * imageScale)
+		h := float32(int32(bh) * imageScale)
 		widget = giu.Image(viewerState.textures[textureIdx]).Size(w, h)
 	}
 
