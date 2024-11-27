@@ -5,7 +5,7 @@ import (
 
 	"github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/hswidget"
 )
 
@@ -99,7 +99,7 @@ func (p *widget) initState() {
 		ds1Controls: &ds1Controls{},
 	}
 
-	p.textureLoader.CreateTextureFromFile(hsassets.ImageShrug, func(t *giu.Texture) {
+	p.textureLoader.CreateTextureFromFile(assets.ImageShrug, func(t *giu.Texture) {
 		state.ds1Controls.noObjectsImageTexture = t
 	})
 

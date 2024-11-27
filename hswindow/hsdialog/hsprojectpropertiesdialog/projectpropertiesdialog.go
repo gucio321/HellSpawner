@@ -16,7 +16,7 @@ import (
 
 	"github.com/AllenDang/cimgui-go/imgui"
 
-	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/hscommon/hsproject"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog"
 )
@@ -55,15 +55,15 @@ func Create(textureLoader hscommon.TextureLoader, onProjectPropertiesChanged fun
 		mpqSelectDialogVisible:     false,
 	}
 
-	textureLoader.CreateTextureFromFile(hsassets.DeleteIcon, func(texture *g.Texture) {
+	textureLoader.CreateTextureFromFile(assets.DeleteIcon, func(texture *g.Texture) {
 		result.removeIconTexture = texture
 	})
 
-	textureLoader.CreateTextureFromFile(hsassets.UpArrowIcon, func(texture *g.Texture) {
+	textureLoader.CreateTextureFromFile(assets.UpArrowIcon, func(texture *g.Texture) {
 		result.upIconTexture = texture
 	})
 
-	textureLoader.CreateTextureFromFile(hsassets.DownArrowIcon, func(texture *g.Texture) {
+	textureLoader.CreateTextureFromFile(assets.DownArrowIcon, func(texture *g.Texture) {
 		result.downIconTexture = texture
 	})
 

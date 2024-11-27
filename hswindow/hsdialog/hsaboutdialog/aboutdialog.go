@@ -10,7 +10,7 @@ import (
 	"github.com/jaytaylor/html2text"
 	"github.com/russross/blackfriday"
 
-	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/hscommon"
 	"github.com/gucio321/HellSpawner/hscommon/hsutil"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog"
@@ -46,7 +46,7 @@ func Create(textureLoader hscommon.TextureLoader, regularFont, titleFont, fixedF
 		fixedFont:   fixedFont,
 	}
 
-	textureLoader.CreateTextureFromFile(hsassets.HellSpawnerLogo, func(t *g.Texture) {
+	textureLoader.CreateTextureFromFile(assets.HellSpawnerLogo, func(t *g.Texture) {
 		result.logo = t
 	})
 

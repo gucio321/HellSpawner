@@ -1,4 +1,4 @@
-package hsassets
+package assets
 
 import (
 	_ "embed" // this is standard solution for embed

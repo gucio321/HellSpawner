@@ -15,7 +15,7 @@ import (
 
 	g "github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/hscommon"
 	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
 	"github.com/gucio321/HellSpawner/hscommon/hsproject"
@@ -64,7 +64,7 @@ func Create(textureLoader hscommon.TextureLoader,
 
 	// some type of workaround ;-). SOmetimes we only want to get tree nodes (and don't need textures)
 	if textureLoader != nil {
-		textureLoader.CreateTextureFromFile(hsassets.ReloadIcon, func(texture *g.Texture) {
+		textureLoader.CreateTextureFromFile(assets.ReloadIcon, func(texture *g.Texture) {
 			result.refreshIconTexture = texture
 		})
 	}

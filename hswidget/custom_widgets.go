@@ -7,7 +7,7 @@ import (
 	"github.com/AllenDang/cimgui-go/imgui"
 	"github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/hscommon"
 )
 
@@ -101,11 +101,11 @@ func (p *PlayPauseButtonWidget) Build() {
 
 		state := &playPauseButtonState{}
 
-		p.textureLoader.CreateTextureFromFile(hsassets.PlayButtonIcon, func(t *giu.Texture) {
+		p.textureLoader.CreateTextureFromFile(assets.PlayButtonIcon, func(t *giu.Texture) {
 			state.playTexture = t
 		})
 
-		p.textureLoader.CreateTextureFromFile(hsassets.PauseButtonIcon, func(t *giu.Texture) {
+		p.textureLoader.CreateTextureFromFile(assets.PauseButtonIcon, func(t *giu.Texture) {
 			state.pauseTexture = t
 		})
 

@@ -20,7 +20,7 @@ import (
 	"github.com/gucio321/HellSpawner/hswindow/hseditor/hspalettemapeditor"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor/hsstringtableeditor"
 
-	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/hscommon/hsenum"
 	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
 	"github.com/gucio321/HellSpawner/hscommon/hsutil"
@@ -206,7 +206,7 @@ func (a *App) setupDialogs() error {
 // it will only load an appropriate glyph ranges for
 // displayed text (e.g. for string/font table editors)
 func (a *App) setupFonts() {
-	font := hsassets.FontNotoSansRegular
+	font := assets.FontNotoSansRegular
 
 	switch a.config.Locale {
 	// glyphs supported by default
@@ -215,9 +215,9 @@ func (a *App) setupFonts() {
 		hsenum.LocaleSpanish, hsenum.LocalePolish:
 		// noop
 	case hsenum.LocaleChineseTraditional:
-		font = hsassets.FontSourceHanSerif
+		font = assets.FontSourceHanSerif
 	case hsenum.LocaleKorean:
-		font = hsassets.FontSourceHanSerif
+		font = assets.FontSourceHanSerif
 	}
 
 	g.Context.FontAtlas.SetDefaultFontFromBytes(font, baseFontSize)
@@ -225,10 +225,10 @@ func (a *App) setupFonts() {
 	// please note, that the following fonts will not use
 	// previously generated glyph ranges.
 	// they'll have a default range
-	a.fontFixed = g.Context.FontAtlas.AddFontFromBytes("fixed font", hsassets.FontCascadiaCode, fixedFontSize)
-	a.fontFixedSmall = g.Context.FontAtlas.AddFontFromBytes("small fixed font", hsassets.FontCascadiaCode, fixedSmallFontSize)
-	a.diabloRegularFont = g.Context.FontAtlas.AddFontFromBytes("diablo regular", hsassets.FontDiabloRegular, diabloRegularFontSize)
-	a.diabloBoldFont = g.Context.FontAtlas.AddFontFromBytes("diablo bold", hsassets.FontDiabloBold, diabloBoldFontSize)
+	a.fontFixed = g.Context.FontAtlas.AddFontFromBytes("fixed font", assets.FontCascadiaCode, fixedFontSize)
+	a.fontFixedSmall = g.Context.FontAtlas.AddFontFromBytes("small fixed font", assets.FontCascadiaCode, fixedSmallFontSize)
+	a.diabloRegularFont = g.Context.FontAtlas.AddFontFromBytes("diablo regular", assets.FontDiabloRegular, diabloRegularFontSize)
+	a.diabloBoldFont = g.Context.FontAtlas.AddFontFromBytes("diablo bold", assets.FontDiabloBold, diabloBoldFontSize)
 }
 
 func (a *App) registerGlobalKeyboardShortcuts() {

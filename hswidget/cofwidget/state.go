@@ -8,7 +8,7 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2enum"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2cof"
 
-	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/hswidget"
 )
 
@@ -112,19 +112,19 @@ func (p *widget) initState() {
 		state.viewerState.layer = &p.cof.CofLayers[0]
 	}
 
-	p.textureLoader.CreateTextureFromFile(hsassets.UpArrowIcon, func(texture *giu.Texture) {
+	p.textureLoader.CreateTextureFromFile(assets.UpArrowIcon, func(texture *giu.Texture) {
 		state.textures.up = texture
 	})
 
-	p.textureLoader.CreateTextureFromFile(hsassets.DownArrowIcon, func(texture *giu.Texture) {
+	p.textureLoader.CreateTextureFromFile(assets.DownArrowIcon, func(texture *giu.Texture) {
 		state.textures.down = texture
 	})
 
-	p.textureLoader.CreateTextureFromFile(hsassets.LeftArrowIcon, func(texture *giu.Texture) {
+	p.textureLoader.CreateTextureFromFile(assets.LeftArrowIcon, func(texture *giu.Texture) {
 		state.textures.left = texture
 	})
 
-	p.textureLoader.CreateTextureFromFile(hsassets.RightArrowIcon, func(texture *giu.Texture) {
+	p.textureLoader.CreateTextureFromFile(assets.RightArrowIcon, func(texture *giu.Texture) {
 		state.textures.right = texture
 	})
 

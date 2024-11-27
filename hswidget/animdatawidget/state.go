@@ -6,7 +6,7 @@ import (
 
 	"github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/hsassets"
+	"github.com/gucio321/HellSpawner/pkg/assets"
 )
 
 type widgetMode int32
@@ -65,7 +65,7 @@ func (p *widget) getState() *widgetState {
 func (p *widget) initState() {
 	state := &widgetState{}
 
-	p.textureLoader.CreateTextureFromFile(hsassets.DeleteIcon, func(texture *giu.Texture) {
+	p.textureLoader.CreateTextureFromFile(assets.DeleteIcon, func(texture *giu.Texture) {
 		state.deleteIcon = texture
 	})
 
