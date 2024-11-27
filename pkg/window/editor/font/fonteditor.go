@@ -1,5 +1,5 @@
-// Package hsfonteditor contains font editor's data
-package hsfonteditor
+// Package font contains font editor's data
+package font
 
 import (
 	"fmt"
