@@ -9,9 +9,9 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2cof"
 
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 
-	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 
@@ -19,22 +19,22 @@ import (
 )
 
 // static check, to ensure, if cof editor implemented editoWindow
-var _ hscommon.EditorWindow = &COFEditor{}
+var _ common.EditorWindow = &COFEditor{}
 
 // COFEditor represents a cof editor
 type COFEditor struct {
 	*hseditor.Editor
 	cof           *d2cof.COF
-	textureLoader hscommon.TextureLoader
+	textureLoader common.TextureLoader
 	state         []byte
 }
 
 // Create creates a new cof editor
 func Create(_ *config.Config,
-	tl hscommon.TextureLoader,
-	pathEntry *hscommon.PathEntry,
+	tl common.TextureLoader,
+	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (hscommon.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
 	cof, err := d2cof.Unmarshal(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading cof file: %w", err)

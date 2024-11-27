@@ -11,8 +11,8 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2dt1"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget/dt1widget"
 	"github.com/gucio321/HellSpawner/hswidget/selectpalettewidget"
@@ -20,13 +20,13 @@ import (
 )
 
 // static check, to ensure, if dt1 editor implemented editoWindow
-var _ hscommon.EditorWindow = &DT1Editor{}
+var _ common.EditorWindow = &DT1Editor{}
 
 // DT1Editor represents a dt1 editor
 type DT1Editor struct {
 	*hseditor.Editor
 	dt1                 *d2dt1.DT1
-	textureLoader       hscommon.TextureLoader
+	textureLoader       common.TextureLoader
 	config              *config.Config
 	selectPalette       bool
 	palette             *[256]d2interface.Color
@@ -36,10 +36,10 @@ type DT1Editor struct {
 
 // Create creates new dt1 editor
 func Create(config *config.Config,
-	textureLoader hscommon.TextureLoader,
-	pathEntry *hscommon.PathEntry,
+	textureLoader common.TextureLoader,
+	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (hscommon.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
 	dt1, err := d2dt1.LoadDT1(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading dt1 file: %w", err)

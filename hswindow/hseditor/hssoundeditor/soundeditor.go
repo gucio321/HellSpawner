@@ -9,9 +9,9 @@ import (
 
 	"github.com/OpenDiablo2/dialog"
 
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 
-	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/pkg/common"
 
 	"github.com/faiface/beep"
 	"github.com/faiface/beep/speaker"
@@ -32,7 +32,7 @@ const (
 )
 
 // static check, to ensure, if sound editor implemented editoWindow
-var _ hscommon.EditorWindow = &SoundEditor{}
+var _ common.EditorWindow = &SoundEditor{}
 
 // SoundEditor represents a sound editor
 type SoundEditor struct {
@@ -42,15 +42,15 @@ type SoundEditor struct {
 	control       *beep.Ctrl
 	format        beep.Format
 	file          string
-	textureLoader hscommon.TextureLoader
+	textureLoader common.TextureLoader
 }
 
 // Create creates a new sound editor
 func Create(_ *config.Config,
-	tl hscommon.TextureLoader,
-	pathEntry *hscommon.PathEntry,
+	tl common.TextureLoader,
+	pathEntry *common.PathEntry,
 	_ []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (hscommon.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
 	streamer, format, err := wav.Decode(bytes.NewReader(*data))
 	if err != nil {
 		return nil, fmt.Errorf("wav decode error: %w", err)

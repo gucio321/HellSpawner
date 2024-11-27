@@ -9,8 +9,8 @@ import (
 
 	"github.com/OpenDiablo2/dialog"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 )
@@ -22,7 +22,7 @@ const (
 )
 
 // static check, to ensure, if text editor implemented editoWindow
-var _ hscommon.EditorWindow = &TextEditor{}
+var _ common.EditorWindow = &TextEditor{}
 
 // TextEditor represents a text editor
 type TextEditor struct {
@@ -36,10 +36,10 @@ type TextEditor struct {
 
 // Create creates a new text editor
 func Create(_ *config.Config,
-	_ hscommon.TextureLoader,
-	pathEntry *hscommon.PathEntry,
+	_ common.TextureLoader,
+	pathEntry *common.PathEntry,
 	_ []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (hscommon.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
 	result := &TextEditor{
 		Editor: hseditor.New(pathEntry, x, y, project),
 		text:   string(*data),

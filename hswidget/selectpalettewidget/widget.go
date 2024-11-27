@@ -9,9 +9,9 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2dat"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsmpqexplorer"
 	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsprojectexplorer"
@@ -46,7 +46,7 @@ func NewSelectPaletteWidget(
 		closeCB: closeCB,
 	}
 
-	callback := func(path *hscommon.PathEntry) {
+	callback := func(path *common.PathEntry) {
 		bytes, bytesErr := path.GetFileBytes()
 		if bytesErr != nil {
 			log.Print(bytesErr)

@@ -11,7 +11,7 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2font"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2font/d2fontglyph"
 
-	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/hswidget"
 )
 
@@ -26,13 +26,13 @@ const (
 type widget struct {
 	fontTable     *d2font.Font
 	id            giu.ID
-	textureLoader hscommon.TextureLoader
+	textureLoader common.TextureLoader
 }
 
 // Create creates a new FontTable widget
 func Create(
 	state []byte,
-	tl hscommon.TextureLoader,
+	tl common.TextureLoader,
 	id string, fontTable *d2font.Font,
 ) giu.Widget {
 	result := &widget{

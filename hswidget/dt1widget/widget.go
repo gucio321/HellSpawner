@@ -18,7 +18,7 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2math"
 
-	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/hswidget/dt1widget/tiletypeimage"
 )
 
@@ -49,11 +49,11 @@ type widget struct {
 	id            giu.ID
 	dt1           *d2dt1.DT1
 	palette       *[256]d2interface.Color
-	textureLoader hscommon.TextureLoader
+	textureLoader common.TextureLoader
 }
 
 // Create creates a new dt1 viewers widget
-func Create(state []byte, palette *[256]d2interface.Color, textureLoader hscommon.TextureLoader, id string, dt1 *d2dt1.DT1) giu.Widget {
+func Create(state []byte, palette *[256]d2interface.Color, textureLoader common.TextureLoader, id string, dt1 *d2dt1.DT1) giu.Widget {
 	result := &widget{
 		id:            giu.ID(id),
 		dt1:           dt1,

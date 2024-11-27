@@ -13,9 +13,9 @@ import (
 	"github.com/OpenDiablo2/dialog"
 
 	"github.com/gucio321/HellSpawner/abysswrapper"
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hsaboutdialog"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hspreferencesdialog"
@@ -56,13 +56,13 @@ const (
 
 type editorConstructor func(
 	config *config.Config,
-	textureLoader hscommon.TextureLoader,
-	pathEntry *hscommon.PathEntry,
+	textureLoader common.TextureLoader,
+	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte,
 	x, y float32,
 	project *hsproject.Project,
-) (hscommon.EditorWindow, error)
+) (common.EditorWindow, error)
 
 // App represents an app
 type App struct {
@@ -81,18 +81,18 @@ type App struct {
 	mpqExplorer     *hsmpqexplorer.MPQExplorer
 	console         *hsconsole.Console
 
-	editors            []hscommon.EditorWindow
+	editors            []common.EditorWindow
 	editorConstructors map[hsfiletypes.FileType]editorConstructor
 
 	editorManagerMutex sync.RWMutex
-	focusedEditor      hscommon.EditorWindow
+	focusedEditor      common.EditorWindow
 
 	fontFixed         *g.FontInfo
 	fontFixedSmall    *g.FontInfo
 	diabloBoldFont    *g.FontInfo
 	diabloRegularFont *g.FontInfo
 
-	TextureLoader hscommon.TextureLoader
+	TextureLoader common.TextureLoader
 
 	showUsage bool
 }
@@ -101,9 +101,9 @@ type App struct {
 func Create() (*App, error) {
 	result := &App{
 		Flags:              &Flags{},
-		editors:            make([]hscommon.EditorWindow, 0),
+		editors:            make([]common.EditorWindow, 0),
 		editorConstructors: make(map[hsfiletypes.FileType]editorConstructor),
-		TextureLoader:      hscommon.NewTextureLoader(),
+		TextureLoader:      common.NewTextureLoader(),
 		abyssWrapper:       abysswrapper.Create(),
 	}
 
@@ -175,7 +175,7 @@ func logErr(fmtErr string, args ...interface{}) {
 	dialog.Message(msg).Error()
 }
 
-func (a *App) createEditor(path *hscommon.PathEntry, state []byte, x, y, w, h float32) {
+func (a *App) createEditor(path *common.PathEntry, state []byte, x, y, w, h float32) {
 	data, err := path.GetFileBytes()
 	if err != nil {
 		const fmtErr = "Could not load file: %v"
@@ -218,7 +218,7 @@ func (a *App) createEditor(path *hscommon.PathEntry, state []byte, x, y, w, h fl
 	editor.BringToFront()
 }
 
-func (a *App) openEditor(path *hscommon.PathEntry) {
+func (a *App) openEditor(path *common.PathEntry) {
 	a.editorManagerMutex.RLock()
 
 	uniqueID := path.GetUniqueID()

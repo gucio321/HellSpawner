@@ -7,10 +7,10 @@ import (
 	g "github.com/AllenDang/giu"
 	"github.com/OpenDiablo2/dialog"
 
-	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes/hsfont"
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes/hsfont"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 
-	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 )
@@ -22,7 +22,7 @@ const (
 )
 
 // static check, to ensure, if font editor implemented editoWindow
-var _ hscommon.EditorWindow = &FontEditor{}
+var _ common.EditorWindow = &FontEditor{}
 
 // FontEditor represents a font editor
 type FontEditor struct {
@@ -32,10 +32,10 @@ type FontEditor struct {
 
 // Create creates a new font editor
 func Create(_ *config.Config,
-	_ hscommon.TextureLoader,
-	pathEntry *hscommon.PathEntry,
+	_ common.TextureLoader,
+	pathEntry *common.PathEntry,
 	_ []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (hscommon.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
 	font, err := hsfont.LoadFromJSON(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading JSON font: %w", err)

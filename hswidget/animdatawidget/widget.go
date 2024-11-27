@@ -11,7 +11,7 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2animdata"
 
-	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/hswidget"
 )
 
@@ -25,11 +25,11 @@ const (
 type widget struct {
 	id            giu.ID
 	d2            *d2animdata.AnimationData
-	textureLoader hscommon.TextureLoader
+	textureLoader common.TextureLoader
 }
 
 // Create creates a new widget
-func Create(textureLoader hscommon.TextureLoader, state []byte, id string, d2 *d2animdata.AnimationData) giu.Widget {
+func Create(textureLoader common.TextureLoader, state []byte, id string, d2 *d2animdata.AnimationData) giu.Widget {
 	result := &widget{
 		id:            giu.ID(id),
 		d2:            d2,

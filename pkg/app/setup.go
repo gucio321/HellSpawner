@@ -21,9 +21,9 @@ import (
 	"github.com/gucio321/HellSpawner/hswindow/hseditor/hsstringtableeditor"
 
 	"github.com/gucio321/HellSpawner/pkg/assets"
-	"github.com/gucio321/HellSpawner/hscommon/hsenum"
-	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
-	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/pkg/common/hsenum"
+	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
+	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hsaboutdialog"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hspreferencesdialog"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hsprojectpropertiesdialog"

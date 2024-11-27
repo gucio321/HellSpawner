@@ -1,4 +1,4 @@
-package hscommon
+package common
 
 import (
 	"errors"

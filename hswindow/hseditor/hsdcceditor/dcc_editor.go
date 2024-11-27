@@ -11,8 +11,8 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2dcc"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget/dccwidget"
 	"github.com/gucio321/HellSpawner/hswidget/selectpalettewidget"
@@ -20,7 +20,7 @@ import (
 )
 
 // static check, to ensure, if dc6 editor implemented editoWindow
-var _ hscommon.EditorWindow = &DCCEditor{}
+var _ common.EditorWindow = &DCCEditor{}
 
 // DCCEditor represents a new dcc editor
 type DCCEditor struct {
@@ -31,15 +31,15 @@ type DCCEditor struct {
 	palette             *[256]d2interface.Color
 	selectPaletteWidget g.Widget
 	state               []byte
-	textureLoader       hscommon.TextureLoader
+	textureLoader       common.TextureLoader
 }
 
 // Create creates a new dcc editor
 func Create(config *config.Config,
-	tl hscommon.TextureLoader,
-	pathEntry *hscommon.PathEntry,
+	tl common.TextureLoader,
+	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (hscommon.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
 	dcc, err := d2dcc.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading dcc animation: %w", err)

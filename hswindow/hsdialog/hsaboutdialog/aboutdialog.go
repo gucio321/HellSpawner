@@ -11,8 +11,8 @@ import (
 	"github.com/russross/blackfriday"
 
 	"github.com/gucio321/HellSpawner/pkg/assets"
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog"
 )
 
@@ -38,7 +38,7 @@ type AboutDialog struct {
 }
 
 // Create creates a new AboutDialog
-func Create(textureLoader hscommon.TextureLoader, regularFont, titleFont, fixedFont *g.FontInfo) (*AboutDialog, error) {
+func Create(textureLoader common.TextureLoader, regularFont, titleFont, fixedFont *g.FontInfo) (*AboutDialog, error) {
 	result := &AboutDialog{
 		Dialog:      hsdialog.New("About HellSpawner"),
 		titleFont:   titleFont,

@@ -11,7 +11,7 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2enum"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2cof"
 
-	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/hswidget"
 )
 
@@ -27,13 +27,13 @@ const (
 type widget struct {
 	id            giu.ID
 	cof           *d2cof.COF
-	textureLoader hscommon.TextureLoader
+	textureLoader common.TextureLoader
 }
 
 // Create a new COF widget
 func Create(
 	state []byte,
-	textureLoader hscommon.TextureLoader,
+	textureLoader common.TextureLoader,
 	id string, cof *d2cof.COF,
 ) giu.Widget {
 	result := &widget{

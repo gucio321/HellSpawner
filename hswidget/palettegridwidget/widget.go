@@ -5,7 +5,7 @@ import (
 
 	"github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/pkg/common"
 )
 
 const (
@@ -18,12 +18,12 @@ const (
 type PaletteGridWidget struct {
 	id            string
 	colors        *[]PaletteColor
-	textureLoader hscommon.TextureLoader
+	textureLoader common.TextureLoader
 	onClick       func(idx int)
 }
 
 // Create creates a new palette grid widget
-func Create(tl hscommon.TextureLoader, id string, colors *[]PaletteColor) *PaletteGridWidget {
+func Create(tl common.TextureLoader, id string, colors *[]PaletteColor) *PaletteGridWidget {
 	result := &PaletteGridWidget{
 		id:            id,
 		colors:        colors,

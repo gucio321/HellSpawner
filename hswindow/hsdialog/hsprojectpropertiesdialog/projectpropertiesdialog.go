@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/pkg/common"
 
 	"github.com/gucio321/HellSpawner/pkg/config"
 
@@ -17,7 +17,7 @@ import (
 	"github.com/AllenDang/cimgui-go/imgui"
 
 	"github.com/gucio321/HellSpawner/pkg/assets"
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog"
 )
 
@@ -48,7 +48,7 @@ type ProjectPropertiesDialog struct {
 }
 
 // Create creates a new project properties' dialog
-func Create(textureLoader hscommon.TextureLoader, onProjectPropertiesChanged func(project *hsproject.Project)) *ProjectPropertiesDialog {
+func Create(textureLoader common.TextureLoader, onProjectPropertiesChanged func(project *hsproject.Project)) *ProjectPropertiesDialog {
 	result := &ProjectPropertiesDialog{
 		Dialog:                     hsdialog.New("Project Properties"),
 		onProjectPropertiesChanged: onProjectPropertiesChanged,

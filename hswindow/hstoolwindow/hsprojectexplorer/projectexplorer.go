@@ -16,11 +16,11 @@ import (
 	g "github.com/AllenDang/giu"
 
 	"github.com/gucio321/HellSpawner/pkg/assets"
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
-	"github.com/gucio321/HellSpawner/hscommon/hsstate"
-	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
+	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/hswidget"
 	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow"
 )
@@ -37,7 +37,7 @@ const (
 )
 
 // ProjectExplorerFileSelectedCallback represents callback on project file selected
-type ProjectExplorerFileSelectedCallback func(path *hscommon.PathEntry)
+type ProjectExplorerFileSelectedCallback func(path *common.PathEntry)
 
 // ProjectExplorer represents a project explorer
 type ProjectExplorer struct {
@@ -50,7 +50,7 @@ type ProjectExplorer struct {
 }
 
 // Create creates a new project explorer
-func Create(textureLoader hscommon.TextureLoader,
+func Create(textureLoader common.TextureLoader,
 	fileSelectedCallback ProjectExplorerFileSelectedCallback,
 	x, y float32,
 ) (*ProjectExplorer, error) {
@@ -167,13 +167,13 @@ func (m *ProjectExplorer) onRefreshProjectExplorerClicked() {
 	m.project.InvalidateFileStructure()
 }
 
-func (m *ProjectExplorer) onNewFontClicked(pathEntry *hscommon.PathEntry) {
+func (m *ProjectExplorer) onNewFontClicked(pathEntry *common.PathEntry) {
 	if err := m.project.CreateNewFile(hsfiletypes.FileTypeFont, pathEntry); err != nil {
 		log.Print(err)
 	}
 }
 
-func (m *ProjectExplorer) renderNodes(pathEntry *hscommon.PathEntry) g.Widget {
+func (m *ProjectExplorer) renderNodes(pathEntry *common.PathEntry) g.Widget {
 	if !pathEntry.IsDirectory {
 		return m.createFileTreeItem(pathEntry)
 	}
@@ -194,7 +194,7 @@ func (m *ProjectExplorer) renderNodes(pathEntry *hscommon.PathEntry) g.Widget {
 	return m.createDirectoryTreeItem(pathEntry, widgets)
 }
 
-func (m *ProjectExplorer) createFileTreeItem(pathEntry *hscommon.PathEntry) g.Widget {
+func (m *ProjectExplorer) createFileTreeItem(pathEntry *common.PathEntry) g.Widget {
 	id := "##ProjectExplorerNode_" + pathEntry.FullPath
 
 	var layout g.Layout = make([]g.Widget, 0)
@@ -227,7 +227,7 @@ func (m *ProjectExplorer) createFileTreeItem(pathEntry *hscommon.PathEntry) g.Wi
 	return layout
 }
 
-func (m *ProjectExplorer) createDirectoryTreeItem(pathEntry *hscommon.PathEntry, layout g.Layout) g.Widget {
+func (m *ProjectExplorer) createDirectoryTreeItem(pathEntry *common.PathEntry, layout g.Layout) g.Widget {
 	id := pathEntry.Name + "##ProjectExplorerNode_" + pathEntry.FullPath
 
 	if pathEntry.IsRenaming {
@@ -312,7 +312,7 @@ func (m *ProjectExplorer) createDirectoryTreeItem(pathEntry *hscommon.PathEntry,
 	return g.TreeNode(id).Layout(append(menuLayout, layout...))
 }
 
-func (m *ProjectExplorer) onDeleteFolderClicked(entry *hscommon.PathEntry) {
+func (m *ProjectExplorer) onDeleteFolderClicked(entry *common.PathEntry) {
 	if !dialog.Message("Are you sure you want to delete:\n%s", entry.FullPath).YesNo() {
 		return
 	}
@@ -326,7 +326,7 @@ func (m *ProjectExplorer) onDeleteFolderClicked(entry *hscommon.PathEntry) {
 	m.project.InvalidateFileStructure()
 }
 
-func (m *ProjectExplorer) onDeleteFileClicked(entry *hscommon.PathEntry) {
+func (m *ProjectExplorer) onDeleteFileClicked(entry *common.PathEntry) {
 	if !dialog.Message("Are you sure you want to delete:\n%s", entry.FullPath).YesNo() {
 		return
 	}
@@ -340,12 +340,12 @@ func (m *ProjectExplorer) onDeleteFileClicked(entry *hscommon.PathEntry) {
 	m.project.InvalidateFileStructure()
 }
 
-func (m *ProjectExplorer) onRenameFileClicked(entry *hscommon.PathEntry) {
+func (m *ProjectExplorer) onRenameFileClicked(entry *common.PathEntry) {
 	entry.OldName = entry.Name
 	entry.IsRenaming = true
 }
 
-func (m *ProjectExplorer) onFileRenamed(entry *hscommon.PathEntry) {
+func (m *ProjectExplorer) onFileRenamed(entry *common.PathEntry) {
 	if entry.Name == entry.OldName {
 		entry.OldName = ""
 
@@ -409,13 +409,13 @@ func logErr(fmtErr string, args ...interface{}) {
 	dialog.Message(msg).Error()
 }
 
-func (m *ProjectExplorer) onNewFolderClicked(pathEntry *hscommon.PathEntry) {
+func (m *ProjectExplorer) onNewFolderClicked(pathEntry *common.PathEntry) {
 	if err := m.project.CreateNewFolder(pathEntry); err != nil {
 		logErr("%s", err)
 	}
 }
 
-func sortPaths(rootPath *hscommon.PathEntry) {
+func sortPaths(rootPath *common.PathEntry) {
 	sort.Slice(rootPath.Children, func(i, j int) bool {
 		if rootPath.Children[i].IsDirectory == rootPath.Children[j].IsDirectory {
 			var nameI, nameJ string

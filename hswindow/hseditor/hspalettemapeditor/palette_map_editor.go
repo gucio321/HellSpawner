@@ -10,30 +10,30 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2pl2"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget/palettemapwidget"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 )
 
 // static check, to ensure, if palette map editor implemented editoWindow
-var _ hscommon.EditorWindow = &PaletteMapEditor{}
+var _ common.EditorWindow = &PaletteMapEditor{}
 
 // PaletteMapEditor represents a palette map editor
 type PaletteMapEditor struct {
 	*hseditor.Editor
 	pl2           *d2pl2.PL2
-	textureLoader hscommon.TextureLoader
+	textureLoader common.TextureLoader
 	state         []byte
 }
 
 // Create creates a new palette map editor
 func Create(_ *config.Config,
-	textureLoader hscommon.TextureLoader,
-	pathEntry *hscommon.PathEntry,
+	textureLoader common.TextureLoader,
+	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (hscommon.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
 	pl2, err := d2pl2.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading PL2 file: %w", err)

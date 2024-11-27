@@ -8,7 +8,7 @@ import (
 
 	"github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 )
 
 const miliseconds = 1000

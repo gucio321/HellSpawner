@@ -10,8 +10,8 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2tbl"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget/stringtablewidget"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
@@ -22,7 +22,7 @@ const (
 )
 
 // static check, to ensure, if string table editor implemented editoWindow
-var _ hscommon.EditorWindow = &StringTableEditor{}
+var _ common.EditorWindow = &StringTableEditor{}
 
 // StringTableEditor represents a string table editor
 type StringTableEditor struct {
@@ -33,10 +33,10 @@ type StringTableEditor struct {
 
 // Create creates a new string table editor
 func Create(_ *config.Config,
-	_ hscommon.TextureLoader,
-	pathEntry *hscommon.PathEntry,
+	_ common.TextureLoader,
+	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (hscommon.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
 	dict, err := d2tbl.LoadTextDictionary(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading string table: %w", err)

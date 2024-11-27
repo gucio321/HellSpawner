@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsstate"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
 )
 
 // State creates a new app state
@@ -33,7 +33,7 @@ func (a *App) State() hsstate.AppState {
 // RestoreAppState restores an app state
 func (a *App) RestoreAppState(state hsstate.AppState) {
 	for _, toolState := range state.ToolWindows {
-		var tool hscommon.ToolWindow
+		var tool common.ToolWindow
 
 		switch toolState.Type {
 		case hsstate.ToolWindowTypeConsole:
@@ -54,7 +54,7 @@ func (a *App) RestoreAppState(state hsstate.AppState) {
 	for _, editorState := range state.EditorWindows {
 		editorState := editorState
 
-		var path hscommon.PathEntry
+		var path common.PathEntry
 
 		err := json.Unmarshal(editorState.Path, &path)
 		if err != nil {

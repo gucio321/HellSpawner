@@ -9,18 +9,18 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/config"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 )
 
 // GetMPQFileNodes returns mpq's node
-func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, config *config.Config) *hscommon.PathEntry {
-	result := &hscommon.PathEntry{
+func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, config *config.Config) *common.PathEntry {
+	result := &common.PathEntry{
 		Name:        filepath.Base(mpq.Path()),
 		IsDirectory: true,
-		Source:      hscommon.PathEntrySourceMPQ,
+		Source:      common.PathEntrySourceMPQ,
 		MPQFile:     mpq.Path(),
 	}
 
@@ -32,7 +32,7 @@ func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, config *config.Config
 		}
 	}
 
-	pathNodes := make(map[string]*hscommon.PathEntry)
+	pathNodes := make(map[string]*common.PathEntry)
 	pathNodes[""] = result
 
 	for idx := range files {
@@ -49,10 +49,10 @@ func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, config *config.Config
 			}
 
 			if pathNodes[strings.ToLower(path)] == nil {
-				pathNodes[strings.ToLower(path)] = &hscommon.PathEntry{
+				pathNodes[strings.ToLower(path)] = &common.PathEntry{
 					Name:        elements[elemIdx],
 					FullPath:    path,
-					Source:      hscommon.PathEntrySourceMPQ,
+					Source:      common.PathEntrySourceMPQ,
 					MPQFile:     mpq.Path(),
 					IsDirectory: elemIdx < len(elements)-1,
 				}
@@ -63,7 +63,7 @@ func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, config *config.Config
 		}
 	}
 
-	hscommon.SortPaths(result)
+	common.SortPaths(result)
 
 	return result
 }

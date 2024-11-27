@@ -8,22 +8,22 @@ import (
 
 	"github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsstate"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
 	"github.com/gucio321/HellSpawner/hswindow"
 )
 
 // Editor represents an editor
 type Editor struct {
 	*hswindow.Window
-	Path    *hscommon.PathEntry
+	Path    *common.PathEntry
 	Project *hsproject.Project
 }
 
 // New creates a new editor
-func New(path *hscommon.PathEntry, x, y float32, project *hsproject.Project) *Editor {
+func New(path *common.PathEntry, x, y float32, project *hsproject.Project) *Editor {
 	return &Editor{
 		Window:  hswindow.New(generateWindowTitle(path), x, y),
 		Path:    path,
@@ -59,7 +59,7 @@ func (e *Editor) GetID() string {
 
 // Save saves an editor
 func (e *Editor) Save(editor Saveable) {
-	if e.Path.Source != hscommon.PathEntrySourceProject {
+	if e.Path.Source != common.PathEntrySourceProject {
 		// saving to MPQ not yet supported
 		return
 	}
@@ -89,7 +89,7 @@ func (e *Editor) Save(editor Saveable) {
 
 // HasChanges returns true if editor has changed data
 func (e *Editor) HasChanges(editor Saveable) bool {
-	if e.Path.Source != hscommon.PathEntrySourceProject {
+	if e.Path.Source != common.PathEntrySourceProject {
 		// saving to MPQ not yet supported
 		return false
 	}
@@ -111,7 +111,7 @@ func (e *Editor) Cleanup() {
 	e.Window.Cleanup()
 }
 
-func generateWindowTitle(path *hscommon.PathEntry) string {
+func generateWindowTitle(path *common.PathEntry) string {
 	return path.Name + "##" + path.GetUniqueID()
 }
 

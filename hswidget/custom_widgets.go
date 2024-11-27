@@ -8,7 +8,7 @@ import (
 	"github.com/AllenDang/giu"
 
 	"github.com/gucio321/HellSpawner/pkg/assets"
-	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/pkg/common"
 )
 
 // MakeImageButton is a hack for giu.ImageButton that creates image button
@@ -53,11 +53,11 @@ type PlayPauseButtonWidget struct {
 	height float32
 
 	isPlaying     *bool
-	textureLoader hscommon.TextureLoader
+	textureLoader common.TextureLoader
 }
 
 // PlayPauseButton creates a play/pause button
-func PlayPauseButton(id string, isPlaying *bool, tl hscommon.TextureLoader) *PlayPauseButtonWidget {
+func PlayPauseButton(id string, isPlaying *bool, tl common.TextureLoader) *PlayPauseButtonWidget {
 	return &PlayPauseButtonWidget{
 		id:            id,
 		textureLoader: tl,

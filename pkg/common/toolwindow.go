@@ -1,9 +1,9 @@
-package hscommon
+package common
 
 import (
 	"github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/hscommon/hsstate"
+	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
 )
 
 // ToolWindow represents tool windows

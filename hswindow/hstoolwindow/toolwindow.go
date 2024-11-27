@@ -1,7 +1,7 @@
 package hstoolwindow
 
 import (
-	"github.com/gucio321/HellSpawner/hscommon/hsstate"
+	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
 	"github.com/gucio321/HellSpawner/hswindow"
 )
 

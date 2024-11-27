@@ -10,8 +10,8 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2font"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget/fonttablewidget"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
@@ -22,22 +22,22 @@ const (
 )
 
 // static check, to ensure, if font table editor implemented editoWindow
-var _ hscommon.EditorWindow = &FontTableEditor{}
+var _ common.EditorWindow = &FontTableEditor{}
 
 // FontTableEditor represents font table editor
 type FontTableEditor struct {
 	*hseditor.Editor
 	fontTable     *d2font.Font
 	state         []byte
-	textureLoader hscommon.TextureLoader
+	textureLoader common.TextureLoader
 }
 
 // Create creates a new font table editor
 func Create(_ *config.Config,
-	tl hscommon.TextureLoader,
-	pathEntry *hscommon.PathEntry,
+	tl common.TextureLoader,
+	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (hscommon.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
 	table, err := d2font.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error font table: %w", err)

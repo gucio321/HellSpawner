@@ -1,4 +1,4 @@
-package hscommon
+package common
 
 import "github.com/AllenDang/giu"
 

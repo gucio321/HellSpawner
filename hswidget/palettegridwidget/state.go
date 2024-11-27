@@ -7,7 +7,7 @@ import (
 
 	"github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 )
 
 // PaletteGridState represents palette grid's state

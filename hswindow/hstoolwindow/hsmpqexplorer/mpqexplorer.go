@@ -14,10 +14,10 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2mpq"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
-	"github.com/gucio321/HellSpawner/hscommon/hsstate"
-	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
+	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget"
 	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow"
@@ -28,7 +28,7 @@ const (
 )
 
 // MPQExplorerFileSelectedCallback represents file selected callback
-type MPQExplorerFileSelectedCallback func(path *hscommon.PathEntry)
+type MPQExplorerFileSelectedCallback func(path *common.PathEntry)
 
 // MPQExplorer represents a mpq explorer
 type MPQExplorer struct {
@@ -140,7 +140,7 @@ func (m *MPQExplorer) GetMpqTreeNodes() []g.Widget {
 	return result
 }
 
-func (m *MPQExplorer) renderNodes(pathEntry *hscommon.PathEntry) g.Widget {
+func (m *MPQExplorer) renderNodes(pathEntry *common.PathEntry) g.Widget {
 	if !pathEntry.IsDirectory {
 		id := generatePathEntryID(pathEntry)
 
@@ -156,7 +156,7 @@ func (m *MPQExplorer) renderNodes(pathEntry *hscommon.PathEntry) g.Widget {
 	}
 
 	widgets := make([]g.Widget, len(pathEntry.Children))
-	hscommon.SortPaths(pathEntry)
+	common.SortPaths(pathEntry)
 
 	wg := sync.WaitGroup{}
 	wg.Add(len(pathEntry.Children))
@@ -174,7 +174,7 @@ func (m *MPQExplorer) renderNodes(pathEntry *hscommon.PathEntry) g.Widget {
 	return g.TreeNode(pathEntry.Name).Layout(widgets...)
 }
 
-func (m *MPQExplorer) copyToProject(pathEntry *hscommon.PathEntry) {
+func (m *MPQExplorer) copyToProject(pathEntry *common.PathEntry) {
 	data, err := pathEntry.GetFileBytes()
 	if err != nil {
 		log.Printf("failed to read file %s when copying to project: %s", pathEntry.FullPath, err)
@@ -208,7 +208,7 @@ func (m *MPQExplorer) copyToProject(pathEntry *hscommon.PathEntry) {
 	}
 }
 
-func generatePathEntryID(pathEntry *hscommon.PathEntry) string {
+func generatePathEntryID(pathEntry *common.PathEntry) string {
 	return "##MPQExplorerNode_" + pathEntry.FullPath
 }
 

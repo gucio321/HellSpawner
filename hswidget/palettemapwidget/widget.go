@@ -8,8 +8,8 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2pl2"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/hswidget/palettegrideditorwidget"
 	"github.com/gucio321/HellSpawner/hswidget/palettegridwidget"
 )
@@ -24,11 +24,11 @@ const (
 type widget struct {
 	id            string
 	pl2           *d2pl2.PL2
-	textureLoader hscommon.TextureLoader
+	textureLoader common.TextureLoader
 }
 
 // Create creates a new palette map viewer's widget
-func Create(textureLoader hscommon.TextureLoader, id string, pl2 *d2pl2.PL2, state []byte) giu.Widget {
+func Create(textureLoader common.TextureLoader, id string, pl2 *d2pl2.PL2, state []byte) giu.Widget {
 	result := &widget{
 		id:            id,
 		pl2:           pl2,

@@ -7,7 +7,7 @@ import (
 
 	g "github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/hscommon/hsstate"
+	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
 	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow"
 )
 

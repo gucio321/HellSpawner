@@ -13,8 +13,8 @@ import (
 	"github.com/gravestench/osinfo"
 	"github.com/pkg/browser"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 )
 
 const (
@@ -387,7 +387,7 @@ func (a *App) renderEditors() {
 }
 
 func (a *App) renderWindows() {
-	windows := []hscommon.Renderable{
+	windows := []common.Renderable{
 		a.projectExplorer,
 		a.mpqExplorer,
 		a.console,

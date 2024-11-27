@@ -9,31 +9,31 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2animdata"
 
-	"github.com/gucio321/HellSpawner/hscommon/hsproject"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 
-	"github.com/gucio321/HellSpawner/hscommon"
+	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget/animdatawidget"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 )
 
 // static check, to ensure, if D2 editor implemented editoWindow
-var _ hscommon.EditorWindow = &AnimationDataEditor{}
+var _ common.EditorWindow = &AnimationDataEditor{}
 
 // AnimationDataEditor represents a cof editor
 type AnimationDataEditor struct {
 	*hseditor.Editor
 	d2            *d2animdata.AnimationData
 	state         []byte
-	textureLoader hscommon.TextureLoader
+	textureLoader common.TextureLoader
 }
 
 // Create creates a new cof editor
 func Create(_ *config.Config,
-	tl hscommon.TextureLoader,
-	pathEntry *hscommon.PathEntry,
+	tl common.TextureLoader,
+	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (hscommon.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
 	d2, err := d2animdata.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading animation data file: %w", err)

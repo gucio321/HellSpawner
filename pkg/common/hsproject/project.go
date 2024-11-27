@@ -16,9 +16,9 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2mpq"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
-	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes/hsfont"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
+	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes/hsfont"
 	"github.com/gucio321/HellSpawner/pkg/config"
 )
 
@@ -40,7 +40,7 @@ type Project struct {
 	AuxiliaryMPQs []string
 
 	filePath       string
-	pathEntryCache *hscommon.PathEntry
+	pathEntryCache *common.PathEntry
 	mpqs           []d2interface.Archive
 }
 
@@ -155,7 +155,7 @@ func (p *Project) ensureProjectPaths() error {
 }
 
 // GetFileStructure returns project's file structure
-func (p *Project) GetFileStructure() (*hscommon.PathEntry, error) {
+func (p *Project) GetFileStructure() (*common.PathEntry, error) {
 	if p.pathEntryCache != nil {
 		return p.pathEntryCache, nil
 	}
@@ -164,12 +164,12 @@ func (p *Project) GetFileStructure() (*hscommon.PathEntry, error) {
 		return nil, err
 	}
 
-	result := &hscommon.PathEntry{
+	result := &common.PathEntry{
 		Name:        p.ProjectName,
-		Children:    make([]*hscommon.PathEntry, 0),
+		Children:    make([]*common.PathEntry, 0),
 		IsDirectory: true,
 		IsRoot:      true,
-		Source:      hscommon.PathEntrySourceProject,
+		Source:      common.PathEntrySourceProject,
 	}
 
 	result.FullPath = filepath.Join(filepath.Dir(p.filePath), "content")
@@ -180,18 +180,18 @@ func (p *Project) GetFileStructure() (*hscommon.PathEntry, error) {
 	return result, err
 }
 
-func (p *Project) getFileNodes(path string, entry *hscommon.PathEntry) error {
+func (p *Project) getFileNodes(path string, entry *common.PathEntry) error {
 	files, err := ioutil.ReadDir(path)
 	if err != nil {
 		return fmt.Errorf("cannot read dir, %w", err)
 	}
 
 	for idx := range files {
-		fileNode := &hscommon.PathEntry{
-			Children: []*hscommon.PathEntry{},
+		fileNode := &common.PathEntry{
+			Children: []*common.PathEntry{},
 			Name:     files[idx].Name(),
 			FullPath: filepath.Join(path, files[idx].Name()),
-			Source:   hscommon.PathEntrySourceProject,
+			Source:   common.PathEntrySourceProject,
 		}
 
 		if fileNode.Name[0] == '.' || fileNode.FullPath == p.filePath {
@@ -229,7 +229,7 @@ func (p *Project) RenameFile(path string) {
 }
 
 // FindPathEntry search for path entry in project's cahe
-func (p *Project) FindPathEntry(path string) *hscommon.PathEntry {
+func (p *Project) FindPathEntry(path string) *common.PathEntry {
 	if p.pathEntryCache == nil {
 		return nil
 	}
@@ -237,7 +237,7 @@ func (p *Project) FindPathEntry(path string) *hscommon.PathEntry {
 	return p.searchPathEntries(p.pathEntryCache, path)
 }
 
-func (p *Project) searchPathEntries(pathEntry *hscommon.PathEntry, path string) *hscommon.PathEntry {
+func (p *Project) searchPathEntries(pathEntry *common.PathEntry, path string) *common.PathEntry {
 	if pathEntry.FullPath == path {
 		return p.pathEntryCache
 	}
@@ -279,7 +279,7 @@ func logErr(fmtErr string, args ...interface{}) {
 }
 
 // CreateNewFolder creates a new directory
-func (p *Project) CreateNewFolder(path *hscommon.PathEntry) (err error) {
+func (p *Project) CreateNewFolder(path *common.PathEntry) (err error) {
 	basePath := path.FullPath
 
 	fmtPath := filepath.Join(basePath, "untitled%d")
@@ -302,7 +302,7 @@ func (p *Project) CreateNewFolder(path *hscommon.PathEntry) (err error) {
 }
 
 // CreateNewFile creates a new file
-func (p *Project) CreateNewFile(fileType hsfiletypes.FileType, path *hscommon.PathEntry) (err error) {
+func (p *Project) CreateNewFile(fileType hsfiletypes.FileType, path *common.PathEntry) (err error) {
 	basePath := path.FullPath
 
 	fmtFile := fmt.Sprintf("untitled%s", fileType.FileExtension())

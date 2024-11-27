@@ -13,8 +13,8 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2dc6"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 
-	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/hswidget"
 )
 
@@ -33,12 +33,12 @@ const (
 type widget struct {
 	id            string
 	dc6           *d2dc6.DC6
-	textureLoader hscommon.TextureLoader
+	textureLoader common.TextureLoader
 	palette       *[256]d2interface.Color
 }
 
 // Create creates new widget
-func Create(state []byte, palette *[256]d2interface.Color, textureLoader hscommon.TextureLoader, id string, dc6 *d2dc6.DC6) giu.Widget {
+func Create(state []byte, palette *[256]d2interface.Color, textureLoader common.TextureLoader, id string, dc6 *d2dc6.DC6) giu.Widget {
 	result := &widget{
 		id:            id,
 		dc6:           dc6,

@@ -7,8 +7,8 @@ import (
 	g "github.com/AllenDang/giu"
 	"github.com/OpenDiablo2/dialog"
 
-	"github.com/gucio321/HellSpawner/hscommon/hsenum"
-	"github.com/gucio321/HellSpawner/hscommon/hsutil"
+	"github.com/gucio321/HellSpawner/pkg/common/hsenum"
+	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog"
 )
