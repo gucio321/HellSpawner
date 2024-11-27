@@ -1,5 +1,5 @@
-// Package hscofeditor contains cof editor's data
-package hscofeditor
+// Package cof contains cof editor's data
+package cof
 
 import (
 	"fmt"
