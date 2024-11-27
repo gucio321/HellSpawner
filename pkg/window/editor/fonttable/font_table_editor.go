@@ -1,5 +1,5 @@
-// Package hsfonttableeditor represents fontTableEditor's window
-package hsfonttableeditor
+// Package fonttable represents fontTableEditor's window
+package fonttable
 
 import (
 	"fmt"
