@@ -12,7 +12,7 @@ import (
 
 	"github.com/gucio321/HellSpawner/hscommon"
 	"github.com/gucio321/HellSpawner/hscommon/hsproject"
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget/dc6widget"
 	"github.com/gucio321/HellSpawner/hswidget/selectpalettewidget"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
@@ -26,7 +26,7 @@ type DC6Editor struct {
 	*hseditor.Editor
 	dc6                 *d2dc6.DC6
 	textureLoader       hscommon.TextureLoader
-	config              *hsconfig.Config
+	config              *config.Config
 	selectPalette       bool
 	palette             *[256]d2interface.Color
 	selectPaletteWidget g.Widget
@@ -34,7 +34,7 @@ type DC6Editor struct {
 }
 
 // Create creates a new dc6 editor
-func Create(config *hsconfig.Config,
+func Create(config *config.Config,
 	textureLoader hscommon.TextureLoader,
 	pathEntry *hscommon.PathEntry,
 	state []byte,

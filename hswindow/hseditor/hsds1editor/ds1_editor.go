@@ -13,7 +13,7 @@ import (
 
 	"github.com/gucio321/HellSpawner/hsassets"
 	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget/ds1widget"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 )
@@ -31,7 +31,7 @@ type DS1Editor struct {
 }
 
 // Create creates a new ds1 editor
-func Create(_ *hsconfig.Config,
+func Create(_ *config.Config,
 	tl hscommon.TextureLoader,
 	pathEntry *hscommon.PathEntry,
 	state []byte,

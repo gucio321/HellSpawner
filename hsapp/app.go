@@ -16,7 +16,7 @@ import (
 	"github.com/gucio321/HellSpawner/hscommon"
 	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
 	"github.com/gucio321/HellSpawner/hscommon/hsproject"
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hsaboutdialog"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hspreferencesdialog"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hsprojectpropertiesdialog"
@@ -55,7 +55,7 @@ const (
 )
 
 type editorConstructor func(
-	config *hsconfig.Config,
+	config *config.Config,
 	textureLoader hscommon.TextureLoader,
 	pathEntry *hscommon.PathEntry,
 	state []byte,
@@ -69,7 +69,7 @@ type App struct {
 	masterWindow *g.MasterWindow
 	*Flags
 	project      *hsproject.Project
-	config       *hsconfig.Config
+	config       *config.Config
 	abyssWrapper *abysswrapper.AbyssWrapper
 	logFile      *os.File
 
@@ -111,7 +111,7 @@ func Create() (*App, error) {
 		return nil, nil
 	}
 
-	result.config = hsconfig.Load(*result.Flags.optionalConfigPath)
+	result.config = config.Load(*result.Flags.optionalConfigPath)
 
 	return result, nil
 }
@@ -303,7 +303,7 @@ func (a *App) onProjectPropertiesChanged(project *hsproject.Project) {
 	}
 }
 
-func (a *App) onPreferencesChanged(config *hsconfig.Config) {
+func (a *App) onPreferencesChanged(config *config.Config) {
 	a.config = config
 	if err := a.config.Save(); err != nil {
 		logErr("after changing preferences, %s", err)

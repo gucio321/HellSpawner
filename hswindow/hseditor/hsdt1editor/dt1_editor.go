@@ -13,7 +13,7 @@ import (
 
 	"github.com/gucio321/HellSpawner/hscommon"
 	"github.com/gucio321/HellSpawner/hscommon/hsproject"
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget/dt1widget"
 	"github.com/gucio321/HellSpawner/hswidget/selectpalettewidget"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
@@ -27,7 +27,7 @@ type DT1Editor struct {
 	*hseditor.Editor
 	dt1                 *d2dt1.DT1
 	textureLoader       hscommon.TextureLoader
-	config              *hsconfig.Config
+	config              *config.Config
 	selectPalette       bool
 	palette             *[256]d2interface.Color
 	selectPaletteWidget g.Widget
@@ -35,7 +35,7 @@ type DT1Editor struct {
 }
 
 // Create creates new dt1 editor
-func Create(config *hsconfig.Config,
+func Create(config *config.Config,
 	textureLoader hscommon.TextureLoader,
 	pathEntry *hscommon.PathEntry,
 	state []byte,

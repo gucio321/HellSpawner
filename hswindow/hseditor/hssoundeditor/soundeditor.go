@@ -17,7 +17,7 @@ import (
 	"github.com/faiface/beep/speaker"
 	"github.com/faiface/beep/wav"
 
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 
@@ -46,7 +46,7 @@ type SoundEditor struct {
 }
 
 // Create creates a new sound editor
-func Create(_ *hsconfig.Config,
+func Create(_ *config.Config,
 	tl hscommon.TextureLoader,
 	pathEntry *hscommon.PathEntry,
 	_ []byte,

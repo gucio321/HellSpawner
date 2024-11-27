@@ -19,7 +19,7 @@ import (
 	"github.com/gucio321/HellSpawner/hscommon"
 	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
 	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes/hsfont"
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 )
 
 const (
@@ -103,7 +103,7 @@ func (p *Project) Save() error {
 }
 
 // ValidateAuxiliaryMPQs creates auxiliary mpq's list
-func (p *Project) ValidateAuxiliaryMPQs(config *hsconfig.Config) error {
+func (p *Project) ValidateAuxiliaryMPQs(config *config.Config) error {
 	for idx := range p.AuxiliaryMPQs {
 		realPath := filepath.Join(config.AuxiliaryMpqPath, p.AuxiliaryMPQs[idx])
 		if _, err := os.Stat(realPath); os.IsNotExist(err) {
@@ -341,7 +341,7 @@ func (p *Project) CreateNewFile(fileType hsfiletypes.FileType, path *hscommon.Pa
 }
 
 // ReloadAuxiliaryMPQs reloads auxiliary MPQs
-func (p *Project) ReloadAuxiliaryMPQs(config *hsconfig.Config) (err error) {
+func (p *Project) ReloadAuxiliaryMPQs(config *config.Config) (err error) {
 	p.mpqs = make([]d2interface.Archive, len(p.AuxiliaryMPQs))
 
 	wg := sync.WaitGroup{}

@@ -12,7 +12,7 @@ import (
 	"github.com/gucio321/HellSpawner/hscommon"
 	"github.com/gucio321/HellSpawner/hscommon/hsfiletypes"
 	"github.com/gucio321/HellSpawner/hscommon/hsproject"
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsmpqexplorer"
 	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsprojectexplorer"
 )
@@ -36,7 +36,7 @@ type SelectPaletteWidget struct {
 func NewSelectPaletteWidget(
 	id string,
 	project *hsproject.Project,
-	config *hsconfig.Config,
+	config *config.Config,
 	saveCB func(colors *[256]d2interface.Color),
 	closeCB func(),
 ) *SelectPaletteWidget {

@@ -10,13 +10,13 @@ import (
 	"strings"
 
 	"github.com/gucio321/HellSpawner/hscommon"
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 )
 
 // GetMPQFileNodes returns mpq's node
-func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, config *hsconfig.Config) *hscommon.PathEntry {
+func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, config *config.Config) *hscommon.PathEntry {
 	result := &hscommon.PathEntry{
 		Name:        filepath.Base(mpq.Path()),
 		IsDirectory: true,
@@ -69,7 +69,7 @@ func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, config *hsconfig.Conf
 }
 
 // searchForMpqFiles searches for files in MPQ's without listfiles using a list of known filenames
-func (p *Project) searchForMpqFiles(mpq d2interface.Archive, config *hsconfig.Config) ([]string, error) {
+func (p *Project) searchForMpqFiles(mpq d2interface.Archive, config *config.Config) ([]string, error) {
 	var files []string
 
 	if config.ExternalListFile != "" {

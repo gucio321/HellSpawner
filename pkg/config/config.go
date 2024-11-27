@@ -1,4 +1,4 @@
-package hsconfig
+package config
 
 import (
 	"encoding/json"

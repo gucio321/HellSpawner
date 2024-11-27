@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 )
 
 const (
@@ -49,7 +49,7 @@ func (a *AbyssWrapper) Write(p []byte) (n int, err error) {
 }
 
 // Launch launches abyss wrapper
-func (a *AbyssWrapper) Launch(config *hsconfig.Config, output io.Writer) error {
+func (a *AbyssWrapper) Launch(config *config.Config, output io.Writer) error {
 	a.mutex.RLock()
 	if a.running {
 		a.mutex.RUnlock()

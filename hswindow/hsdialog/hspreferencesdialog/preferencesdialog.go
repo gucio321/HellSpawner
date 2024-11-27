@@ -9,7 +9,7 @@ import (
 
 	"github.com/gucio321/HellSpawner/hscommon/hsenum"
 	"github.com/gucio321/HellSpawner/hscommon/hsutil"
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswindow/hsdialog"
 )
 
@@ -23,14 +23,14 @@ const (
 type PreferencesDialog struct {
 	*hsdialog.Dialog
 
-	config             *hsconfig.Config
-	onConfigChanged    func(config *hsconfig.Config)
+	config             *config.Config
+	onConfigChanged    func(config *config.Config)
 	windowColorChanger func(c color.Color)
 	restartPrompt      bool
 }
 
 // Create creates a new preferences dialog
-func Create(onConfigChanged func(config *hsconfig.Config), windowColorChanger func(c color.Color)) *PreferencesDialog {
+func Create(onConfigChanged func(config *config.Config), windowColorChanger func(c color.Color)) *PreferencesDialog {
 	result := &PreferencesDialog{
 		Dialog:             hsdialog.New("Preferences"),
 		onConfigChanged:    onConfigChanged,
@@ -108,7 +108,7 @@ func (p *PreferencesDialog) Build() {
 					p.windowColorChanger(p.config.BGColor)
 				}),
 				g.Button("Default##BackgroundColorDefault").OnClick(func() {
-					p.config.BGColor = hsutil.Color(hsconfig.DefaultBGColor)
+					p.config.BGColor = hsutil.Color(config.DefaultBGColor)
 					p.windowColorChanger(p.config.BGColor)
 				}),
 			),
@@ -121,7 +121,7 @@ func (p *PreferencesDialog) Build() {
 }
 
 // Show switch preferences dialog to visible state
-func (p *PreferencesDialog) Show(config *hsconfig.Config) {
+func (p *PreferencesDialog) Show(config *config.Config) {
 	p.Dialog.Show()
 
 	p.config = config

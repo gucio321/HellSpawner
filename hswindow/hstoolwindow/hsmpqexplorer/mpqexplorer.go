@@ -18,7 +18,7 @@ import (
 	"github.com/gucio321/HellSpawner/hscommon/hsproject"
 	"github.com/gucio321/HellSpawner/hscommon/hsstate"
 	"github.com/gucio321/HellSpawner/hscommon/hsutil"
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget"
 	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow"
 )
@@ -33,7 +33,7 @@ type MPQExplorerFileSelectedCallback func(path *hscommon.PathEntry)
 // MPQExplorer represents a mpq explorer
 type MPQExplorer struct {
 	*hstoolwindow.ToolWindow
-	config               *hsconfig.Config
+	config               *config.Config
 	project              *hsproject.Project
 	fileSelectedCallback MPQExplorerFileSelectedCallback
 	nodeCache            []g.Widget
@@ -47,7 +47,7 @@ type fileToOverwrite struct {
 }
 
 // Create creates a new explorer
-func Create(fileSelectedCallback MPQExplorerFileSelectedCallback, config *hsconfig.Config, x, y float32) (*MPQExplorer, error) {
+func Create(fileSelectedCallback MPQExplorerFileSelectedCallback, config *config.Config, x, y float32) (*MPQExplorer, error) {
 	result := &MPQExplorer{
 		ToolWindow:           hstoolwindow.New("MPQ Explorer", hsstate.ToolWindowTypeMPQExplorer, x, y),
 		fileSelectedCallback: fileSelectedCallback,

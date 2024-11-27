@@ -10,7 +10,7 @@ import (
 
 	"github.com/gucio321/HellSpawner/hscommon"
 
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 
 	g "github.com/AllenDang/giu"
 
@@ -39,7 +39,7 @@ type ProjectPropertiesDialog struct {
 	upIconTexture              *g.Texture
 	downIconTexture            *g.Texture
 	project                    hsproject.Project
-	config                     *hsconfig.Config
+	config                     *config.Config
 	onProjectPropertiesChanged func(project *hsproject.Project)
 	auxMPQs, auxMPQNames       []string
 	mpqsToAdd                  []int
@@ -71,7 +71,7 @@ func Create(textureLoader hscommon.TextureLoader, onProjectPropertiesChanged fun
 }
 
 // Show shows project properties dialog
-func (p *ProjectPropertiesDialog) Show(project *hsproject.Project, config *hsconfig.Config) {
+func (p *ProjectPropertiesDialog) Show(project *hsproject.Project, config *config.Config) {
 	p.config = config
 	p.project = *project
 	p.auxMPQs = config.GetAuxMPQs()

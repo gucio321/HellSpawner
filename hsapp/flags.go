@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 )
 
 // Flags specifies app flags
@@ -61,7 +61,7 @@ func (a *App) parseConfigArgs() {
 		fmtDesc      = "specify a custom config path.\nDefault is:\n\t%s"
 	)
 
-	desc := fmt.Sprintf(fmtDesc, hsconfig.GetConfigPath())
+	desc := fmt.Sprintf(fmtDesc, config.GetConfigPath())
 	a.Flags.optionalConfigPath = flag.String(name, defaultValue, desc)
 }
 
@@ -71,7 +71,7 @@ func (a *App) parseBackgroundColorArgs() {
 		desc = "custom background color."
 	)
 
-	defaultValue := fmt.Sprintf("0x%x", hsconfig.DefaultBGColor)
+	defaultValue := fmt.Sprintf("0x%x", config.DefaultBGColor)
 	a.Flags.bgColor = flag.String(name, defaultValue, desc)
 }
 

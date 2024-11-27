@@ -12,7 +12,7 @@ import (
 
 	"github.com/gucio321/HellSpawner/hscommon"
 	"github.com/gucio321/HellSpawner/hscommon/hsproject"
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget/stringtablewidget"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
 )
@@ -32,7 +32,7 @@ type StringTableEditor struct {
 }
 
 // Create creates a new string table editor
-func Create(_ *hsconfig.Config,
+func Create(_ *config.Config,
 	_ hscommon.TextureLoader,
 	pathEntry *hscommon.PathEntry,
 	state []byte,

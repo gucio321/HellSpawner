@@ -13,7 +13,7 @@ import (
 
 	"github.com/gucio321/HellSpawner/hscommon"
 	"github.com/gucio321/HellSpawner/hscommon/hsproject"
-	"github.com/gucio321/HellSpawner/hsconfig"
+	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/hswidget/palettegrideditorwidget"
 	"github.com/gucio321/HellSpawner/hswidget/palettegridwidget"
 	"github.com/gucio321/HellSpawner/hswindow/hseditor"
@@ -32,7 +32,7 @@ type PaletteEditor struct {
 
 // Create creates a new palette editor
 func Create(
-	_ *hsconfig.Config,
+	_ *config.Config,
 	tl hscommon.TextureLoader,
 	pathEntry *hscommon.PathEntry,
 	state []byte,
