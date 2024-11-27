@@ -3,6 +3,7 @@ package config
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/state"
 	"image/color"
 	"log"
 	"os"
@@ -11,8 +12,6 @@ import (
 
 	"github.com/gucio321/HellSpawner/pkg/common/enum"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
-	"github.com/gucio321/HellSpawner/pkg/common/state"
-
 	"github.com/kirsle/configdir"
 )
 

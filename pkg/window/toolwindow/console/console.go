@@ -3,11 +3,11 @@ package console
 
 import (
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/state"
 	"os"
 
 	g "github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/pkg/common/state"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow"
 )
 

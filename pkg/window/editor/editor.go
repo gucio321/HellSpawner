@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/state"
 	"log"
 
 	"github.com/AllenDang/giu"
@@ -11,7 +12,6 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 
 	"github.com/gucio321/HellSpawner/pkg/common"
-	"github.com/gucio321/HellSpawner/pkg/common/state"
 	"github.com/gucio321/HellSpawner/pkg/window"
 )
 

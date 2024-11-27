@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"log"
 
+	state "github.com/gucio321/HellSpawner/pkg/app/state"
+
 	"github.com/gucio321/HellSpawner/pkg/common"
-	"github.com/gucio321/HellSpawner/pkg/common/state"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow"
 )
 

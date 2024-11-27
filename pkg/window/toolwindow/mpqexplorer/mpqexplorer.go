@@ -3,6 +3,7 @@
 package mpqexplorer
 
 import (
+	"github.com/gucio321/HellSpawner/pkg/app/state"
 	"log"
 	"os"
 	"path"
@@ -17,7 +18,6 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
-	"github.com/gucio321/HellSpawner/pkg/common/state"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/widgets"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow"
