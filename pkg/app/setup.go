@@ -18,15 +18,12 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/editor/dt1"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/fonttable"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/palettemap"
-	"github.com/gucio321/HellSpawner/pkg/window/editor/stringtableeditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor/stringtable"
 
 	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/pkg/common/hsenum"
 	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
-	"github.com/gucio321/HellSpawner/pkg/window/popup/hsaboutdialog"
-	"github.com/gucio321/HellSpawner/pkg/window/popup/hspreferencesdialog"
-	"github.com/gucio321/HellSpawner/pkg/window/popup/hsprojectpropertiesdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/animdata"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/cof"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/dc6"
@@ -35,6 +32,9 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/editor/palette"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/sound"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/text"
+	"github.com/gucio321/HellSpawner/pkg/window/popup/hsaboutdialog"
+	"github.com/gucio321/HellSpawner/pkg/window/popup/hspreferencesdialog"
+	"github.com/gucio321/HellSpawner/pkg/window/popup/hsprojectpropertiesdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsconsole"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsmpqexplorer"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsprojectexplorer"
@@ -135,7 +135,7 @@ func (a *App) registerEditors() {
 	a.editorConstructors[hsfiletypes.FileTypeFont] = font.Create
 	a.editorConstructors[hsfiletypes.FileTypeDT1] = dt1.Create
 	a.editorConstructors[hsfiletypes.FileTypePL2] = palettemap.Create
-	a.editorConstructors[hsfiletypes.FileTypeTBLStringTable] = hsstringtableeditor.Create
+	a.editorConstructors[hsfiletypes.FileTypeTBLStringTable] = stringtable.Create
 	a.editorConstructors[hsfiletypes.FileTypeTBLFontTable] = fonttable.Create
 	a.editorConstructors[hsfiletypes.FileTypeDS1] = ds1.Create
 }
