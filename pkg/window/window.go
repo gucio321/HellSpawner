@@ -1,6 +1,7 @@
 package window
 
 import (
+	"github.com/AllenDang/cimgui-go/imgui"
 	"github.com/AllenDang/giu"
 	"github.com/gucio321/HellSpawner/pkg/app/state"
 )
@@ -70,4 +71,10 @@ func (t *Window) SetVisible(visible bool) {
 // Cleanup hides window
 func (t *Window) Cleanup() {
 	t.Visible = false
+}
+
+func (t *Window) Pos(x, y float32) *giu.WindowWidget {
+	// normalize this by main viewports pos
+	pos0 := imgui.MainViewport().Pos()
+	return t.WindowWidget.Pos(x+pos0.X, y+pos0.Y)
 }

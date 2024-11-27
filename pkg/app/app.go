@@ -95,7 +95,8 @@ type App struct {
 
 	TextureLoader common.TextureLoader
 
-	showUsage bool
+	showUsage   bool
+	justStarted bool
 }
 
 // Create creates new app instance
@@ -106,6 +107,7 @@ func Create() (*App, error) {
 		editorConstructors: make(map[hsfiletypes.FileType]editorConstructor),
 		TextureLoader:      common.NewTextureLoader(),
 		abyssWrapper:       abysswrapper.Create(),
+		justStarted:        true,
 	}
 
 	if shouldTerminate := result.parseArgs(); shouldTerminate {
@@ -146,19 +148,21 @@ func (a *App) Run() (err error) {
 		return err
 	}
 
-	if a.config.OpenMostRecentOnStartup && len(a.config.RecentProjects) > 0 {
-		err = a.loadProjectFromFile(a.config.RecentProjects[0])
-		if err != nil {
-			return err
-		}
-	}
-
 	a.masterWindow.Run(a.render)
 
 	return nil
 }
 
 func (a *App) render() {
+	// unfortunately can't do that in Run as this requires imgui.MainViewport
+	if a.justStarted && a.config.OpenMostRecentOnStartup && len(a.config.RecentProjects) > 0 {
+		err := a.loadProjectFromFile(a.config.RecentProjects[0])
+		a.justStarted = false
+		if err != nil {
+			logErr("could not load most recent project on startup: %v", err)
+		}
+	}
+
 	a.TextureLoader.StopLoadingTextures()
 
 	a.renderMainMenuBar()
