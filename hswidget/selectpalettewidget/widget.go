@@ -13,8 +13,8 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
-	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsmpqexplorer"
-	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsprojectexplorer"
+	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow/hsmpqexplorer"
+	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow/hsprojectexplorer"
 )
 
 const (

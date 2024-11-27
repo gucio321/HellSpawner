@@ -17,12 +17,12 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
-	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hsaboutdialog"
-	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hspreferencesdialog"
-	"github.com/gucio321/HellSpawner/hswindow/hsdialog/hsprojectpropertiesdialog"
-	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsconsole"
-	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsmpqexplorer"
-	"github.com/gucio321/HellSpawner/hswindow/hstoolwindow/hsprojectexplorer"
+	"github.com/gucio321/HellSpawner/pkg/window/hsdialog/hsaboutdialog"
+	"github.com/gucio321/HellSpawner/pkg/window/hsdialog/hspreferencesdialog"
+	"github.com/gucio321/HellSpawner/pkg/window/hsdialog/hsprojectpropertiesdialog"
+	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow/hsconsole"
+	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow/hsmpqexplorer"
+	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow/hsprojectexplorer"
 )
 
 const (

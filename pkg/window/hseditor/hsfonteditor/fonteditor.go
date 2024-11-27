@@ -1,0 +1,162 @@
+// Package hsfonteditor contains font editor's data
+package hsfonteditor
+
+import (
+	"fmt"
+
+	g "github.com/AllenDang/giu"
+	"github.com/OpenDiablo2/dialog"
+
+	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes/hsfont"
+	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
+
+	"github.com/gucio321/HellSpawner/pkg/common"
+	"github.com/gucio321/HellSpawner/pkg/config"
+	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
+)
+
+const (
+	mainWindowW, mainWindowH = 400, 300
+	pathSize                 = 245
+	browseW, browseH         = 30, 0
+)
+
+// static check, to ensure, if font editor implemented editoWindow
+var _ common.EditorWindow = &FontEditor{}
+
+// FontEditor represents a font editor
+type FontEditor struct {
+	*hseditor.Editor
+	*hsfont.Font
+}
+
+// Create creates a new font editor
+func Create(_ *config.Config,
+	_ common.TextureLoader,
+	pathEntry *common.PathEntry,
+	_ []byte,
+	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
+	font, err := hsfont.LoadFromJSON(*data)
+	if err != nil {
+		return nil, fmt.Errorf("error loading JSON font: %w", err)
+	}
+
+	result := &FontEditor{
+		Editor: hseditor.New(pathEntry, x, y, project),
+		Font:   font,
+	}
+
+	if w, h := result.CurrentSize(); w == 0 || h == 0 {
+		result.Size(mainWindowW, mainWindowH)
+	}
+
+	return result, nil
+}
+
+// Build builds an editor
+func (e *FontEditor) Build() {
+	e.IsOpen(&e.Visible).
+		Layout(g.Layout{
+			g.Label("DC6 Path"),
+			g.Row(
+				g.InputText(&e.SpriteFile).Size(pathSize).Flags(g.InputTextFlagsReadOnly),
+				g.Button("...##FontEditorDC6Browse").Size(browseW, browseH).OnClick(e.onBrowseDC6PathClicked),
+			),
+			g.Separator(),
+			g.Label("TBL Path"),
+			g.Row(
+				g.InputText(&e.TableFile).Size(pathSize).Flags(g.InputTextFlagsReadOnly),
+				g.Button("...##FontEditorTBLBrowse").Size(browseW, browseH).OnClick(e.onBrowseTBLPathClicked),
+			),
+			g.Separator(),
+			g.Label("PL2 Path"),
+			g.Row(
+				g.InputText(&e.PaletteFile).Size(pathSize).Flags(g.InputTextFlagsReadOnly),
+				g.Button("...##FontEditorPL2Browse").Size(browseW, browseH).OnClick(e.onBrowsePL2PathClicked),
+			),
+		})
+}
+
+func (e *FontEditor) onBrowseDC6PathClicked() {
+	path := dialog.File().SetStartDir(e.Project.GetProjectFileContentPath())
+	path.Filter("DC6 File", "dc6", "DC6")
+
+	filePath, err := path.Load()
+
+	if err != nil || filePath == "" {
+		return
+	}
+
+	e.SpriteFile = filePath
+}
+
+func (e *FontEditor) onBrowseTBLPathClicked() {
+	path := dialog.File().SetStartDir(e.Project.GetProjectFileContentPath())
+	path.Filter("TBL File", "tbl", "TBL")
+
+	filePath, err := path.Load()
+
+	if err != nil || filePath == "" {
+		return
+	}
+
+	e.TableFile = filePath
+}
+
+func (e *FontEditor) onBrowsePL2PathClicked() {
+	path := dialog.File().SetStartDir(e.Project.GetProjectFileContentPath())
+	path.Filter("PL2 File", "pl2", "PL2")
+
+	filePath, err := path.Load()
+
+	if err != nil || filePath == "" {
+		return
+	}
+
+	e.PaletteFile = filePath
+}
+
+// UpdateMainMenuLayout updates main menu layout to it contains editors options
+func (e *FontEditor) UpdateMainMenuLayout(l *g.Layout) {
+	m := g.Menu("Font Editor").Layout(g.Layout{
+		g.MenuItem("Add to project").OnClick(func() {}),
+		g.MenuItem("Remove from project").OnClick(func() {}),
+		g.Separator(),
+		g.MenuItem("Import from file...").OnClick(func() {}),
+		g.MenuItem("Export to file...").OnClick(func() {}),
+		g.Separator(),
+		g.MenuItem("Close").OnClick(func() {
+			e.Cleanup()
+		}),
+	})
+
+	*l = append(*l, m)
+}
+
+// GenerateSaveData generates data to be saved
+func (e *FontEditor) GenerateSaveData() []byte {
+	data, err := e.JSON()
+	if err != nil {
+		fmt.Println("failed to marshal font to JSON:, ", err)
+		return nil
+	}
+
+	return data
+}
+
+// Save saves an editor
+func (e *FontEditor) Save() {
+	e.Editor.Save(e)
+}
+
+// Cleanup hides an editor
+func (e *FontEditor) Cleanup() {
+	if e.HasChanges(e) {
+		if shouldSave := dialog.Message("There are unsaved changes to %s, save before closing this editor?",
+			e.Path.FullPath).YesNo(); shouldSave {
+			e.Save()
+		}
+	}
+
+	e.Editor.Cleanup()
+}
