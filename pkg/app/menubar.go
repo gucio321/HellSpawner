@@ -150,7 +150,7 @@ func (a *App) projectMenu() *g.MenuWidget {
 	)
 
 	projectOpened := a.project != nil
-	enginePathSet := len(a.config.AbyssEnginePath) > 0
+	enginePathSet := a.config.AbyssEnginePath != ""
 
 	label := runAbyssEngine
 	if a.abyssWrapper.IsRunning() {
@@ -281,7 +281,7 @@ func (a *App) onHelpAboutClicked() {
 func (a *App) onProjectRunClicked() {
 	if a.abyssWrapper.IsRunning() {
 		if err := a.abyssWrapper.Kill(); err != nil {
-			dialog.Message(err.Error()).Error()
+			dialog.Message("%v", err).Error()
 		}
 
 		return
@@ -290,7 +290,7 @@ func (a *App) onProjectRunClicked() {
 	a.console.Show()
 
 	if err := a.abyssWrapper.Launch(a.config, a.console); err != nil {
-		dialog.Message(err.Error()).Error()
+		dialog.Message("%v", err).Error()
 	}
 }
 
@@ -410,7 +410,7 @@ func makeMenuID(name, group, shortcut string) string {
 		fmt3 = "%v\t(%v)%v%v%v"
 	)
 
-	if len(shortcut) > 0 {
+	if shortcut != "" {
 		return fmt.Sprintf(fmt3, name, shortcut, sep, group, name)
 	}
 

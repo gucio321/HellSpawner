@@ -84,7 +84,7 @@ func (a *App) setupMasterWindow() {
 }
 
 func (a *App) determineBackgroundColor() color.RGBA {
-	const bitSize = 64
+	const bitSize = 32
 
 	result := a.config.BGColor
 
@@ -110,6 +110,7 @@ func (a *App) determineBackgroundColor() color.RGBA {
 			bg <<= 8
 		}
 
+		//nolint:gosec // this complains about intager size, but this number was created by strconv.ParseInt with bitsize 32
 		result = hsutil.Color(uint32(bg))
 	}
 

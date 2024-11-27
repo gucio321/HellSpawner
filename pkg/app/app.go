@@ -170,9 +170,8 @@ func (a *App) render() {
 }
 
 func logErr(fmtErr string, args ...interface{}) {
-	msg := fmt.Sprintf(fmtErr, args...)
-	log.Print(msg)
-	dialog.Message(msg).Error()
+	log.Printf(fmtErr, args...)
+	dialog.Message(fmtErr, args...).Error()
 }
 
 func (a *App) createEditor(path *common.PathEntry, state []byte, x, y, w, h float32) {
@@ -303,8 +302,8 @@ func (a *App) onProjectPropertiesChanged(project *hsproject.Project) {
 	}
 }
 
-func (a *App) onPreferencesChanged(config *config.Config) {
-	a.config = config
+func (a *App) onPreferencesChanged(cfg *config.Config) {
+	a.config = cfg
 	if err := a.config.Save(); err != nil {
 		logErr("after changing preferences, %s", err)
 	}
@@ -343,11 +342,9 @@ func (a *App) closeActiveEditor() {
 }
 
 func (a *App) closePopups() {
-	/*
-		a.projectPropertiesDialog.Cleanup()
-		a.aboutDialog.Cleanup()
-		a.preferencesDialog.Cleanup()
-	*/
+	a.projectPropertiesDialog.Cleanup()
+	a.aboutDialog.Cleanup()
+	a.preferencesDialog.Cleanup()
 }
 
 func (a *App) toggleConsole() {
@@ -356,9 +353,9 @@ func (a *App) toggleConsole() {
 
 // CloseAllOpenWindows closes all opened windows
 func (a *App) CloseAllOpenWindows() {
-	// a.closePopups()
-	// a.projectExplorer.Cleanup()
-	// a.mpqExplorer.Cleanup()
+	a.closePopups()
+	a.projectExplorer.Cleanup()
+	a.mpqExplorer.Cleanup()
 	a.focusedEditor = nil
 
 	for _, editor := range a.editors {

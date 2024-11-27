@@ -1,2 +1,2 @@
-// Package hsapp contains HellSpawner's high-level application logic
+// Package app contains HellSpawner's high-level application logic
 package app

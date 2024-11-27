@@ -52,8 +52,6 @@ func (a *App) RestoreAppState(state hsstate.AppState) {
 	}
 
 	for _, editorState := range state.EditorWindows {
-		editorState := editorState
-
 		var path common.PathEntry
 
 		err := json.Unmarshal(editorState.Path, &path)
