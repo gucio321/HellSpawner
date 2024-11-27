@@ -18,11 +18,11 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )
 
-// static check if DS1Editor implemented common.EditorWindow
-var _ common.EditorWindow = &DS1Editor{}
+// static check if Editor implemented common.EditorWindow
+var _ common.EditorWindow = &Editor{}
 
-// DS1Editor represents ds1 editor
-type DS1Editor struct {
+// Editor represents ds1 editor
+type Editor struct {
 	*editor.Editor
 	ds1                 *d2ds1.DS1
 	deleteButtonTexture *g.Texture
@@ -35,13 +35,14 @@ func Create(_ *config.Config,
 	tl common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project,
+) (common.EditorWindow, error) {
 	ds1, err := d2ds1.Unmarshal(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading DS1 file: %w", err)
 	}
 
-	result := &DS1Editor{
+	result := &Editor{
 		Editor:        editor.New(pathEntry, x, y, project),
 		ds1:           ds1,
 		textureLoader: tl,
@@ -58,7 +59,7 @@ func Create(_ *config.Config,
 }
 
 // Build builds an editor
-func (e *DS1Editor) Build() {
+func (e *Editor) Build() {
 	e.IsOpen(&e.Visible).
 		Flags(g.WindowFlagsAlwaysAutoResize).
 		Layout(g.Layout{
@@ -67,7 +68,7 @@ func (e *DS1Editor) Build() {
 }
 
 // UpdateMainMenuLayout updates main menu layout to it contains editors options
-func (e *DS1Editor) UpdateMainMenuLayout(l *g.Layout) {
+func (e *Editor) UpdateMainMenuLayout(l *g.Layout) {
 	m := g.Menu("DS1 Editor").Layout(g.Layout{
 		g.MenuItem("Save\t\t\t\tCtrl+Shift+S").OnClick(e.Save),
 		g.Separator(),
@@ -86,19 +87,19 @@ func (e *DS1Editor) UpdateMainMenuLayout(l *g.Layout) {
 }
 
 // GenerateSaveData generates data to be saved
-func (e *DS1Editor) GenerateSaveData() []byte {
+func (e *Editor) GenerateSaveData() []byte {
 	data := e.ds1.Marshal()
 
 	return data
 }
 
 // Save saves editors data
-func (e *DS1Editor) Save() {
+func (e *Editor) Save() {
 	e.Editor.Save(e)
 }
 
 // Cleanup hides editor
-func (e *DS1Editor) Cleanup() {
+func (e *Editor) Cleanup() {
 	if e.HasChanges(e) {
 		if shouldSave := dialog.Message("There are unsaved changes to %s, save before closing this editor?",
 			e.Path.FullPath).YesNo(); shouldSave {

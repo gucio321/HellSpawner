@@ -18,10 +18,10 @@ import (
 )
 
 // static check, to ensure, if palette map editor implemented editoWindow
-var _ common.EditorWindow = &PaletteMapEditor{}
+var _ common.EditorWindow = &Editor{}
 
-// PaletteMapEditor represents a palette map editor
-type PaletteMapEditor struct {
+// Editor represents a palette map editor
+type Editor struct {
 	*editor.Editor
 	pl2           *d2pl2.PL2
 	textureLoader common.TextureLoader
@@ -33,13 +33,14 @@ func Create(_ *config.Config,
 	textureLoader common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project,
+) (common.EditorWindow, error) {
 	pl2, err := d2pl2.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading PL2 file: %w", err)
 	}
 
-	result := &PaletteMapEditor{
+	result := &Editor{
 		Editor:        editor.New(pathEntry, x, y, project),
 		pl2:           pl2,
 		textureLoader: textureLoader,
@@ -52,7 +53,7 @@ func Create(_ *config.Config,
 }
 
 // Build builds an editor
-func (e *PaletteMapEditor) Build() {
+func (e *Editor) Build() {
 	e.IsOpen(&e.Visible).
 		Flags(g.WindowFlagsAlwaysAutoResize).
 		Layout(g.Layout{
@@ -61,7 +62,7 @@ func (e *PaletteMapEditor) Build() {
 }
 
 // UpdateMainMenuLayout updates a main menu layout to it contains editors options
-func (e *PaletteMapEditor) UpdateMainMenuLayout(l *g.Layout) {
+func (e *Editor) UpdateMainMenuLayout(l *g.Layout) {
 	m := g.Menu("Palette Map Editor").Layout(g.Layout{
 		g.MenuItem("Save\t\t\t\tCtrl+Shift+S").OnClick(e.Save),
 		g.Separator(),
@@ -80,19 +81,19 @@ func (e *PaletteMapEditor) UpdateMainMenuLayout(l *g.Layout) {
 }
 
 // GenerateSaveData creates data to be saved
-func (e *PaletteMapEditor) GenerateSaveData() []byte {
+func (e *Editor) GenerateSaveData() []byte {
 	data := e.pl2.Marshal()
 
 	return data
 }
 
 // Save saves an editor
-func (e *PaletteMapEditor) Save() {
+func (e *Editor) Save() {
 	e.Editor.Save(e)
 }
 
 // Cleanup hides an editor
-func (e *PaletteMapEditor) Cleanup() {
+func (e *Editor) Cleanup() {
 	if e.HasChanges(e) {
 		if shouldSave := dialog.Message("There are unsaved changes to %s, save before closing this editor?",
 			e.Path.FullPath).YesNo(); shouldSave {

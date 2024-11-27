@@ -32,10 +32,10 @@ const (
 )
 
 // static check, to ensure, if sound editor implemented editoWindow
-var _ common.EditorWindow = &SoundEditor{}
+var _ common.EditorWindow = &Editor{}
 
-// SoundEditor represents a sound editor
-type SoundEditor struct {
+// Editor represents a sound editor
+type Editor struct {
 	*editor.Editor
 
 	streamer      beep.StreamSeekCloser
@@ -50,7 +50,8 @@ func Create(_ *config.Config,
 	tl common.TextureLoader,
 	pathEntry *common.PathEntry,
 	_ []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project,
+) (common.EditorWindow, error) {
 	streamer, format, err := wav.Decode(bytes.NewReader(*data))
 	if err != nil {
 		return nil, fmt.Errorf("wav decode error: %w", err)
@@ -61,7 +62,7 @@ func Create(_ *config.Config,
 		Paused:   false,
 	}
 
-	result := &SoundEditor{
+	result := &Editor{
 		Editor:        editor.New(pathEntry, x, y, project),
 		file:          filepath.Base(pathEntry.FullPath),
 		streamer:      streamer,
@@ -78,7 +79,7 @@ func Create(_ *config.Config,
 }
 
 // Build builds a sound editor
-func (s *SoundEditor) Build() {
+func (s *Editor) Build() {
 	isPlaying := !s.control.Paused
 
 	secondsCurrent := s.streamer.Position() / progressTimeModifier
@@ -107,7 +108,7 @@ func (s *SoundEditor) Build() {
 }
 
 // Cleanup closes an editor
-func (s *SoundEditor) Cleanup() {
+func (s *Editor) Cleanup() {
 	speaker.Lock()
 	s.control.Paused = true
 
@@ -126,13 +127,13 @@ func (s *SoundEditor) Cleanup() {
 	speaker.Unlock()
 }
 
-func (s *SoundEditor) play() {
+func (s *Editor) play() {
 	speaker.Lock()
 	s.control.Paused = false
 	speaker.Unlock()
 }
 
-func (s *SoundEditor) stop() {
+func (s *Editor) stop() {
 	speaker.Lock()
 
 	if s.control.Paused {
@@ -148,7 +149,7 @@ func (s *SoundEditor) stop() {
 }
 
 // UpdateMainMenuLayout updates mainMenu's layout to it contain soundEditor's options
-func (s *SoundEditor) UpdateMainMenuLayout(l *g.Layout) {
+func (s *Editor) UpdateMainMenuLayout(l *g.Layout) {
 	m := g.Menu("Sound Editor").Layout(g.Layout{
 		g.MenuItem("Add to project").OnClick(func() {}),
 		g.MenuItem("Remove from project").OnClick(func() {}),
@@ -165,7 +166,7 @@ func (s *SoundEditor) UpdateMainMenuLayout(l *g.Layout) {
 }
 
 // GenerateSaveData generates data to be saved
-func (s *SoundEditor) GenerateSaveData() []byte {
+func (s *Editor) GenerateSaveData() []byte {
 	// https://github.com/gucio321/HellSpawner/issues/181
 	data, _ := s.Path.GetFileBytes()
 
@@ -173,6 +174,6 @@ func (s *SoundEditor) GenerateSaveData() []byte {
 }
 
 // Save saves an editor
-func (s *SoundEditor) Save() {
+func (s *Editor) Save() {
 	s.Editor.Save(s)
 }

@@ -19,10 +19,10 @@ import (
 )
 
 // static check, to ensure, if cof editor implemented editoWindow
-var _ common.EditorWindow = &COFEditor{}
+var _ common.EditorWindow = &Editor{}
 
-// COFEditor represents a cof editor
-type COFEditor struct {
+// Editor represents a cof editor
+type Editor struct {
 	*editor.Editor
 	cof           *d2cof.COF
 	textureLoader common.TextureLoader
@@ -34,13 +34,14 @@ func Create(_ *config.Config,
 	tl common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project,
+) (common.EditorWindow, error) {
 	cof, err := d2cof.Unmarshal(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading cof file: %w", err)
 	}
 
-	result := &COFEditor{
+	result := &Editor{
 		Editor:        editor.New(pathEntry, x, y, project),
 		cof:           cof,
 		textureLoader: tl,
@@ -51,7 +52,7 @@ func Create(_ *config.Config,
 }
 
 // Build builds a cof editor
-func (e *COFEditor) Build() {
+func (e *Editor) Build() {
 	uid := e.Path.GetUniqueID()
 	cofWidget := cofwidget.Create(e.state, e.textureLoader, uid, e.cof)
 
@@ -61,7 +62,7 @@ func (e *COFEditor) Build() {
 }
 
 // UpdateMainMenuLayout updates a main menu layout, to it contains COFViewer's settings
-func (e *COFEditor) UpdateMainMenuLayout(l *g.Layout) {
+func (e *Editor) UpdateMainMenuLayout(l *g.Layout) {
 	m := g.Menu("COF Editor").Layout(g.Layout{
 		g.MenuItem("Save\t\t\t\tCtrl+Shift+S").OnClick(e.Save),
 		g.Separator(),
@@ -80,19 +81,19 @@ func (e *COFEditor) UpdateMainMenuLayout(l *g.Layout) {
 }
 
 // GenerateSaveData generates data to be saved
-func (e *COFEditor) GenerateSaveData() []byte {
+func (e *Editor) GenerateSaveData() []byte {
 	data := e.cof.Marshal()
 
 	return data
 }
 
 // Save saves an editor
-func (e *COFEditor) Save() {
+func (e *Editor) Save() {
 	e.Editor.Save(e)
 }
 
 // Cleanup hides an editor
-func (e *COFEditor) Cleanup() {
+func (e *Editor) Cleanup() {
 	const strPrompt = "There are unsaved changes to %s, save before closing this editor?"
 
 	if e.HasChanges(e) {

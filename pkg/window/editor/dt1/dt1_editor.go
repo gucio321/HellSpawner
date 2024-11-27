@@ -20,10 +20,10 @@ import (
 )
 
 // static check, to ensure, if dt1 editor implemented editoWindow
-var _ common.EditorWindow = &DT1Editor{}
+var _ common.EditorWindow = &Editorg{}
 
-// DT1Editor represents a dt1 editor
-type DT1Editor struct {
+// Editorg represents a dt1 editor
+type Editorg struct {
 	*editor.Editor
 	dt1                 *d2dt1.DT1
 	textureLoader       common.TextureLoader
@@ -35,20 +35,21 @@ type DT1Editor struct {
 }
 
 // Create creates new dt1 editor
-func Create(config *config.Config,
+func Create(cfg *config.Config,
 	textureLoader common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project,
+) (common.EditorWindow, error) {
 	dt1, err := d2dt1.LoadDT1(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading dt1 file: %w", err)
 	}
 
-	result := &DT1Editor{
+	result := &Editorg{
 		Editor:        editor.New(pathEntry, x, y, project),
 		dt1:           dt1,
-		config:        config,
+		config:        cfg,
 		selectPalette: false,
 		textureLoader: textureLoader,
 		state:         state,
@@ -58,7 +59,7 @@ func Create(config *config.Config,
 }
 
 // Build prepares the editor for rendering, but does not actually render it
-func (e *DT1Editor) Build() {
+func (e *Editorg) Build() {
 	e.IsOpen(&e.Visible)
 	e.Flags(g.WindowFlagsAlwaysAutoResize)
 
@@ -90,7 +91,7 @@ func (e *DT1Editor) Build() {
 }
 
 // UpdateMainMenuLayout updates main menu layout to it contains editors options
-func (e *DT1Editor) UpdateMainMenuLayout(l *g.Layout) {
+func (e *Editorg) UpdateMainMenuLayout(l *g.Layout) {
 	m := g.Menu("DT1 Editor").Layout(g.Layout{
 		g.MenuItem("Change Palette").OnClick(func() {
 			e.selectPalette = true
@@ -113,7 +114,7 @@ func (e *DT1Editor) UpdateMainMenuLayout(l *g.Layout) {
 }
 
 // KeyboardShortcuts register a new keyboard shortcut
-func (e *DT1Editor) KeyboardShortcuts() []g.WindowShortcut {
+func (e *Editorg) KeyboardShortcuts() []g.WindowShortcut {
 	// https://github.com/gucio321/HellSpawner/issues/329
 	return []g.WindowShortcut{
 		/*
@@ -139,19 +140,19 @@ func (e *DT1Editor) KeyboardShortcuts() []g.WindowShortcut {
 }
 
 // GenerateSaveData generates data to be saved
-func (e *DT1Editor) GenerateSaveData() []byte {
+func (e *Editorg) GenerateSaveData() []byte {
 	data := e.dt1.Marshal()
 
 	return data
 }
 
 // Save saves editor
-func (e *DT1Editor) Save() {
+func (e *Editorg) Save() {
 	e.Editor.Save(e)
 }
 
 // Cleanup hides editor
-func (e *DT1Editor) Cleanup() {
+func (e *Editorg) Cleanup() {
 	if e.HasChanges(e) {
 		if shouldSave := dialog.Message("There are unsaved changes to %s, save before closing this editor?",
 			e.Path.FullPath).YesNo(); shouldSave {

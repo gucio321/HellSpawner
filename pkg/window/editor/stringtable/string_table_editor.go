@@ -22,10 +22,10 @@ const (
 )
 
 // static check, to ensure, if string table editor implemented editoWindow
-var _ common.EditorWindow = &StringTableEditor{}
+var _ common.EditorWindow = &Editor{}
 
-// StringTableEditor represents a string table editor
-type StringTableEditor struct {
+// Editor represents a string table editor
+type Editor struct {
 	*editor.Editor
 	dict  d2tbl.TextDictionary
 	state []byte
@@ -36,13 +36,14 @@ func Create(_ *config.Config,
 	_ common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project,
+) (common.EditorWindow, error) {
 	dict, err := d2tbl.LoadTextDictionary(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading string table: %w", err)
 	}
 
-	result := &StringTableEditor{
+	result := &Editor{
 		Editor: editor.New(pathEntry, x, y, project),
 		dict:   dict,
 		state:  state,
@@ -58,7 +59,7 @@ func Create(_ *config.Config,
 }
 
 // Build builds an editor
-func (e *StringTableEditor) Build() {
+func (e *Editor) Build() {
 	l := stringtablewidget.Create(e.state, e.Path.GetUniqueID(), e.dict)
 
 	e.IsOpen(&e.Visible).
@@ -67,7 +68,7 @@ func (e *StringTableEditor) Build() {
 }
 
 // UpdateMainMenuLayout updates main menu layout to it contain editors options
-func (e *StringTableEditor) UpdateMainMenuLayout(l *g.Layout) {
+func (e *Editor) UpdateMainMenuLayout(l *g.Layout) {
 	m := g.Menu("String Table Editor").Layout(g.Layout{
 		g.MenuItem("Save\t\t\t\tCtrl+Shift+S").OnClick(e.Save),
 		g.Separator(),
@@ -86,19 +87,19 @@ func (e *StringTableEditor) UpdateMainMenuLayout(l *g.Layout) {
 }
 
 // GenerateSaveData generates data to be saved
-func (e *StringTableEditor) GenerateSaveData() []byte {
+func (e *Editor) GenerateSaveData() []byte {
 	data := e.dict.Marshal()
 
 	return data
 }
 
 // Save saves an editor
-func (e *StringTableEditor) Save() {
+func (e *Editor) Save() {
 	e.Editor.Save(e)
 }
 
 // Cleanup hides an editor
-func (e *StringTableEditor) Cleanup() {
+func (e *Editor) Cleanup() {
 	if e.HasChanges(e) {
 		if shouldSave := dialog.Message("There are unsaved changes to %s, save before closing this editor?",
 			e.Path.FullPath).YesNo(); shouldSave {

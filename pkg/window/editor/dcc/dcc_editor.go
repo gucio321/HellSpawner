@@ -20,10 +20,10 @@ import (
 )
 
 // static check, to ensure, if dc6 editor implemented editoWindow
-var _ common.EditorWindow = &DCCEditor{}
+var _ common.EditorWindow = &Editor{}
 
-// DCCEditor represents a new dcc editor
-type DCCEditor struct {
+// Editor represents a new dcc editor
+type Editor struct {
 	*editor.Editor
 	dcc                 *d2dcc.DCC
 	config              *config.Config
@@ -35,20 +35,21 @@ type DCCEditor struct {
 }
 
 // Create creates a new dcc editor
-func Create(config *config.Config,
+func Create(cfg *config.Config,
 	tl common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project,
+) (common.EditorWindow, error) {
 	dcc, err := d2dcc.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading dcc animation: %w", err)
 	}
 
-	result := &DCCEditor{
+	result := &Editor{
 		Editor:        editor.New(pathEntry, x, y, project),
 		dcc:           dcc,
-		config:        config,
+		config:        cfg,
 		selectPalette: false,
 		state:         state,
 		textureLoader: tl,
@@ -58,7 +59,7 @@ func Create(config *config.Config,
 }
 
 // Build builds a dcc editor
-func (e *DCCEditor) Build() {
+func (e *Editor) Build() {
 	e.IsOpen(&e.Visible)
 	e.Flags(g.WindowFlagsAlwaysAutoResize)
 
@@ -88,7 +89,7 @@ func (e *DCCEditor) Build() {
 }
 
 // UpdateMainMenuLayout updates main menu to it contain editor's options
-func (e *DCCEditor) UpdateMainMenuLayout(l *g.Layout) {
+func (e *Editor) UpdateMainMenuLayout(l *g.Layout) {
 	m := g.Menu("DCC Editor").Layout(g.Layout{
 		g.MenuItem("Change Palette").OnClick(func() {
 			e.selectPalette = true
@@ -109,7 +110,7 @@ func (e *DCCEditor) UpdateMainMenuLayout(l *g.Layout) {
 }
 
 // GenerateSaveData generates data to save
-func (e *DCCEditor) GenerateSaveData() []byte {
+func (e *Editor) GenerateSaveData() []byte {
 	// https://github.com/gucio321/HellSpawner/issues/181
 	data, _ := e.Path.GetFileBytes()
 
@@ -117,12 +118,12 @@ func (e *DCCEditor) GenerateSaveData() []byte {
 }
 
 // Save saves editor
-func (e *DCCEditor) Save() {
+func (e *Editor) Save() {
 	e.Editor.Save(e)
 }
 
 // Cleanup hides editor
-func (e *DCCEditor) Cleanup() {
+func (e *Editor) Cleanup() {
 	if e.HasChanges(e) {
 		if shouldSave := dialog.Message("There are unsaved changes to %s, save before closing this editor?",
 			e.Path.FullPath).YesNo(); shouldSave {

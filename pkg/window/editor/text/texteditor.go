@@ -22,10 +22,10 @@ const (
 )
 
 // static check, to ensure, if text editor implemented editoWindow
-var _ common.EditorWindow = &TextEditor{}
+var _ common.EditorWindow = &Editor{}
 
-// TextEditor represents a text editor
-type TextEditor struct {
+// Editor represents a text editor
+type Editor struct {
 	*editor.Editor
 
 	text      string
@@ -39,8 +39,9 @@ func Create(_ *config.Config,
 	_ common.TextureLoader,
 	pathEntry *common.PathEntry,
 	_ []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
-	result := &TextEditor{
+	data *[]byte, x, y float32, project *hsproject.Project,
+) (common.EditorWindow, error) {
+	result := &Editor{
 		Editor: editor.New(pathEntry, x, y, project),
 		text:   string(*data),
 	}
@@ -93,7 +94,7 @@ func Create(_ *config.Config,
 }
 
 // Build builds an editor
-func (e *TextEditor) Build() {
+func (e *Editor) Build() {
 	if !e.tableView {
 		e.IsOpen(&e.Visible).
 			Layout(
@@ -112,7 +113,7 @@ func (e *TextEditor) Build() {
 }
 
 // UpdateMainMenuLayout updates mainMenu layout to it contains editor's options
-func (e *TextEditor) UpdateMainMenuLayout(l *g.Layout) {
+func (e *Editor) UpdateMainMenuLayout(l *g.Layout) {
 	m := g.Menu("Text Editor").Layout(g.Layout{
 		g.MenuItem("Save\t\t\t\tCtrl+Shift+S").OnClick(e.Save),
 		g.Separator(),
@@ -131,19 +132,19 @@ func (e *TextEditor) UpdateMainMenuLayout(l *g.Layout) {
 }
 
 // GenerateSaveData generates data to be saved
-func (e *TextEditor) GenerateSaveData() []byte {
+func (e *Editor) GenerateSaveData() []byte {
 	data := []byte(e.text)
 
 	return data
 }
 
 // Save saves an editor
-func (e *TextEditor) Save() {
+func (e *Editor) Save() {
 	e.Editor.Save(e)
 }
 
 // Cleanup hides an editor
-func (e *TextEditor) Cleanup() {
+func (e *Editor) Cleanup() {
 	if e.HasChanges(e) {
 		if shouldSave := dialog.Message("There are unsaved changes to %s, save before closing this editor?",
 			e.Path.FullPath).YesNo(); shouldSave {

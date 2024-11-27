@@ -20,10 +20,10 @@ import (
 )
 
 // static check, to ensure, if palette editor implemented editoWindow
-var _ common.EditorWindow = &PaletteEditor{}
+var _ common.EditorWindow = &Editor{}
 
-// PaletteEditor represents a palette editor
-type PaletteEditor struct {
+// Editor represents a palette editor
+type Editor struct {
 	*editor.Editor
 	palette       d2interface.Palette
 	textureLoader common.TextureLoader
@@ -36,13 +36,14 @@ func Create(
 	tl common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project,
+) (common.EditorWindow, error) {
 	palette, err := d2dat.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading dat palette: %w", err)
 	}
 
-	result := &PaletteEditor{
+	result := &Editor{
 		Editor:        editor.New(pathEntry, x, y, project),
 		palette:       palette,
 		textureLoader: tl,
@@ -53,7 +54,7 @@ func Create(
 }
 
 // Build builds a palette editor
-func (e *PaletteEditor) Build() {
+func (e *Editor) Build() {
 	const colorsPerPalette = 256
 
 	col := make([]palettegridwidget.PaletteColor, colorsPerPalette)
@@ -67,7 +68,7 @@ func (e *PaletteEditor) Build() {
 }
 
 // UpdateMainMenuLayout updates a main menu layout to it contain palette editor's options
-func (e *PaletteEditor) UpdateMainMenuLayout(l *g.Layout) {
+func (e *Editor) UpdateMainMenuLayout(l *g.Layout) {
 	m := g.Menu("Palette Editor").Layout(g.Layout{
 		g.MenuItem("Save\t\t\t\tCtrl+Shift+S").OnClick(e.Save),
 		g.Separator(),
@@ -86,7 +87,7 @@ func (e *PaletteEditor) UpdateMainMenuLayout(l *g.Layout) {
 }
 
 // GenerateSaveData generates data to be saved
-func (e *PaletteEditor) GenerateSaveData() []byte {
+func (e *Editor) GenerateSaveData() []byte {
 	palette, ok := e.palette.(*d2dat.DATPalette)
 	if ok {
 		data := palette.Marshal()
@@ -98,12 +99,12 @@ func (e *PaletteEditor) GenerateSaveData() []byte {
 }
 
 // Save saves editor
-func (e *PaletteEditor) Save() {
+func (e *Editor) Save() {
 	e.Editor.Save(e)
 }
 
 // Cleanup hides palette editor
-func (e *PaletteEditor) Cleanup() {
+func (e *Editor) Cleanup() {
 	if e.HasChanges(e) {
 		if shouldSave := dialog.Message("There are unsaved changes to %s, save before closing this editor?",
 			e.Path.FullPath).YesNo(); shouldSave {

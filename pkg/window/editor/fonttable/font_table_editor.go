@@ -22,10 +22,10 @@ const (
 )
 
 // static check, to ensure, if font table editor implemented editoWindow
-var _ common.EditorWindow = &FontTableEditor{}
+var _ common.EditorWindow = &Editor{}
 
-// FontTableEditor represents font table editor
-type FontTableEditor struct {
+// Editor represents font table editor
+type Editor struct {
 	*editor.Editor
 	fontTable     *d2font.Font
 	state         []byte
@@ -37,13 +37,14 @@ func Create(_ *config.Config,
 	tl common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project,
+) (common.EditorWindow, error) {
 	table, err := d2font.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error font table: %w", err)
 	}
 
-	result := &FontTableEditor{
+	result := &Editor{
 		Editor:        editor.New(pathEntry, x, y, project),
 		fontTable:     table,
 		state:         state,
@@ -58,15 +59,15 @@ func Create(_ *config.Config,
 }
 
 // Build builds a font table editor's window
-func (e *FontTableEditor) Build() {
+func (e *Editor) Build() {
 	e.IsOpen(&e.Visible).Flags(g.WindowFlagsHorizontalScrollbar).
 		Layout(g.Layout{
 			fonttablewidget.Create(e.state, e.textureLoader, e.Path.GetUniqueID(), e.fontTable),
 		})
 }
 
-// UpdateMainMenuLayout updates mainMenu layout's to it contain FontTableEditor's options
-func (e *FontTableEditor) UpdateMainMenuLayout(l *g.Layout) {
+// UpdateMainMenuLayout updates mainMenu layout's to it contain Editor's options
+func (e *Editor) UpdateMainMenuLayout(l *g.Layout) {
 	m := g.Menu("Font Table Editor").Layout(g.Layout{
 		g.MenuItem("Save\t\t\t\tCtrl+Shift+S").OnClick(e.Save),
 		g.Separator(),
@@ -85,19 +86,19 @@ func (e *FontTableEditor) UpdateMainMenuLayout(l *g.Layout) {
 }
 
 // GenerateSaveData generates data to be saved
-func (e *FontTableEditor) GenerateSaveData() []byte {
+func (e *Editor) GenerateSaveData() []byte {
 	data := e.fontTable.Marshal()
 
 	return data
 }
 
 // Save saves an editor
-func (e *FontTableEditor) Save() {
+func (e *Editor) Save() {
 	e.Editor.Save(e)
 }
 
 // Cleanup hides an editor
-func (e *FontTableEditor) Cleanup() {
+func (e *Editor) Cleanup() {
 	if e.HasChanges(e) {
 		if shouldSave := dialog.Message("There are unsaved changes to %s, save before closing this editor?",
 			e.Path.FullPath).YesNo(); shouldSave {

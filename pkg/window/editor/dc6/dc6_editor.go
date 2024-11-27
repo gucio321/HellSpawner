@@ -19,10 +19,10 @@ import (
 )
 
 // static check, to ensure, if dc6 editor implemented editoWindow
-var _ common.EditorWindow = &DC6Editor{}
+var _ common.EditorWindow = &Editor{}
 
-// DC6Editor represents a dc6 editor
-type DC6Editor struct {
+// Editor represents a dc6 editor
+type Editor struct {
 	*editor.Editor
 	dc6                 *d2dc6.DC6
 	textureLoader       common.TextureLoader
@@ -34,22 +34,23 @@ type DC6Editor struct {
 }
 
 // Create creates a new dc6 editor
-func Create(config *config.Config,
+func Create(cfg *config.Config,
 	textureLoader common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project,
+) (common.EditorWindow, error) {
 	dc6, err := d2dc6.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading DC6 animation: %w", err)
 	}
 
-	result := &DC6Editor{
+	result := &Editor{
 		Editor:        editor.New(pathEntry, x, y, project),
 		dc6:           dc6,
 		textureLoader: textureLoader,
 		selectPalette: false,
-		config:        config,
+		config:        cfg,
 		state:         state,
 	}
 
@@ -57,7 +58,7 @@ func Create(config *config.Config,
 }
 
 // Build builds a new dc6 editor
-func (e *DC6Editor) Build() {
+func (e *Editor) Build() {
 	e.IsOpen(&e.Visible)
 	e.Flags(g.WindowFlagsAlwaysAutoResize)
 
@@ -87,7 +88,7 @@ func (e *DC6Editor) Build() {
 }
 
 // UpdateMainMenuLayout updates main menu to it contain DC6's editor menu
-func (e *DC6Editor) UpdateMainMenuLayout(l *g.Layout) {
+func (e *Editor) UpdateMainMenuLayout(l *g.Layout) {
 	m := g.Menu("DC6 Editor").Layout(g.Layout{
 		g.MenuItem("Change Palette").OnClick(func() {
 			e.selectPalette = true
@@ -110,19 +111,19 @@ func (e *DC6Editor) UpdateMainMenuLayout(l *g.Layout) {
 }
 
 // GenerateSaveData generates save data
-func (e *DC6Editor) GenerateSaveData() []byte {
+func (e *Editor) GenerateSaveData() []byte {
 	data := e.dc6.Marshal()
 
 	return data
 }
 
 // Save saves editor's data
-func (e *DC6Editor) Save() {
+func (e *Editor) Save() {
 	e.Editor.Save(e)
 }
 
 // Cleanup hides editor
-func (e *DC6Editor) Cleanup() {
+func (e *Editor) Cleanup() {
 	if e.HasChanges(e) {
 		if shouldSave := dialog.Message("There are unsaved changes to %s, save before closing this editor?",
 			e.Path.FullPath).YesNo(); shouldSave {

@@ -22,10 +22,10 @@ const (
 )
 
 // static check, to ensure, if font editor implemented editoWindow
-var _ common.EditorWindow = &FontEditor{}
+var _ common.EditorWindow = &Editor{}
 
-// FontEditor represents a font editor
-type FontEditor struct {
+// Editor represents a font editor
+type Editor struct {
 	*editor.Editor
 	*hsfont.Font
 }
@@ -35,13 +35,14 @@ func Create(_ *config.Config,
 	_ common.TextureLoader,
 	pathEntry *common.PathEntry,
 	_ []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project,
+) (common.EditorWindow, error) {
 	font, err := hsfont.LoadFromJSON(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading JSON font: %w", err)
 	}
 
-	result := &FontEditor{
+	result := &Editor{
 		Editor: editor.New(pathEntry, x, y, project),
 		Font:   font,
 	}
@@ -54,30 +55,30 @@ func Create(_ *config.Config,
 }
 
 // Build builds an editor
-func (e *FontEditor) Build() {
+func (e *Editor) Build() {
 	e.IsOpen(&e.Visible).
 		Layout(g.Layout{
 			g.Label("DC6 Path"),
 			g.Row(
 				g.InputText(&e.SpriteFile).Size(pathSize).Flags(g.InputTextFlagsReadOnly),
-				g.Button("...##FontEditorDC6Browse").Size(browseW, browseH).OnClick(e.onBrowseDC6PathClicked),
+				g.Button("...##EditorDC6Browse").Size(browseW, browseH).OnClick(e.onBrowseDC6PathClicked),
 			),
 			g.Separator(),
 			g.Label("TBL Path"),
 			g.Row(
 				g.InputText(&e.TableFile).Size(pathSize).Flags(g.InputTextFlagsReadOnly),
-				g.Button("...##FontEditorTBLBrowse").Size(browseW, browseH).OnClick(e.onBrowseTBLPathClicked),
+				g.Button("...##EditorTBLBrowse").Size(browseW, browseH).OnClick(e.onBrowseTBLPathClicked),
 			),
 			g.Separator(),
 			g.Label("PL2 Path"),
 			g.Row(
 				g.InputText(&e.PaletteFile).Size(pathSize).Flags(g.InputTextFlagsReadOnly),
-				g.Button("...##FontEditorPL2Browse").Size(browseW, browseH).OnClick(e.onBrowsePL2PathClicked),
+				g.Button("...##EditorPL2Browse").Size(browseW, browseH).OnClick(e.onBrowsePL2PathClicked),
 			),
 		})
 }
 
-func (e *FontEditor) onBrowseDC6PathClicked() {
+func (e *Editor) onBrowseDC6PathClicked() {
 	path := dialog.File().SetStartDir(e.Project.GetProjectFileContentPath())
 	path.Filter("DC6 File", "dc6", "DC6")
 
@@ -90,7 +91,7 @@ func (e *FontEditor) onBrowseDC6PathClicked() {
 	e.SpriteFile = filePath
 }
 
-func (e *FontEditor) onBrowseTBLPathClicked() {
+func (e *Editor) onBrowseTBLPathClicked() {
 	path := dialog.File().SetStartDir(e.Project.GetProjectFileContentPath())
 	path.Filter("TBL File", "tbl", "TBL")
 
@@ -103,7 +104,7 @@ func (e *FontEditor) onBrowseTBLPathClicked() {
 	e.TableFile = filePath
 }
 
-func (e *FontEditor) onBrowsePL2PathClicked() {
+func (e *Editor) onBrowsePL2PathClicked() {
 	path := dialog.File().SetStartDir(e.Project.GetProjectFileContentPath())
 	path.Filter("PL2 File", "pl2", "PL2")
 
@@ -117,7 +118,7 @@ func (e *FontEditor) onBrowsePL2PathClicked() {
 }
 
 // UpdateMainMenuLayout updates main menu layout to it contains editors options
-func (e *FontEditor) UpdateMainMenuLayout(l *g.Layout) {
+func (e *Editor) UpdateMainMenuLayout(l *g.Layout) {
 	m := g.Menu("Font Editor").Layout(g.Layout{
 		g.MenuItem("Add to project").OnClick(func() {}),
 		g.MenuItem("Remove from project").OnClick(func() {}),
@@ -134,7 +135,7 @@ func (e *FontEditor) UpdateMainMenuLayout(l *g.Layout) {
 }
 
 // GenerateSaveData generates data to be saved
-func (e *FontEditor) GenerateSaveData() []byte {
+func (e *Editor) GenerateSaveData() []byte {
 	data, err := e.JSON()
 	if err != nil {
 		fmt.Println("failed to marshal font to JSON:, ", err)
@@ -145,12 +146,12 @@ func (e *FontEditor) GenerateSaveData() []byte {
 }
 
 // Save saves an editor
-func (e *FontEditor) Save() {
+func (e *Editor) Save() {
 	e.Editor.Save(e)
 }
 
 // Cleanup hides an editor
-func (e *FontEditor) Cleanup() {
+func (e *Editor) Cleanup() {
 	if e.HasChanges(e) {
 		if shouldSave := dialog.Message("There are unsaved changes to %s, save before closing this editor?",
 			e.Path.FullPath).YesNo(); shouldSave {
