@@ -14,7 +14,7 @@ import (
 
 	g "github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/pkg/window/editor/hsds1editor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor/ds1"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/hsdt1editor"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/hsfonttableeditor"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/hspalettemapeditor"
@@ -137,7 +137,7 @@ func (a *App) registerEditors() {
 	a.editorConstructors[hsfiletypes.FileTypePL2] = hspalettemapeditor.Create
 	a.editorConstructors[hsfiletypes.FileTypeTBLStringTable] = hsstringtableeditor.Create
 	a.editorConstructors[hsfiletypes.FileTypeTBLFontTable] = hsfonttableeditor.Create
-	a.editorConstructors[hsfiletypes.FileTypeDS1] = hsds1editor.Create
+	a.editorConstructors[hsfiletypes.FileTypeDS1] = ds1.Create
 }
 
 func (a *App) setupMainMpqExplorer() error {
