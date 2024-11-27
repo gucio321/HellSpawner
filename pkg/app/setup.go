@@ -37,7 +37,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/popup/projectproperties"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsconsole"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/mpqexplorer"
-	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsprojectexplorer"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/projectexplorer"
 )
 
 func (a *App) setup() (err error) {
@@ -154,7 +154,7 @@ func (a *App) setupMainMpqExplorer() error {
 func (a *App) setupProjectExplorer() error {
 	x, y := float32(projectExplorerDefaultX), float32(projectExplorerDefaultY)
 
-	window, err := hsprojectexplorer.Create(a.TextureLoader,
+	window, err := projectexplorer.Create(a.TextureLoader,
 		a.openEditor, x, y)
 	if err != nil {
 		return fmt.Errorf("error creating a project explorer: %w", err)

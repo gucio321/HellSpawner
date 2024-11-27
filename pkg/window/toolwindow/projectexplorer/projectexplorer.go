@@ -1,5 +1,5 @@
-// Package hsprojectexplorer provides a project explorer, for viewing project directories as trees.
-package hsprojectexplorer
+// Package projectexplorer provides a project explorer, for viewing project directories as trees.
+package projectexplorer
 
 import (
 	"fmt"

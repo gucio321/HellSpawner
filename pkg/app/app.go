@@ -22,7 +22,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/popup/projectproperties"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsconsole"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/mpqexplorer"
-	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsprojectexplorer"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/projectexplorer"
 )
 
 const (
@@ -77,7 +77,7 @@ type App struct {
 	preferencesDialog       *preferences.Dialog
 	projectPropertiesDialog *projectproperties.Dialog
 
-	projectExplorer *hsprojectexplorer.ProjectExplorer
+	projectExplorer *projectexplorer.ProjectExplorer
 	mpqExplorer     *mpqexplorer.MPQExplorer
 	console         *hsconsole.Console
 
