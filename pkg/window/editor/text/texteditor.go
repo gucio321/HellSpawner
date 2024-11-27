@@ -22,11 +22,11 @@ const (
 )
 
 // static check, to ensure, if text editor implemented editoWindow
-var _ common.EditorWindow = &Editor{}
+var _ editor.Editor = &Editor{}
 
 // Editor represents a text editor
 type Editor struct {
-	*editor.Editor
+	*editor.EditorBase
 
 	text      string
 	tableView bool
@@ -40,10 +40,10 @@ func Create(_ *config.Config,
 	pathEntry *common.PathEntry,
 	_ []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
-) (common.EditorWindow, error) {
+) (editor.Editor, error) {
 	result := &Editor{
-		Editor: editor.New(pathEntry, x, y, project),
-		text:   string(*data),
+		EditorBase: editor.New(pathEntry, x, y, project),
+		text:       string(*data),
 	}
 
 	if w, h := result.CurrentSize(); w == 0 || h == 0 {
@@ -140,7 +140,7 @@ func (e *Editor) GenerateSaveData() []byte {
 
 // Save saves an editor
 func (e *Editor) Save() {
-	e.Editor.Save(e)
+	e.EditorBase.Save(e)
 }
 
 // Cleanup hides an editor
@@ -152,5 +152,5 @@ func (e *Editor) Cleanup() {
 		}
 	}
 
-	e.Editor.Cleanup()
+	e.EditorBase.Cleanup()
 }

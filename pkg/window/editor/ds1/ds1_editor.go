@@ -18,12 +18,12 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )
 
-// static check if Editor implemented common.EditorWindow
-var _ common.EditorWindow = &Editor{}
+// static check if Editor implemented editor.Editor
+var _ editor.Editor = &Editor{}
 
 // Editor represents ds1 editor
 type Editor struct {
-	*editor.Editor
+	*editor.EditorBase
 	ds1                 *d2ds1.DS1
 	deleteButtonTexture *g.Texture
 	textureLoader       common.TextureLoader
@@ -36,14 +36,14 @@ func Create(_ *config.Config,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
-) (common.EditorWindow, error) {
+) (editor.Editor, error) {
 	ds1, err := d2ds1.Unmarshal(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading DS1 file: %w", err)
 	}
 
 	result := &Editor{
-		Editor:        editor.New(pathEntry, x, y, project),
+		EditorBase:    editor.New(pathEntry, x, y, project),
 		ds1:           ds1,
 		textureLoader: tl,
 		state:         state,
@@ -95,7 +95,7 @@ func (e *Editor) GenerateSaveData() []byte {
 
 // Save saves editors data
 func (e *Editor) Save() {
-	e.Editor.Save(e)
+	e.EditorBase.Save(e)
 }
 
 // Cleanup hides editor
@@ -107,5 +107,5 @@ func (e *Editor) Cleanup() {
 		}
 	}
 
-	e.Editor.Cleanup()
+	e.EditorBase.Cleanup()
 }

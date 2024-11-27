@@ -18,11 +18,11 @@ import (
 )
 
 // static check, to ensure, if palette map editor implemented editoWindow
-var _ common.EditorWindow = &Editor{}
+var _ editor.Editor = &Editor{}
 
 // Editor represents a palette map editor
 type Editor struct {
-	*editor.Editor
+	*editor.EditorBase
 	pl2           *d2pl2.PL2
 	textureLoader common.TextureLoader
 	state         []byte
@@ -34,14 +34,14 @@ func Create(_ *config.Config,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
-) (common.EditorWindow, error) {
+) (editor.Editor, error) {
 	pl2, err := d2pl2.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading PL2 file: %w", err)
 	}
 
 	result := &Editor{
-		Editor:        editor.New(pathEntry, x, y, project),
+		EditorBase:    editor.New(pathEntry, x, y, project),
 		pl2:           pl2,
 		textureLoader: textureLoader,
 		state:         state,
@@ -89,7 +89,7 @@ func (e *Editor) GenerateSaveData() []byte {
 
 // Save saves an editor
 func (e *Editor) Save() {
-	e.Editor.Save(e)
+	e.EditorBase.Save(e)
 }
 
 // Cleanup hides an editor
@@ -101,5 +101,5 @@ func (e *Editor) Cleanup() {
 		}
 	}
 
-	e.Editor.Cleanup()
+	e.EditorBase.Cleanup()
 }

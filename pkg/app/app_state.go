@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"log"
 
+	state "github.com/gucio321/HellSpawner/pkg/app/state"
+
 	"github.com/gucio321/HellSpawner/pkg/common"
-	"github.com/gucio321/HellSpawner/pkg/common/state"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow"
 )
 
 // State creates a new app state
@@ -33,7 +35,7 @@ func (a *App) State() state.AppState {
 // RestoreAppState restores an app state
 func (a *App) RestoreAppState(appState state.AppState) {
 	for _, toolState := range appState.ToolWindows {
-		var tool common.ToolWindow
+		var tool toolwindow.ToolWindow
 
 		switch toolState.Type {
 		case state.ToolWindowTypeConsole:

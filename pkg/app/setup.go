@@ -21,7 +21,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/editor/stringtable"
 
 	"github.com/gucio321/HellSpawner/pkg/assets"
-	"github.com/gucio321/HellSpawner/pkg/common/hsenum"
+	"github.com/gucio321/HellSpawner/pkg/common/enum"
 	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/animdata"
@@ -211,13 +211,13 @@ func (a *App) setupFonts() {
 
 	switch a.config.Locale {
 	// glyphs supported by default
-	case hsenum.LocaleEnglish, hsenum.LocaleGerman,
-		hsenum.LocaleFrench, hsenum.LocaleItalien,
-		hsenum.LocaleSpanish, hsenum.LocalePolish:
+	case enum.LocaleEnglish, enum.LocaleGerman,
+		enum.LocaleFrench, enum.LocaleItalien,
+		enum.LocaleSpanish, enum.LocalePolish:
 		// noop
-	case hsenum.LocaleChineseTraditional:
+	case enum.LocaleChineseTraditional:
 		font = assets.FontSourceHanSerif
-	case hsenum.LocaleKorean:
+	case enum.LocaleKorean:
 		font = assets.FontSourceHanSerif
 	}
 

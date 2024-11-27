@@ -18,11 +18,11 @@ import (
 )
 
 // static check, to ensure, if D2 editor implemented editoWindow
-var _ common.EditorWindow = &AnimationDataEditor{}
+var _ editor.Editor = &AnimationDataEditor{}
 
 // AnimationDataEditor represents a cof editor
 type AnimationDataEditor struct {
-	*editor.Editor
+	*editor.EditorBase
 	d2            *d2animdata.AnimationData
 	state         []byte
 	textureLoader common.TextureLoader
@@ -34,14 +34,14 @@ func Create(_ *config.Config,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
-) (common.EditorWindow, error) {
+) (editor.Editor, error) {
 	d2, err := d2animdata.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading animation data file: %w", err)
 	}
 
 	result := &AnimationDataEditor{
-		Editor:        editor.New(pathEntry, x, y, project),
+		EditorBase:    editor.New(pathEntry, x, y, project),
 		d2:            d2,
 		state:         state,
 		textureLoader: tl,
@@ -88,7 +88,7 @@ func (e *AnimationDataEditor) GenerateSaveData() []byte {
 
 // Save saves an editor
 func (e *AnimationDataEditor) Save() {
-	e.Editor.Save(e)
+	e.EditorBase.Save(e)
 }
 
 // Cleanup hides an editor
@@ -101,5 +101,5 @@ func (e *AnimationDataEditor) Cleanup() {
 		}
 	}
 
-	e.Editor.Cleanup()
+	e.EditorBase.Cleanup()
 }

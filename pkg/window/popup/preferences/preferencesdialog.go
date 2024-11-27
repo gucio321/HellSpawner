@@ -7,7 +7,7 @@ import (
 	g "github.com/AllenDang/giu"
 	"github.com/OpenDiablo2/dialog"
 
-	"github.com/gucio321/HellSpawner/pkg/common/hsenum"
+	"github.com/gucio321/HellSpawner/pkg/common/enum"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/window/popup"
@@ -45,7 +45,7 @@ func Create(onConfigChanged func(config *config.Config), windowColorChanger func
 // Build builds a preferences dialog
 func (p *Dialog) Build() {
 	locales := make([]string, 0)
-	for i := hsenum.LocaleEnglish; i <= hsenum.LocalePolish; i++ {
+	for i := enum.LocaleEnglish; i <= enum.LocalePolish; i++ {
 		locales = append(locales, i.String())
 	}
 
@@ -98,7 +98,7 @@ func (p *Dialog) Build() {
 			}),
 			g.Combo("locale", locales[locale], locales, &locale).OnChange(func() {
 				p.restartPrompt = true
-				p.config.Locale = hsenum.Locale(locale)
+				p.config.Locale = enum.Locale(locale)
 			}),
 			g.Separator(),
 			g.Label("Background color:"),

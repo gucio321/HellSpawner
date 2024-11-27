@@ -19,11 +19,11 @@ import (
 )
 
 // static check, to ensure, if cof editor implemented editoWindow
-var _ common.EditorWindow = &Editor{}
+var _ editor.Editor = &Editor{}
 
 // Editor represents a cof editor
 type Editor struct {
-	*editor.Editor
+	*editor.EditorBase
 	cof           *d2cof.COF
 	textureLoader common.TextureLoader
 	state         []byte
@@ -35,14 +35,14 @@ func Create(_ *config.Config,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
-) (common.EditorWindow, error) {
+) (editor.Editor, error) {
 	cof, err := d2cof.Unmarshal(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading cof file: %w", err)
 	}
 
 	result := &Editor{
-		Editor:        editor.New(pathEntry, x, y, project),
+		EditorBase:    editor.New(pathEntry, x, y, project),
 		cof:           cof,
 		textureLoader: tl,
 		state:         state,
@@ -89,7 +89,7 @@ func (e *Editor) GenerateSaveData() []byte {
 
 // Save saves an editor
 func (e *Editor) Save() {
-	e.Editor.Save(e)
+	e.EditorBase.Save(e)
 }
 
 // Cleanup hides an editor
@@ -102,5 +102,5 @@ func (e *Editor) Cleanup() {
 		}
 	}
 
-	e.Editor.Cleanup()
+	e.EditorBase.Cleanup()
 }

@@ -20,11 +20,11 @@ import (
 )
 
 // static check, to ensure, if palette editor implemented editoWindow
-var _ common.EditorWindow = &Editor{}
+var _ editor.Editor = &Editor{}
 
 // Editor represents a palette editor
 type Editor struct {
-	*editor.Editor
+	*editor.EditorBase
 	palette       d2interface.Palette
 	textureLoader common.TextureLoader
 	state         []byte
@@ -37,14 +37,14 @@ func Create(
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
-) (common.EditorWindow, error) {
+) (editor.Editor, error) {
 	palette, err := d2dat.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading dat palette: %w", err)
 	}
 
 	result := &Editor{
-		Editor:        editor.New(pathEntry, x, y, project),
+		EditorBase:    editor.New(pathEntry, x, y, project),
 		palette:       palette,
 		textureLoader: tl,
 		state:         state,
@@ -100,7 +100,7 @@ func (e *Editor) GenerateSaveData() []byte {
 
 // Save saves editor
 func (e *Editor) Save() {
-	e.Editor.Save(e)
+	e.EditorBase.Save(e)
 }
 
 // Cleanup hides palette editor
@@ -112,5 +112,5 @@ func (e *Editor) Cleanup() {
 		}
 	}
 
-	e.Editor.Cleanup()
+	e.EditorBase.Cleanup()
 }

@@ -1,4 +1,4 @@
-package common
+package window
 
 import "github.com/AllenDang/giu"
 

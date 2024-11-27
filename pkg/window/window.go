@@ -2,8 +2,7 @@ package window
 
 import (
 	"github.com/AllenDang/giu"
-
-	"github.com/gucio321/HellSpawner/pkg/common/state"
+	"github.com/gucio321/HellSpawner/pkg/app/state"
 )
 
 // Window represents project's window

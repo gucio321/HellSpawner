@@ -1,4 +1,4 @@
-package hsenum
+package enum
 
 // PolishSpecialCharacters are the characters which should be added
 // to imgui's glyph range. They aren't by default

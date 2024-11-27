@@ -446,7 +446,7 @@ func (p *widget) makeTileInfoTab(tile *d2dt1.Tile) giu.Layout {
 
 	// tileTypeIdx is current index on tile types' list
 	var tileTypeIdx int32
-	// if tileTypeIdx is in range of known names (hsenum.GetTileTypeString)
+	// if tileTypeIdx is in range of known names (enum.GetTileTypeString)
 	// then this index is set to tile.Type
 	// else, we're adding Unknown+#tile.Type to list
 	// and setting tileTypeIdx to this index
