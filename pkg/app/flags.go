@@ -3,10 +3,9 @@ package app
 import (
 	"flag"
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"log"
 	"os"
-
-	"github.com/gucio321/HellSpawner/pkg/config"
 )
 
 // Flags specifies app flags

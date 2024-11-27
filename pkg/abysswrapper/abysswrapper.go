@@ -2,12 +2,11 @@ package abysswrapper
 
 import (
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"io"
 	"os/exec"
 	"sync"
 	"time"
-
-	"github.com/gucio321/HellSpawner/pkg/config"
 )
 
 const (

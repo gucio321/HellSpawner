@@ -4,15 +4,14 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
 
-	"github.com/gucio321/HellSpawner/pkg/common"
-	"github.com/gucio321/HellSpawner/pkg/config"
-
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
+	"github.com/gucio321/HellSpawner/pkg/common"
 )
 
 // GetMPQFileNodes returns mpq's node

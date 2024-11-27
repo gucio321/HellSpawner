@@ -2,6 +2,7 @@
 package projectexplorer
 
 import (
+	"github.com/gucio321/HellSpawner/pkg/app/assets"
 	"github.com/gucio321/HellSpawner/pkg/app/state"
 	"log"
 	"os"
@@ -15,7 +16,6 @@ import (
 
 	g "github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"

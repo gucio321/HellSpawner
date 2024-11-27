@@ -3,6 +3,7 @@ package font
 
 import (
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	g "github.com/AllenDang/giu"
 	"github.com/OpenDiablo2/dialog"
@@ -11,7 +12,6 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 
 	"github.com/gucio321/HellSpawner/pkg/common"
-	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )
 

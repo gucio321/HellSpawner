@@ -2,6 +2,7 @@ package app
 
 import (
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/assets"
 	"image/color"
 	"log"
 	"strconv"
@@ -20,7 +21,6 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/editor/palettemap"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/stringtable"
 
-	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/pkg/common/enum"
 	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"

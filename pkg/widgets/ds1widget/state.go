@@ -2,10 +2,10 @@ package ds1widget
 
 import (
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/assets"
 
 	"github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/pkg/widgets"
 )
 

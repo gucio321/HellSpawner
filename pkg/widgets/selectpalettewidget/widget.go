@@ -1,6 +1,7 @@
 package selectpalettewidget
 
 import (
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"log"
 	"path/filepath"
 
@@ -12,7 +13,6 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
-	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/mpqexplorer"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/projectexplorer"
 )

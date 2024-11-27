@@ -2,6 +2,7 @@
 package preferences
 
 import (
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"image/color"
 
 	g "github.com/AllenDang/giu"
@@ -9,7 +10,6 @@ import (
 
 	"github.com/gucio321/HellSpawner/pkg/common/enum"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
-	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/window/popup"
 )
 

@@ -2,12 +2,12 @@ package widgets
 
 import (
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/assets"
 	"math"
 
 	"github.com/AllenDang/cimgui-go/imgui"
 	"github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/pkg/common"
 )
 

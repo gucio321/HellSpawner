@@ -3,6 +3,8 @@ package ds1
 
 import (
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/assets"
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	g "github.com/AllenDang/giu"
 	"github.com/OpenDiablo2/dialog"
@@ -11,9 +13,7 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2ds1"
 
-	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/pkg/common"
-	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/widgets/ds1widget"
 	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )

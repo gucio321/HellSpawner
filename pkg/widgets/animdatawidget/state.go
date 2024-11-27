@@ -2,11 +2,10 @@ package animdatawidget
 
 import (
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/assets"
 	"sort"
 
 	"github.com/AllenDang/giu"
-
-	"github.com/gucio321/HellSpawner/pkg/assets"
 )
 
 type widgetMode int32

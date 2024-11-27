@@ -2,13 +2,13 @@ package cofwidget
 
 import (
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/assets"
 
 	"github.com/AllenDang/giu"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2enum"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2cof"
 
-	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/pkg/widgets"
 )
 

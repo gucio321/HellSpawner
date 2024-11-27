@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"log"
 	"os"
 	"path/filepath"
@@ -18,7 +19,6 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
 	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes/hsfont"
-	"github.com/gucio321/HellSpawner/pkg/config"
 )
 
 const (

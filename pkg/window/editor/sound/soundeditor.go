@@ -4,6 +4,7 @@ package sound
 import (
 	"bytes"
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"log"
 	"path/filepath"
 
@@ -17,7 +18,6 @@ import (
 	"github.com/faiface/beep/speaker"
 	"github.com/faiface/beep/wav"
 
-	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/widgets"
 	"github.com/gucio321/HellSpawner/pkg/window/editor"
 

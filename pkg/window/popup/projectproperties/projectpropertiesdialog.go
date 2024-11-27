@@ -3,6 +3,8 @@ package projectproperties
 
 import (
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/assets"
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"log"
 	"path/filepath"
 	"strconv"
@@ -10,13 +12,10 @@ import (
 
 	"github.com/gucio321/HellSpawner/pkg/common"
 
-	"github.com/gucio321/HellSpawner/pkg/config"
-
 	g "github.com/AllenDang/giu"
 
 	"github.com/AllenDang/cimgui-go/imgui"
 
-	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/window/popup"
 )

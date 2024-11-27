@@ -3,6 +3,7 @@ package aboutdialog
 
 import (
 	"fmt"
+	"github.com/gucio321/HellSpawner/pkg/app/assets"
 	"os"
 	"strings"
 
@@ -10,7 +11,6 @@ import (
 	"github.com/jaytaylor/html2text"
 	"github.com/russross/blackfriday"
 
-	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/pkg/window/popup"
