@@ -19,8 +19,8 @@ const (
 	btnW, btnH               = 30, 0
 )
 
-// PreferencesDialog represents preferences dialog
-type PreferencesDialog struct {
+// Dialog represents preferences dialog
+type Dialog struct {
 	*popup.Dialog
 
 	config             *config.Config
@@ -30,8 +30,8 @@ type PreferencesDialog struct {
 }
 
 // Create creates a new preferences dialog
-func Create(onConfigChanged func(config *config.Config), windowColorChanger func(c color.Color)) *PreferencesDialog {
-	result := &PreferencesDialog{
+func Create(onConfigChanged func(config *config.Config), windowColorChanger func(c color.Color)) *Dialog {
+	result := &Dialog{
 		Dialog:             popup.New("Preferences"),
 		onConfigChanged:    onConfigChanged,
 		windowColorChanger: windowColorChanger,
@@ -43,7 +43,7 @@ func Create(onConfigChanged func(config *config.Config), windowColorChanger func
 }
 
 // Build builds a preferences dialog
-func (p *PreferencesDialog) Build() {
+func (p *Dialog) Build() {
 	locales := make([]string, 0)
 	for i := hsenum.LocaleEnglish; i <= hsenum.LocalePolish; i++ {
 		locales = append(locales, i.String())
@@ -121,13 +121,13 @@ func (p *PreferencesDialog) Build() {
 }
 
 // Show switch preferences dialog to visible state
-func (p *PreferencesDialog) Show(config *config.Config) {
+func (p *Dialog) Show(cfg *config.Config) {
 	p.Dialog.Show()
 
-	p.config = config
+	p.config = cfg
 }
 
-func (p *PreferencesDialog) onBrowseAuxMpqPathClicked() {
+func (p *Dialog) onBrowseAuxMpqPathClicked() {
 	path, err := dialog.Directory().Browse()
 	if err != nil || path == "" {
 		return
@@ -136,7 +136,7 @@ func (p *PreferencesDialog) onBrowseAuxMpqPathClicked() {
 	p.config.AuxiliaryMpqPath = path
 }
 
-func (p *PreferencesDialog) onBrowseExternalListfileClicked() {
+func (p *Dialog) onBrowseExternalListfileClicked() {
 	path := dialog.File()
 	path.Filter("Text file", "txt")
 	filePath, err := path.Load()
@@ -148,7 +148,7 @@ func (p *PreferencesDialog) onBrowseExternalListfileClicked() {
 	p.config.ExternalListFile = filePath
 }
 
-func (p *PreferencesDialog) onBrowseLogFilePathClicked() {
+func (p *Dialog) onBrowseLogFilePathClicked() {
 	path, err := dialog.Directory().Browse()
 	if err != nil || path == "" {
 		return
@@ -157,16 +157,16 @@ func (p *PreferencesDialog) onBrowseLogFilePathClicked() {
 	p.config.LogFilePath = path
 }
 
-func (p *PreferencesDialog) onSaveClicked() {
+func (p *Dialog) onSaveClicked() {
 	p.onConfigChanged(p.config)
 	p.Visible = false
 }
 
-func (p *PreferencesDialog) onCancelClicked() {
+func (p *Dialog) onCancelClicked() {
 	p.Visible = false
 }
 
-func (p *PreferencesDialog) onBrowseAbyssEngineClicked() {
+func (p *Dialog) onBrowseAbyssEngineClicked() {
 	path := dialog.File()
 
 	filePath, err := path.Load()

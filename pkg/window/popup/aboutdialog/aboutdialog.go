@@ -3,7 +3,7 @@ package aboutdialog
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"strings"
 
 	g "github.com/AllenDang/giu"
@@ -54,19 +54,19 @@ func Create(textureLoader common.TextureLoader, regularFont, titleFont, fixedFon
 
 	var data []byte
 
-	if data, err = ioutil.ReadFile("LICENSE"); err != nil {
+	if data, err = os.ReadFile("LICENSE"); err != nil {
 		data = nil
 	}
 
 	result.license = string(data)
 
-	if data, err = ioutil.ReadFile("CONTRIBUTORS"); err != nil {
+	if data, err = os.ReadFile("CONTRIBUTORS"); err != nil {
 		data = nil
 	}
 
 	result.credits = string(data)
 
-	if data, err = ioutil.ReadFile("README.md"); err != nil {
+	if data, err = os.ReadFile("README.md"); err != nil {
 		data = nil
 	}
 

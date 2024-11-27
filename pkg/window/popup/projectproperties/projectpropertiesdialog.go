@@ -31,8 +31,8 @@ const (
 	descriptionW, descriptionH = inputTextSize, 100
 )
 
-// ProjectPropertiesDialog represent project properties' dialog
-type ProjectPropertiesDialog struct {
+// Dialog represent project properties' dialog
+type Dialog struct {
 	*popup.Dialog
 
 	removeIconTexture          *g.Texture
@@ -48,8 +48,8 @@ type ProjectPropertiesDialog struct {
 }
 
 // Create creates a new project properties' dialog
-func Create(textureLoader common.TextureLoader, onProjectPropertiesChanged func(project *hsproject.Project)) *ProjectPropertiesDialog {
-	result := &ProjectPropertiesDialog{
+func Create(textureLoader common.TextureLoader, onProjectPropertiesChanged func(project *hsproject.Project)) *Dialog {
+	result := &Dialog{
 		Dialog:                     popup.New("Project Properties"),
 		onProjectPropertiesChanged: onProjectPropertiesChanged,
 		mpqSelectDialogVisible:     false,
@@ -71,10 +71,10 @@ func Create(textureLoader common.TextureLoader, onProjectPropertiesChanged func(
 }
 
 // Show shows project properties dialog
-func (p *ProjectPropertiesDialog) Show(project *hsproject.Project, config *config.Config) {
-	p.config = config
+func (p *Dialog) Show(project *hsproject.Project, cfg *config.Config) {
+	p.config = cfg
 	p.project = *project
-	p.auxMPQs = config.GetAuxMPQs()
+	p.auxMPQs = cfg.GetAuxMPQs()
 	p.auxMPQNames = make([]string, len(p.auxMPQs))
 
 	for idx := range p.auxMPQNames {
@@ -87,9 +87,10 @@ func (p *ProjectPropertiesDialog) Show(project *hsproject.Project, config *confi
 }
 
 // Build builds a dialog
-// nolint:gocognit,funlen,gocyclo // no need to change
-func (p *ProjectPropertiesDialog) Build() {
-	canSave := len(strings.TrimSpace(p.project.ProjectName)) > 0
+//
+//nolint:gocognit,funlen,gocyclo // no need to change
+func (p *Dialog) Build() {
+	canSave := strings.TrimSpace(p.project.ProjectName) != ""
 
 	p.IsOpen(&p.mpqSelectDialogVisible).Layout(
 		g.Child().Size(mainWindowW, mainWindowH).Layout(
@@ -119,7 +120,6 @@ func (p *ProjectPropertiesDialog) Build() {
 
 				// list of `Selectable widgets`;
 				for i, mpq := range p.auxMPQNames {
-					i := i
 					isSelected := isInMpqList(i)
 					g.Row(
 						g.Checkbox(
@@ -153,6 +153,7 @@ func (p *ProjectPropertiesDialog) Build() {
 					for _, idx := range p.mpqsToAdd {
 						p.addAuxMpq(p.auxMPQs[idx])
 					}
+
 					p.onProjectPropertiesChanged(&p.project)
 				}
 
@@ -182,6 +183,7 @@ func (p *ProjectPropertiesDialog) Build() {
 							imgui.PushStyleColorVec4(imgui.ColButton, imgui.Vec4{})
 							imgui.PushStyleColorVec4(imgui.ColBorder, imgui.Vec4{})
 							imgui.PushStyleVarVec2(imgui.StyleVarItemSpacing, imgui.Vec2{})
+
 							for idx := range p.project.AuxiliaryMPQs {
 								currentIdx := idx
 
@@ -225,9 +227,10 @@ func (p *ProjectPropertiesDialog) Build() {
 									g.Label(p.project.AuxiliaryMPQs[idx]),
 								).Build()
 							}
-							imgui.PopStyleVar()
-							// nolint:gomnd // const
+
+							//nolint:mnd // we've pushed twice and we need to pop twice
 							imgui.PopStyleColorV(2)
+							imgui.PopStyleVar()
 						}),
 					),
 					g.Button("Add Auxiliary MPQ...##ProjectPropertiesAddAuxMpq").OnClick(p.onAddAuxMpqClicked),
@@ -241,13 +244,13 @@ func (p *ProjectPropertiesDialog) Build() {
 						imgui.PushStyleVarFloat(imgui.StyleVarAlpha, halfOpacity)
 					}
 				}),
-				g.Button("Save##ProjectPropertiesDialogSave").OnClick(p.onSaveClicked),
+				g.Button("Save##DialogSave").OnClick(p.onSaveClicked),
 				g.Custom(func() {
 					if !canSave {
 						imgui.PopStyleVar()
 					}
 				}),
-				g.Button("Cancel##ProjectPropertiesDialogCancel").OnClick(p.onCancelClicked),
+				g.Button("Cancel##DialogCancel").OnClick(p.onCancelClicked),
 			),
 		)
 	}
@@ -255,7 +258,7 @@ func (p *ProjectPropertiesDialog) Build() {
 	p.Dialog.Build()
 }
 
-func (p *ProjectPropertiesDialog) onSaveClicked() {
+func (p *Dialog) onSaveClicked() {
 	if strings.TrimSpace(p.project.ProjectName) == "" {
 		return
 	}
@@ -264,15 +267,15 @@ func (p *ProjectPropertiesDialog) onSaveClicked() {
 	p.Visible = false
 }
 
-func (p *ProjectPropertiesDialog) onCancelClicked() {
+func (p *Dialog) onCancelClicked() {
 	p.Visible = false
 }
 
-func (p *ProjectPropertiesDialog) onAddAuxMpqClicked() {
+func (p *Dialog) onAddAuxMpqClicked() {
 	p.mpqSelectDialogVisible = true
 }
 
-func (p *ProjectPropertiesDialog) addAuxMpq(mpqPath string) {
+func (p *Dialog) addAuxMpq(mpqPath string) {
 	relPath, err := filepath.Rel(p.config.AuxiliaryMpqPath, mpqPath)
 	if err != nil {
 		log.Print(err)
