@@ -35,7 +35,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/popup/aboutdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/preferences"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/projectproperties"
-	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsconsole"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/console"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/mpqexplorer"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/projectexplorer"
 )
@@ -177,7 +177,7 @@ func (a *App) setupAudio() error {
 }
 
 func (a *App) setupConsole() {
-	a.console = hsconsole.Create(a.fontFixed, consoleDefaultX, consoleDefaultY, a.logFile)
+	a.console = console.Create(a.fontFixed, consoleDefaultX, consoleDefaultY, a.logFile)
 
 	log.SetFlags(log.Lshortfile)
 	log.SetOutput(a.console)

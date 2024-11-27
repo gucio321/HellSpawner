@@ -20,7 +20,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/popup/aboutdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/preferences"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/projectproperties"
-	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsconsole"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/console"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/mpqexplorer"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/projectexplorer"
 )
@@ -79,7 +79,7 @@ type App struct {
 
 	projectExplorer *projectexplorer.ProjectExplorer
 	mpqExplorer     *mpqexplorer.MPQExplorer
-	console         *hsconsole.Console
+	console         *console.Console
 
 	editors            []common.EditorWindow
 	editorConstructors map[hsfiletypes.FileType]editorConstructor

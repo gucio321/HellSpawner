@@ -1,5 +1,5 @@
-// Package hsconsole provides a graphical console for logging output while the app is running.
-package hsconsole
+// Package console provides a graphical console for logging output while the app is running.
+package console
 
 import (
 	"fmt"
