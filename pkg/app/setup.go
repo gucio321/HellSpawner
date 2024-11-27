@@ -27,7 +27,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/popup/hsaboutdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/hspreferencesdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/hsprojectpropertiesdialog"
-	"github.com/gucio321/HellSpawner/pkg/window/editor/animDataEditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor/animdataeditor"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/hscofeditor"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/hsdc6editor"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/hsdcceditor"
@@ -128,7 +128,7 @@ func (a *App) registerEditors() {
 	a.editorConstructors[hsfiletypes.FileTypeText] = hstexteditor.Create
 	a.editorConstructors[hsfiletypes.FileTypeAudio] = hssoundeditor.Create
 	a.editorConstructors[hsfiletypes.FileTypePalette] = hspaletteeditor.Create
-	a.editorConstructors[hsfiletypes.FileTypeAnimationData] = animDataEditor.Create
+	a.editorConstructors[hsfiletypes.FileTypeAnimationData] = animdataeditor.Create
 	a.editorConstructors[hsfiletypes.FileTypeDC6] = hsdc6editor.Create
 	a.editorConstructors[hsfiletypes.FileTypeDCC] = hsdcceditor.Create
 	a.editorConstructors[hsfiletypes.FileTypeCOF] = hscofeditor.Create

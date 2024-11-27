@@ -1,5 +1,5 @@
-// Package animDataEditor contains D2 editor's data
-package animDataEditor
+// Package animdataeditor contains D2 editor's data
+package animdataeditor
 
 import (
 	"fmt"
@@ -33,7 +33,8 @@ func Create(_ *config.Config,
 	tl common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
-	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
+	data *[]byte, x, y float32, project *hsproject.Project,
+) (common.EditorWindow, error) {
 	d2, err := d2animdata.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading animation data file: %w", err)
