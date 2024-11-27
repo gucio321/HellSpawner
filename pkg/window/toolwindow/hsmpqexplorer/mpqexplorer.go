@@ -20,7 +20,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/widgets"
-	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow"
 )
 
 const (
@@ -32,7 +32,7 @@ type MPQExplorerFileSelectedCallback func(path *common.PathEntry)
 
 // MPQExplorer represents a mpq explorer
 type MPQExplorer struct {
-	*hstoolwindow.ToolWindow
+	*toolwindow.ToolWindow
 	config               *config.Config
 	project              *hsproject.Project
 	fileSelectedCallback MPQExplorerFileSelectedCallback
@@ -49,7 +49,7 @@ type fileToOverwrite struct {
 // Create creates a new explorer
 func Create(fileSelectedCallback MPQExplorerFileSelectedCallback, config *config.Config, x, y float32) (*MPQExplorer, error) {
 	result := &MPQExplorer{
-		ToolWindow:           hstoolwindow.New("MPQ Explorer", hsstate.ToolWindowTypeMPQExplorer, x, y),
+		ToolWindow:           toolwindow.New("MPQ Explorer", hsstate.ToolWindowTypeMPQExplorer, x, y),
 		fileSelectedCallback: fileSelectedCallback,
 		config:               config,
 	}

@@ -22,7 +22,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/pkg/widgets"
-	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow"
 )
 
 const (
@@ -41,7 +41,7 @@ type ProjectExplorerFileSelectedCallback func(path *common.PathEntry)
 
 // ProjectExplorer represents a project explorer
 type ProjectExplorer struct {
-	*hstoolwindow.ToolWindow
+	*toolwindow.ToolWindow
 
 	project              *hsproject.Project
 	fileSelectedCallback ProjectExplorerFileSelectedCallback
@@ -55,7 +55,7 @@ func Create(textureLoader common.TextureLoader,
 	x, y float32,
 ) (*ProjectExplorer, error) {
 	result := &ProjectExplorer{
-		ToolWindow:           hstoolwindow.New("Project Explorer", hsstate.ToolWindowTypeProjectExplorer, x, y),
+		ToolWindow:           toolwindow.New("Project Explorer", hsstate.ToolWindowTypeProjectExplorer, x, y),
 		nodeCache:            make(map[string][]g.Widget),
 		fileSelectedCallback: fileSelectedCallback,
 	}

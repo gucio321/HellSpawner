@@ -1,4 +1,4 @@
-package hstoolwindow
+package toolwindow
 
 import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsstate"

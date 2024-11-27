@@ -35,9 +35,9 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/editor/hspaletteeditor"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/hssoundeditor"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/hstexteditor"
-	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow/hsconsole"
-	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow/hsmpqexplorer"
-	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow/hsprojectexplorer"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsconsole"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsmpqexplorer"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsprojectexplorer"
 )
 
 func (a *App) setup() (err error) {

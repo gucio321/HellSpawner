@@ -20,9 +20,9 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/popup/hsaboutdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/hspreferencesdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/hsprojectpropertiesdialog"
-	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow/hsconsole"
-	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow/hsmpqexplorer"
-	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow/hsprojectexplorer"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsconsole"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsmpqexplorer"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsprojectexplorer"
 )
 
 const (
