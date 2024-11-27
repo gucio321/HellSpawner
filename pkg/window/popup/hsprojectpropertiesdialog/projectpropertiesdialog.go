@@ -18,7 +18,7 @@ import (
 
 	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
-	"github.com/gucio321/HellSpawner/pkg/window/hsdialog"
+	"github.com/gucio321/HellSpawner/pkg/window/popup"
 )
 
 const (
@@ -33,7 +33,7 @@ const (
 
 // ProjectPropertiesDialog represent project properties' dialog
 type ProjectPropertiesDialog struct {
-	*hsdialog.Dialog
+	*popup.Dialog
 
 	removeIconTexture          *g.Texture
 	upIconTexture              *g.Texture
@@ -50,7 +50,7 @@ type ProjectPropertiesDialog struct {
 // Create creates a new project properties' dialog
 func Create(textureLoader common.TextureLoader, onProjectPropertiesChanged func(project *hsproject.Project)) *ProjectPropertiesDialog {
 	result := &ProjectPropertiesDialog{
-		Dialog:                     hsdialog.New("Project Properties"),
+		Dialog:                     popup.New("Project Properties"),
 		onProjectPropertiesChanged: onProjectPropertiesChanged,
 		mpqSelectDialogVisible:     false,
 	}

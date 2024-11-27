@@ -13,7 +13,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
-	"github.com/gucio321/HellSpawner/pkg/window/hsdialog"
+	"github.com/gucio321/HellSpawner/pkg/window/popup"
 )
 
 const (
@@ -27,7 +27,7 @@ const (
 
 // AboutDialog represents about dialog
 type AboutDialog struct {
-	*hsdialog.Dialog
+	*popup.Dialog
 	titleFont   *g.FontInfo
 	regularFont *g.FontInfo
 	fixedFont   *g.FontInfo
@@ -40,7 +40,7 @@ type AboutDialog struct {
 // Create creates a new AboutDialog
 func Create(textureLoader common.TextureLoader, regularFont, titleFont, fixedFont *g.FontInfo) (*AboutDialog, error) {
 	result := &AboutDialog{
-		Dialog:      hsdialog.New("About HellSpawner"),
+		Dialog:      popup.New("About HellSpawner"),
 		titleFont:   titleFont,
 		regularFont: regularFont,
 		fixedFont:   fixedFont,

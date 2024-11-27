@@ -10,7 +10,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsenum"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/pkg/config"
-	"github.com/gucio321/HellSpawner/pkg/window/hsdialog"
+	"github.com/gucio321/HellSpawner/pkg/window/popup"
 )
 
 const (
@@ -21,7 +21,7 @@ const (
 
 // PreferencesDialog represents preferences dialog
 type PreferencesDialog struct {
-	*hsdialog.Dialog
+	*popup.Dialog
 
 	config             *config.Config
 	onConfigChanged    func(config *config.Config)
@@ -32,7 +32,7 @@ type PreferencesDialog struct {
 // Create creates a new preferences dialog
 func Create(onConfigChanged func(config *config.Config), windowColorChanger func(c color.Color)) *PreferencesDialog {
 	result := &PreferencesDialog{
-		Dialog:             hsdialog.New("Preferences"),
+		Dialog:             popup.New("Preferences"),
 		onConfigChanged:    onConfigChanged,
 		windowColorChanger: windowColorChanger,
 		restartPrompt:      false,

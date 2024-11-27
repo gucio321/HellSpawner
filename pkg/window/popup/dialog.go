@@ -1,5 +1,5 @@
-// Package hsdialog contains project's dialogs
-package hsdialog
+// Package popup contains project's dialogs
+package popup
 
 import (
 	"github.com/AllenDang/giu"
