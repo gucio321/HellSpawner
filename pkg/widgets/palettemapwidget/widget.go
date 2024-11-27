@@ -8,7 +8,6 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2pl2"
 
-	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/pkg/widgets/palettegrideditorwidget"
 	"github.com/gucio321/HellSpawner/pkg/widgets/palettegridwidget"
@@ -22,17 +21,15 @@ const (
 )
 
 type widget struct {
-	id            string
-	pl2           *d2pl2.PL2
-	textureLoader common.TextureLoader
+	id  string
+	pl2 *d2pl2.PL2
 }
 
 // Create creates a new palette map viewer's widget
-func Create(textureLoader common.TextureLoader, id string, pl2 *d2pl2.PL2, state []byte) giu.Widget {
+func Create(id string, pl2 *d2pl2.PL2, state []byte) giu.Widget {
 	result := &widget{
-		id:            id,
-		pl2:           pl2,
-		textureLoader: textureLoader,
+		id:  id,
+		pl2: pl2,
 	}
 
 	if giu.Context.GetState(result.getStateID()) == nil && state != nil {
@@ -74,7 +71,7 @@ func (p *widget) buildViewer(state *widgetState) {
 
 	left := giu.Layout{
 		giu.Label("Base Palette"),
-		palettegrideditorwidget.Create(nil, p.textureLoader, p.id+"basePalette", &baseColors).OnChange(func() {
+		palettegrideditorwidget.Create(nil, p.id+"basePalette", &baseColors).OnChange(func() {
 			state.textures = make(map[string]giu.Widget)
 		}),
 	}
@@ -167,7 +164,7 @@ func (p *widget) buildEditor(state *widgetState) {
 		colors[n] = palettegridwidget.PaletteColor(&p.pl2.BasePalette.Colors[n])
 	}
 
-	grid = palettegridwidget.Create(p.textureLoader, p.id+"transformEdit", &colors).OnClick(func(idx int) {
+	grid = palettegridwidget.Create(p.id+"transformEdit", &colors).OnClick(func(idx int) {
 		// this is save, because idx is always less than 256
 		indices[state.Idx] = byte(idx)
 

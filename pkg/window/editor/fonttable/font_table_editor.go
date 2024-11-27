@@ -27,14 +27,12 @@ var _ editor.Editor = &Editor{}
 // Editor represents font table editor
 type Editor struct {
 	*editor.EditorBase
-	fontTable     *d2font.Font
-	state         []byte
-	textureLoader common.TextureLoader
+	fontTable *d2font.Font
+	state     []byte
 }
 
 // Create creates a new font table editor
 func Create(_ *config.Config,
-	tl common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
@@ -45,10 +43,9 @@ func Create(_ *config.Config,
 	}
 
 	result := &Editor{
-		EditorBase:    editor.New(pathEntry, x, y, project),
-		fontTable:     table,
-		state:         state,
-		textureLoader: tl,
+		EditorBase: editor.New(pathEntry, x, y, project),
+		fontTable:  table,
+		state:      state,
 	}
 
 	if w, h := result.CurrentSize(); w == 0 || h == 0 {
@@ -62,7 +59,7 @@ func Create(_ *config.Config,
 func (e *Editor) Build() {
 	e.IsOpen(&e.Visible).Flags(g.WindowFlagsHorizontalScrollbar).
 		Layout(g.Layout{
-			fonttablewidget.Create(e.state, e.textureLoader, e.Path.GetUniqueID(), e.fontTable),
+			fonttablewidget.Create(e.state, e.Path.GetUniqueID(), e.fontTable),
 		})
 }
 

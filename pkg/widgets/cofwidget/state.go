@@ -3,6 +3,7 @@ package cofwidget
 import (
 	"fmt"
 	"github.com/gucio321/HellSpawner/pkg/app/assets"
+	"github.com/gucio321/HellSpawner/pkg/common"
 
 	"github.com/AllenDang/giu"
 
@@ -112,19 +113,19 @@ func (p *widget) initState() {
 		state.viewerState.layer = &p.cof.CofLayers[0]
 	}
 
-	p.textureLoader.CreateTextureFromFile(assets.UpArrowIcon, func(texture *giu.Texture) {
+	common.LoadTexture(assets.UpArrowIcon, func(texture *giu.Texture) {
 		state.textures.up = texture
 	})
 
-	p.textureLoader.CreateTextureFromFile(assets.DownArrowIcon, func(texture *giu.Texture) {
+	common.LoadTexture(assets.DownArrowIcon, func(texture *giu.Texture) {
 		state.textures.down = texture
 	})
 
-	p.textureLoader.CreateTextureFromFile(assets.LeftArrowIcon, func(texture *giu.Texture) {
+	common.LoadTexture(assets.LeftArrowIcon, func(texture *giu.Texture) {
 		state.textures.left = texture
 	})
 
-	p.textureLoader.CreateTextureFromFile(assets.RightArrowIcon, func(texture *giu.Texture) {
+	common.LoadTexture(assets.RightArrowIcon, func(texture *giu.Texture) {
 		state.textures.right = texture
 	})
 

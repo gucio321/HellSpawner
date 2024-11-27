@@ -23,14 +23,12 @@ var _ editor.Editor = &Editor{}
 // Editor represents a palette map editor
 type Editor struct {
 	*editor.EditorBase
-	pl2           *d2pl2.PL2
-	textureLoader common.TextureLoader
-	state         []byte
+	pl2   *d2pl2.PL2
+	state []byte
 }
 
 // Create creates a new palette map editor
 func Create(_ *config.Config,
-	textureLoader common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
@@ -41,10 +39,9 @@ func Create(_ *config.Config,
 	}
 
 	result := &Editor{
-		EditorBase:    editor.New(pathEntry, x, y, project),
-		pl2:           pl2,
-		textureLoader: textureLoader,
-		state:         state,
+		EditorBase: editor.New(pathEntry, x, y, project),
+		pl2:        pl2,
+		state:      state,
 	}
 
 	result.Path = pathEntry
@@ -57,7 +54,7 @@ func (e *Editor) Build() {
 	e.IsOpen(&e.Visible).
 		Flags(g.WindowFlagsAlwaysAutoResize).
 		Layout(g.Layout{
-			palettemapwidget.Create(e.textureLoader, e.Path.GetUniqueID(), e.pl2, e.state),
+			palettemapwidget.Create(e.Path.GetUniqueID(), e.pl2, e.state),
 		})
 }
 

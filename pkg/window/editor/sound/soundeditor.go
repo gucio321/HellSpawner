@@ -38,16 +38,14 @@ var _ editor.Editor = &Editor{}
 type Editor struct {
 	*editor.EditorBase
 
-	streamer      beep.StreamSeekCloser
-	control       *beep.Ctrl
-	format        beep.Format
-	file          string
-	textureLoader common.TextureLoader
+	streamer beep.StreamSeekCloser
+	control  *beep.Ctrl
+	format   beep.Format
+	file     string
 }
 
 // Create creates a new sound editor
 func Create(_ *config.Config,
-	tl common.TextureLoader,
 	pathEntry *common.PathEntry,
 	_ []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
@@ -63,12 +61,11 @@ func Create(_ *config.Config,
 	}
 
 	result := &Editor{
-		EditorBase:    editor.New(pathEntry, x, y, project),
-		file:          filepath.Base(pathEntry.FullPath),
-		streamer:      streamer,
-		control:       control,
-		format:        format,
-		textureLoader: tl,
+		EditorBase: editor.New(pathEntry, x, y, project),
+		file:       filepath.Base(pathEntry.FullPath),
+		streamer:   streamer,
+		control:    control,
+		format:     format,
 	}
 
 	result.Path = pathEntry
@@ -94,7 +91,7 @@ func (s *Editor) Build() {
 		Size(mainWindowW, mainWindowH).
 		Layout(g.Layout{
 			g.Row(
-				widgets.PlayPauseButton("##"+s.Path.GetUniqueID()+"playPause", &isPlaying, s.textureLoader).
+				widgets.PlayPauseButton("##"+s.Path.GetUniqueID()+"playPause", &isPlaying).
 					OnPlayClicked(s.play).OnPauseClicked(s.stop).Size(btnSize, btnSize),
 				g.ProgressBar(progress).Size(-1, progressBarHeight).
 					Overlay(fmt.Sprintf("%d:%02d / %d:%02d",

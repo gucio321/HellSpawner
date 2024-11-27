@@ -13,7 +13,6 @@ import (
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2ds1"
 
-	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/widgets"
 )
 
@@ -32,16 +31,14 @@ type widget struct {
 	id                  giu.ID
 	ds1                 *d2ds1.DS1
 	deleteButtonTexture *giu.Texture
-	textureLoader       common.TextureLoader
 }
 
 // Create creates a new ds1 viewer
-func Create(textureLoader common.TextureLoader, id string, ds1 *d2ds1.DS1, dbt *giu.Texture, state []byte) giu.Widget {
+func Create(id string, ds1 *d2ds1.DS1, dbt *giu.Texture, state []byte) giu.Widget {
 	result := &widget{
 		id:                  giu.ID(id),
 		ds1:                 ds1,
 		deleteButtonTexture: dbt,
-		textureLoader:       textureLoader,
 	}
 
 	if giu.Context.GetState(result.getStateID()) == nil && state != nil {

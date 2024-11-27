@@ -3,6 +3,7 @@ package fonttablewidget
 import (
 	"fmt"
 	"github.com/gucio321/HellSpawner/pkg/app/assets"
+	"github.com/gucio321/HellSpawner/pkg/common"
 
 	"github.com/AllenDang/giu"
 )
@@ -75,7 +76,7 @@ func (p *widget) initState() {
 		Mode: modeViewer,
 	}
 
-	p.textureLoader.CreateTextureFromFile(assets.DeleteIcon, func(texture *giu.Texture) {
+	common.LoadTexture(assets.DeleteIcon, func(texture *giu.Texture) {
 		state.deleteButtonTexture = texture
 	})
 

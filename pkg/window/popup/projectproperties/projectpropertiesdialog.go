@@ -47,22 +47,22 @@ type Dialog struct {
 }
 
 // Create creates a new project properties' dialog
-func Create(textureLoader common.TextureLoader, onProjectPropertiesChanged func(project *hsproject.Project)) *Dialog {
+func Create(onProjectPropertiesChanged func(project *hsproject.Project)) *Dialog {
 	result := &Dialog{
 		Dialog:                     popup.New("Project Properties"),
 		onProjectPropertiesChanged: onProjectPropertiesChanged,
 		mpqSelectDialogVisible:     false,
 	}
 
-	textureLoader.CreateTextureFromFile(assets.DeleteIcon, func(texture *g.Texture) {
+	common.LoadTexture(assets.DeleteIcon, func(texture *g.Texture) {
 		result.removeIconTexture = texture
 	})
 
-	textureLoader.CreateTextureFromFile(assets.UpArrowIcon, func(texture *g.Texture) {
+	common.LoadTexture(assets.UpArrowIcon, func(texture *g.Texture) {
 		result.upIconTexture = texture
 	})
 
-	textureLoader.CreateTextureFromFile(assets.DownArrowIcon, func(texture *g.Texture) {
+	common.LoadTexture(assets.DownArrowIcon, func(texture *g.Texture) {
 		result.downIconTexture = texture
 	})
 

@@ -69,9 +69,6 @@ func (a *App) setup() (err error) {
 		return err
 	}
 
-	// we may have tried loading some textures already...
-	a.TextureLoader.ProcessTextureLoadRequests()
-
 	return nil
 }
 
@@ -154,8 +151,7 @@ func (a *App) setupMainMpqExplorer() error {
 func (a *App) setupProjectExplorer() error {
 	x, y := float32(projectExplorerDefaultX), float32(projectExplorerDefaultY)
 
-	window, err := projectexplorer.Create(a.TextureLoader,
-		a.openEditor, x, y)
+	window, err := projectexplorer.Create(a.openEditor, x, y)
 	if err != nil {
 		return fmt.Errorf("error creating a project explorer: %w", err)
 	}
@@ -191,13 +187,13 @@ func (a *App) setupConsole() {
 
 func (a *App) setupDialogs() error {
 	// Register the dialogs
-	about, err := aboutdialog.Create(a.TextureLoader, a.diabloRegularFont, a.diabloBoldFont, a.fontFixedSmall)
+	about, err := aboutdialog.Create(a.diabloRegularFont, a.diabloBoldFont, a.fontFixedSmall)
 	if err != nil {
 		return fmt.Errorf("error creating an about dialog: %w", err)
 	}
 
 	a.aboutDialog = about
-	a.projectPropertiesDialog = projectproperties.Create(a.TextureLoader, a.onProjectPropertiesChanged)
+	a.projectPropertiesDialog = projectproperties.Create(a.onProjectPropertiesChanged)
 	a.preferencesDialog = preferences.Create(a.onPreferencesChanged, a.masterWindow.SetBgColor)
 
 	return nil

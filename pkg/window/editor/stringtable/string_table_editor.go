@@ -33,7 +33,6 @@ type Editor struct {
 
 // Create creates a new string table editor
 func Create(_ *config.Config,
-	_ common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,

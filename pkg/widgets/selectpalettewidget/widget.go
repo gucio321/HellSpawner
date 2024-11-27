@@ -89,7 +89,7 @@ func NewSelectPaletteWidget(
 
 	result.mpqExplorer = mpqExplorer
 
-	projectExplorer, err := projectexplorer.Create(nil, callback, 0, 0)
+	projectExplorer, err := projectexplorer.Create(callback, 0, 0)
 	if err != nil {
 		log.Print(err)
 	}

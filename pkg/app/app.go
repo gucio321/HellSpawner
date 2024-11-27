@@ -57,7 +57,6 @@ const (
 
 type editorConstructor func(
 	config *config.Config,
-	textureLoader common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte,
@@ -93,8 +92,6 @@ type App struct {
 	diabloBoldFont    *g.FontInfo
 	diabloRegularFont *g.FontInfo
 
-	TextureLoader common.TextureLoader
-
 	showUsage   bool
 	justStarted bool
 }
@@ -105,7 +102,6 @@ func Create() (*App, error) {
 		Flags:              &Flags{},
 		editors:            make([]editor.Editor, 0),
 		editorConstructors: make(map[hsfiletypes.FileType]editorConstructor),
-		TextureLoader:      common.NewTextureLoader(),
 		abyssWrapper:       abysswrapper.Create(),
 		justStarted:        true,
 	}
@@ -163,15 +159,11 @@ func (a *App) render() {
 		}
 	}
 
-	a.TextureLoader.StopLoadingTextures()
-
 	a.renderMainMenuBar()
 	a.renderEditors()
 	a.renderWindows()
 
 	g.Update()
-
-	a.TextureLoader.ResumeLoadingTextures()
 }
 
 func logErr(fmtErr string, args ...interface{}) {
@@ -206,7 +198,7 @@ func (a *App) createEditor(path *common.PathEntry, state []byte, x, y, w, h floa
 		return
 	}
 
-	editor, err := a.editorConstructors[fileType](a.config, a.TextureLoader, path, state, &data, x, y, a.project)
+	editor, err := a.editorConstructors[fileType](a.config, path, state, &data, x, y, a.project)
 	if err != nil {
 		const fmtErr = "Error creating editor: %v"
 

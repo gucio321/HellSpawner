@@ -26,7 +26,6 @@ var _ editor.Editor = &Editorg{}
 type Editorg struct {
 	*editor.EditorBase
 	dt1                 *d2dt1.DT1
-	textureLoader       common.TextureLoader
 	config              *config.Config
 	selectPalette       bool
 	palette             *[256]d2interface.Color
@@ -36,7 +35,6 @@ type Editorg struct {
 
 // Create creates new dt1 editor
 func Create(cfg *config.Config,
-	textureLoader common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
@@ -51,7 +49,6 @@ func Create(cfg *config.Config,
 		dt1:           dt1,
 		config:        cfg,
 		selectPalette: false,
-		textureLoader: textureLoader,
 		state:         state,
 	}
 
@@ -64,7 +61,7 @@ func (e *Editorg) Build() {
 	e.Flags(g.WindowFlagsAlwaysAutoResize)
 
 	if !e.selectPalette {
-		dt1Viewer := dt1widget.Create(e.state, e.palette, e.textureLoader, e.Path.GetUniqueID(), e.dt1)
+		dt1Viewer := dt1widget.Create(e.state, e.palette, e.Path.GetUniqueID(), e.dt1)
 		e.Layout(g.Layout{
 			dt1Viewer,
 		})

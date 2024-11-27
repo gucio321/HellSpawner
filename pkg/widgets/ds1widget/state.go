@@ -3,6 +3,7 @@ package ds1widget
 import (
 	"fmt"
 	"github.com/gucio321/HellSpawner/pkg/app/assets"
+	"github.com/gucio321/HellSpawner/pkg/common"
 
 	"github.com/AllenDang/giu"
 
@@ -99,7 +100,7 @@ func (p *widget) initState() {
 		ds1Controls: &ds1Controls{},
 	}
 
-	p.textureLoader.CreateTextureFromFile(assets.ImageShrug, func(t *giu.Texture) {
+	common.LoadTexture(assets.ImageShrug, func(t *giu.Texture) {
 		state.ds1Controls.noObjectsImageTexture = t
 	})
 

@@ -79,7 +79,7 @@ func (p *PaletteGridWidget) rebuildImage() {
 		}
 	}
 
-	p.textureLoader.CreateTextureFromARGB(rgb, func(texture *giu.Texture) {
+	giu.EnqueueNewTextureFromRgba(rgb, func(texture *giu.Texture) {
 		p.setState(&widgetState{rgba: texture})
 	})
 }

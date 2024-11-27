@@ -36,7 +36,6 @@ type Editor struct {
 
 // Create creates a new text editor
 func Create(_ *config.Config,
-	_ common.TextureLoader,
 	pathEntry *common.PathEntry,
 	_ []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,

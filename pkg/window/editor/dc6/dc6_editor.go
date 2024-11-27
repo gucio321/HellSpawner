@@ -25,7 +25,6 @@ var _ editor.Editor = &Editor{}
 type Editor struct {
 	*editor.EditorBase
 	dc6                 *d2dc6.DC6
-	textureLoader       common.TextureLoader
 	config              *config.Config
 	selectPalette       bool
 	palette             *[256]d2interface.Color
@@ -35,7 +34,6 @@ type Editor struct {
 
 // Create creates a new dc6 editor
 func Create(cfg *config.Config,
-	textureLoader common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
@@ -48,7 +46,6 @@ func Create(cfg *config.Config,
 	result := &Editor{
 		EditorBase:    editor.New(pathEntry, x, y, project),
 		dc6:           dc6,
-		textureLoader: textureLoader,
 		selectPalette: false,
 		config:        cfg,
 		state:         state,
@@ -64,7 +61,7 @@ func (e *Editor) Build() {
 
 	if !e.selectPalette {
 		e.Layout(g.Layout{
-			dc6widget.Create(e.state, e.palette, e.textureLoader, e.Path.GetUniqueID(), e.dc6),
+			dc6widget.Create(e.state, e.palette, e.Path.GetUniqueID(), e.dc6),
 		})
 
 		return

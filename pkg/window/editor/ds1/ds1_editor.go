@@ -26,13 +26,11 @@ type Editor struct {
 	*editor.EditorBase
 	ds1                 *d2ds1.DS1
 	deleteButtonTexture *g.Texture
-	textureLoader       common.TextureLoader
 	state               []byte
 }
 
 // Create creates a new ds1 editor
 func Create(_ *config.Config,
-	tl common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
@@ -43,15 +41,14 @@ func Create(_ *config.Config,
 	}
 
 	result := &Editor{
-		EditorBase:    editor.New(pathEntry, x, y, project),
-		ds1:           ds1,
-		textureLoader: tl,
-		state:         state,
+		EditorBase: editor.New(pathEntry, x, y, project),
+		ds1:        ds1,
+		state:      state,
 	}
 
 	result.Path = pathEntry
 
-	tl.CreateTextureFromFile(assets.DeleteIcon, func(texture *g.Texture) {
+	common.LoadTexture(assets.DeleteIcon, func(texture *g.Texture) {
 		result.deleteButtonTexture = texture
 	})
 
@@ -63,7 +60,7 @@ func (e *Editor) Build() {
 	e.IsOpen(&e.Visible).
 		Flags(g.WindowFlagsAlwaysAutoResize).
 		Layout(g.Layout{
-			ds1widget.Create(e.textureLoader, e.Path.GetUniqueID(), e.ds1, e.deleteButtonTexture, e.state),
+			ds1widget.Create(e.Path.GetUniqueID(), e.ds1, e.deleteButtonTexture, e.state),
 		})
 }
 

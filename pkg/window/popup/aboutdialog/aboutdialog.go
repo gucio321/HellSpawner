@@ -38,7 +38,7 @@ type AboutDialog struct {
 }
 
 // Create creates a new AboutDialog
-func Create(textureLoader common.TextureLoader, regularFont, titleFont, fixedFont *g.FontInfo) (*AboutDialog, error) {
+func Create(regularFont, titleFont, fixedFont *g.FontInfo) (*AboutDialog, error) {
 	result := &AboutDialog{
 		Dialog:      popup.New("About HellSpawner"),
 		titleFont:   titleFont,
@@ -46,7 +46,7 @@ func Create(textureLoader common.TextureLoader, regularFont, titleFont, fixedFon
 		fixedFont:   fixedFont,
 	}
 
-	textureLoader.CreateTextureFromFile(assets.HellSpawnerLogo, func(t *g.Texture) {
+	common.LoadTexture(assets.HellSpawnerLogo, func(t *g.Texture) {
 		result.logo = t
 	})
 

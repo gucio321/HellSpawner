@@ -6,7 +6,6 @@ import (
 
 	"github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/pkg/widgets/palettegridwidget"
 )
@@ -17,22 +16,19 @@ const (
 
 // PaletteGridEditorWidget represents a palette grid editor
 type PaletteGridEditorWidget struct {
-	id            string
-	colors        *[]palettegridwidget.PaletteColor
-	textureLoader common.TextureLoader
-	onChange      func()
+	id       string
+	colors   *[]palettegridwidget.PaletteColor
+	onChange func()
 }
 
 // Create creates a new palette grid editor widget
 func Create(state []byte,
-	textureLoader common.TextureLoader,
 	id string,
 	colors *[]palettegridwidget.PaletteColor) *PaletteGridEditorWidget {
 	result := &PaletteGridEditorWidget{
-		id:            id,
-		colors:        colors,
-		textureLoader: textureLoader,
-		onChange:      nil,
+		id:       id,
+		colors:   colors,
+		onChange: nil,
 	}
 
 	if giu.Context.GetState(result.getStateID()) == nil && state != nil {
@@ -64,7 +60,7 @@ func (p *PaletteGridEditorWidget) Build() {
 		colors[n] = (*p.colors)[n]
 	}
 
-	grid := palettegridwidget.Create(p.textureLoader, p.id, &colors).OnClick(func(idx int) {
+	grid := palettegridwidget.Create(p.id, &colors).OnClick(func(idx int) {
 		color := hsutil.Color((*p.colors)[idx].RGBA())
 		state.RGBA = color
 		state.Idx = idx

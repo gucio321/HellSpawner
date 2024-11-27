@@ -24,14 +24,12 @@ var _ editor.Editor = &Editor{}
 // Editor represents a cof editor
 type Editor struct {
 	*editor.EditorBase
-	cof           *d2cof.COF
-	textureLoader common.TextureLoader
-	state         []byte
+	cof   *d2cof.COF
+	state []byte
 }
 
 // Create creates a new cof editor
 func Create(_ *config.Config,
-	tl common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
@@ -42,10 +40,9 @@ func Create(_ *config.Config,
 	}
 
 	result := &Editor{
-		EditorBase:    editor.New(pathEntry, x, y, project),
-		cof:           cof,
-		textureLoader: tl,
-		state:         state,
+		EditorBase: editor.New(pathEntry, x, y, project),
+		cof:        cof,
+		state:      state,
 	}
 
 	return result, nil
@@ -54,7 +51,7 @@ func Create(_ *config.Config,
 // Build builds a cof editor
 func (e *Editor) Build() {
 	uid := e.Path.GetUniqueID()
-	cofWidget := cofwidget.Create(e.state, e.textureLoader, uid, e.cof)
+	cofWidget := cofwidget.Create(e.state, uid, e.cof)
 
 	e.IsOpen(&e.Visible)
 	e.Flags(g.WindowFlagsAlwaysAutoResize)

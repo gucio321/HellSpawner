@@ -49,7 +49,7 @@ type ProjectExplorer struct {
 }
 
 // Create creates a new project explorer
-func Create(textureLoader common.TextureLoader,
+func Create(
 	fileSelectedCallback FileSelectedCallback,
 	x, y float32,
 ) (*ProjectExplorer, error) {
@@ -61,12 +61,9 @@ func Create(textureLoader common.TextureLoader,
 
 	result.Visible = false
 
-	// some type of workaround ;-). SOmetimes we only want to get tree nodes (and don't need textures)
-	if textureLoader != nil {
-		textureLoader.CreateTextureFromFile(assets.ReloadIcon, func(texture *g.Texture) {
-			result.refreshIconTexture = texture
-		})
-	}
+	common.LoadTexture(assets.ReloadIcon, func(texture *g.Texture) {
+		result.refreshIconTexture = texture
+	})
 
 	if w, h := result.CurrentSize(); w == 0 || h == 0 {
 		result.Size(mainWindowW, mainWindowH)

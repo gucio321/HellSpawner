@@ -13,7 +13,6 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2dcc"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 
-	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/pkg/widgets"
 )
@@ -33,19 +32,17 @@ const (
 )
 
 type widget struct {
-	id            string
-	dcc           *d2dcc.DCC
-	palette       *[256]d2interface.Color
-	textureLoader common.TextureLoader
+	id      string
+	dcc     *d2dcc.DCC
+	palette *[256]d2interface.Color
 }
 
 // Create creates a new dcc widget
-func Create(tl common.TextureLoader, state []byte, palette *[256]d2interface.Color, id string, dcc *d2dcc.DCC) giu.Widget {
+func Create(state []byte, palette *[256]d2interface.Color, id string, dcc *d2dcc.DCC) giu.Widget {
 	result := &widget{
-		id:            id,
-		dcc:           dcc,
-		palette:       palette,
-		textureLoader: tl,
+		id:      id,
+		dcc:     dcc,
+		palette: palette,
 	}
 
 	if giu.Context.GetState(result.getStateID()) == nil && state != nil {
@@ -144,7 +141,7 @@ func (p *widget) makePlayerLayout(state *widgetState) giu.Layout {
 			giu.InputInt(&state.TickTime).Label("Tick time").Size(inputIntW).OnChange(func() {
 				state.ticker.Reset(time.Second * time.Duration(state.TickTime) / miliseconds)
 			}),
-			widgets.PlayPauseButton("##"+p.id+"PlayPauseAnimation", &state.IsPlaying, p.textureLoader).
+			widgets.PlayPauseButton("##"+p.id+"PlayPauseAnimation", &state.IsPlaying).
 				Size(playPauseButtonSize, playPauseButtonSize),
 			giu.Button("Export GIF##"+p.id+"exportGif").OnClick(func() {
 				err := p.exportGif(state)

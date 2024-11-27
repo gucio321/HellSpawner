@@ -25,15 +25,13 @@ var _ editor.Editor = &Editor{}
 // Editor represents a palette editor
 type Editor struct {
 	*editor.EditorBase
-	palette       d2interface.Palette
-	textureLoader common.TextureLoader
-	state         []byte
+	palette d2interface.Palette
+	state   []byte
 }
 
 // Create creates a new palette editor
 func Create(
 	_ *config.Config,
-	tl common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
@@ -44,10 +42,9 @@ func Create(
 	}
 
 	result := &Editor{
-		EditorBase:    editor.New(pathEntry, x, y, project),
-		palette:       palette,
-		textureLoader: tl,
-		state:         state,
+		EditorBase: editor.New(pathEntry, x, y, project),
+		palette:    palette,
+		state:      state,
 	}
 
 	return result, nil
@@ -63,7 +60,7 @@ func (e *Editor) Build() {
 	}
 
 	e.IsOpen(&e.Visible).Flags(g.WindowFlagsAlwaysAutoResize).Layout(g.Layout{
-		palettegrideditorwidget.Create(e.state, e.textureLoader, e.GetID(), &col),
+		palettegrideditorwidget.Create(e.state, e.GetID(), &col),
 	})
 }
 

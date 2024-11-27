@@ -18,7 +18,6 @@ import (
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2interface"
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2math"
 
-	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/widgets/dt1widget/tiletypeimage"
 )
 
@@ -46,19 +45,17 @@ func (tileIdentity) fromTile(tile *d2dt1.Tile) tileIdentity {
 
 // widget represents dt1 viewers widget
 type widget struct {
-	id            giu.ID
-	dt1           *d2dt1.DT1
-	palette       *[256]d2interface.Color
-	textureLoader common.TextureLoader
+	id      giu.ID
+	dt1     *d2dt1.DT1
+	palette *[256]d2interface.Color
 }
 
 // Create creates a new dt1 viewers widget
-func Create(state []byte, palette *[256]d2interface.Color, textureLoader common.TextureLoader, id string, dt1 *d2dt1.DT1) giu.Widget {
+func Create(state []byte, palette *[256]d2interface.Color, id string, dt1 *d2dt1.DT1) giu.Widget {
 	result := &widget{
-		id:            giu.ID(id),
-		dt1:           dt1,
-		textureLoader: textureLoader,
-		palette:       palette,
+		id:      giu.ID(id),
+		dt1:     dt1,
+		palette: palette,
 	}
 
 	result.registerKeyboardShortcuts()
@@ -160,7 +157,7 @@ func (p *widget) makeTileTextures() {
 			imgFloor, imgWall := image.NewRGBA(rect), image.NewRGBA(rect)
 			imgFloor.Pix, imgWall.Pix = floorPix, wallPix
 
-			p.textureLoader.CreateTextureFromARGB(imgFloor, func(tex *giu.Texture) {
+			giu.EnqueueNewTextureFromRgba(imgFloor, func(tex *giu.Texture) {
 				if group[variantIdx] == nil {
 					group[variantIdx] = make(map[string]*giu.Texture)
 				}
@@ -168,7 +165,7 @@ func (p *widget) makeTileTextures() {
 				group[variantIdx]["floor"] = tex
 			})
 
-			p.textureLoader.CreateTextureFromARGB(imgWall, func(tex *giu.Texture) {
+			giu.EnqueueNewTextureFromRgba(imgWall, func(tex *giu.Texture) {
 				if group[variantIdx] == nil {
 					group[variantIdx] = make(map[string]*giu.Texture)
 				}

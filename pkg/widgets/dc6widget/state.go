@@ -192,7 +192,7 @@ func (p *widget) initState() {
 		textures := make([]*giu.Texture, totalFrames)
 
 		for frameIndex := 0; frameIndex < totalFrames; frameIndex++ {
-			p.textureLoader.CreateTextureFromARGB(newState.rgb[frameIndex], func(t *giu.Texture) {
+			giu.EnqueueNewTextureFromRgba(newState.rgb[frameIndex], func(t *giu.Texture) {
 				textures[frameIndex] = t
 			})
 		}
@@ -279,7 +279,7 @@ func (p *widget) createImage(state *widgetState) {
 		return
 	}
 
-	p.textureLoader.CreateTextureFromARGB(newimg, func(t *giu.Texture) {
+	giu.EnqueueNewTextureFromRgba(newimg, func(t *giu.Texture) {
 		state.tiled = t
 	})
 

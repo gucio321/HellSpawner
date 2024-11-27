@@ -16,7 +16,7 @@ func (p *widget) makeGrid(key string, colors *[256]palettegridwidget.PaletteColo
 	copy(c, colors[:])
 
 	state := p.getState()
-	state.textures[key] = palettegridwidget.Create(p.textureLoader, p.id+key, &c).OnClick(func(idx int) {
+	state.textures[key] = palettegridwidget.Create(p.id+key, &c).OnClick(func(idx int) {
 		state.ID = key
 		state.Idx = idx
 		state.Mode = widgetModeEditTransform
@@ -148,7 +148,7 @@ func (p *widget) textColors(key string, colors []d2pl2.PL2Color24Bits) giu.Layou
 			c[n] = palettegridwidget.PaletteColor(&p.pl2.TextColors[n])
 		}
 
-		grid := palettegrideditorwidget.Create(nil, p.textureLoader, p.id+"transform24editColor", &c)
+		grid := palettegrideditorwidget.Create(nil, p.id+"transform24editColor", &c)
 
 		state.textures[textureID] = grid
 	}

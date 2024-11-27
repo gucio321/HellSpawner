@@ -3,6 +3,7 @@ package animdatawidget
 import (
 	"fmt"
 	"github.com/gucio321/HellSpawner/pkg/app/assets"
+	"github.com/gucio321/HellSpawner/pkg/common"
 	"sort"
 
 	"github.com/AllenDang/giu"
@@ -64,7 +65,7 @@ func (p *widget) getState() *widgetState {
 func (p *widget) initState() {
 	state := &widgetState{}
 
-	p.textureLoader.CreateTextureFromFile(assets.DeleteIcon, func(texture *giu.Texture) {
+	common.LoadTexture(assets.DeleteIcon, func(texture *giu.Texture) {
 		state.deleteIcon = texture
 	})
 

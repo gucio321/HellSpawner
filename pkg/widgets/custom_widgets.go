@@ -52,16 +52,14 @@ type PlayPauseButtonWidget struct {
 	width,
 	height float32
 
-	isPlaying     *bool
-	textureLoader common.TextureLoader
+	isPlaying *bool
 }
 
 // PlayPauseButton creates a play/pause button
-func PlayPauseButton(id string, isPlaying *bool, tl common.TextureLoader) *PlayPauseButtonWidget {
+func PlayPauseButton(id string, isPlaying *bool) *PlayPauseButtonWidget {
 	return &PlayPauseButtonWidget{
-		id:            id,
-		textureLoader: tl,
-		isPlaying:     isPlaying,
+		id:        id,
+		isPlaying: isPlaying,
 	}
 }
 
@@ -101,11 +99,11 @@ func (p *PlayPauseButtonWidget) Build() {
 
 		state := &playPauseButtonState{}
 
-		p.textureLoader.CreateTextureFromFile(assets.PlayButtonIcon, func(t *giu.Texture) {
+		common.LoadTexture(assets.PlayButtonIcon, func(t *giu.Texture) {
 			state.playTexture = t
 		})
 
-		p.textureLoader.CreateTextureFromFile(assets.PauseButtonIcon, func(t *giu.Texture) {
+		common.LoadTexture(assets.PauseButtonIcon, func(t *giu.Texture) {
 			state.pauseTexture = t
 		})
 

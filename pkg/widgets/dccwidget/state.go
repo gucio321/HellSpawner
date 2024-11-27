@@ -133,7 +133,7 @@ func (p *widget) initState() {
 
 		for frameIndex := 0; frameIndex < totalFrames; frameIndex++ {
 			frameIndex := frameIndex
-			p.textureLoader.CreateTextureFromARGB(state.images[frameIndex], func(t *giu.Texture) {
+			giu.EnqueueNewTextureFromRgba(state.images[frameIndex], func(t *giu.Texture) {
 				textures[frameIndex] = t
 			})
 		}

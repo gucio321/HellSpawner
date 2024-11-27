@@ -23,14 +23,12 @@ var _ editor.Editor = &AnimationDataEditor{}
 // AnimationDataEditor represents a cof editor
 type AnimationDataEditor struct {
 	*editor.EditorBase
-	d2            *d2animdata.AnimationData
-	state         []byte
-	textureLoader common.TextureLoader
+	d2    *d2animdata.AnimationData
+	state []byte
 }
 
 // Create creates a new cof editor
 func Create(_ *config.Config,
-	tl common.TextureLoader,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
@@ -41,10 +39,9 @@ func Create(_ *config.Config,
 	}
 
 	result := &AnimationDataEditor{
-		EditorBase:    editor.New(pathEntry, x, y, project),
-		d2:            d2,
-		state:         state,
-		textureLoader: tl,
+		EditorBase: editor.New(pathEntry, x, y, project),
+		d2:         d2,
+		state:      state,
 	}
 
 	return result, nil
@@ -53,7 +50,7 @@ func Create(_ *config.Config,
 // Build builds a D2 editor
 func (e *AnimationDataEditor) Build() {
 	uid := e.Path.GetUniqueID()
-	animDataWidget := animdatawidget.Create(e.textureLoader, e.state, uid, e.d2)
+	animDataWidget := animdatawidget.Create(e.state, uid, e.d2)
 
 	e.IsOpen(&e.Visible)
 	e.Flags(g.WindowFlagsAlwaysAutoResize)
