@@ -29,11 +29,3 @@ func calculateDuration(cof *d2cof.COF) float64 {
 
 	return float64(cof.FramesPerDirection) * frameDelay
 }
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-
-	return b
-}

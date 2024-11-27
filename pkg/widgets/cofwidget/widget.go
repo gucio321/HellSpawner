@@ -227,6 +227,7 @@ func (p *widget) makePriorityTab(state *widgetState) giu.Layout {
 	deleteButton.OnClick(func() {
 		fnYes := func() {
 			p.deleteCurrentDirection()
+
 			state.Mode = modeViewer
 		}
 
@@ -277,7 +278,7 @@ func (p *widget) layoutAnimFrames(state *widgetState) *giu.RowWidget {
 	leftButtonID := giu.ID(fmt.Sprintf("##%sDecreaseFramesPerDirection", p.id))
 	rightButtonID := giu.ID(fmt.Sprintf("##%sIncreaseFramesPerDirection", p.id))
 
-	left := widgets.MakeImageButton(giu.ID(leftButtonID), buttonWidthHeight, buttonWidthHeight, state.textures.left, fnDecrease)
+	left := widgets.MakeImageButton(leftButtonID, buttonWidthHeight, buttonWidthHeight, state.textures.left, fnDecrease)
 	frameCount := giu.Label(fmt.Sprintf("%d", numFrames))
 	right := widgets.MakeImageButton(rightButtonID, buttonWidthHeight, buttonWidthHeight, state.textures.right, fnIncrease)
 
@@ -498,6 +499,7 @@ func (p *widget) makeSaveCancelButtonRow(available []d2enum.CompositeType, state
 		}
 
 		// this sets layer index to just added layer
+		//nolint:gosec // this is for giu and has to be int32.
 		state.viewerState.LayerIndex = int32(p.cof.NumberOfLayers - 1)
 		state.viewerState.layer = newCofLayer
 		state.Mode = modeViewer
@@ -536,7 +538,7 @@ func (p *widget) deleteCurrentLayer(index int32) {
 	newLayers := make([]d2cof.CofLayer, 0)
 
 	for n, i := range p.cof.CofLayers {
-		if int32(n) != index {
+		if n != int(index) {
 			newLayers = append(newLayers, i)
 		}
 	}
@@ -559,6 +561,7 @@ func (p *widget) duplicateDirection() {
 
 	p.cof.Priority = append(p.cof.Priority, p.cof.Priority[idx])
 
+	//nolint:gosec // this is for giu and has to be int32.
 	state.DirectionIndex = int32(len(p.cof.Priority) - 1)
 }
 
@@ -572,7 +575,7 @@ func (p *widget) deleteCurrentDirection() {
 	newPriority := make([][][]d2enum.CompositeType, 0)
 
 	for n, i := range p.cof.Priority {
-		if int32(n) != index {
+		if n != int(index) {
 			newPriority = append(newPriority, i)
 		}
 	}
