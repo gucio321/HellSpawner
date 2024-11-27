@@ -1,5 +1,5 @@
-// Package hsdc6editor represents a dc6 editor window
-package hsdc6editor
+// Package dc6 represents a dc6 editor window
+package dc6
 
 import (
 	"fmt"
