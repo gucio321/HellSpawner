@@ -33,7 +33,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/editor/sound"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/text"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/aboutdialog"
-	"github.com/gucio321/HellSpawner/pkg/window/popup/hspreferencesdialog"
+	"github.com/gucio321/HellSpawner/pkg/window/popup/preferences"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/hsprojectpropertiesdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsconsole"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsmpqexplorer"
@@ -198,7 +198,7 @@ func (a *App) setupDialogs() error {
 
 	a.aboutDialog = about
 	a.projectPropertiesDialog = hsprojectpropertiesdialog.Create(a.TextureLoader, a.onProjectPropertiesChanged)
-	a.preferencesDialog = hspreferencesdialog.Create(a.onPreferencesChanged, a.masterWindow.SetBgColor)
+	a.preferencesDialog = preferences.Create(a.onPreferencesChanged, a.masterWindow.SetBgColor)
 
 	return nil
 }

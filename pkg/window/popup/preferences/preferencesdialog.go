@@ -1,5 +1,5 @@
-// Package hspreferencesdialog contains preferences dialog data
-package hspreferencesdialog
+// Package preferences contains preferences dialog data
+package preferences
 
 import (
 	"image/color"

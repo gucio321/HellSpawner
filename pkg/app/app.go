@@ -18,7 +18,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/aboutdialog"
-	"github.com/gucio321/HellSpawner/pkg/window/popup/hspreferencesdialog"
+	"github.com/gucio321/HellSpawner/pkg/window/popup/preferences"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/hsprojectpropertiesdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsconsole"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsmpqexplorer"
@@ -74,7 +74,7 @@ type App struct {
 	logFile      *os.File
 
 	aboutDialog             *aboutdialog.AboutDialog
-	preferencesDialog       *hspreferencesdialog.PreferencesDialog
+	preferencesDialog       *preferences.PreferencesDialog
 	projectPropertiesDialog *hsprojectpropertiesdialog.ProjectPropertiesDialog
 
 	projectExplorer *hsprojectexplorer.ProjectExplorer
