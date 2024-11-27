@@ -1,4 +1,4 @@
-package hsapp
+package app
 
 import (
 	"encoding/json"
