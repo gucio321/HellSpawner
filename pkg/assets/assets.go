@@ -5,7 +5,6 @@ import (
 )
 
 // these variables are links to existing icons used in project
-// nolint:gochecknoglobals // go:embed directive works only for globals
 // https://github.com/golangci/golangci-lint/issues/1727
 var (
 	//go:embed icons/reload.png
@@ -34,7 +33,6 @@ var (
 )
 
 // these variables are links to existing fonts used in project
-// nolint:gochecknoglobals // like above: this is ok for go:embed
 var (
 	//go:embed fonts/NotoSans-Regular.ttf
 	FontNotoSansRegular []byte
@@ -49,11 +47,11 @@ var (
 )
 
 // HellSpawnerLogo is a logo image from about dialog
+//
 //go:embed images/d2logo.png
-// nolint:gochecknoglobals // go-embed
 var HellSpawnerLogo []byte
 
 // ImageShrug is an image, which is displayed in ds1 editor, when no objects are there
+//
 //go:embed images/shrug.png
-// nolint:gochecknoglobals // the same reson as above
 var ImageShrug []byte
