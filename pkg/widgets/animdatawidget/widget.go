@@ -80,18 +80,18 @@ func (p *widget) buildAnimationsList() {
 	const imageButtonSize = 13
 
 	for idx, name := range keys {
-		currentIdx := idx
 		list[idx] = giu.Row(
 			widgets.MakeImageButton(
-				"##"+p.id+"deleteEntry"+giu.ID(strconv.Itoa(currentIdx)),
+				"##"+p.id+"deleteEntry"+giu.ID(strconv.Itoa(idx)),
 				imageButtonSize, imageButtonSize,
 				state.deleteIcon,
 				func() {
-					p.deleteEntry(state.mapKeys[currentIdx])
+					p.deleteEntry(state.mapKeys[idx])
 				},
 			),
 			giu.Selectable(name).OnClick(func() {
-				state.MapIndex = int32(currentIdx)
+				//nolint:gosec // its for giu and has to be int32.
+				state.MapIndex = int32(idx)
 				state.Mode = widgetModeViewRecord
 			}),
 		)
@@ -123,9 +123,11 @@ func (p *widget) buildViewRecordLayout() {
 	records := p.d2.GetRecords(name)
 	record := records[state.RecordIdx]
 
-	max := len(records) - 1
+	maxV := len(records) - 1
 
+	//nolint:gosec // its for giu and has to be int32.
 	fpd := int32(record.FramesPerDirection())
+	//nolint:gosec // its for giu and has to be int32.
 	speed := int32(record.Speed())
 
 	giu.Layout{
@@ -150,9 +152,10 @@ func (p *widget) buildViewRecordLayout() {
 		),
 		giu.Separator(),
 		giu.Custom(func() {
-			if max > 0 {
+			if maxV > 0 {
 				giu.Layout{
-					giu.SliderInt(&state.RecordIdx, 0, int32(max)).ID("record##" + p.id),
+					//nolint:gosec // its for giu and has to be int32.
+					giu.SliderInt(&state.RecordIdx, 0, int32(maxV)).ID("record##" + p.id),
 					giu.Separator(),
 				}.Build()
 			}
@@ -160,12 +163,14 @@ func (p *widget) buildViewRecordLayout() {
 		giu.Row(
 			giu.Label("Frames per direction: "),
 			giu.InputInt(&fpd).Size(inputIntW).OnChange(func() {
+				//nolint:gosec // its for giu and has to be int32.
 				record.SetFramesPerDirection(uint32(fpd))
 			}),
 		),
 		giu.Row(
 			giu.Label("Speed: "),
 			giu.InputInt(&speed).Size(inputIntW).OnChange(func() {
+				//nolint:gosec // its for giu and has to be int32.
 				record.SetSpeed(uint16(speed))
 			}),
 		),
@@ -179,6 +184,7 @@ func (p *widget) buildViewRecordLayout() {
 			p.d2.PushRecord(name)
 
 			// no -1, because current records hasn't new field yet
+			//nolint:gosec // its for giu and has to be int32.
 			state.RecordIdx = int32(len(records))
 		}),
 		giu.Button("").ID("Delete record##"+p.id+"deleteRecordBtn").Size(actionBtnW, actionBtnH).OnClick(func() {
@@ -189,7 +195,8 @@ func (p *widget) buildViewRecordLayout() {
 
 				return
 			}
-			if state.RecordIdx == int32(len(records)-1) {
+
+			if int(state.RecordIdx) == len(records)-1 {
 				if state.RecordIdx > 0 {
 					state.RecordIdx--
 				} else {
@@ -252,6 +259,7 @@ func (p *widget) viewRecord() {
 
 	for n, i := range state.mapKeys {
 		if i == state.Name {
+			//nolint:gosec // its for giu and has to be int32.
 			state.MapIndex = int32(n)
 		}
 	}
