@@ -1,4 +1,4 @@
-package hsstate
+package state
 
 // WindowState holds information about windows.
 type WindowState struct {

@@ -7,7 +7,7 @@ import (
 
 	g "github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
+	"github.com/gucio321/HellSpawner/pkg/common/state"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow"
 )
 
@@ -28,7 +28,7 @@ type Console struct {
 func Create(fontFixed *g.FontInfo, x, y float32, logFile *os.File) *Console {
 	result := &Console{
 		fontFixed:  fontFixed,
-		ToolWindow: toolwindow.New("Console", hsstate.ToolWindowTypeConsole, x, y),
+		ToolWindow: toolwindow.New("Console", state.ToolWindowTypeConsole, x, y),
 		logFile:    logFile,
 	}
 

@@ -5,15 +5,15 @@ import (
 	"log"
 
 	"github.com/gucio321/HellSpawner/pkg/common"
-	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
+	"github.com/gucio321/HellSpawner/pkg/common/state"
 )
 
 // State creates a new app state
-func (a *App) State() hsstate.AppState {
-	appState := hsstate.AppState{
+func (a *App) State() state.AppState {
+	appState := state.AppState{
 		ProjectPath:   a.project.GetProjectFilePath(),
-		EditorWindows: []hsstate.EditorState{},
-		ToolWindows:   []hsstate.ToolWindowState{},
+		EditorWindows: []state.EditorState{},
+		ToolWindows:   []state.ToolWindowState{},
 	}
 
 	for _, editor := range a.editors {
@@ -31,16 +31,16 @@ func (a *App) State() hsstate.AppState {
 }
 
 // RestoreAppState restores an app state
-func (a *App) RestoreAppState(state hsstate.AppState) {
-	for _, toolState := range state.ToolWindows {
+func (a *App) RestoreAppState(appState state.AppState) {
+	for _, toolState := range appState.ToolWindows {
 		var tool common.ToolWindow
 
 		switch toolState.Type {
-		case hsstate.ToolWindowTypeConsole:
+		case state.ToolWindowTypeConsole:
 			tool = a.console
-		case hsstate.ToolWindowTypeMPQExplorer:
+		case state.ToolWindowTypeMPQExplorer:
 			tool = a.mpqExplorer
-		case hsstate.ToolWindowTypeProjectExplorer:
+		case state.ToolWindowTypeProjectExplorer:
 			tool = a.projectExplorer
 		default:
 			continue
@@ -51,7 +51,7 @@ func (a *App) RestoreAppState(state hsstate.AppState) {
 		tool.Size(toolState.Width, toolState.Height)
 	}
 
-	for _, editorState := range state.EditorWindows {
+	for _, editorState := range appState.EditorWindows {
 		var path common.PathEntry
 
 		err := json.Unmarshal(editorState.Path, &path)

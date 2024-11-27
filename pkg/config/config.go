@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/gucio321/HellSpawner/pkg/common/hsenum"
-	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
+	"github.com/gucio321/HellSpawner/pkg/common/state"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 
 	"github.com/kirsle/configdir"
@@ -37,7 +37,7 @@ type Config struct {
 	AuxiliaryMpqPath        string                      `json:"auxiliaryMpqPath"`
 	ExternalListFile        string                      `json:"externalListFile"`
 	OpenMostRecentOnStartup bool                        `json:"openMostRecentOnStartup"`
-	ProjectStates           map[string]hsstate.AppState `json:"projectStates"`
+	ProjectStates           map[string]state.AppState `json:"projectStates"`
 	LoggingToFile           bool                        `json:"loggingToFile"`
 	LogFilePath             string                      `json:"logFile"`
 	Locale                  hsenum.Locale               `json:"locale"`
@@ -59,7 +59,7 @@ func generateDefaultConfig(path string) *Config {
 		Path:                    path,
 		RecentProjects:          []string{},
 		OpenMostRecentOnStartup: true,
-		ProjectStates:           make(map[string]hsstate.AppState),
+		ProjectStates:           make(map[string]state.AppState),
 		LoggingToFile:           false,
 		LogFilePath:             filepath.Join(filepath.Dir(path), "output.log"),
 		Locale:                  hsenum.LocaleEnglish,

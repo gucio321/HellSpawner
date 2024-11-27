@@ -3,7 +3,7 @@ package window
 import (
 	"github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
+	"github.com/gucio321/HellSpawner/pkg/common/state"
 )
 
 // Window represents project's window
@@ -20,11 +20,11 @@ func New(title string, x, y float32) *Window {
 }
 
 // State returns window's state
-func (t *Window) State() hsstate.WindowState {
+func (t *Window) State() state.WindowState {
 	x, y := t.CurrentPosition()
 	w, h := t.CurrentSize()
 
-	return hsstate.WindowState{
+	return state.WindowState{
 		Visible: t.Visible,
 		PosX:    x,
 		PosY:    y,

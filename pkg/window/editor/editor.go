@@ -11,7 +11,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 
 	"github.com/gucio321/HellSpawner/pkg/common"
-	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
+	"github.com/gucio321/HellSpawner/pkg/common/state"
 	"github.com/gucio321/HellSpawner/pkg/window"
 )
 
@@ -32,13 +32,13 @@ func New(path *common.PathEntry, x, y float32, project *hsproject.Project) *Edit
 }
 
 // State returns editors state
-func (e *Editor) State() hsstate.EditorState {
+func (e *Editor) State() state.EditorState {
 	path, err := json.Marshal(e.Path)
 	if err != nil {
 		log.Print("failed to marshal editor path to JSON: ", err)
 	}
 
-	result := hsstate.EditorState{
+	result := state.EditorState{
 		WindowState: e.Window.State(),
 		Path:        path,
 		Encoded:     e.EncodeState(),

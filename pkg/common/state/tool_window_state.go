@@ -1,4 +1,4 @@
-package hsstate
+package state
 
 // ToolWindowType represents type of tool window
 type ToolWindowType string

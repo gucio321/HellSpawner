@@ -3,7 +3,7 @@ package common
 import (
 	"github.com/AllenDang/giu"
 
-	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
+	"github.com/gucio321/HellSpawner/pkg/common/state"
 )
 
 // EditorWindow represents editor window
@@ -24,7 +24,7 @@ type EditorWindow interface {
 	// BringToFront brings this editor to the front of the application, giving it focus
 	BringToFront()
 	// State returns the current state of this editor, in a JSON-serializable struct
-	State() hsstate.EditorState
+	State() state.EditorState
 	// Save writes any changes made in the editor to the file that is open in the editor.
 	Save()
 

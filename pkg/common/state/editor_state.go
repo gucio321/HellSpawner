@@ -1,4 +1,4 @@
-package hsstate
+package state
 
 // EditorState holds information about the state of an open editor
 type EditorState struct {
