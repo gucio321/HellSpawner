@@ -1,5 +1,5 @@
-// Package hsprojectpropertiesdialog contains project properties dialog's data
-package hsprojectpropertiesdialog
+// Package projectproperties contains project properties dialog's data
+package projectproperties
 
 import (
 	"fmt"
