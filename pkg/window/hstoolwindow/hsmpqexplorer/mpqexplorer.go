@@ -19,7 +19,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
 	"github.com/gucio321/HellSpawner/pkg/config"
-	"github.com/gucio321/HellSpawner/hswidget"
+	"github.com/gucio321/HellSpawner/pkg/widgets"
 	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow"
 )
 
@@ -146,7 +146,7 @@ func (m *MPQExplorer) renderNodes(pathEntry *common.PathEntry) g.Widget {
 
 		return g.Layout{
 			g.Selectable(pathEntry.Name + id),
-			hswidget.OnDoubleClick(func() { m.fileSelectedCallback(pathEntry) }),
+			widgets.OnDoubleClick(func() { m.fileSelectedCallback(pathEntry) }),
 			g.ContextMenu().Layout(g.Layout{
 				g.Selectable("Copy to Project").OnClick(func() {
 					m.copyToProject(pathEntry)

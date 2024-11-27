@@ -18,7 +18,7 @@ import (
 	"github.com/faiface/beep/wav"
 
 	"github.com/gucio321/HellSpawner/pkg/config"
-	"github.com/gucio321/HellSpawner/hswidget"
+	"github.com/gucio321/HellSpawner/pkg/widgets"
 	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
 
 	g "github.com/AllenDang/giu"
@@ -93,7 +93,7 @@ func (s *SoundEditor) Build() {
 		Size(mainWindowW, mainWindowH).
 		Layout(g.Layout{
 			g.Row(
-				hswidget.PlayPauseButton("##"+s.Path.GetUniqueID()+"playPause", &isPlaying, s.textureLoader).
+				widgets.PlayPauseButton("##"+s.Path.GetUniqueID()+"playPause", &isPlaying, s.textureLoader).
 					OnPlayClicked(s.play).OnPauseClicked(s.stop).Size(btnSize, btnSize),
 				g.ProgressBar(progress).Size(-1, progressBarHeight).
 					Overlay(fmt.Sprintf("%d:%02d / %d:%02d",

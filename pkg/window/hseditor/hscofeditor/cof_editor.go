@@ -15,7 +15,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
 
-	"github.com/gucio321/HellSpawner/hswidget/cofwidget"
+	"github.com/gucio321/HellSpawner/pkg/widgets/cofwidget"
 )
 
 // static check, to ensure, if cof editor implemented editoWindow

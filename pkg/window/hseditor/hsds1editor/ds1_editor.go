@@ -14,7 +14,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/config"
-	"github.com/gucio321/HellSpawner/hswidget/ds1widget"
+	"github.com/gucio321/HellSpawner/pkg/widgets/ds1widget"
 	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
 )
 

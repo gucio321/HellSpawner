@@ -13,7 +13,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
-	"github.com/gucio321/HellSpawner/hswidget/fonttablewidget"
+	"github.com/gucio321/HellSpawner/pkg/widgets/fonttablewidget"
 	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
 )
 

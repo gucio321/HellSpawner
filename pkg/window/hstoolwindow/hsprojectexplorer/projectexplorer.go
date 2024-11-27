@@ -21,7 +21,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/common/hsstate"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
-	"github.com/gucio321/HellSpawner/hswidget"
+	"github.com/gucio321/HellSpawner/pkg/widgets"
 	"github.com/gucio321/HellSpawner/pkg/window/hstoolwindow"
 )
 
@@ -213,7 +213,7 @@ func (m *ProjectExplorer) createFileTreeItem(pathEntry *common.PathEntry) g.Widg
 	} else {
 		layout = append(layout,
 			g.Selectable(pathEntry.Name+id),
-			hswidget.OnDoubleClick(func() { m.fileSelectedCallback(pathEntry) }),
+			widgets.OnDoubleClick(func() { m.fileSelectedCallback(pathEntry) }),
 		)
 	}
 
