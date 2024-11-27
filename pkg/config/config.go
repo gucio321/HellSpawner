@@ -9,9 +9,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/gucio321/HellSpawner/pkg/common/hsenum"
-	"github.com/gucio321/HellSpawner/pkg/common/state"
+	"github.com/gucio321/HellSpawner/pkg/common/enum"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
+	"github.com/gucio321/HellSpawner/pkg/common/state"
 
 	"github.com/kirsle/configdir"
 )
@@ -31,17 +31,17 @@ const (
 
 // Config represents HellSpawner's config
 type Config struct {
-	Path                    string                      `json:"-"`
-	RecentProjects          []string                    `json:"recentProjects"`
-	AbyssEnginePath         string                      `json:"abyssEnginePath"`
-	AuxiliaryMpqPath        string                      `json:"auxiliaryMpqPath"`
-	ExternalListFile        string                      `json:"externalListFile"`
-	OpenMostRecentOnStartup bool                        `json:"openMostRecentOnStartup"`
+	Path                    string                    `json:"-"`
+	RecentProjects          []string                  `json:"recentProjects"`
+	AbyssEnginePath         string                    `json:"abyssEnginePath"`
+	AuxiliaryMpqPath        string                    `json:"auxiliaryMpqPath"`
+	ExternalListFile        string                    `json:"externalListFile"`
+	OpenMostRecentOnStartup bool                      `json:"openMostRecentOnStartup"`
 	ProjectStates           map[string]state.AppState `json:"projectStates"`
-	LoggingToFile           bool                        `json:"loggingToFile"`
-	LogFilePath             string                      `json:"logFile"`
-	Locale                  hsenum.Locale               `json:"locale"`
-	BGColor                 color.RGBA                  `json:"bgColor"`
+	LoggingToFile           bool                      `json:"loggingToFile"`
+	LogFilePath             string                    `json:"logFile"`
+	Locale                  enum.Locale               `json:"locale"`
+	BGColor                 color.RGBA                `json:"bgColor"`
 }
 
 // GetConfigPath returns default config path
@@ -62,7 +62,7 @@ func generateDefaultConfig(path string) *Config {
 		ProjectStates:           make(map[string]state.AppState),
 		LoggingToFile:           false,
 		LogFilePath:             filepath.Join(filepath.Dir(path), "output.log"),
-		Locale:                  hsenum.LocaleEnglish,
+		Locale:                  enum.LocaleEnglish,
 		BGColor:                 hsutil.Color(DefaultBGColor),
 	}
 
