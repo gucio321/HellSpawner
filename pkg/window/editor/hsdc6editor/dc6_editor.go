@@ -15,7 +15,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/widgets/dc6widget"
 	"github.com/gucio321/HellSpawner/pkg/widgets/selectpalettewidget"
-	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )
 
 // static check, to ensure, if dc6 editor implemented editoWindow
@@ -23,7 +23,7 @@ var _ common.EditorWindow = &DC6Editor{}
 
 // DC6Editor represents a dc6 editor
 type DC6Editor struct {
-	*hseditor.Editor
+	*editor.Editor
 	dc6                 *d2dc6.DC6
 	textureLoader       common.TextureLoader
 	config              *config.Config
@@ -45,7 +45,7 @@ func Create(config *config.Config,
 	}
 
 	result := &DC6Editor{
-		Editor:        hseditor.New(pathEntry, x, y, project),
+		Editor:        editor.New(pathEntry, x, y, project),
 		dc6:           dc6,
 		textureLoader: textureLoader,
 		selectPalette: false,

@@ -14,7 +14,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/widgets/palettemapwidget"
-	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )
 
 // static check, to ensure, if palette map editor implemented editoWindow
@@ -22,7 +22,7 @@ var _ common.EditorWindow = &PaletteMapEditor{}
 
 // PaletteMapEditor represents a palette map editor
 type PaletteMapEditor struct {
-	*hseditor.Editor
+	*editor.Editor
 	pl2           *d2pl2.PL2
 	textureLoader common.TextureLoader
 	state         []byte
@@ -40,7 +40,7 @@ func Create(_ *config.Config,
 	}
 
 	result := &PaletteMapEditor{
-		Editor:        hseditor.New(pathEntry, x, y, project),
+		Editor:        editor.New(pathEntry, x, y, project),
 		pl2:           pl2,
 		textureLoader: textureLoader,
 		state:         state,

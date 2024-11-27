@@ -15,7 +15,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/widgets/ds1widget"
-	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )
 
 // static check if DS1Editor implemented common.EditorWindow
@@ -23,7 +23,7 @@ var _ common.EditorWindow = &DS1Editor{}
 
 // DS1Editor represents ds1 editor
 type DS1Editor struct {
-	*hseditor.Editor
+	*editor.Editor
 	ds1                 *d2ds1.DS1
 	deleteButtonTexture *g.Texture
 	textureLoader       common.TextureLoader
@@ -42,7 +42,7 @@ func Create(_ *config.Config,
 	}
 
 	result := &DS1Editor{
-		Editor:        hseditor.New(pathEntry, x, y, project),
+		Editor:        editor.New(pathEntry, x, y, project),
 		ds1:           ds1,
 		textureLoader: tl,
 		state:         state,

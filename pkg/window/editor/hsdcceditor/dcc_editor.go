@@ -16,7 +16,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/widgets/dccwidget"
 	"github.com/gucio321/HellSpawner/pkg/widgets/selectpalettewidget"
-	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )
 
 // static check, to ensure, if dc6 editor implemented editoWindow
@@ -24,7 +24,7 @@ var _ common.EditorWindow = &DCCEditor{}
 
 // DCCEditor represents a new dcc editor
 type DCCEditor struct {
-	*hseditor.Editor
+	*editor.Editor
 	dcc                 *d2dcc.DCC
 	config              *config.Config
 	selectPalette       bool
@@ -46,7 +46,7 @@ func Create(config *config.Config,
 	}
 
 	result := &DCCEditor{
-		Editor:        hseditor.New(pathEntry, x, y, project),
+		Editor:        editor.New(pathEntry, x, y, project),
 		dcc:           dcc,
 		config:        config,
 		selectPalette: false,

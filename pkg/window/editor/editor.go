@@ -1,4 +1,4 @@
-package hseditor
+package editor
 
 import (
 	"bytes"

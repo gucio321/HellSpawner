@@ -12,7 +12,7 @@ import (
 
 	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/config"
-	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )
 
 const (
@@ -26,7 +26,7 @@ var _ common.EditorWindow = &FontEditor{}
 
 // FontEditor represents a font editor
 type FontEditor struct {
-	*hseditor.Editor
+	*editor.Editor
 	*hsfont.Font
 }
 
@@ -42,7 +42,7 @@ func Create(_ *config.Config,
 	}
 
 	result := &FontEditor{
-		Editor: hseditor.New(pathEntry, x, y, project),
+		Editor: editor.New(pathEntry, x, y, project),
 		Font:   font,
 	}
 

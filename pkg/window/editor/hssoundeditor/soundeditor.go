@@ -19,7 +19,7 @@ import (
 
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/widgets"
-	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor"
 
 	g "github.com/AllenDang/giu"
 )
@@ -36,7 +36,7 @@ var _ common.EditorWindow = &SoundEditor{}
 
 // SoundEditor represents a sound editor
 type SoundEditor struct {
-	*hseditor.Editor
+	*editor.Editor
 
 	streamer      beep.StreamSeekCloser
 	control       *beep.Ctrl
@@ -62,7 +62,7 @@ func Create(_ *config.Config,
 	}
 
 	result := &SoundEditor{
-		Editor:        hseditor.New(pathEntry, x, y, project),
+		Editor:        editor.New(pathEntry, x, y, project),
 		file:          filepath.Base(pathEntry.FullPath),
 		streamer:      streamer,
 		control:       control,

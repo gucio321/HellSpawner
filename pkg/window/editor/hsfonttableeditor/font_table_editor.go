@@ -14,7 +14,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/widgets/fonttablewidget"
-	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )
 
 const (
@@ -26,7 +26,7 @@ var _ common.EditorWindow = &FontTableEditor{}
 
 // FontTableEditor represents font table editor
 type FontTableEditor struct {
-	*hseditor.Editor
+	*editor.Editor
 	fontTable     *d2font.Font
 	state         []byte
 	textureLoader common.TextureLoader
@@ -44,7 +44,7 @@ func Create(_ *config.Config,
 	}
 
 	result := &FontTableEditor{
-		Editor:        hseditor.New(pathEntry, x, y, project),
+		Editor:        editor.New(pathEntry, x, y, project),
 		fontTable:     table,
 		state:         state,
 		textureLoader: tl,

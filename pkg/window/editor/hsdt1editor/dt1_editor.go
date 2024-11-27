@@ -16,7 +16,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/widgets/dt1widget"
 	"github.com/gucio321/HellSpawner/pkg/widgets/selectpalettewidget"
-	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )
 
 // static check, to ensure, if dt1 editor implemented editoWindow
@@ -24,7 +24,7 @@ var _ common.EditorWindow = &DT1Editor{}
 
 // DT1Editor represents a dt1 editor
 type DT1Editor struct {
-	*hseditor.Editor
+	*editor.Editor
 	dt1                 *d2dt1.DT1
 	textureLoader       common.TextureLoader
 	config              *config.Config
@@ -46,7 +46,7 @@ func Create(config *config.Config,
 	}
 
 	result := &DT1Editor{
-		Editor:        hseditor.New(pathEntry, x, y, project),
+		Editor:        editor.New(pathEntry, x, y, project),
 		dt1:           dt1,
 		config:        config,
 		selectPalette: false,

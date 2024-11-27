@@ -14,7 +14,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/widgets/stringtablewidget"
-	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )
 
 const (
@@ -26,7 +26,7 @@ var _ common.EditorWindow = &StringTableEditor{}
 
 // StringTableEditor represents a string table editor
 type StringTableEditor struct {
-	*hseditor.Editor
+	*editor.Editor
 	dict  d2tbl.TextDictionary
 	state []byte
 }
@@ -43,7 +43,7 @@ func Create(_ *config.Config,
 	}
 
 	result := &StringTableEditor{
-		Editor: hseditor.New(pathEntry, x, y, project),
+		Editor: editor.New(pathEntry, x, y, project),
 		dict:   dict,
 		state:  state,
 	}

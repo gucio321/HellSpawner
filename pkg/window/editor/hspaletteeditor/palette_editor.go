@@ -16,7 +16,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/config"
 	"github.com/gucio321/HellSpawner/pkg/widgets/palettegrideditorwidget"
 	"github.com/gucio321/HellSpawner/pkg/widgets/palettegridwidget"
-	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )
 
 // static check, to ensure, if palette editor implemented editoWindow
@@ -24,7 +24,7 @@ var _ common.EditorWindow = &PaletteEditor{}
 
 // PaletteEditor represents a palette editor
 type PaletteEditor struct {
-	*hseditor.Editor
+	*editor.Editor
 	palette       d2interface.Palette
 	textureLoader common.TextureLoader
 	state         []byte
@@ -43,7 +43,7 @@ func Create(
 	}
 
 	result := &PaletteEditor{
-		Editor:        hseditor.New(pathEntry, x, y, project),
+		Editor:        editor.New(pathEntry, x, y, project),
 		palette:       palette,
 		textureLoader: tl,
 		state:         state,

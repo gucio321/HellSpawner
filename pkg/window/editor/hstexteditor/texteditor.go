@@ -12,7 +12,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
-	"github.com/gucio321/HellSpawner/pkg/window/hseditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor"
 )
 
 const (
@@ -26,7 +26,7 @@ var _ common.EditorWindow = &TextEditor{}
 
 // TextEditor represents a text editor
 type TextEditor struct {
-	*hseditor.Editor
+	*editor.Editor
 
 	text      string
 	tableView bool
@@ -41,7 +41,7 @@ func Create(_ *config.Config,
 	_ []byte,
 	data *[]byte, x, y float32, project *hsproject.Project) (common.EditorWindow, error) {
 	result := &TextEditor{
-		Editor: hseditor.New(pathEntry, x, y, project),
+		Editor: editor.New(pathEntry, x, y, project),
 		text:   string(*data),
 	}
 
