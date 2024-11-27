@@ -1,5 +1,5 @@
-// Package hstexteditor contains text editor's data
-package hstexteditor
+// Package text contains text editor's data
+package text
 
 import (
 	"log"
