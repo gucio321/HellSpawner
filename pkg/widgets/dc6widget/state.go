@@ -132,7 +132,7 @@ func (p *widget) initState() {
 			framesPerDirection: p.dc6.FramesPerDirection,
 		},
 		tiledState: tiledState{
-			Width:  int32(p.dc6.FramesPerDirection),
+			Width:  int32(p.dc6.FramesPerDirection), //nolint:gosec // we need to have it in int32.
 			Height: 1,
 		},
 
@@ -192,7 +192,6 @@ func (p *widget) initState() {
 		textures := make([]*giu.Texture, totalFrames)
 
 		for frameIndex := 0; frameIndex < totalFrames; frameIndex++ {
-			frameIndex := frameIndex
 			p.textureLoader.CreateTextureFromARGB(newState.rgb[frameIndex], func(t *giu.Texture) {
 				textures[frameIndex] = t
 			})
@@ -214,6 +213,7 @@ func (p *widget) runPlayer(state *widgetState) {
 			continue
 		}
 
+		//nolint:gosec // on one hand it comes from od2 and we have no control over that. On the other hand we need to pas it to giu.
 		numFrames := int32(p.dc6.FramesPerDirection - 1)
 		isLastFrame := state.Controls.Frame == numFrames
 
@@ -236,7 +236,8 @@ func (p *widget) runPlayer(state *widgetState) {
 			state.Controls.Frame--
 		}
 
-		state.Controls.Frame = int32(hsutil.Wrap(int(state.Controls.Frame), int(p.dc6.FramesPerDirection)))
+		//nolint:gosec // we need to have it in int32.
+		state.Controls.Frame = hsutil.Wrap(state.Controls.Frame, int32(p.dc6.FramesPerDirection))
 
 		// next, check for stopping/repeat
 		isStoppingFrame := (state.Controls.Frame == 0) || (state.Controls.Frame == numFrames)
@@ -249,17 +250,21 @@ func (p *widget) runPlayer(state *widgetState) {
 
 func (p *widget) recalculateTiledViewWidth(state *widgetState) {
 	// the area of our rectangle must be less or equal than FramesPerDirection
+	//nolint:gosec // we need to have it in int32.
 	state.Width = int32(p.dc6.FramesPerDirection) / state.Height
 	p.createImage(state)
 }
 
 func (p *widget) recalculateTiledViewHeight(state *widgetState) {
 	// the area of our rectangle must be less or equal than FramesPerDirection
+	//nolint:gosec // we need to have it in int32.
 	state.tiledState.Height = int32(p.dc6.FramesPerDirection) / state.Width
 	p.createImage(state)
 }
 
 func (p *widget) createImage(state *widgetState) {
+	//nolint:gosec // we need to have it in int32
+	// (btw there is no good solution as Direction is int32 on the other hand so can't cast to uint).
 	firstFrame := state.Controls.Direction * int32(p.dc6.FramesPerDirection)
 
 	grids := make([]*gim.Grid, 0)

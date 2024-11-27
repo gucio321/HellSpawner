@@ -80,6 +80,7 @@ func (p *widget) Build() {
 func (p *widget) makeViewerLayout() giu.Layout {
 	viewerState := p.getState()
 
+	//nolint:gosec // we need to cast this here
 	imageScale := uint32(viewerState.Controls.Scale)
 	curFrameIndex := int(viewerState.Controls.Frame) + (int(viewerState.Controls.Direction) * int(p.dc6.FramesPerDirection))
 	dirIdx := int(viewerState.Controls.Direction)
@@ -120,10 +121,12 @@ func (p *widget) makeViewerLayout() giu.Layout {
 		giu.Custom(func() {
 			imgui.BeginGroup()
 			if p.dc6.Directions > 1 {
+				//nolint:gosec // imgui magic here.
 				imgui.SliderInt("Direction", &viewerState.Controls.Direction, 0, int32(p.dc6.Directions-1))
 			}
 
 			if p.dc6.FramesPerDirection > 1 {
+				//nolint:gosec // imgui magic here.
 				imgui.SliderInt("Frames", &viewerState.Controls.Frame, 0, int32(p.dc6.FramesPerDirection-1))
 			}
 
@@ -167,13 +170,13 @@ func (p *widget) makePlayerLayout(state *widgetState) giu.Layout {
 			giu.Button("Export GIF##"+p.id+"exportGif").OnClick(func() {
 				err := p.exportGif(state)
 				if err != nil {
-					dialog.Message(err.Error()).Error()
+					dialog.Message("%v", err).Error()
 				}
 			}),
 			giu.Button("Export Frames (PNG)##"+p.id+"exportpng").OnClick(func() {
 				err := p.exportPng(state)
 				if err != nil {
-					dialog.Message(err.Error()).Error()
+					dialog.Message("%v", err).Error()
 				}
 			}),
 		),
@@ -199,6 +202,7 @@ func (p *widget) makeTiledViewLayout(state *widgetState) giu.Layout {
 }
 
 func (p *widget) exportGif(state *widgetState) error {
+	//nolint:gosec // we need to cast this here
 	fpd := int32(p.dc6.FramesPerDirection)
 	firstFrame := state.Controls.Direction * fpd
 	images := state.rgb[firstFrame : firstFrame+fpd]
