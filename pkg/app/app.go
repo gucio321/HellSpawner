@@ -17,7 +17,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
-	"github.com/gucio321/HellSpawner/pkg/window/popup/hsaboutdialog"
+	"github.com/gucio321/HellSpawner/pkg/window/popup/aboutdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/hspreferencesdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/hsprojectpropertiesdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsconsole"
@@ -73,7 +73,7 @@ type App struct {
 	abyssWrapper *abysswrapper.AbyssWrapper
 	logFile      *os.File
 
-	aboutDialog             *hsaboutdialog.AboutDialog
+	aboutDialog             *aboutdialog.AboutDialog
 	preferencesDialog       *hspreferencesdialog.PreferencesDialog
 	projectPropertiesDialog *hsprojectpropertiesdialog.ProjectPropertiesDialog
 

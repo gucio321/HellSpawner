@@ -32,7 +32,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/editor/palette"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/sound"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/text"
-	"github.com/gucio321/HellSpawner/pkg/window/popup/hsaboutdialog"
+	"github.com/gucio321/HellSpawner/pkg/window/popup/aboutdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/hspreferencesdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/hsprojectpropertiesdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsconsole"
@@ -191,7 +191,7 @@ func (a *App) setupConsole() {
 
 func (a *App) setupDialogs() error {
 	// Register the dialogs
-	about, err := hsaboutdialog.Create(a.TextureLoader, a.diabloRegularFont, a.diabloBoldFont, a.fontFixedSmall)
+	about, err := aboutdialog.Create(a.TextureLoader, a.diabloRegularFont, a.diabloBoldFont, a.fontFixedSmall)
 	if err != nil {
 		return fmt.Errorf("error creating an about dialog: %w", err)
 	}

@@ -1,5 +1,5 @@
-// Package hsaboutdialog provides the "About" window implementation, which shows information about hellspawner.
-package hsaboutdialog
+// Package aboutdialog provides the "About" window implementation, which shows information about hellspawner.
+package aboutdialog
 
 import (
 	"fmt"
