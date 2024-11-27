@@ -18,7 +18,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/editor/dt1"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/fonttable"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/palettemap"
-	"github.com/gucio321/HellSpawner/pkg/window/editor/hsstringtableeditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor/stringtableeditor"
 
 	"github.com/gucio321/HellSpawner/pkg/assets"
 	"github.com/gucio321/HellSpawner/pkg/common/hsenum"

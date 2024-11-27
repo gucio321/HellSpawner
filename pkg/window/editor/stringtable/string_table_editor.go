@@ -1,5 +1,5 @@
-// Package hsstringtableeditor contains string tables editor's data
-package hsstringtableeditor
+// Package stringtableeditor contains string tables editor's data
+package stringtableeditor
 
 import (
 	"fmt"
