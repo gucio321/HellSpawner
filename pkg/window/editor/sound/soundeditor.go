@@ -1,5 +1,5 @@
-// Package hssoundeditor represents a soundEditor's window
-package hssoundeditor
+// Package sound represents a soundEditor's window
+package sound
 
 import (
 	"bytes"

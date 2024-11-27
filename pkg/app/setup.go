@@ -33,7 +33,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/editor/dcc"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/font"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/palette"
-	"github.com/gucio321/HellSpawner/pkg/window/editor/hssoundeditor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor/sound"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/hstexteditor"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsconsole"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsmpqexplorer"
@@ -126,7 +126,7 @@ func (a *App) setupAutoSave() {
 
 func (a *App) registerEditors() {
 	a.editorConstructors[hsfiletypes.FileTypeText] = hstexteditor.Create
-	a.editorConstructors[hsfiletypes.FileTypeAudio] = hssoundeditor.Create
+	a.editorConstructors[hsfiletypes.FileTypeAudio] = sound.Create
 	a.editorConstructors[hsfiletypes.FileTypePalette] = palette.Create
 	a.editorConstructors[hsfiletypes.FileTypeAnimationData] = animdata.Create
 	a.editorConstructors[hsfiletypes.FileTypeDC6] = dc6.Create
