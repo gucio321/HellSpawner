@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"image/color"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -91,7 +90,7 @@ func Load(optionalPath string) *Config {
 
 	var data []byte
 
-	if data, err = ioutil.ReadFile(filepath.Clean(configFile)); err != nil {
+	if data, err = os.ReadFile(filepath.Clean(configFile)); err != nil {
 		return generateDefaultConfig(configFile)
 	}
 
@@ -113,7 +112,7 @@ func (c *Config) Save() error {
 		return fmt.Errorf("cannot marshal config: %w", err)
 	}
 
-	if err := ioutil.WriteFile(c.Path, data, os.FileMode(newFileMode)); err != nil {
+	if err := os.WriteFile(c.Path, data, os.FileMode(newFileMode)); err != nil {
 		return fmt.Errorf("cannot write config at %s: %w", c.Path, err)
 	}
 
@@ -163,7 +162,7 @@ func (c *Config) GetAuxMPQs() []string {
 
 	result := make([]string, 0)
 
-	err := filepath.Walk(c.AuxiliaryMpqPath, func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(c.AuxiliaryMpqPath, func(path string, _ os.FileInfo, err error) error {
 		if err != nil {
 			return nil
 		}
