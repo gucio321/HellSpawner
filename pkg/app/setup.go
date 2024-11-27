@@ -15,7 +15,7 @@ import (
 	g "github.com/AllenDang/giu"
 
 	"github.com/gucio321/HellSpawner/pkg/window/editor/ds1"
-	"github.com/gucio321/HellSpawner/pkg/window/editor/hsdt1editor"
+	"github.com/gucio321/HellSpawner/pkg/window/editor/dt1"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/hsfonttableeditor"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/hspalettemapeditor"
 	"github.com/gucio321/HellSpawner/pkg/window/editor/hsstringtableeditor"
@@ -133,7 +133,7 @@ func (a *App) registerEditors() {
 	a.editorConstructors[hsfiletypes.FileTypeDCC] = dcc.Create
 	a.editorConstructors[hsfiletypes.FileTypeCOF] = cof.Create
 	a.editorConstructors[hsfiletypes.FileTypeFont] = hsfonteditor.Create
-	a.editorConstructors[hsfiletypes.FileTypeDT1] = hsdt1editor.Create
+	a.editorConstructors[hsfiletypes.FileTypeDT1] = dt1.Create
 	a.editorConstructors[hsfiletypes.FileTypePL2] = hspalettemapeditor.Create
 	a.editorConstructors[hsfiletypes.FileTypeTBLStringTable] = hsstringtableeditor.Create
 	a.editorConstructors[hsfiletypes.FileTypeTBLFontTable] = hsfonttableeditor.Create

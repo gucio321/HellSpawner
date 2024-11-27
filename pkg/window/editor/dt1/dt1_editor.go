@@ -1,5 +1,5 @@
-// Package hsdt1editor contains dt1 editor's data
-package hsdt1editor
+// Package dt1 contains dt1 editor's data
+package dt1
 
 import (
 	"fmt"
