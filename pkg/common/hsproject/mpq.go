@@ -16,7 +16,7 @@ import (
 )
 
 // GetMPQFileNodes returns mpq's node
-func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, config *config.Config) *common.PathEntry {
+func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, cfg *config.Config) *common.PathEntry {
 	result := &common.PathEntry{
 		Name:        filepath.Base(mpq.Path()),
 		IsDirectory: true,
@@ -26,7 +26,7 @@ func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, config *config.Config
 
 	files, err := mpq.Listfile()
 	if err != nil {
-		files, err = p.searchForMpqFiles(mpq, config)
+		files, err = p.searchForMpqFiles(mpq, cfg)
 		if err != nil {
 			return result
 		}
@@ -57,8 +57,7 @@ func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, config *config.Config
 					IsDirectory: elemIdx < len(elements)-1,
 				}
 
-				pathNodes[strings.ToLower(oldPath)].Children =
-					append(pathNodes[strings.ToLower(oldPath)].Children, pathNodes[strings.ToLower(path)])
+				pathNodes[strings.ToLower(oldPath)].Children = append(pathNodes[strings.ToLower(oldPath)].Children, pathNodes[strings.ToLower(path)])
 			}
 		}
 	}
@@ -69,11 +68,11 @@ func (p *Project) GetMPQFileNodes(mpq d2interface.Archive, config *config.Config
 }
 
 // searchForMpqFiles searches for files in MPQ's without listfiles using a list of known filenames
-func (p *Project) searchForMpqFiles(mpq d2interface.Archive, config *config.Config) ([]string, error) {
+func (p *Project) searchForMpqFiles(mpq d2interface.Archive, cfg *config.Config) ([]string, error) {
 	var files []string
 
-	if config.ExternalListFile != "" {
-		file, err := os.Open(config.ExternalListFile)
+	if cfg.ExternalListFile != "" {
+		file, err := os.Open(cfg.ExternalListFile)
 		if err != nil {
 			return files, errors.New("couldn't open listfile")
 		}

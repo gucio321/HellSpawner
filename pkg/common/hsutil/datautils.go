@@ -13,7 +13,10 @@ import (
 	"github.com/OpenDiablo2/dialog"
 )
 
-const milliseconds = 1000
+const (
+	milliseconds      = 1000
+	newFilePermission = 0o600
+)
 
 // BoolToInt converts bool into 32-bit integer
 // if b is true, then returns 1, else 0
@@ -26,11 +29,11 @@ func BoolToInt(b bool) int32 {
 }
 
 // Wrap integer to max: wrap(450, 360) == 90
-func Wrap(x, max int) int {
-	wrapped := x % max
+func Wrap(x, maxV int) int {
+	wrapped := x % maxV
 
 	if wrapped < 0 {
-		return max + wrapped
+		return maxV + wrapped
 	}
 
 	return wrapped
@@ -53,7 +56,7 @@ func ExportToGif(images []*image.RGBA, delay int32) error {
 		// (goanigiffy does this by calling gif.Encode and gif.Decode).
 		g := bytes.NewBuffer([]byte{})
 
-		err := gif.Encode(g, img, nil) // nolint:govet // I want to reuse this ;-)
+		err = gif.Encode(g, img, nil)
 		if err != nil {
 			return fmt.Errorf("error encoding gif: %w", err)
 		}
@@ -74,8 +77,7 @@ func ExportToGif(images []*image.RGBA, delay int32) error {
 	}
 
 	defer func() {
-		err := file.Close() // nolint:govet // I want to re-use err
-		if err != nil {
+		if err := file.Close(); err != nil {
 			log.Printf("Error closing file %s: %v", filePath, err)
 		}
 	}()
@@ -103,7 +105,9 @@ func ExportToPng(images []*image.RGBA) error {
 			return fmt.Errorf("error encoding gif: %w", err)
 		}
 
-		if err := os.WriteFile(filepath.Join(filepath.Dir(filePath), fmt.Sprintf("%d%s", i, filepath.Base(filePath))), g.Bytes(), 0o644); err != nil {
+		if err := os.WriteFile(
+			filepath.Join(filepath.Dir(filePath), fmt.Sprintf("%d%s", i, filepath.Base(filePath))),
+			g.Bytes(), newFilePermission); err != nil {
 			return fmt.Errorf("error saving to output png: %w", err)
 		}
 	}

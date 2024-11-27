@@ -3,7 +3,6 @@ package common
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 
 	"github.com/OpenDiablo2/OpenDiablo2/d2common/d2fileformats/d2mpq"
@@ -67,7 +66,7 @@ func (p *PathEntry) GetFileBytes() ([]byte, error) {
 			return nil, fmt.Errorf("cannot get informations about file %s: %w", p.FullPath, err)
 		}
 
-		data, err := ioutil.ReadFile(p.FullPath)
+		data, err := os.ReadFile(p.FullPath)
 		if err != nil {
 			return nil, fmt.Errorf("error reading file: %w", err)
 		}
@@ -103,7 +102,7 @@ func (p *PathEntry) WriteFile(data []byte) error {
 		return fmt.Errorf("cannot get informations about file %s: %w", p.FullPath, err)
 	}
 
-	err = ioutil.WriteFile(p.FullPath, data, info.Mode())
+	err = os.WriteFile(p.FullPath, data, info.Mode())
 	if err != nil {
 		return fmt.Errorf("cannot write to file at %s: %w", p.FullPath, err)
 	}

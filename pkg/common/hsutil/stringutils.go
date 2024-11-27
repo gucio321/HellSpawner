@@ -31,7 +31,7 @@ func SplitIntoLinesWithMaxWidth(fullSentence string, maxChars int) []string {
 		line += word
 	}
 
-	if len(line) > 0 {
+	if line != "" {
 		lines = append(lines, line)
 	}
 

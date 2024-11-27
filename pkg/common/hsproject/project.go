@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -89,7 +88,7 @@ func (p *Project) Save() error {
 		return fmt.Errorf("cannot marshal project: %w", err)
 	}
 
-	if err := ioutil.WriteFile(p.filePath, file, os.FileMode(newFileMode)); err != nil {
+	if err := os.WriteFile(p.filePath, file, os.FileMode(newFileMode)); err != nil {
 		return fmt.Errorf("cannot write to file %s: %w", p.filePath, err)
 	}
 
@@ -103,9 +102,9 @@ func (p *Project) Save() error {
 }
 
 // ValidateAuxiliaryMPQs creates auxiliary mpq's list
-func (p *Project) ValidateAuxiliaryMPQs(config *config.Config) error {
+func (p *Project) ValidateAuxiliaryMPQs(cfg *config.Config) error {
 	for idx := range p.AuxiliaryMPQs {
-		realPath := filepath.Join(config.AuxiliaryMpqPath, p.AuxiliaryMPQs[idx])
+		realPath := filepath.Join(cfg.AuxiliaryMpqPath, p.AuxiliaryMPQs[idx])
 		if _, err := os.Stat(realPath); os.IsNotExist(err) {
 			return fmt.Errorf("file not found at %s", realPath)
 		}
@@ -122,7 +121,7 @@ func LoadFromFile(fileName string) (*Project, error) {
 
 	var result *Project
 
-	if file, err = ioutil.ReadFile(filepath.Clean(fileName)); err != nil {
+	if file, err = os.ReadFile(filepath.Clean(fileName)); err != nil {
 		return nil, fmt.Errorf("cannot read project's file %s: %w", fileName, err)
 	}
 
@@ -181,7 +180,7 @@ func (p *Project) GetFileStructure() (*common.PathEntry, error) {
 }
 
 func (p *Project) getFileNodes(path string, entry *common.PathEntry) error {
-	files, err := ioutil.ReadDir(path)
+	files, err := os.ReadDir(path)
 	if err != nil {
 		return fmt.Errorf("cannot read dir, %w", err)
 	}
@@ -273,9 +272,8 @@ func getNextUniqueNewPath(fmtPath string, maxAttempt int) (fileName string, err 
 }
 
 func logErr(fmtErr string, args ...interface{}) {
-	msg := fmt.Sprintf(fmtErr, args...)
-	log.Print(msg)
-	dialog.Message(msg).Error()
+	log.Printf(fmtErr, args...)
+	dialog.Message(fmtErr, args...).Error()
 }
 
 // CreateNewFolder creates a new directory
@@ -307,8 +305,8 @@ func (p *Project) CreateNewFile(fileType hsfiletypes.FileType, path *common.Path
 
 	fmtFile := fmt.Sprintf("untitled%s", fileType.FileExtension())
 	fmtPath := filepath.Join(basePath, fmtFile)
-	fileName, err := getNextUniqueNewPath(fmtPath, maxNewFileAttempts)
 
+	fileName, err := getNextUniqueNewPath(fmtPath, maxNewFileAttempts)
 	if err != nil {
 		logErr("%s", err)
 		return err
@@ -326,7 +324,7 @@ func (p *Project) CreateNewFile(fileType hsfiletypes.FileType, path *common.Path
 			return fmt.Errorf("no marshaller for file %s", fileName)
 		}
 
-		if err = ioutil.WriteFile(fileName, m.Marshal(), os.FileMode(newFileMode)); err != nil {
+		if err = os.WriteFile(fileName, m.Marshal(), os.FileMode(newFileMode)); err != nil {
 			return fmt.Errorf("cannot write to file %s: %w", fileName, err)
 		}
 	}
@@ -341,7 +339,7 @@ func (p *Project) CreateNewFile(fileType hsfiletypes.FileType, path *common.Path
 }
 
 // ReloadAuxiliaryMPQs reloads auxiliary MPQs
-func (p *Project) ReloadAuxiliaryMPQs(config *config.Config) (err error) {
+func (p *Project) ReloadAuxiliaryMPQs(cfg *config.Config) (err error) {
 	p.mpqs = make([]d2interface.Archive, len(p.AuxiliaryMPQs))
 
 	wg := sync.WaitGroup{}
@@ -349,7 +347,7 @@ func (p *Project) ReloadAuxiliaryMPQs(config *config.Config) (err error) {
 
 	for mpqIdx := range p.AuxiliaryMPQs {
 		go func(idx int) {
-			fileName := filepath.Join(config.AuxiliaryMpqPath, p.AuxiliaryMPQs[idx])
+			fileName := filepath.Join(cfg.AuxiliaryMpqPath, p.AuxiliaryMPQs[idx])
 
 			if data, mpqErr := d2mpq.FromFile(fileName); mpqErr != nil {
 				err = mpqErr

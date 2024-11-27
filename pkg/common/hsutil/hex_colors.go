@@ -20,8 +20,11 @@ func Hex2RGB(hex string) (r, g, b uint8, err error) {
 		return 0, 0, 0, fmt.Errorf("error parsing uint: %w", err)
 	}
 
+	//nolint:gosec // this is expected and will never overflow
 	r = uint8(values >> rOffset)
+	//nolint:gosec // this is expected and will never overflow
 	g = uint8((values >> gOffset) & mask)
+	//nolint:gosec // this is expected and will never overflow
 	b = uint8(values & mask)
 
 	return r, g, b, nil

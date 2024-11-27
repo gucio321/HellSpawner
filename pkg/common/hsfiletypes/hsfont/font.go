@@ -4,7 +4,6 @@ package hsfont
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 )
 
@@ -66,7 +65,7 @@ func (f *Font) SaveToFile() error {
 		return err
 	}
 
-	if err := ioutil.WriteFile(f.filePath, data, os.FileMode(newFilePerms)); err != nil {
+	if err := os.WriteFile(f.filePath, data, os.FileMode(newFilePerms)); err != nil {
 		return fmt.Errorf("cannot write to file %s: %w", f.filePath, err)
 	}
 

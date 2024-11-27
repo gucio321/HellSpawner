@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	defaultFilePermissions os.FileMode = 0755
+	defaultFilePermissions os.FileMode = 0o755
 )
 
 // CreateFileAtPath creates file at path
@@ -22,7 +22,7 @@ func CreateFileAtPath(pathToFile string, data []byte) bool {
 		return false
 	}
 
-	newFile, err := os.Create(pathToFile)
+	newFile, err := os.Create(filepath.Clean(pathToFile))
 	if err != nil {
 		log.Printf("failed to create new file %s: %s", pathToFile, err)
 		return false

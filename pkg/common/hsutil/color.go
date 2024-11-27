@@ -10,22 +10,12 @@ func Color(rgba uint32) color.RGBA {
 		byteMask   = 0xff
 	)
 
-	result := color.RGBA{}
-
-	for idx := 0; idx < 4; idx++ {
-		shift := idx * byteWidth
-		component := uint8(rgba>>shift) & uint8(byteMask)
-
-		switch idx {
-		case a:
-			result.A = component
-		case b:
-			result.B = component
-		case g:
-			result.G = component
-		case r:
-			result.R = component
-		}
+	//nolint:gosec // this uses bitmask so these itagers will never actually overflow - this is intended.
+	result := color.RGBA{
+		R: uint8((rgba >> (r * byteWidth)) & byteMask),
+		G: uint8((rgba >> (g * byteWidth)) & byteMask),
+		B: uint8((rgba >> (b * byteWidth)) & byteMask),
+		A: uint8((rgba >> (a * byteWidth)) & byteMask),
 	}
 
 	return result

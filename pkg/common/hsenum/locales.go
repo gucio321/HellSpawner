@@ -5,6 +5,7 @@ package hsenum
 const PolishSpecialCharacters = "ĄąĘęŁłŃńÓóŚśŹźŻż"
 
 // Locale represents an app locale
+//
 //go:generate stringer -linecomment -type Locale -output locales_string.go
 type Locale byte
 
