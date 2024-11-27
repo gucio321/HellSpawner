@@ -1,5 +1,5 @@
-// Package animdataeditor contains D2 editor's data
-package animdataeditor
+// Package animdata contains D2 editor's data
+package animdata
 
 import (
 	"fmt"
