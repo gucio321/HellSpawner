@@ -19,11 +19,11 @@ import (
 )
 
 // static check, to ensure, if dc6 editor implemented editoWindow
-var _ common.EditorWindow = &Editor{}
+var _ editor.Editor = &Editor{}
 
 // Editor represents a dc6 editor
 type Editor struct {
-	*editor.Editor
+	*editor.EditorBase
 	dc6                 *d2dc6.DC6
 	textureLoader       common.TextureLoader
 	config              *config.Config
@@ -39,14 +39,14 @@ func Create(cfg *config.Config,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
-) (common.EditorWindow, error) {
+) (editor.Editor, error) {
 	dc6, err := d2dc6.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading DC6 animation: %w", err)
 	}
 
 	result := &Editor{
-		Editor:        editor.New(pathEntry, x, y, project),
+		EditorBase:    editor.New(pathEntry, x, y, project),
 		dc6:           dc6,
 		textureLoader: textureLoader,
 		selectPalette: false,
@@ -119,7 +119,7 @@ func (e *Editor) GenerateSaveData() []byte {
 
 // Save saves editor's data
 func (e *Editor) Save() {
-	e.Editor.Save(e)
+	e.EditorBase.Save(e)
 }
 
 // Cleanup hides editor
@@ -131,5 +131,5 @@ func (e *Editor) Cleanup() {
 		}
 	}
 
-	e.Editor.Cleanup()
+	e.EditorBase.Cleanup()
 }

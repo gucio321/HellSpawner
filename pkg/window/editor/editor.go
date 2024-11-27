@@ -15,16 +15,41 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window"
 )
 
-// Editor represents an editor
-type Editor struct {
+// EditorWindow represents editor window
+type Editor interface {
+	window.Renderable
+	window.MainMenuUpdater
+
+	// HasFocus returns true if editor is focused
+	HasFocus() (hasFocus bool)
+	// GetWindowTitle controls what the window title for this editor appears as
+	GetWindowTitle() string
+	// Show sets Visible to true
+	Show()
+	// SetVisible can be used to set Visible to false if the editor should be closed
+	SetVisible(bool)
+	// GetID returns a unique identifier for this editor window
+	GetID() string
+	// BringToFront brings this editor to the front of the application, giving it focus
+	BringToFront()
+	// State returns the current state of this editor, in a JSON-serializable struct
+	State() state.EditorState
+	// Save writes any changes made in the editor to the file that is open in the editor.
+	Save()
+
+	Size(float32, float32) *giu.WindowWidget
+}
+
+// EditorBase represents an editor
+type EditorBase struct {
 	*window.Window
 	Path    *common.PathEntry
 	Project *hsproject.Project
 }
 
 // New creates a new editor
-func New(path *common.PathEntry, x, y float32, project *hsproject.Project) *Editor {
-	return &Editor{
+func New(path *common.PathEntry, x, y float32, project *hsproject.Project) *EditorBase {
+	return &EditorBase{
 		Window:  window.New(generateWindowTitle(path), x, y),
 		Path:    path,
 		Project: project,
@@ -32,7 +57,7 @@ func New(path *common.PathEntry, x, y float32, project *hsproject.Project) *Edit
 }
 
 // State returns editors state
-func (e *Editor) State() state.EditorState {
+func (e *EditorBase) State() state.EditorState {
 	path, err := json.Marshal(e.Path)
 	if err != nil {
 		log.Print("failed to marshal editor path to JSON: ", err)
@@ -48,17 +73,17 @@ func (e *Editor) State() state.EditorState {
 }
 
 // GetWindowTitle returns window title
-func (e *Editor) GetWindowTitle() string {
+func (e *EditorBase) GetWindowTitle() string {
 	return generateWindowTitle(e.Path)
 }
 
 // GetID returns editors ID
-func (e *Editor) GetID() string {
+func (e *EditorBase) GetID() string {
 	return e.Path.GetUniqueID()
 }
 
 // Save saves an editor
-func (e *Editor) Save(editor Saveable) {
+func (e *EditorBase) Save(editor Saveable) {
 	if e.Path.Source != common.PathEntrySourceProject {
 		// saving to MPQ not yet supported
 		return
@@ -88,7 +113,7 @@ func (e *Editor) Save(editor Saveable) {
 }
 
 // HasChanges returns true if editor has changed data
-func (e *Editor) HasChanges(editor Saveable) bool {
+func (e *EditorBase) HasChanges(editor Saveable) bool {
 	if e.Path.Source != common.PathEntrySourceProject {
 		// saving to MPQ not yet supported
 		return false
@@ -107,7 +132,7 @@ func (e *Editor) HasChanges(editor Saveable) bool {
 }
 
 // Cleanup cides an editor
-func (e *Editor) Cleanup() {
+func (e *EditorBase) Cleanup() {
 	e.Window.Cleanup()
 }
 
@@ -116,7 +141,7 @@ func generateWindowTitle(path *common.PathEntry) string {
 }
 
 // EncodeState returns widget's state (unique for each editor type) in byte slice format
-func (e *Editor) EncodeState() []byte {
+func (e *EditorBase) EncodeState() []byte {
 	id := giu.ID(fmt.Sprintf("widget_%s", e.Path.GetUniqueID()))
 
 	if s := giu.Context.GetState(id); s != nil {

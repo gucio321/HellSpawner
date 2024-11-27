@@ -22,11 +22,11 @@ const (
 )
 
 // static check, to ensure, if font editor implemented editoWindow
-var _ common.EditorWindow = &Editor{}
+var _ editor.Editor = &Editor{}
 
 // Editor represents a font editor
 type Editor struct {
-	*editor.Editor
+	*editor.EditorBase
 	*hsfont.Font
 }
 
@@ -36,15 +36,15 @@ func Create(_ *config.Config,
 	pathEntry *common.PathEntry,
 	_ []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
-) (common.EditorWindow, error) {
+) (editor.Editor, error) {
 	font, err := hsfont.LoadFromJSON(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading JSON font: %w", err)
 	}
 
 	result := &Editor{
-		Editor: editor.New(pathEntry, x, y, project),
-		Font:   font,
+		EditorBase: editor.New(pathEntry, x, y, project),
+		Font:       font,
 	}
 
 	if w, h := result.CurrentSize(); w == 0 || h == 0 {
@@ -147,7 +147,7 @@ func (e *Editor) GenerateSaveData() []byte {
 
 // Save saves an editor
 func (e *Editor) Save() {
-	e.Editor.Save(e)
+	e.EditorBase.Save(e)
 }
 
 // Cleanup hides an editor
@@ -159,5 +159,5 @@ func (e *Editor) Cleanup() {
 		}
 	}
 
-	e.Editor.Cleanup()
+	e.EditorBase.Cleanup()
 }

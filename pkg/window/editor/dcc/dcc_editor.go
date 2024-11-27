@@ -20,11 +20,11 @@ import (
 )
 
 // static check, to ensure, if dc6 editor implemented editoWindow
-var _ common.EditorWindow = &Editor{}
+var _ editor.Editor = &Editor{}
 
 // Editor represents a new dcc editor
 type Editor struct {
-	*editor.Editor
+	*editor.EditorBase
 	dcc                 *d2dcc.DCC
 	config              *config.Config
 	selectPalette       bool
@@ -40,14 +40,14 @@ func Create(cfg *config.Config,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
-) (common.EditorWindow, error) {
+) (editor.Editor, error) {
 	dcc, err := d2dcc.Load(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading dcc animation: %w", err)
 	}
 
 	result := &Editor{
-		Editor:        editor.New(pathEntry, x, y, project),
+		EditorBase:    editor.New(pathEntry, x, y, project),
 		dcc:           dcc,
 		config:        cfg,
 		selectPalette: false,
@@ -119,7 +119,7 @@ func (e *Editor) GenerateSaveData() []byte {
 
 // Save saves editor
 func (e *Editor) Save() {
-	e.Editor.Save(e)
+	e.EditorBase.Save(e)
 }
 
 // Cleanup hides editor
@@ -131,5 +131,5 @@ func (e *Editor) Cleanup() {
 		}
 	}
 
-	e.Editor.Cleanup()
+	e.EditorBase.Cleanup()
 }

@@ -20,11 +20,11 @@ import (
 )
 
 // static check, to ensure, if dt1 editor implemented editoWindow
-var _ common.EditorWindow = &Editorg{}
+var _ editor.Editor = &Editorg{}
 
 // Editorg represents a dt1 editor
 type Editorg struct {
-	*editor.Editor
+	*editor.EditorBase
 	dt1                 *d2dt1.DT1
 	textureLoader       common.TextureLoader
 	config              *config.Config
@@ -40,14 +40,14 @@ func Create(cfg *config.Config,
 	pathEntry *common.PathEntry,
 	state []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
-) (common.EditorWindow, error) {
+) (editor.Editor, error) {
 	dt1, err := d2dt1.LoadDT1(*data)
 	if err != nil {
 		return nil, fmt.Errorf("error loading dt1 file: %w", err)
 	}
 
 	result := &Editorg{
-		Editor:        editor.New(pathEntry, x, y, project),
+		EditorBase:    editor.New(pathEntry, x, y, project),
 		dt1:           dt1,
 		config:        cfg,
 		selectPalette: false,
@@ -148,7 +148,7 @@ func (e *Editorg) GenerateSaveData() []byte {
 
 // Save saves editor
 func (e *Editorg) Save() {
-	e.Editor.Save(e)
+	e.EditorBase.Save(e)
 }
 
 // Cleanup hides editor
@@ -160,5 +160,5 @@ func (e *Editorg) Cleanup() {
 		}
 	}
 
-	e.Editor.Cleanup()
+	e.EditorBase.Cleanup()
 }

@@ -32,11 +32,11 @@ const (
 )
 
 // static check, to ensure, if sound editor implemented editoWindow
-var _ common.EditorWindow = &Editor{}
+var _ editor.Editor = &Editor{}
 
 // Editor represents a sound editor
 type Editor struct {
-	*editor.Editor
+	*editor.EditorBase
 
 	streamer      beep.StreamSeekCloser
 	control       *beep.Ctrl
@@ -51,7 +51,7 @@ func Create(_ *config.Config,
 	pathEntry *common.PathEntry,
 	_ []byte,
 	data *[]byte, x, y float32, project *hsproject.Project,
-) (common.EditorWindow, error) {
+) (editor.Editor, error) {
 	streamer, format, err := wav.Decode(bytes.NewReader(*data))
 	if err != nil {
 		return nil, fmt.Errorf("wav decode error: %w", err)
@@ -63,7 +63,7 @@ func Create(_ *config.Config,
 	}
 
 	result := &Editor{
-		Editor:        editor.New(pathEntry, x, y, project),
+		EditorBase:    editor.New(pathEntry, x, y, project),
 		file:          filepath.Base(pathEntry.FullPath),
 		streamer:      streamer,
 		control:       control,
@@ -123,7 +123,7 @@ func (s *Editor) Cleanup() {
 		}
 	}
 
-	s.Editor.Cleanup()
+	s.EditorBase.Cleanup()
 	speaker.Unlock()
 }
 
@@ -175,5 +175,5 @@ func (s *Editor) GenerateSaveData() []byte {
 
 // Save saves an editor
 func (s *Editor) Save() {
-	s.Editor.Save(s)
+	s.EditorBase.Save(s)
 }

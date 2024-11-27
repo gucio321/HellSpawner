@@ -17,6 +17,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
+	"github.com/gucio321/HellSpawner/pkg/window/editor"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/aboutdialog"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/preferences"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/projectproperties"
@@ -62,7 +63,7 @@ type editorConstructor func(
 	data *[]byte,
 	x, y float32,
 	project *hsproject.Project,
-) (common.EditorWindow, error)
+) (editor.Editor, error)
 
 // App represents an app
 type App struct {
@@ -81,11 +82,11 @@ type App struct {
 	mpqExplorer     *mpqexplorer.MPQExplorer
 	console         *console.Console
 
-	editors            []common.EditorWindow
+	editors            []editor.Editor
 	editorConstructors map[hsfiletypes.FileType]editorConstructor
 
 	editorManagerMutex sync.RWMutex
-	focusedEditor      common.EditorWindow
+	focusedEditor      editor.Editor
 
 	fontFixed         *g.FontInfo
 	fontFixedSmall    *g.FontInfo
@@ -101,7 +102,7 @@ type App struct {
 func Create() (*App, error) {
 	result := &App{
 		Flags:              &Flags{},
-		editors:            make([]common.EditorWindow, 0),
+		editors:            make([]editor.Editor, 0),
 		editorConstructors: make(map[hsfiletypes.FileType]editorConstructor),
 		TextureLoader:      common.NewTextureLoader(),
 		abyssWrapper:       abysswrapper.Create(),

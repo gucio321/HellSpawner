@@ -1,8 +1,8 @@
-package common
+package window
 
 import "github.com/AllenDang/giu"
 
-// Renderable represents renderable objects
+// Renderable represents top-level renderable objects (window of one of types: editor, toolwindow, dialog)
 type Renderable interface {
 	Build()
 	Cleanup()

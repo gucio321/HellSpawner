@@ -16,9 +16,11 @@ const (
 	lineW, lineH             = -1, -1
 )
 
+var _ toolwindow.ToolWindow = (*Console)(nil)
+
 // Console represents a console
 type Console struct {
-	*toolwindow.ToolWindow
+	*toolwindow.ToolWindowBase
 	outputText string
 	fontFixed  *g.FontInfo
 	logFile    *os.File
@@ -27,9 +29,9 @@ type Console struct {
 // Create creates a new console
 func Create(fontFixed *g.FontInfo, x, y float32, logFile *os.File) *Console {
 	result := &Console{
-		fontFixed:  fontFixed,
-		ToolWindow: toolwindow.New("Console", state.ToolWindowTypeConsole, x, y),
-		logFile:    logFile,
+		fontFixed:      fontFixed,
+		ToolWindowBase: toolwindow.New("Console", state.ToolWindowTypeConsole, x, y),
+		logFile:        logFile,
 	}
 
 	if w, h := result.CurrentSize(); w == 0 || h == 0 {
