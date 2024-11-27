@@ -49,7 +49,7 @@ func (a *AbyssWrapper) Write(p []byte) (n int, err error) {
 }
 
 // Launch launches abyss wrapper
-func (a *AbyssWrapper) Launch(config *config.Config, output io.Writer) error {
+func (a *AbyssWrapper) Launch(cfg *config.Config, output io.Writer) error {
 	a.mutex.RLock()
 	if a.running {
 		a.mutex.RUnlock()
@@ -60,7 +60,7 @@ func (a *AbyssWrapper) Launch(config *config.Config, output io.Writer) error {
 	a.mutex.Lock()
 
 	a.output = output
-	a.cmd = exec.Command(config.AbyssEnginePath) // nolint:gosec // is ok
+	a.cmd = exec.Command(cfg.AbyssEnginePath) //nolint:gosec // is ok
 	a.cmd.Stdout = a
 	a.cmd.Stderr = a
 	a.cmd.Stdin = a
