@@ -1,5 +1,5 @@
-// Package hspaletteeditor contains palette editor's data
-package hspaletteeditor
+// Package palette contains palette editor's data
+package palette
 
 import (
 	"fmt"
