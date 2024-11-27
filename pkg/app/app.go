@@ -12,7 +12,7 @@ import (
 
 	"github.com/OpenDiablo2/dialog"
 
-	"github.com/gucio321/HellSpawner/abysswrapper"
+	"github.com/gucio321/HellSpawner/pkg/abysswrapper"
 	"github.com/gucio321/HellSpawner/pkg/common"
 	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
