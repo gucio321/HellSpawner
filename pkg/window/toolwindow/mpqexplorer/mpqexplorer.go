@@ -27,15 +27,15 @@ const (
 	mainWindowW, mainWindowH = 300, 400
 )
 
-// MPQExplorerFileSelectedCallback represents file selected callback
-type MPQExplorerFileSelectedCallback func(path *common.PathEntry)
+// FileSelectedCallback represents file selected callback
+type FileSelectedCallback func(path *common.PathEntry)
 
 // MPQExplorer represents a mpq explorer
 type MPQExplorer struct {
 	*toolwindow.ToolWindow
 	config               *config.Config
 	project              *hsproject.Project
-	fileSelectedCallback MPQExplorerFileSelectedCallback
+	fileSelectedCallback FileSelectedCallback
 	nodeCache            []g.Widget
 
 	filesToOverwrite []fileToOverwrite
@@ -47,11 +47,11 @@ type fileToOverwrite struct {
 }
 
 // Create creates a new explorer
-func Create(fileSelectedCallback MPQExplorerFileSelectedCallback, config *config.Config, x, y float32) (*MPQExplorer, error) {
+func Create(fileSelectedCallback FileSelectedCallback, cfg *config.Config, x, y float32) (*MPQExplorer, error) {
 	result := &MPQExplorer{
 		ToolWindow:           toolwindow.New("MPQ Explorer", hsstate.ToolWindowTypeMPQExplorer, x, y),
 		fileSelectedCallback: fileSelectedCallback,
-		config:               config,
+		config:               cfg,
 	}
 
 	if w, h := result.CurrentSize(); w == 0 || h == 0 {
@@ -155,7 +155,7 @@ func (m *MPQExplorer) renderNodes(pathEntry *common.PathEntry) g.Widget {
 		}
 	}
 
-	widgets := make([]g.Widget, len(pathEntry.Children))
+	nodes := make([]g.Widget, len(pathEntry.Children))
 	common.SortPaths(pathEntry)
 
 	wg := sync.WaitGroup{}
@@ -163,7 +163,7 @@ func (m *MPQExplorer) renderNodes(pathEntry *common.PathEntry) g.Widget {
 
 	for childIdx := range pathEntry.Children {
 		go func(idx int) {
-			widgets[idx] = m.renderNodes(pathEntry.Children[idx])
+			nodes[idx] = m.renderNodes(pathEntry.Children[idx])
 
 			wg.Done()
 		}(childIdx)
@@ -171,7 +171,7 @@ func (m *MPQExplorer) renderNodes(pathEntry *common.PathEntry) g.Widget {
 
 	wg.Wait()
 
-	return g.TreeNode(pathEntry.Name).Layout(widgets...)
+	return g.TreeNode(pathEntry.Name).Layout(nodes...)
 }
 
 func (m *MPQExplorer) copyToProject(pathEntry *common.PathEntry) {

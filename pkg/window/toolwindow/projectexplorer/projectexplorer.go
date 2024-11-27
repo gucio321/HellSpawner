@@ -2,7 +2,6 @@
 package projectexplorer
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -36,22 +35,22 @@ const (
 	blackHalfOpacity = 0xffffff20
 )
 
-// ProjectExplorerFileSelectedCallback represents callback on project file selected
-type ProjectExplorerFileSelectedCallback func(path *common.PathEntry)
+// FileSelectedCallback represents callback on project file selected
+type FileSelectedCallback func(path *common.PathEntry)
 
 // ProjectExplorer represents a project explorer
 type ProjectExplorer struct {
 	*toolwindow.ToolWindow
 
 	project              *hsproject.Project
-	fileSelectedCallback ProjectExplorerFileSelectedCallback
+	fileSelectedCallback FileSelectedCallback
 	nodeCache            map[string][]g.Widget
 	refreshIconTexture   *g.Texture
 }
 
 // Create creates a new project explorer
 func Create(textureLoader common.TextureLoader,
-	fileSelectedCallback ProjectExplorerFileSelectedCallback,
+	fileSelectedCallback FileSelectedCallback,
 	x, y float32,
 ) (*ProjectExplorer, error) {
 	result := &ProjectExplorer{
@@ -183,15 +182,15 @@ func (m *ProjectExplorer) renderNodes(pathEntry *common.PathEntry) g.Widget {
 		return m.createDirectoryTreeItem(pathEntry, nil)
 	}
 
-	widgets := make([]g.Widget, len(pathEntry.Children))
+	nodes := make([]g.Widget, len(pathEntry.Children))
 
 	sortPaths(pathEntry)
 
 	for idx := range pathEntry.Children {
-		widgets[idx] = m.renderNodes(pathEntry.Children[idx])
+		nodes[idx] = m.renderNodes(pathEntry.Children[idx])
 	}
 
-	return m.createDirectoryTreeItem(pathEntry, widgets)
+	return m.createDirectoryTreeItem(pathEntry, nodes)
 }
 
 func (m *ProjectExplorer) createFileTreeItem(pathEntry *common.PathEntry) g.Widget {
@@ -392,7 +391,7 @@ func (m *ProjectExplorer) onFileRenamed(entry *common.PathEntry) {
 	}
 
 	if err := os.Rename(oldPath, newPath); err != nil {
-		dialog.Message("Could not rename file:\n" + err.Error()).Error()
+		dialog.Message("Could not rename file: %v", err).Error()
 
 		entry.Name = entry.OldName
 		entry.OldName = ""
@@ -404,9 +403,8 @@ func (m *ProjectExplorer) onFileRenamed(entry *common.PathEntry) {
 }
 
 func logErr(fmtErr string, args ...interface{}) {
-	msg := fmt.Sprintf(fmtErr, args...)
-	log.Print(msg)
-	dialog.Message(msg).Error()
+	log.Printf(fmtErr, args...)
+	dialog.Message(fmtErr, args...).Error()
 }
 
 func (m *ProjectExplorer) onNewFolderClicked(pathEntry *common.PathEntry) {
@@ -420,13 +418,13 @@ func sortPaths(rootPath *common.PathEntry) {
 		if rootPath.Children[i].IsDirectory == rootPath.Children[j].IsDirectory {
 			var nameI, nameJ string
 
-			if len(rootPath.Children[i].OldName) > 0 {
+			if rootPath.Children[i].OldName != "" {
 				nameI = rootPath.Children[i].OldName
 			} else {
 				nameI = rootPath.Children[i].Name
 			}
 
-			if len(rootPath.Children[j].OldName) > 0 {
+			if rootPath.Children[j].OldName != "" {
 				nameJ = rootPath.Children[j].OldName
 			} else {
 				nameJ = rootPath.Children[j].Name
