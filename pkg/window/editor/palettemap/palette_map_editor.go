@@ -1,5 +1,5 @@
-// Package hspalettemapeditor contains palette map editor's data
-package hspalettemapeditor
+// Package palettemap contains palette map editor's data
+package palettemap
 
 import (
 	"fmt"
