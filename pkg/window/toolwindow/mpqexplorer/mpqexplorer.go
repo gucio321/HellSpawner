@@ -1,6 +1,6 @@
-// Package hsmpqexplorer contains an implementation of a MPQ archive explorer,
+// Package mpqexplorer contains an implementation of a MPQ archive explorer,
 // which displays the archive contents as a tree.
-package hsmpqexplorer
+package mpqexplorer
 
 import (
 	"log"

@@ -13,7 +13,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/common/hsfiletypes"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/config"
-	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsmpqexplorer"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/mpqexplorer"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsprojectexplorer"
 )
 
@@ -25,7 +25,7 @@ const (
 // SelectPaletteWidget represents an pop-up MPQ explorer, when we're
 // selectin DAT palette
 type SelectPaletteWidget struct {
-	mpqExplorer     *hsmpqexplorer.MPQExplorer
+	mpqExplorer     *mpqexplorer.MPQExplorer
 	projectExplorer *hsprojectexplorer.ProjectExplorer
 	id              string
 	saveCB          func(colors *[256]d2interface.Color)
@@ -80,7 +80,7 @@ func NewSelectPaletteWidget(
 		}
 	}
 
-	mpqExplorer, err := hsmpqexplorer.Create(callback, config, 0, 0)
+	mpqExplorer, err := mpqexplorer.Create(callback, config, 0, 0)
 	if err != nil {
 		log.Print(err)
 	}

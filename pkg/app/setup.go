@@ -36,7 +36,7 @@ import (
 	"github.com/gucio321/HellSpawner/pkg/window/popup/preferences"
 	"github.com/gucio321/HellSpawner/pkg/window/popup/projectproperties"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsconsole"
-	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsmpqexplorer"
+	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/mpqexplorer"
 	"github.com/gucio321/HellSpawner/pkg/window/toolwindow/hsprojectexplorer"
 )
 
@@ -141,7 +141,7 @@ func (a *App) registerEditors() {
 }
 
 func (a *App) setupMainMpqExplorer() error {
-	window, err := hsmpqexplorer.Create(a.openEditor, a.config, mpqExplorerDefaultX, mpqExplorerDefaultY)
+	window, err := mpqexplorer.Create(a.openEditor, a.config, mpqExplorerDefaultX, mpqExplorerDefaultY)
 	if err != nil {
 		return fmt.Errorf("error creating a MPQ explorer: %w", err)
 	}
