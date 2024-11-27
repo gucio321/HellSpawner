@@ -5,7 +5,7 @@
 [![GoDoc](https://pkg.go.dev/badge/github.com/gucio321/HellSpawner?utm_source=godoc)](https://pkg.go.dev/mod/github.com/gucio321/HellSpawner)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-![Logo](hsassets/images/d2logo.png)
+![Logo](pkg/assets/images/d2logo.png)
 
 # Announcment
 
