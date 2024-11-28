@@ -343,13 +343,18 @@ func (p *Project) ReloadAuxiliaryMPQs(cfg *config.Config) (err error) {
 	p.mpqs = make([]d2interface.Archive, len(p.AuxiliaryMPQs))
 
 	wg := sync.WaitGroup{}
+	m := &sync.Mutex{}
 	wg.Add(len(p.AuxiliaryMPQs))
 
 	for mpqIdx := range p.AuxiliaryMPQs {
 		go func(idx int) {
 			fileName := filepath.Join(cfg.AuxiliaryMpqPath, p.AuxiliaryMPQs[idx])
 
-			if data, mpqErr := d2mpq.FromFile(fileName); mpqErr != nil {
+			m.Lock()
+			data, mpqErr := d2mpq.FromFile(fileName)
+			m.Unlock()
+
+			if mpqErr != nil {
 				err = mpqErr
 			} else {
 				p.mpqs[idx] = data

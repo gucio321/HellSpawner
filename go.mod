@@ -3,7 +3,7 @@ module github.com/gucio321/HellSpawner
 go 1.23.3
 
 require (
-	github.com/AllenDang/giu v0.11.1-0.20241126223035-127b1890fcfb
+	github.com/AllenDang/giu v0.11.1-0.20241127193319-4536adce5d46
 	github.com/OpenDiablo2/OpenDiablo2 v0.0.0-20210514222603-a688d660a0f7
 	github.com/OpenDiablo2/dialog v0.0.0-20201230220514-26162241209f
 	github.com/enriquebris/goconcurrentqueue v0.6.0
