@@ -15,7 +15,7 @@ type ToolWindow interface {
 	SetVisible(bool)
 	BringToFront()
 	State() state.ToolWindowState
-	Pos(x, y float32) *giu.WindowWidget
+	Pos(x, y float32) *window.Window
 	Size(float32, float32) *giu.WindowWidget
 	CurrentSize() (float32, float32)
 }

@@ -2,13 +2,12 @@ package app
 
 import (
 	"fmt"
+	"github.com/AllenDang/cimgui-go/imgui"
 	"github.com/gucio321/HellSpawner/pkg/app/assets"
 	"image/color"
 	"log"
 	"strconv"
 	"time"
-
-	"github.com/OpenDiablo2/dialog"
 
 	"github.com/faiface/beep"
 	"github.com/faiface/beep/speaker"
@@ -41,9 +40,6 @@ import (
 )
 
 func (a *App) setup() (err error) {
-	dialog.Init()
-
-	a.setupMasterWindow()
 	a.setupConsole()
 	a.setupAutoSave()
 	a.registerGlobalKeyboardShortcuts()
@@ -138,7 +134,11 @@ func (a *App) registerEditors() {
 }
 
 func (a *App) setupMainMpqExplorer() error {
-	window, err := mpqexplorer.Create(a.openEditor, a.config, mpqExplorerDefaultX, mpqExplorerDefaultY)
+	// normalization
+	basePos := imgui.MainViewport().Pos()
+
+	fmt.Println(basePos)
+	window, err := mpqexplorer.Create(a.openEditor, a.config, mpqExplorerDefaultX+basePos.X, mpqExplorerDefaultY+basePos.Y)
 	if err != nil {
 		return fmt.Errorf("error creating a MPQ explorer: %w", err)
 	}
@@ -149,9 +149,12 @@ func (a *App) setupMainMpqExplorer() error {
 }
 
 func (a *App) setupProjectExplorer() error {
-	x, y := float32(projectExplorerDefaultX), float32(projectExplorerDefaultY)
+	basePos := imgui.MainViewport().Pos()
 
-	window, err := projectexplorer.Create(a.openEditor, x, y)
+	window, err := projectexplorer.Create(
+		a.openEditor,
+		projectExplorerDefaultX+basePos.X, projectExplorerDefaultY+basePos.Y,
+	)
 	if err != nil {
 		return fmt.Errorf("error creating a project explorer: %w", err)
 	}

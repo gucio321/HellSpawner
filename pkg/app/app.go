@@ -2,6 +2,7 @@ package app
 
 import (
 	"fmt"
+	"github.com/AllenDang/cimgui-go/imgui"
 	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"log"
 	"os"
@@ -139,10 +140,8 @@ func (a *App) Run() (err error) {
 		}()
 	}
 
-	err = a.setup()
-	if err != nil {
-		return err
-	}
+	dialog.Init()
+	a.setupMasterWindow()
 
 	a.masterWindow.Run(a.render)
 
@@ -151,11 +150,20 @@ func (a *App) Run() (err error) {
 
 func (a *App) render() {
 	// unfortunately can't do that in Run as this requires imgui.MainViewport
-	if a.justStarted && a.config.OpenMostRecentOnStartup && len(a.config.RecentProjects) > 0 {
-		err := a.loadProjectFromFile(a.config.RecentProjects[0])
+	if a.justStarted {
 		a.justStarted = false
+
+		fmt.Println("start setup")
+		err := a.setup()
 		if err != nil {
-			logErr("could not load most recent project on startup: %v", err)
+			logErr("could not set up application: %v", err)
+		}
+
+		if a.config.OpenMostRecentOnStartup && len(a.config.RecentProjects) > 0 {
+			err = a.loadProjectFromFile(a.config.RecentProjects[0])
+			if err != nil {
+				logErr("could not load most recent project on startup: %v", err)
+			}
 		}
 	}
 
@@ -229,11 +237,15 @@ func (a *App) openEditor(path *common.PathEntry) {
 
 	a.editorManagerMutex.RUnlock()
 
+	//since we sue multiviewport, we need to get base position of the main window - we want an editor
+	// inside window
+	basePos := imgui.MainViewport().Pos()
+
 	// w, h = 0, because we're creating a new editor,
 	// width and height aren't saved, so we give 0 and
 	// editors without AutoResize flag sets w, h to default
 	a.editorManagerMutex.Lock()
-	a.createEditor(path, nil, editorWindowDefaultX, editorWindowDefaultY, 0, 0)
+	a.createEditor(path, nil, editorWindowDefaultX+basePos.X, editorWindowDefaultY+basePos.Y, 0, 0)
 	a.editorManagerMutex.Unlock()
 }
 

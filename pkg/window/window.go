@@ -1,7 +1,6 @@
 package window
 
 import (
-	"github.com/AllenDang/cimgui-go/imgui"
 	"github.com/AllenDang/giu"
 	"github.com/gucio321/HellSpawner/pkg/app/state"
 )
@@ -14,9 +13,9 @@ type Window struct {
 
 // New creates new window
 func New(title string, x, y float32) *Window {
-	return &Window{
-		WindowWidget: giu.Window(title).Pos(x, y),
-	}
+	return (&Window{
+		WindowWidget: giu.Window(title),
+	}).Pos(x, y)
 }
 
 // State returns window's state
@@ -73,8 +72,7 @@ func (t *Window) Cleanup() {
 	t.Visible = false
 }
 
-func (t *Window) Pos(x, y float32) *giu.WindowWidget {
-	// normalize this by main viewports pos
-	pos0 := imgui.MainViewport().Pos()
-	return t.WindowWidget.Pos(x+pos0.X, y+pos0.Y)
+func (t *Window) Pos(x, y float32) *Window {
+	t.WindowWidget.Pos(x, y)
+	return t
 }
