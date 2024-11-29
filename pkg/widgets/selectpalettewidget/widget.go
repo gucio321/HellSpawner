@@ -2,6 +2,7 @@ package selectpalettewidget
 
 import (
 	"github.com/gucio321/HellSpawner/pkg/app/config"
+	"github.com/gucio321/HellSpawner/pkg/window/popup"
 	"log"
 	"path/filepath"
 
@@ -106,7 +107,7 @@ func (p *SelectPaletteWidget) Build() {
 	// always true (we don't use this feature in this case
 	isOpen := true
 	giu.Layout{
-		giu.PopupModal("##" + p.id + "popUpSelectPalette").IsOpen(&isOpen).Layout(giu.Layout{
+		popup.New("##" + p.id + "popUpSelectPalette").IsOpen(&isOpen).Layout(giu.Layout{
 			giu.Child().Size(paletteSelectW, paletteSelectH).Layout(giu.Layout{
 				p.projectExplorer.GetProjectTreeNodes(),
 				giu.Layout(p.mpqExplorer.GetMpqTreeNodes()),
@@ -125,4 +126,8 @@ func (p *SelectPaletteWidget) Build() {
 			}),
 		}),
 	}.Build()
+
+	if !isOpen {
+		p.closeCB()
+	}
 }
