@@ -43,6 +43,13 @@ type Config struct {
 	Locale                  enum.Locale               `json:"locale"`
 	BGColor                 color.RGBA                `json:"bgColor"`
 	ViewMode                ViewMode
+	StaticLayout            StaticLayout
+}
+
+type StaticLayout struct {
+	ProjectSplit float32
+	MPQSplit     float32
+	ConsoleSplit float32
 }
 
 // GetConfigPath returns default config path
@@ -65,6 +72,11 @@ func generateDefaultConfig(path string) *Config {
 		LogFilePath:             filepath.Join(filepath.Dir(path), "output.log"),
 		Locale:                  enum.LocaleEnglish,
 		BGColor:                 hsutil.Color(DefaultBGColor),
+		StaticLayout: StaticLayout{
+			ProjectSplit: 200,
+			MPQSplit:     600,
+			ConsoleSplit: 500,
+		},
 	}
 
 	if err := result.Save(); err != nil {

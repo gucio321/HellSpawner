@@ -188,6 +188,19 @@ func (a *App) renderLegacy() {
 func (a *App) renderStatic() {
 	g.SingleWindowWithMenuBar().Layout(
 		g.MenuBar().Layout(a.menuLayout()),
+		renderWnd(a.preferencesDialog),
+		renderWnd(a.aboutDialog),
+		renderWnd(a.projectPropertiesDialog),
+		g.SplitLayout(g.DirectionVertical, &a.config.StaticLayout.ProjectSplit,
+			a.projectExplorer.GetLayout(),
+			g.SplitLayout(g.DirectionVertical, &a.config.StaticLayout.MPQSplit,
+				g.SplitLayout(g.DirectionHorizontal, &a.config.StaticLayout.ConsoleSplit,
+					a.renderStaticEditors(),
+					a.console.GetLayout(),
+				),
+				a.mpqExplorer.GetLayout(),
+			),
+		),
 	)
 }
 
