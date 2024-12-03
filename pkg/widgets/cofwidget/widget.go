@@ -120,8 +120,7 @@ func (p *widget) makeAnimationTab(state *widgetState) giu.Layout {
 }
 
 func (p *widget) makeLayerTab(state *widgetState) giu.Layout {
-	addLayerButtonID := fmt.Sprintf("Add a new layer...##%sAddLayer", p.id)
-	addLayerButton := giu.Button(addLayerButtonID).Size(actionButtonW, actionButtonH)
+	addLayerButton := giu.Button("Add a new layer...").Size(actionButtonW, actionButtonH)
 	addLayerButton.OnClick(func() {
 		p.createNewLayer()
 	})
@@ -136,11 +135,10 @@ func (p *widget) makeLayerTab(state *widgetState) giu.Layout {
 	}
 
 	currentLayerName := layerStrings[state.viewerState.LayerIndex]
-	layerList := giu.Combo("", currentLayerName, layerStrings, &state.LayerIndex).ID("##" + p.id + "layer")
+	layerList := giu.Combo("", currentLayerName, layerStrings, &state.LayerIndex)
 	layerList.Size(layerListW).OnChange(p.onUpdate)
 
-	deleteLayerButtonID := fmt.Sprintf("Delete current layer...##%sDeleteLayer", p.id)
-	deleteLayerButton := giu.Button(deleteLayerButtonID).Size(actionButtonW, actionButtonH)
+	deleteLayerButton := giu.Button("Delete current layer...").Size(actionButtonW, actionButtonH)
 	deleteLayerButton.OnClick(func() {
 		const (
 			strPrompt  = "Do you really want to remove this layer?"
@@ -193,8 +191,7 @@ func (p *widget) makePriorityTab(state *widgetState) giu.Layout {
 	}
 
 	directionString := directionStrings[state.viewerState.DirectionIndex]
-	directionList := giu.Combo("", directionString, directionStrings, &state.DirectionIndex).
-		ID("##" + p.id + "dir")
+	directionList := giu.Combo("", directionString, directionStrings, &state.DirectionIndex)
 	directionList.Size(layerListW).OnChange(p.onUpdate)
 
 	frameStrings := make([]string, 0)
@@ -203,8 +200,7 @@ func (p *widget) makePriorityTab(state *widgetState) giu.Layout {
 	}
 
 	frameString := frameStrings[state.FrameIndex]
-	frameList := giu.Combo("", frameString, frameStrings, &state.FrameIndex).
-		ID("##" + p.id + "frame")
+	frameList := giu.Combo("", frameString, frameStrings, &state.FrameIndex)
 	frameList.Size(layerListW).OnChange(p.onUpdate)
 
 	const (
@@ -212,14 +208,12 @@ func (p *widget) makePriorityTab(state *widgetState) giu.Layout {
 		strMessage = "If you'll click YES, all data from this direction will be lost. Continue?"
 	)
 
-	duplicateButtonID := fmt.Sprintf("Duplicate current direction...##%sDuplicateDirection", p.id)
-	duplicateButton := giu.Button(duplicateButtonID).Size(actionButtonW, actionButtonH)
+	duplicateButton := giu.Button("Duplicate current direction...").Size(actionButtonW, actionButtonH)
 	duplicateButton.OnClick(func() {
 		p.duplicateDirection()
 	})
 
-	deleteButtonID := fmt.Sprintf("Delete current direction...##%sDeleteDirection", p.id)
-	deleteButton := giu.Button(deleteButtonID).Size(actionButtonW, actionButtonH)
+	deleteButton := giu.Button("Delete current direction...").Size(actionButtonW, actionButtonH)
 	deleteButton.OnClick(func() {
 		fnYes := func() {
 			p.deleteCurrentDirection()
@@ -432,9 +426,7 @@ func (p *widget) makeAddLayerLayout() giu.Layout {
 		giu.Row(
 			giu.Label("Type: "),
 			giu.Combo("", compositeTypeList[state.newLayerFields.LayerType],
-				compositeTypeList, &state.newLayerFields.LayerType).Size(bigListW).ID(
-				"##"+p.id+"AddLayerType",
-			),
+				compositeTypeList, &state.newLayerFields.LayerType).Size(bigListW),
 		),
 		giu.Row(
 			giu.Label("Shadow: "),
@@ -442,25 +434,21 @@ func (p *widget) makeAddLayerLayout() giu.Layout {
 		),
 		giu.Row(
 			giu.Label("Selectable: "),
-			giu.Checkbox("", &state.newLayerFields.Selectable).ID("##"+p.id+"AddLayerSelectable"),
+			giu.Checkbox("", &state.newLayerFields.Selectable),
 		),
 		giu.Row(
 			giu.Label("Transparent: "),
-			giu.Checkbox("", &state.newLayerFields.Transparent).ID("##"+p.id+"AddLayerTransparent"),
+			giu.Checkbox("", &state.newLayerFields.Transparent),
 		),
 		giu.Row(
 			giu.Label("Draw effect: "),
 			giu.Combo("", drawEffectList[state.newLayerFields.DrawEffect],
-				drawEffectList, &state.newLayerFields.DrawEffect).Size(bigListW).ID(
-				"##"+p.id+"AddLayerDrawEffect",
-			),
+				drawEffectList, &state.newLayerFields.DrawEffect).Size(bigListW),
 		),
 		giu.Row(
 			giu.Label("Weapon class: "),
 			giu.Combo("", weaponClassList[state.newLayerFields.WeaponClass],
-				weaponClassList, &state.newLayerFields.WeaponClass).Size(bigListW).ID(
-				"##"+p.id+"AddLayerWeaponClass",
-			),
+				weaponClassList, &state.newLayerFields.WeaponClass).Size(bigListW),
 		),
 		giu.Separator(),
 		p.makeSaveCancelButtonRow(available, state),
