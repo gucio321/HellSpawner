@@ -4,9 +4,10 @@ package sound
 import (
 	"bytes"
 	"fmt"
-	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"log"
 	"path/filepath"
+
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	"github.com/OpenDiablo2/dialog"
 
@@ -91,7 +92,7 @@ func (s *Editor) Build() {
 		Size(mainWindowW, mainWindowH).
 		Layout(g.Layout{
 			g.Row(
-				widgets.PlayPauseButton("##"+s.Path.GetUniqueID()+"playPause", &isPlaying).
+				widgets.PlayPauseButton(&isPlaying).
 					OnPlayClicked(s.play).OnPauseClicked(s.stop).Size(btnSize, btnSize),
 				g.ProgressBar(progress).Size(-1, progressBarHeight).
 					Overlay(fmt.Sprintf("%d:%02d / %d:%02d",

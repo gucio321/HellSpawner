@@ -141,7 +141,7 @@ func (p *widget) makePlayerLayout(state *widgetState) giu.Layout {
 			giu.InputInt(&state.TickTime).Label("Tick time").Size(inputIntW).OnChange(func() {
 				state.ticker.Reset(time.Second * time.Duration(state.TickTime) / miliseconds)
 			}),
-			widgets.PlayPauseButton("##"+p.id+"PlayPauseAnimation", &state.IsPlaying).
+			widgets.PlayPauseButton(&state.IsPlaying).
 				Size(playPauseButtonSize, playPauseButtonSize),
 			giu.Button("Export GIF##"+p.id+"exportGif").OnClick(func() {
 				err := p.exportGif(state)

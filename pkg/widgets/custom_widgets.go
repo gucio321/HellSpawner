@@ -2,8 +2,9 @@ package widgets
 
 import (
 	"fmt"
-	"github.com/gucio321/HellSpawner/pkg/app/assets"
 	"math"
+
+	"github.com/gucio321/HellSpawner/pkg/app/assets"
 
 	"github.com/AllenDang/cimgui-go/imgui"
 	"github.com/AllenDang/giu"
@@ -43,7 +44,7 @@ func (s *playPauseButtonState) Dispose() {
 
 // PlayPauseButtonWidget represents a play/pause button
 type PlayPauseButtonWidget struct {
-	id string
+	id giu.ID
 
 	onChange,
 	onPauseClicked,
@@ -56,11 +57,17 @@ type PlayPauseButtonWidget struct {
 }
 
 // PlayPauseButton creates a play/pause button
-func PlayPauseButton(id string, isPlaying *bool) *PlayPauseButtonWidget {
+func PlayPauseButton(isPlaying *bool) *PlayPauseButtonWidget {
 	return &PlayPauseButtonWidget{
-		id:        id,
+		id:        giu.GenAutoID("##PlayPauseButton"),
 		isPlaying: isPlaying,
 	}
+}
+
+// ID is for compatibility with giu widgets. It allows to manually set widget's id.
+func (p *PlayPauseButtonWidget) ID(id giu.ID) *PlayPauseButtonWidget {
+	p.id = id
+	return p
 }
 
 // Size sets button's size
