@@ -2,13 +2,13 @@
 package projectproperties
 
 import (
-	"fmt"
-	"github.com/gucio321/HellSpawner/pkg/app/assets"
-	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"log"
 	"path/filepath"
 	"strconv"
 	"strings"
+
+	"github.com/gucio321/HellSpawner/pkg/app/assets"
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	"github.com/gucio321/HellSpawner/pkg/common"
 
@@ -191,17 +191,9 @@ func (p *Dialog) Build() {
 								}
 
 								g.Row(
-									g.Custom(func() {
-										imgui.PushIDStr(fmt.Sprintf("ProjectPropertiesAddAuxMpqRemove_%d", currentIdx))
-									}),
-
 									g.ImageButton(p.removeIconTexture).Size(imgBtnW, imgBtnH).OnClick(func() {
 										copy(p.project.AuxiliaryMPQs[currentIdx:], p.project.AuxiliaryMPQs[currentIdx+1:])
 										p.project.AuxiliaryMPQs = p.project.AuxiliaryMPQs[:len(p.project.AuxiliaryMPQs)-1]
-									}),
-									g.Custom(func() {
-										imgui.PopID()
-										imgui.PushIDStr(fmt.Sprintf("ProjectPropertiesAddAuxMpqDown_%d", currentIdx))
 									}),
 									g.ImageButton(p.downIconTexture).Size(imgBtnW, imgBtnH).OnClick(func() {
 										if currentIdx < len(p.project.AuxiliaryMPQs)-1 {
@@ -210,10 +202,6 @@ func (p *Dialog) Build() {
 												p.project.AuxiliaryMPQs[currentIdx]
 										}
 									}),
-									g.Custom(func() {
-										imgui.PopID()
-										imgui.PushIDStr(fmt.Sprintf("ProjectPropertiesAddAuxMpqUp_%d", currentIdx))
-									}),
 									g.ImageButton(p.upIconTexture).Size(imgBtnW, imgBtnH).OnClick(func() {
 										if currentIdx > 0 {
 											p.project.AuxiliaryMPQs[currentIdx-1],
@@ -221,7 +209,6 @@ func (p *Dialog) Build() {
 												p.project.AuxiliaryMPQs[currentIdx-1]
 										}
 									}),
-									g.Custom(func() { imgui.PopID() }),
 									g.Dummy(dummyW, dummyH),
 									g.Label(p.project.AuxiliaryMPQs[idx]),
 								).Build()
