@@ -120,7 +120,7 @@ func (p *widget) makeGlyphLayout(r rune) *giu.TableRowWidget {
 	height32 := int32(h)
 
 	row := giu.TableRow(
-		widgets.MakeImageButton("##"+p.id+"deleteFrame"+giu.ID(r),
+		widgets.MakeImageButton(
 			delSize, delSize,
 			state.deleteButtonTexture,
 			func() { p.deleteRow(r) },

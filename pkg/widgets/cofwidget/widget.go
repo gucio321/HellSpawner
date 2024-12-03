@@ -271,12 +271,9 @@ func (p *widget) layoutAnimFrames(state *widgetState) *giu.RowWidget {
 
 	label := giu.Label(strLabel)
 
-	leftButtonID := giu.ID(fmt.Sprintf("##%sDecreaseFramesPerDirection", p.id))
-	rightButtonID := giu.ID(fmt.Sprintf("##%sIncreaseFramesPerDirection", p.id))
-
-	left := widgets.MakeImageButton(leftButtonID, buttonWidthHeight, buttonWidthHeight, state.textures.left, fnDecrease)
+	left := widgets.MakeImageButton(buttonWidthHeight, buttonWidthHeight, state.textures.left, fnDecrease)
 	frameCount := giu.Label(fmt.Sprintf("%d", numFrames))
-	right := widgets.MakeImageButton(rightButtonID, buttonWidthHeight, buttonWidthHeight, state.textures.right, fnIncrease)
+	right := widgets.MakeImageButton(buttonWidthHeight, buttonWidthHeight, state.textures.right, fnIncrease)
 
 	return giu.Row(label, left, frameCount, right)
 }
@@ -365,14 +362,11 @@ func (p *widget) makeDirectionLayout() giu.Layout {
 	buildLayerPriorityRow := func(idx int) {
 		currentIdx := idx
 
-		strIncPri := giu.ID(fmt.Sprintf(fmtIncreasePriority, currentIdx))
-		strDecPri := giu.ID(fmt.Sprintf(fmtDecreasePriority, currentIdx))
-
 		fnIncPriority := makeIncPriorityFn(currentIdx)
 		fnDecPriority := makeDecPriorityFn(currentIdx)
 
-		increasePriority := widgets.MakeImageButton(strIncPri, buttonWidthHeight, buttonWidthHeight, state.textures.up, fnIncPriority)
-		decreasePriority := widgets.MakeImageButton(strDecPri, buttonWidthHeight, buttonWidthHeight, state.textures.down, fnDecPriority)
+		increasePriority := widgets.MakeImageButton(buttonWidthHeight, buttonWidthHeight, state.textures.up, fnIncPriority)
+		decreasePriority := widgets.MakeImageButton(buttonWidthHeight, buttonWidthHeight, state.textures.down, fnDecPriority)
 
 		strLayerName := layers[idx].Name()
 		strLayerLabel := fmt.Sprintf(fmtLayerLabel, idx, strLayerName)

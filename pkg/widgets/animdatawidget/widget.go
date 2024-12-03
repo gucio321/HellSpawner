@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"strconv"
 	"strings"
 
 	"github.com/AllenDang/giu"
@@ -79,7 +78,6 @@ func (p *widget) buildAnimationsList() {
 	for idx, name := range keys {
 		list[idx] = giu.Row(
 			widgets.MakeImageButton(
-				"##"+p.id+"deleteEntry"+giu.ID(strconv.Itoa(idx)),
 				imageButtonSize, imageButtonSize,
 				state.deleteIcon,
 				func() {

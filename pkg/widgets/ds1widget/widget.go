@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"strconv"
 
 	"github.com/AllenDang/giu"
 
@@ -192,7 +191,6 @@ func (p *widget) makeFilesLayout() giu.Layout {
 		l = append(l, giu.Layout{
 			giu.Row(
 				widgets.MakeImageButton(
-					"##"+p.id+"DeleteFile"+giu.ID(strconv.Itoa(currentIdx)),
 					deleteButtonSize, deleteButtonSize,
 					p.deleteButtonTexture,
 					func() {
@@ -265,7 +263,6 @@ func (p *widget) makeObjectsLayout(state *widgetState) giu.Layout {
 				state.Mode = widgetModeAddPath
 			}),
 			widgets.MakeImageButton(
-				"##"+p.id+"deleteObject",
 				layerDeleteButtonSize, layerDeleteButtonSize,
 				p.deleteButtonTexture,
 				func() {
@@ -411,7 +408,6 @@ func (p *widget) makePathLayout(state *widgetState, obj *d2ds1.Object) giu.Layou
 			giu.Label(fmt.Sprintf("(%d, %d)", int(x), int(y))),
 			giu.Label(fmt.Sprintf("%d", obj.Paths[idx].Action)),
 			widgets.MakeImageButton(
-				"##"+p.id+"deletePath"+giu.ID(strconv.Itoa(currentIdx)),
 				deleteButtonSize, deleteButtonSize,
 				p.deleteButtonTexture,
 				func() {
@@ -516,7 +512,6 @@ func (p *widget) makeTilesGroupLayout(state *widgetState, x, y int, t d2ds1.Laye
 	var deleteBtn giu.Widget
 	if deleteCb != nil {
 		deleteBtn = widgets.MakeImageButton(
-			"##"+p.id+"delete"+giu.ID(t.String()),
 			layerDeleteButtonSize, layerDeleteButtonSize,
 			p.deleteButtonTexture,
 			func() {

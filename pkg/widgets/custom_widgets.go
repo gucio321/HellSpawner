@@ -6,7 +6,6 @@ import (
 
 	"github.com/gucio321/HellSpawner/pkg/app/assets"
 
-	"github.com/AllenDang/cimgui-go/imgui"
 	"github.com/AllenDang/giu"
 
 	"github.com/gucio321/HellSpawner/pkg/common"
@@ -14,22 +13,10 @@ import (
 
 // MakeImageButton is a hack for giu.ImageButton that creates image button
 // as a giu.child
-func MakeImageButton(id giu.ID, w, h int, t *giu.Texture, fn func()) giu.Widget {
+func MakeImageButton(w, h int, t *giu.Texture, fn func()) giu.Widget {
 	// the image button
 	btnW, btnH := float32(w), float32(h)
-	button := giu.Layout{
-		giu.ImageButton(t).Size(btnW, btnH).OnClick(fn),
-	}
-
-	return giu.Layout{
-		giu.Custom(func() {
-			imgui.PushIDStr(string(id))
-		}),
-		button,
-		giu.Custom(func() {
-			imgui.PopID()
-		}),
-	}
+	return giu.ImageButton(t).Size(btnW, btnH).OnClick(fn)
 }
 
 type playPauseButtonState struct {
@@ -125,8 +112,6 @@ func (p *PlayPauseButtonWidget) Build() {
 
 	w, h := int(p.width), int(p.height)
 
-	var id giu.ID
-
 	var texture *giu.Texture
 
 	var callback func() // callback
@@ -144,16 +129,14 @@ func (p *PlayPauseButtonWidget) Build() {
 	}
 
 	if !*p.isPlaying {
-		id = giu.ID(p.id + "Play")
 		texture = imgState.playTexture
 		callback = func() { setIsPlaying(true) }
 	} else {
-		id = giu.ID(p.id + "Pause")
 		texture = imgState.pauseTexture
 		callback = func() { setIsPlaying(false) }
 	}
 
-	widget = MakeImageButton(id, w, h, texture, callback)
+	widget = MakeImageButton(w, h, texture, callback)
 
 	widget.Build()
 }
