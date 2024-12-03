@@ -11,4 +11,5 @@ type Renderable interface {
 	IsVisible() bool
 	// RegisterKeyboardShortcuts wraps giu.RegisterKeyboardShortcuts
 	RegisterKeyboardShortcuts(...giu.WindowShortcut)
+	GetLayout() giu.Widget
 }

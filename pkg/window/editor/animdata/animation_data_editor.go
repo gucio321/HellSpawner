@@ -3,6 +3,7 @@ package animdata
 
 import (
 	"fmt"
+
 	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	g "github.com/AllenDang/giu"
@@ -49,12 +50,14 @@ func Create(_ *config.Config,
 
 // Build builds a D2 editor
 func (e *AnimationDataEditor) Build() {
-	uid := e.Path.GetUniqueID()
-	animDataWidget := animdatawidget.Create(e.state, uid, e.d2)
+	e.IsOpen(&e.Visible).
+		Flags(g.WindowFlagsAlwaysAutoResize).
+		Layout(e.GetLayout())
+}
 
-	e.IsOpen(&e.Visible)
-	e.Flags(g.WindowFlagsAlwaysAutoResize)
-	e.Layout(g.Layout{animDataWidget})
+func (e *AnimationDataEditor) GetLayout() g.Widget {
+	uid := e.Path.GetUniqueID()
+	return animdatawidget.Create(e.state, uid, e.d2)
 }
 
 // UpdateMainMenuLayout updates a main menu layout, to it contains anim data viewer's settings

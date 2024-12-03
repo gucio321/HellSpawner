@@ -3,8 +3,9 @@ package console
 
 import (
 	"fmt"
-	"github.com/gucio321/HellSpawner/pkg/app/state"
 	"os"
+
+	"github.com/gucio321/HellSpawner/pkg/app/state"
 
 	g "github.com/AllenDang/giu"
 
@@ -44,13 +45,15 @@ func Create(fontFixed *g.FontInfo, x, y float32, logFile *os.File) *Console {
 // Build builds a console
 func (c *Console) Build() {
 	c.IsOpen(&c.Visible).
-		Layout(g.Layout{
-			g.Style().SetFont(c.fontFixed).To(
-				g.InputTextMultiline(&c.outputText).
-					Size(lineW, lineH).
-					Flags(g.InputTextFlagsReadOnly | g.InputTextFlagsNoUndoRedo),
-			),
-		})
+		Layout(c.GetLayout())
+}
+
+func (c *Console) GetLayout() g.Widget {
+	return g.Style().SetFont(c.fontFixed).To(
+		g.InputTextMultiline(&c.outputText).
+			Size(lineW, lineH).
+			Flags(g.InputTextFlagsReadOnly | g.InputTextFlagsNoUndoRedo),
+	)
 }
 
 // Write writes input on console, stdout and (if exists) to the log file

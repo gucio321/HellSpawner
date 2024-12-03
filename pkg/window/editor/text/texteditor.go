@@ -2,9 +2,10 @@
 package text
 
 import (
-	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"log"
 	"strings"
+
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	g "github.com/AllenDang/giu"
 
@@ -94,21 +95,20 @@ func Create(_ *config.Config,
 
 // Build builds an editor
 func (e *Editor) Build() {
+	e.IsOpen(&e.Visible).
+		Flags(g.WindowFlagsHorizontalScrollbar).
+		Layout(e.GetLayout())
+}
+
+func (e *Editor) GetLayout() g.Widget {
 	if !e.tableView {
-		e.IsOpen(&e.Visible).
-			Layout(
-				g.InputTextMultiline(&e.text).
-					Flags(g.InputTextFlagsAllowTabInput),
-			)
-	} else {
-		e.IsOpen(&e.Visible).
-			Flags(g.WindowFlagsHorizontalScrollbar).
-			Layout(
-				g.Child().Border(false).Size(float32(e.columns*tableViewModW), 0).Layout(
-					g.Table().FastMode(true).Freeze(0, 1).Rows(e.tableRows...),
-				),
-			)
+		return g.InputTextMultiline(&e.text).
+			Flags(g.InputTextFlagsAllowTabInput)
 	}
+
+	return g.Child().Border(false).Size(float32(e.columns*tableViewModW), 0).Layout(
+		g.Table().FastMode(true).Freeze(0, 1).Rows(e.tableRows...),
+	)
 }
 
 // UpdateMainMenuLayout updates mainMenu layout to it contains editor's options

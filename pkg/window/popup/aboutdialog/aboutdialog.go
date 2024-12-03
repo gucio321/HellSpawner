@@ -3,9 +3,11 @@ package aboutdialog
 
 import (
 	"fmt"
-	"github.com/gucio321/HellSpawner/pkg/app/assets"
 	"os"
 	"strings"
+
+	"github.com/gucio321/HellSpawner/pkg/app/assets"
+	"github.com/gucio321/HellSpawner/pkg/window"
 
 	g "github.com/AllenDang/giu"
 	"github.com/jaytaylor/html2text"
@@ -24,6 +26,8 @@ const (
 const (
 	white = 0xffffffff
 )
+
+var _ window.Renderable = &AboutDialog{}
 
 // AboutDialog represents about dialog
 type AboutDialog struct {
@@ -88,8 +92,13 @@ func Create(regularFont, titleFont, fixedFont *g.FontInfo) (*AboutDialog, error)
 
 // Build build an about dialog
 func (a *AboutDialog) Build() {
+	a.IsOpen(&a.Visible).Layout(a.GetLayout()).Build()
+}
+
+func (a *AboutDialog) GetLayout() g.Widget {
 	colorWhite := hsutil.Color(white)
-	a.IsOpen(&a.Visible).Layout(
+
+	return g.Layout{
 		g.Row(
 			g.Image(a.logo).Size(mainWindowW, mainWindowH),
 			g.Child().Size(mainLayoutW, mainLayoutH).Layout(
@@ -121,5 +130,5 @@ func (a *AboutDialog) Build() {
 				),
 			),
 		),
-	).Build()
+	}
 }

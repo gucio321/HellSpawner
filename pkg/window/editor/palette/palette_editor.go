@@ -3,6 +3,7 @@ package palette
 
 import (
 	"fmt"
+
 	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	"github.com/OpenDiablo2/dialog"
@@ -52,6 +53,12 @@ func Create(
 
 // Build builds a palette editor
 func (e *Editor) Build() {
+	e.IsOpen(&e.Visible).
+		Flags(g.WindowFlagsAlwaysAutoResize).
+		Layout(e.GetLayout())
+}
+
+func (e *Editor) GetLayout() g.Widget {
 	const colorsPerPalette = 256
 
 	col := make([]palettegridwidget.PaletteColor, colorsPerPalette)
@@ -59,9 +66,7 @@ func (e *Editor) Build() {
 		col[n] = palettegridwidget.PaletteColor(i)
 	}
 
-	e.IsOpen(&e.Visible).Flags(g.WindowFlagsAlwaysAutoResize).Layout(g.Layout{
-		palettegrideditorwidget.Create(e.state, e.GetID(), &col),
-	})
+	return palettegrideditorwidget.Create(e.state, e.GetID(), &col)
 }
 
 // UpdateMainMenuLayout updates a main menu layout to it contain palette editor's options

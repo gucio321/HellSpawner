@@ -2,8 +2,10 @@
 package preferences
 
 import (
-	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"image/color"
+
+	"github.com/gucio321/HellSpawner/pkg/app/config"
+	"github.com/gucio321/HellSpawner/pkg/window"
 
 	g "github.com/AllenDang/giu"
 	"github.com/OpenDiablo2/dialog"
@@ -18,6 +20,8 @@ const (
 	textboxSize              = 245
 	btnW, btnH               = 30, 0
 )
+
+var _ window.Renderable = &Dialog{}
 
 // Dialog represents preferences dialog
 type Dialog struct {
@@ -44,6 +48,10 @@ func Create(onConfigChanged func(config *config.Config), windowColorChanger func
 
 // Build builds a preferences dialog
 func (p *Dialog) Build() {
+	p.IsOpen(&p.Visible).Layout(p.GetLayout()).Build()
+}
+
+func (p *Dialog) GetLayout() g.Widget {
 	locales := make([]string, 0)
 	for i := enum.LocaleEnglish; i <= enum.LocalePolish; i++ {
 		locales = append(locales, i.String())
@@ -51,7 +59,7 @@ func (p *Dialog) Build() {
 
 	locale := int32(p.config.Locale)
 
-	p.IsOpen(&p.Visible).Layout(
+	return g.Layout{
 		g.Child().Size(mainWindowW, mainWindowH).Layout(
 			g.Label("Auxiliary MPQ Path"),
 			g.Row(
@@ -117,7 +125,7 @@ func (p *Dialog) Build() {
 			g.Button("Save##AppPreferencesSave").OnClick(p.onSaveClicked),
 			g.Button("Cancel##AppPreferencesCancel").OnClick(p.onCancelClicked),
 		),
-	).Build()
+	}
 }
 
 // Show switch preferences dialog to visible state

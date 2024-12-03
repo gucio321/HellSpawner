@@ -3,6 +3,7 @@ package dc6
 
 import (
 	"fmt"
+
 	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	g "github.com/AllenDang/giu"
@@ -58,13 +59,12 @@ func Create(cfg *config.Config,
 func (e *Editor) Build() {
 	e.IsOpen(&e.Visible)
 	e.Flags(g.WindowFlagsAlwaysAutoResize)
+	e.Layout(e.GetLayout())
+}
 
+func (e *Editor) GetLayout() g.Widget {
 	if !e.selectPalette {
-		e.Layout(g.Layout{
-			dc6widget.Create(e.state, e.palette, e.Path.GetUniqueID(), e.dc6),
-		})
-
-		return
+		return dc6widget.Create(e.state, e.palette, e.Path.GetUniqueID(), e.dc6)
 	}
 
 	if e.selectPaletteWidget == nil {
@@ -81,7 +81,7 @@ func (e *Editor) Build() {
 		)
 	}
 
-	e.Layout(e.selectPaletteWidget)
+	return e.selectPaletteWidget
 }
 
 // UpdateMainMenuLayout updates main menu to it contain DC6's editor menu

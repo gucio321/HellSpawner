@@ -3,6 +3,7 @@ package palettemap
 
 import (
 	"fmt"
+
 	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	g "github.com/AllenDang/giu"
@@ -53,9 +54,11 @@ func Create(_ *config.Config,
 func (e *Editor) Build() {
 	e.IsOpen(&e.Visible).
 		Flags(g.WindowFlagsAlwaysAutoResize).
-		Layout(g.Layout{
-			palettemapwidget.Create(e.Path.GetUniqueID(), e.pl2, e.state),
-		})
+		Layout(e.GetLayout())
+}
+
+func (e *Editor) GetLayout() g.Widget {
+	return palettemapwidget.Create(e.Path.GetUniqueID(), e.pl2, e.state)
 }
 
 // UpdateMainMenuLayout updates a main menu layout to it contains editors options

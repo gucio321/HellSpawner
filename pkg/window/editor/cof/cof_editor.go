@@ -3,6 +3,7 @@ package cof
 
 import (
 	"fmt"
+
 	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	g "github.com/AllenDang/giu"
@@ -50,12 +51,14 @@ func Create(_ *config.Config,
 
 // Build builds a cof editor
 func (e *Editor) Build() {
-	uid := e.Path.GetUniqueID()
-	cofWidget := cofwidget.Create(e.state, uid, e.cof)
-
 	e.IsOpen(&e.Visible)
 	e.Flags(g.WindowFlagsAlwaysAutoResize)
-	e.Layout(g.Layout{cofWidget})
+	e.Layout(e.GetLayout())
+}
+
+func (e *Editor) GetLayout() g.Widget {
+	uid := e.Path.GetUniqueID()
+	return cofwidget.Create(e.state, uid, e.cof)
 }
 
 // UpdateMainMenuLayout updates a main menu layout, to it contains COFViewer's settings

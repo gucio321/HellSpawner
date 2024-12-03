@@ -2,13 +2,14 @@
 package projectexplorer
 
 import (
-	"github.com/gucio321/HellSpawner/pkg/app/assets"
-	"github.com/gucio321/HellSpawner/pkg/app/state"
 	"log"
 	"os"
 	"path/filepath"
 	"sort"
 	"strings"
+
+	"github.com/gucio321/HellSpawner/pkg/app/assets"
+	"github.com/gucio321/HellSpawner/pkg/app/state"
 
 	"github.com/OpenDiablo2/dialog"
 
@@ -37,6 +38,8 @@ const (
 
 // FileSelectedCallback represents callback on project file selected
 type FileSelectedCallback func(path *common.PathEntry)
+
+var _ toolwindow.ToolWindow = (*ProjectExplorer)(nil)
 
 // ProjectExplorer represents a project explorer
 type ProjectExplorer struct {
@@ -79,8 +82,13 @@ func (m *ProjectExplorer) SetProject(project *hsproject.Project) {
 
 // Build builds explorer
 func (m *ProjectExplorer) Build() {
+	m.IsOpen(&m.Visible).
+		Layout(m.GetLayout())
+}
+
+func (m *ProjectExplorer) GetLayout() g.Widget {
 	if m.project == nil {
-		return
+		return g.Label("No project loaded...")
 	}
 
 	header := g.Row(
@@ -91,12 +99,11 @@ func (m *ProjectExplorer) Build() {
 		Flags(g.WindowFlagsHorizontalScrollbar).
 		Layout(m.GetProjectTreeNodes())
 
-	m.IsOpen(&m.Visible).
-		Layout(g.Layout{
-			header,
-			g.Separator(),
-			tree,
-		})
+	return g.Layout{
+		header,
+		g.Separator(),
+		tree,
+	}
 }
 
 func (m *ProjectExplorer) makeRefreshButtonLayout() g.Layout {

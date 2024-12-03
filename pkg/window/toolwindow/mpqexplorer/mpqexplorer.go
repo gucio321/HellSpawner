@@ -3,14 +3,15 @@
 package mpqexplorer
 
 import (
-	"github.com/gucio321/HellSpawner/pkg/app/config"
-	"github.com/gucio321/HellSpawner/pkg/app/state"
 	"log"
 	"os"
 	"path"
 	"path/filepath"
 	"strings"
 	"sync"
+
+	"github.com/gucio321/HellSpawner/pkg/app/config"
+	"github.com/gucio321/HellSpawner/pkg/app/state"
 
 	g "github.com/AllenDang/giu"
 
@@ -70,13 +71,19 @@ func (m *MPQExplorer) SetProject(project *hsproject.Project) {
 
 // Build builds an explorer
 func (m *MPQExplorer) Build() {
+	m.IsOpen(&m.Visible).
+		Size(mainWindowW, mainWindowH).
+		Layout(m.GetLayout())
+}
+
+func (m *MPQExplorer) GetLayout() g.Widget {
 	if m.project == nil {
-		return
+		return g.Label("No project loaded...")
 	}
 
 	needToShowOverwritePrompt := len(m.filesToOverwrite) > 0
 	if needToShowOverwritePrompt {
-		m.IsOpen(&needToShowOverwritePrompt).Layout(g.Layout{
+		return g.Layout{
 			g.PopupModal("Overwrite File?").IsOpen(&needToShowOverwritePrompt).Layout(g.Layout{
 				g.Label("File at " + m.filesToOverwrite[0].Path + " already exists. Overwrite?"),
 				g.Row(
@@ -92,19 +99,13 @@ func (m *MPQExplorer) Build() {
 					}),
 				),
 			}),
-		})
-
-		return
+		}
 	}
 
-	m.IsOpen(&m.Visible).
-		Size(mainWindowW, mainWindowH).
-		Layout(g.Layout{
-			g.Child().
-				Border(false).
-				Flags(g.WindowFlagsHorizontalScrollbar).
-				Layout(m.GetMpqTreeNodes()...),
-		})
+	return g.Child().
+		Border(false).
+		Flags(g.WindowFlagsHorizontalScrollbar).
+		Layout(m.GetMpqTreeNodes()...)
 }
 
 // GetMpqTreeNodes returns mpq tree

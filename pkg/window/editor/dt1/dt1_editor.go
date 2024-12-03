@@ -3,6 +3,7 @@ package dt1
 
 import (
 	"fmt"
+
 	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	g "github.com/AllenDang/giu"
@@ -20,10 +21,10 @@ import (
 )
 
 // static check, to ensure, if dt1 editor implemented editoWindow
-var _ editor.Editor = &Editorg{}
+var _ editor.Editor = &Editor{}
 
-// Editorg represents a dt1 editor
-type Editorg struct {
+// Editor represents a dt1 editor
+type Editor struct {
 	*editor.EditorBase
 	dt1                 *d2dt1.DT1
 	config              *config.Config
@@ -44,7 +45,7 @@ func Create(cfg *config.Config,
 		return nil, fmt.Errorf("error loading dt1 file: %w", err)
 	}
 
-	result := &Editorg{
+	result := &Editor{
 		EditorBase:    editor.New(pathEntry, x, y, project),
 		dt1:           dt1,
 		config:        cfg,
@@ -56,17 +57,21 @@ func Create(cfg *config.Config,
 }
 
 // Build prepares the editor for rendering, but does not actually render it
-func (e *Editorg) Build() {
-	e.IsOpen(&e.Visible)
-	e.Flags(g.WindowFlagsAlwaysAutoResize)
+func (e *Editor) Build() {
+	e.IsOpen(&e.Visible).
+		Flags(g.WindowFlagsAlwaysAutoResize).
+		Layout(e.GetLayout())
+}
 
+func (e *Editor) GetLayout() g.Widget {
 	if !e.selectPalette {
-		dt1Viewer := dt1widget.Create(e.state, e.palette, e.Path.GetUniqueID(), e.dt1)
-		e.Layout(g.Layout{
-			dt1Viewer,
-		})
-
-		return
+		return g.Layout{
+			dt1widget.Create(
+				e.state, e.palette,
+				e.Path.GetUniqueID(),
+				e.dt1,
+			),
+		}
 	}
 
 	// create mpq explorer if doesn't exist for now
@@ -84,11 +89,11 @@ func (e *Editorg) Build() {
 		)
 	}
 
-	e.Layout(g.Layout{e.selectPaletteWidget})
+	return g.Layout{e.selectPaletteWidget}
 }
 
 // UpdateMainMenuLayout updates main menu layout to it contains editors options
-func (e *Editorg) UpdateMainMenuLayout(l *g.Layout) {
+func (e *Editor) UpdateMainMenuLayout(l *g.Layout) {
 	m := g.Menu("DT1 Editor").Layout(g.Layout{
 		g.MenuItem("Change Palette").OnClick(func() {
 			e.selectPalette = true
@@ -111,7 +116,7 @@ func (e *Editorg) UpdateMainMenuLayout(l *g.Layout) {
 }
 
 // KeyboardShortcuts register a new keyboard shortcut
-func (e *Editorg) KeyboardShortcuts() []g.WindowShortcut {
+func (e *Editor) KeyboardShortcuts() []g.WindowShortcut {
 	// https://github.com/gucio321/HellSpawner/issues/329
 	return []g.WindowShortcut{
 		/*
@@ -137,19 +142,19 @@ func (e *Editorg) KeyboardShortcuts() []g.WindowShortcut {
 }
 
 // GenerateSaveData generates data to be saved
-func (e *Editorg) GenerateSaveData() []byte {
+func (e *Editor) GenerateSaveData() []byte {
 	data := e.dt1.Marshal()
 
 	return data
 }
 
 // Save saves editor
-func (e *Editorg) Save() {
+func (e *Editor) Save() {
 	e.EditorBase.Save(e)
 }
 
 // Cleanup hides editor
-func (e *Editorg) Cleanup() {
+func (e *Editor) Cleanup() {
 	if e.HasChanges(e) {
 		if shouldSave := dialog.Message("There are unsaved changes to %s, save before closing this editor?",
 			e.Path.FullPath).YesNo(); shouldSave {

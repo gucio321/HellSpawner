@@ -3,6 +3,7 @@ package font
 
 import (
 	"fmt"
+
 	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	g "github.com/AllenDang/giu"
@@ -56,25 +57,29 @@ func Create(_ *config.Config,
 // Build builds an editor
 func (e *Editor) Build() {
 	e.IsOpen(&e.Visible).
-		Layout(g.Layout{
-			g.Label("DC6 Path"),
-			g.Row(
-				g.InputText(&e.SpriteFile).Size(pathSize).Flags(g.InputTextFlagsReadOnly),
-				g.Button("...##EditorDC6Browse").Size(browseW, browseH).OnClick(e.onBrowseDC6PathClicked),
-			),
-			g.Separator(),
-			g.Label("TBL Path"),
-			g.Row(
-				g.InputText(&e.TableFile).Size(pathSize).Flags(g.InputTextFlagsReadOnly),
-				g.Button("...##EditorTBLBrowse").Size(browseW, browseH).OnClick(e.onBrowseTBLPathClicked),
-			),
-			g.Separator(),
-			g.Label("PL2 Path"),
-			g.Row(
-				g.InputText(&e.PaletteFile).Size(pathSize).Flags(g.InputTextFlagsReadOnly),
-				g.Button("...##EditorPL2Browse").Size(browseW, browseH).OnClick(e.onBrowsePL2PathClicked),
-			),
-		})
+		Layout(e.GetLayout())
+}
+
+func (e *Editor) GetLayout() g.Widget {
+	return g.Layout{
+		g.Label("DC6 Path"),
+		g.Row(
+			g.InputText(&e.SpriteFile).Size(pathSize).Flags(g.InputTextFlagsReadOnly),
+			g.Button("...##EditorDC6Browse").Size(browseW, browseH).OnClick(e.onBrowseDC6PathClicked),
+		),
+		g.Separator(),
+		g.Label("TBL Path"),
+		g.Row(
+			g.InputText(&e.TableFile).Size(pathSize).Flags(g.InputTextFlagsReadOnly),
+			g.Button("...##EditorTBLBrowse").Size(browseW, browseH).OnClick(e.onBrowseTBLPathClicked),
+		),
+		g.Separator(),
+		g.Label("PL2 Path"),
+		g.Row(
+			g.InputText(&e.PaletteFile).Size(pathSize).Flags(g.InputTextFlagsReadOnly),
+			g.Button("...##EditorPL2Browse").Size(browseW, browseH).OnClick(e.onBrowsePL2PathClicked),
+		),
+	}
 }
 
 func (e *Editor) onBrowseDC6PathClicked() {

@@ -3,6 +3,7 @@ package stringtable
 
 import (
 	"fmt"
+
 	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	g "github.com/AllenDang/giu"
@@ -59,11 +60,13 @@ func Create(_ *config.Config,
 
 // Build builds an editor
 func (e *Editor) Build() {
-	l := stringtablewidget.Create(e.state, e.Path.GetUniqueID(), e.dict)
-
 	e.IsOpen(&e.Visible).
 		Flags(g.WindowFlagsHorizontalScrollbar).
-		Layout(g.Layout{l})
+		Layout(e.GetLayout())
+}
+
+func (e *Editor) GetLayout() g.Widget {
+	return stringtablewidget.Create(e.state, e.Path.GetUniqueID(), e.dict)
 }
 
 // UpdateMainMenuLayout updates main menu layout to it contain editors options

@@ -3,6 +3,7 @@ package fonttable
 
 import (
 	"fmt"
+
 	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	"github.com/OpenDiablo2/dialog"
@@ -58,9 +59,11 @@ func Create(_ *config.Config,
 // Build builds a font table editor's window
 func (e *Editor) Build() {
 	e.IsOpen(&e.Visible).Flags(g.WindowFlagsHorizontalScrollbar).
-		Layout(g.Layout{
-			fonttablewidget.Create(e.state, e.Path.GetUniqueID(), e.fontTable),
-		})
+		Layout(e.GetLayout())
+}
+
+func (e *Editor) GetLayout() g.Widget {
+	return fonttablewidget.Create(e.state, e.Path.GetUniqueID(), e.fontTable)
 }
 
 // UpdateMainMenuLayout updates mainMenu layout's to it contain Editor's options

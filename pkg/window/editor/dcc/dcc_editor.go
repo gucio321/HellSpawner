@@ -3,6 +3,7 @@ package dcc
 
 import (
 	"fmt"
+
 	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	g "github.com/AllenDang/giu"
@@ -57,15 +58,16 @@ func Create(cfg *config.Config,
 
 // Build builds a dcc editor
 func (e *Editor) Build() {
-	e.IsOpen(&e.Visible)
-	e.Flags(g.WindowFlagsAlwaysAutoResize)
+	e.IsOpen(&e.Visible).
+		Flags(g.WindowFlagsAlwaysAutoResize).
+		Layout(e.GetLayout())
+}
 
+func (e *Editor) GetLayout() g.Widget {
 	if !e.selectPalette {
-		e.Layout(g.Layout{
+		return g.Layout{
 			dccwidget.Create(e.state, e.palette, e.Path.GetUniqueID(), e.dcc),
-		})
-
-		return
+		}
 	}
 
 	if e.selectPaletteWidget == nil {
@@ -82,7 +84,7 @@ func (e *Editor) Build() {
 		)
 	}
 
-	e.Layout(g.Layout{e.selectPaletteWidget})
+	return g.Layout{e.selectPaletteWidget}
 }
 
 // UpdateMainMenuLayout updates main menu to it contain editor's options

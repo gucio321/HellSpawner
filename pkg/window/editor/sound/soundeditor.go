@@ -78,6 +78,13 @@ func Create(_ *config.Config,
 
 // Build builds a sound editor
 func (s *Editor) Build() {
+	s.IsOpen(&s.Visible).
+		Flags(g.WindowFlagsNoResize).
+		Size(mainWindowW, mainWindowH).
+		Layout(s.GetLayout())
+}
+
+func (s *Editor) GetLayout() g.Widget {
 	isPlaying := !s.control.Paused
 
 	secondsCurrent := s.streamer.Position() / progressTimeModifier
@@ -87,22 +94,17 @@ func (s *Editor) Build() {
 
 	progress := float32(s.streamer.Position()) / float32(s.streamer.Len())
 
-	s.IsOpen(&s.Visible).
-		Flags(g.WindowFlagsNoResize).
-		Size(mainWindowW, mainWindowH).
-		Layout(g.Layout{
-			g.Row(
-				widgets.PlayPauseButton(&isPlaying).
-					OnPlayClicked(s.play).OnPauseClicked(s.stop).Size(btnSize, btnSize),
-				g.ProgressBar(progress).Size(-1, progressBarHeight).
-					Overlay(fmt.Sprintf("%d:%02d / %d:%02d",
-						secondsCurrent/progressIndicatorModifier,
-						secondsCurrent%progressIndicatorModifier,
-						secondsTotal/progressIndicatorModifier,
-						secondsTotal%progressIndicatorModifier,
-					)),
-			),
-		})
+	return g.Row(
+		widgets.PlayPauseButton(&isPlaying).
+			OnPlayClicked(s.play).OnPauseClicked(s.stop).Size(btnSize, btnSize),
+		g.ProgressBar(progress).Size(-1, progressBarHeight).
+			Overlay(fmt.Sprintf("%d:%02d / %d:%02d",
+				secondsCurrent/progressIndicatorModifier,
+				secondsCurrent%progressIndicatorModifier,
+				secondsTotal/progressIndicatorModifier,
+				secondsTotal%progressIndicatorModifier,
+			)),
+	)
 }
 
 // Cleanup closes an editor

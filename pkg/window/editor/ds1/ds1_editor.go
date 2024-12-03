@@ -3,6 +3,7 @@ package ds1
 
 import (
 	"fmt"
+
 	"github.com/gucio321/HellSpawner/pkg/app/assets"
 	"github.com/gucio321/HellSpawner/pkg/app/config"
 
@@ -59,9 +60,11 @@ func Create(_ *config.Config,
 func (e *Editor) Build() {
 	e.IsOpen(&e.Visible).
 		Flags(g.WindowFlagsAlwaysAutoResize).
-		Layout(g.Layout{
-			ds1widget.Create(e.Path.GetUniqueID(), e.ds1, e.deleteButtonTexture, e.state),
-		})
+		Layout(e.GetLayout())
+}
+
+func (e *Editor) GetLayout() g.Widget {
+	return ds1widget.Create(e.Path.GetUniqueID(), e.ds1, e.deleteButtonTexture, e.state)
 }
 
 // UpdateMainMenuLayout updates main menu layout to it contains editors options
