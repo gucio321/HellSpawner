@@ -128,29 +128,29 @@ func (p *widget) buildViewRecordLayout() {
 	giu.Layout{
 		giu.Row(
 			giu.ArrowButton(giu.DirectionLeft).
-				ID("##"+p.id+"previousAnimation").OnClick(func() {
-				state.RecordIdx = 0
+				OnClick(func() {
+					state.RecordIdx = 0
 
-				if state.MapIndex > 0 {
-					state.MapIndex--
-				}
-			}),
+					if state.MapIndex > 0 {
+						state.MapIndex--
+					}
+				}),
 			giu.Label(fmt.Sprintf("Animation name: %s", name)),
 			giu.ArrowButton(giu.DirectionRight).
-				ID("##"+p.id+"nextAnimation").OnClick(func() {
-				state.RecordIdx = 0
+				OnClick(func() {
+					state.RecordIdx = 0
 
-				if int(state.MapIndex) < len(state.mapKeys)-1 {
-					state.MapIndex++
-				}
-			}),
+					if int(state.MapIndex) < len(state.mapKeys)-1 {
+						state.MapIndex++
+					}
+				}),
 		),
 		giu.Separator(),
 		giu.Custom(func() {
 			if maxV > 0 {
 				giu.Layout{
 					//nolint:gosec // its for giu and has to be int32.
-					giu.SliderInt(&state.RecordIdx, 0, int32(maxV)).ID("record##" + p.id),
+					giu.SliderInt(&state.RecordIdx, 0, int32(maxV)),
 					giu.Separator(),
 				}.Build()
 			}
@@ -172,17 +172,17 @@ func (p *widget) buildViewRecordLayout() {
 		giu.Label(fmt.Sprintf("FPS: %v", record.FPS())),
 		giu.Label(fmt.Sprintf("Frame duration: %v (miliseconds)", record.FrameDurationMS())),
 		giu.Separator(),
-		giu.Button("").ID("Back to entry preview##"+p.id+"backToRecordSelection").Size(actionBtnW, actionBtnH).OnClick(func() {
+		giu.Button("Back to entry preview").Size(actionBtnW, actionBtnH).OnClick(func() {
 			state.Mode = widgetModeList
 		}),
-		giu.Button("").ID("Add record##"+p.id+"addRecordBtn").Size(actionBtnW, actionBtnH).OnClick(func() {
+		giu.Button("Add record").Size(actionBtnW, actionBtnH).OnClick(func() {
 			p.d2.PushRecord(name)
 
 			// no -1, because current records hasn't new field yet
 			//nolint:gosec // its for giu and has to be int32.
 			state.RecordIdx = int32(len(records))
 		}),
-		giu.Button("").ID("Delete record##"+p.id+"deleteRecordBtn").Size(actionBtnW, actionBtnH).OnClick(func() {
+		giu.Button("Delete record").Size(actionBtnW, actionBtnH).OnClick(func() {
 			if len(records) == 1 {
 				state.RecordIdx = 0
 				state.Mode = widgetModeList
@@ -225,7 +225,7 @@ func (p *widget) makeSearchLayout() giu.Layout {
 			found := (len(p.d2.GetRecords(state.Name)) > 0)
 			if found {
 				giu.Row(
-					giu.Button("").ID("View##"+p.id+"addEntryViewEntry").Size(saveCancelButtonW, saveCancelButtonH).OnClick(func() {
+					giu.Button("View").Size(saveCancelButtonW, saveCancelButtonH).OnClick(func() {
 						p.viewRecord()
 					}),
 				).Build()
@@ -234,7 +234,7 @@ func (p *widget) makeSearchLayout() giu.Layout {
 			}
 
 			giu.Row(
-				giu.Button("").ID("Add##"+p.id+"addEntry").Size(saveCancelButtonW, saveCancelButtonH).OnClick(func() {
+				giu.Button("Add").Size(saveCancelButtonW, saveCancelButtonH).OnClick(func() {
 					err := p.d2.AddEntry(state.Name)
 					if err != nil {
 						log.Print(err)
