@@ -2,13 +2,14 @@ package app
 
 import (
 	"fmt"
-	"github.com/AllenDang/cimgui-go/imgui"
-	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"log"
 	"os"
 	"path/filepath"
 	"sync"
 	"time"
+
+	"github.com/AllenDang/cimgui-go/imgui"
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 
 	g "github.com/AllenDang/giu"
 
@@ -167,11 +168,27 @@ func (a *App) render() {
 		}
 	}
 
-	a.renderMainMenuBar()
+	switch a.config.ViewMode {
+	case config.ViewModeLegacy:
+		a.renderLegacy()
+	case config.ViewModeStatic:
+		a.renderStatic()
+	}
+}
+
+func (a *App) renderLegacy() {
+	g.MainMenuBar().Layout(a.menuLayout()).Build()
+
 	a.renderEditors()
 	a.renderWindows()
 
 	g.Update()
+}
+
+func (a *App) renderStatic() {
+	g.SingleWindowWithMenuBar().Layout(
+		g.MenuBar().Layout(a.menuLayout()),
+	)
 }
 
 func logErr(fmtErr string, args ...interface{}) {
@@ -237,7 +254,7 @@ func (a *App) openEditor(path *common.PathEntry) {
 
 	a.editorManagerMutex.RUnlock()
 
-	//since we sue multiviewport, we need to get base position of the main window - we want an editor
+	// since we sue multiviewport, we need to get base position of the main window - we want an editor
 	// inside window
 	basePos := imgui.MainViewport().Pos()
 

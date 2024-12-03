@@ -3,12 +3,13 @@ package config
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gucio321/HellSpawner/pkg/app/state"
 	"image/color"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/gucio321/HellSpawner/pkg/app/state"
 
 	"github.com/gucio321/HellSpawner/pkg/common/enum"
 	"github.com/gucio321/HellSpawner/pkg/common/hsutil"
@@ -41,6 +42,7 @@ type Config struct {
 	LogFilePath             string                    `json:"logFile"`
 	Locale                  enum.Locale               `json:"locale"`
 	BGColor                 color.RGBA                `json:"bgColor"`
+	ViewMode                ViewMode
 }
 
 // GetConfigPath returns default config path

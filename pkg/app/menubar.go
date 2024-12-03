@@ -13,6 +13,7 @@ import (
 	"github.com/gravestench/osinfo"
 	"github.com/pkg/browser"
 
+	"github.com/gucio321/HellSpawner/pkg/app/config"
 	"github.com/gucio321/HellSpawner/pkg/common/hsproject"
 	"github.com/gucio321/HellSpawner/pkg/window"
 )
@@ -25,13 +26,13 @@ const (
 )
 
 func (a *App) fileMenu() *g.MenuWidget {
-	m := menu("MainMenu", "File")
+	m := g.Menu("File")
 
-	mNew := menu("MainMenuFile", "New")
+	mNew := g.Menu("New")
 	mNewProject := menuItem("MainMenuFileNew", "Project...", "Ctrl+Shift+N")
 	mNewProject.OnClick(a.onNewProjectClicked)
 
-	mOpen := menu("MainMenuFile", "Open")
+	mOpen := g.Menu("Open")
 	mOpenProject := menuItem("MainMenuFileOpen", "Project...", "Ctrl+Shift+O")
 	mOpenProject.OnClick(a.onOpenProjectClicked)
 
@@ -67,7 +68,7 @@ func (a *App) fileMenu() *g.MenuWidget {
 }
 
 func (a *App) openRecentProjectMenu() *g.MenuWidget {
-	m := menu("MainMenuFileOpenRecent", "Recent Project...")
+	m := g.Menu("Recent Project...")
 
 	fnRecent := func() {
 		if len(a.config.RecentProjects) == 0 {
@@ -90,7 +91,7 @@ func (a *App) openRecentProjectMenu() *g.MenuWidget {
 	return m
 }
 
-func (a *App) renderMainMenuBar() {
+func (a *App) menuLayout() g.Layout {
 	menuLayout := g.Layout{
 		a.fileMenu(),
 		a.viewMenu(),
@@ -102,32 +103,44 @@ func (a *App) renderMainMenuBar() {
 		a.focusedEditor.UpdateMainMenuLayout(&menuLayout)
 	}
 
-	menuBar := g.MainMenuBar().Layout(menuLayout)
-
-	menuBar.Build()
+	return menuLayout
 }
 
 func (a *App) viewMenu() *g.MenuWidget {
-	viewMenu := menu("MainMenu", "View")
+	viewMenu := g.Menu("View")
 	hasProject := a.project != nil
 
-	toolWindows := g.Menu("Tool Windows").Layout(g.Layout{
-		g.MenuItem("Project Explorer\tCtrl+Shift+P").
+	toolWindows := g.Menu("Tool Windows").Layout(
+		g.MenuItem("Project Explorer").Shortcut("Ctrl+Shift+P").
 			Selected(a.projectExplorer.Visible && hasProject).
 			Enabled(hasProject).
 			OnClick(a.toggleProjectExplorer),
 
-		g.MenuItem("MPQ Explorer\t\tCtrl+Shift+M").
+		g.MenuItem("MPQ Explorer").Shortcut("Ctrl+Shift+M").
 			Selected(a.mpqExplorer.Visible && hasProject).
 			Enabled(hasProject).
 			OnClick(a.toggleMPQExplorer),
 
-		g.MenuItem("Console\t\t\t\t\tCtrl+Shift+C").
+		g.MenuItem("Console").Shortcut("Ctrl+Shift+C").
 			Selected(a.console.Visible).
 			OnClick(a.toggleConsole),
-	})
+	)
+
+	viewMode := g.Menu("View Mode").Layout(
+		g.MenuItem("Legacy (floating windows)").
+			Selected(a.config.ViewMode == config.ViewModeLegacy).
+			OnClick(func() {
+				a.config.ViewMode = config.ViewModeLegacy
+			}),
+		g.MenuItem("Static").
+			Selected(a.config.ViewMode == config.ViewModeStatic).
+			OnClick(func() {
+				a.config.ViewMode = config.ViewModeStatic
+			}),
+	)
 
 	items := []g.Widget{
+		viewMode,
 		toolWindows,
 	}
 
@@ -157,7 +170,7 @@ func (a *App) projectMenu() *g.MenuWidget {
 		label = stopAbyssEngine
 	}
 
-	projectMenu := menu("MainMenu", "Project")
+	projectMenu := g.Menu("Project")
 
 	projectMenuRun := menuItem("MainMenuProject", label, "").
 		Enabled(projectOpened && enginePathSet).
@@ -193,7 +206,7 @@ func (a *App) onOpenURL(url string) func() {
 }
 
 func (a *App) helpMenu() *g.MenuWidget {
-	menuHelp := menu("MainMenu", "Help")
+	menuHelp := g.Menu("Help")
 	menuHelpAbout := menuItem("MainMenuHelp", "About HellSpawner...", "F1").
 		OnClick(a.onHelpAboutClicked)
 	menuHelpGithub := menuItem("MainMenuHelp", "GitHub repository", "").
@@ -423,10 +436,6 @@ func menuID(group, name string) string {
 
 func itemID(group, name, shortcut string) string {
 	return makeMenuID(name, group, shortcut)
-}
-
-func menu(group, name string) *g.MenuWidget {
-	return g.Menu(menuID(group, name))
 }
 
 func menuItem(group, name, shortcut string) *g.MenuItemWidget {
