@@ -197,10 +197,10 @@ func (a *App) renderStatic() {
 				g.SplitLayout(g.DirectionHorizontal, &a.config.StaticLayout.ConsoleSplit,
 					a.renderStaticEditors(),
 					a.console.GetLayout(),
-				),
+				).SplitRefType(g.SplitRefProc),
 				a.mpqExplorer.GetLayout(),
-			),
-		),
+			).SplitRefType(g.SplitRefProc),
+		).SplitRefType(g.SplitRefProc),
 	)
 }
 

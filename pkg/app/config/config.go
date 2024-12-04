@@ -27,6 +27,8 @@ const (
 
 const (
 	maxRecentOpenedProjectsCount = 5
+	projectExplorerDefaultW      = 0.2 // 20%
+	mpqExplorerDefaultW          = 1 - (projectExplorerDefaultW / (1 - projectExplorerDefaultW))
 )
 
 // Config represents HellSpawner's config
@@ -73,9 +75,9 @@ func generateDefaultConfig(path string) *Config {
 		Locale:                  enum.LocaleEnglish,
 		BGColor:                 hsutil.Color(DefaultBGColor),
 		StaticLayout: StaticLayout{
-			ProjectSplit: 200,
-			MPQSplit:     600,
-			ConsoleSplit: 500,
+			ProjectSplit: projectExplorerDefaultW,
+			MPQSplit:     mpqExplorerDefaultW,
+			ConsoleSplit: 0.8,
 		},
 	}
 
